@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const { join } = require('path');
 
+const { clientError, serverError } = require('./controllers');
+
 const app = express();
 
 app.disabled('x-powered-by');
@@ -23,6 +25,9 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
   });
 }
+const error = [clientError, serverError];
+
+app.use(error);
 
 app.set('port', process.env.PORT || 5000);
 
