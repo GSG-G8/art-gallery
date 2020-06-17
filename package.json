@@ -1,0 +1,65 @@
+{
+  "name": "art-gallery",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "NODE_ENV=production node server/index.js",
+    "dev": "NODE_ENV=development nodemon server/index.js",
+    "project-setup": "npm install && cd client && npm install",
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "test": "NODE_ENV=test jest --no-cache --runInBand --coverage",
+    "kill": "fuser -k 5000/tcp",
+    "lint": "eslint server/",
+    "lint-fix": "eslint server/ --fix",
+    "lint:react": "cd client && npm run lint",
+    "build:db": "NODE_ENV=test node server/database/data/build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GSG-G8/art-gallery.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GSG-G8/art-gallery/issues"
+  },
+  "homepage": "https://github.com/GSG-G8/art-gallery#readme",
+  "dependencies": {
+    "babel-jest": "^24.9.0",
+    "bcrypt": "^4.0.1",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jest": "^24.9.0",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^7.18.2",
+    "prettier": "^2.0.2",
+    "yup": "^0.28.3"
+  },
+  "devDependencies": {
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.1",
+    "nodemon": "^2.0.2",
+    "pre-commit": "^1.2.2",
+    "supertest": "^4.0.2"
+  },
+  "pre-commit": [
+    "test",
+    "lint",
+    "lint:react"
+  ]
+}
