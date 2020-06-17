@@ -59,6 +59,7 @@
   },
   "pre-commit": [
     "test",
-    "lint"
+    "lint",
+    "lint:react"
   ]
 }
