@@ -11,8 +11,4 @@ app.use(express.json());
 app.use(compression());
 app.set('port', process.env.PORT || 5000);
 
-app.get('/', (req, res) => {
-  res.status(200).json({ msg: 'hi from server' });
-});
-
 module.exports = app;
