@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const { join } = require('path');
 
-const { clientError, serverError } = require('./controllers');
+const error = require('./controllers');
 
 const app = express();
 
@@ -25,7 +25,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
   });
 }
-const error = [clientError, serverError];
 
 app.use(error);
 
