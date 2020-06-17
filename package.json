@@ -11,7 +11,7 @@
     "dev": "NODE_ENV=development nodemon server/index.js",
     "project-setup": "npm install && cd client && npm install",
     "heroku-postbuild": "cd client && npm install && npm run build",
-    "test": "jest --coverage",
+    "test": "NODE_ENV=test jest --no-cache --runInBand --coverage",
     "kill": "fuser -k 5000/tcp",
     "lint": "eslint server/",
     "lint-fix": "eslint server/ --fix",
