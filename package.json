@@ -16,7 +16,8 @@
     "lint": "eslint server/",
     "lint-fix": "eslint server/ --fix",
     "lint:react": "cd client && npm run lint",
-    "build:db": "NODE_ENV=test node server/database/data/build"
+    "build:db": "NODE_ENV=test node server/database/data/build",
+    "init": "npm i && cd/client && npm i"
   },
   "repository": {
     "type": "git",
