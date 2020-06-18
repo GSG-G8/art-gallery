@@ -9,6 +9,9 @@ const error = require('./controllers');
 const app = express();
 
 app.disabled('x-powered-by');
+
+app.set('port', process.env.PORT || 5000);
+
 const middleware = [
   compression(),
   cookieParser(),
@@ -27,7 +30,5 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use(error);
-
-app.set('port', process.env.PORT || 5000);
 
 module.exports = app;
