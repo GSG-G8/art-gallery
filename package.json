@@ -42,6 +42,7 @@
     "morgan": "^1.10.0",
     "pg": "^7.18.2",
     "prettier": "^2.0.2",
+    "yub": "^0.11.1",
     "yup": "^0.28.3"
   },
   "devDependencies": {

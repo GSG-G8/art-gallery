@@ -1,3 +1,5 @@
 const error = require('./errorHandlers');
+const register = require('./register');
 
-module.exports = error;
+exports.error = error;
+exports.register = register;
