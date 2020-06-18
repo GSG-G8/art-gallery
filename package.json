@@ -16,7 +16,8 @@
     "lint": "eslint server/",
     "lint-fix": "eslint server/ --fix",
     "lint:react": "cd client && npm run lint",
-    "build:db": "NODE_ENV=test node server/database/data/build"
+    "build:db": "NODE_ENV=test node server/database/data/build",
+    "init": "npm i && cd client && npm i"
   },
   "repository": {
     "type": "git",
@@ -38,12 +39,13 @@
     "express": "^4.17.1",
     "jest": "^24.9.0",
     "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
     "pg": "^7.18.2",
     "prettier": "^2.0.2",
     "yup": "^0.28.3"
   },
   "devDependencies": {
-    "eslint": "^7.2.0",
+    "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-config-prettier": "^6.10.1",
