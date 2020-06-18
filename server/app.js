@@ -3,7 +3,7 @@ const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const { join } = require('path');
-const router = require('./routes');
+const routes = require('./routes');
 
 const { error } = require('./controllers');
 
@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.use('/api/v1', router);
+app.use('/api/v1', routes);
 
 app.use(error);
 
