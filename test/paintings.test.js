@@ -16,7 +16,7 @@ describe('Get all Paintings', () => {
       .end((err, res) => {
         if (err) return done(err);
         const { data } = res.body;
-        expect(data).toHaveLength(5);
+        expect(data).toHaveLength(10);
         done();
       });
   });
