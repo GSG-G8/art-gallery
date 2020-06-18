@@ -1,8 +1,8 @@
 const router = require('express').Router();
 
 const { registerValidation } = require('./utils/validation');
-const { register } = require('./controllers');
+const { registerController } = require('./controllers');
 
-router.post('/register', registerValidation, register.registerController);
+router.post('/register', registerValidation, registerController);
 
 module.exports = router;

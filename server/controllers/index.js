@@ -1,5 +1,5 @@
 const error = require('./errorHandlers');
-const register = require('./register');
+const { registerController } = require('./auth');
+const getPaintings = require('./getPaintings');
 
-exports.error = error;
-exports.register = register;
+module.exports = { error, getPaintings, registerController };
