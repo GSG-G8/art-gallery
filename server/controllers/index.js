@@ -1,3 +1,7 @@
 const error = require('./errorHandlers');
 
-module.exports = error;
+const auth = require('./auth');
+
+exports.auth = auth;
+
+exports.error = error;
