@@ -1,6 +1,6 @@
 BEGIN;
     DROP TABLE IF EXISTS artists,
-customers,products,feedBack,cart,product_user
+customers,products,feedback,cart,product_user
     CASCADE;
 
 
@@ -43,7 +43,7 @@ CREATE TABLE artist
         artist_id INTEGER REFERENCES artist(id) ON UPDATE CASCADE ON DELETE CASCADE
     );
 
-    CREATE TABLE feedBack
+    CREATE TABLE feedback
     (
         id SERIAL PRIMARY KEY,
         artist_id INTEGER REFERENCES artist(id) ON UPDATE CASCADE ON DELETE CASCADE,
