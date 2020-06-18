@@ -1,3 +1,4 @@
 const error = require('./errorHandlers');
+const getPaintings = require('./getPaintings');
 
-module.exports = error;
+module.exports = { error, getPaintings };
