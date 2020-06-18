@@ -7,15 +7,15 @@ customers,products,feedBack,cart,product_user
 CREATE TABLE artists
 (
     id SERIAL PRIMARY KEY NOT NULL,
-    firstName varchar(50) NOT NULL,
-    lastName varchar(50) NOT NULL,
+    first_name varchar(50) NOT NULL,
+    last_name varchar(50) NOT NULL,
     email varchar(255),
     password text,
-    mobileNo integer,
+    mobile_no integer,
     customized boolean DEFAULT false,
     reviews integer,
-    profileImg text,
-    socialMediaAccounts text
+    profile_img text,
+    social_media_accounts text
     [],
     budget DECIMAL
     (10,2),
@@ -25,8 +25,8 @@ CREATE TABLE artists
     CREATE TABLE customers
     (
         id SERIAL PRIMARY KEY NOT NULL,
-        firstName varchar(50),
-        lastName varchar(50),
+        first_name varchar(50),
+        last_name varchar(50),
         email varchar(255),
         password text,
         budget DECIMAL(10,2)
@@ -66,6 +66,6 @@ CREATE TABLE artists
         product_id INTEGER REFERENCES products(id),
         artist_id INTEGER REFERENCES artists(id),
         customer_id INTEGER REFERENCES customers(id),
-        sellingDate date NOT NULL
+        selling_date date NOT NULL
     );
     COMMIT;
