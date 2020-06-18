@@ -1,4 +1,4 @@
-const getPaintingsQuery = require('./Paintings');
+const { getPaintingsQuery } = require('./Paintings');
 
 module.exports = {
   getPaintingsQuery,
