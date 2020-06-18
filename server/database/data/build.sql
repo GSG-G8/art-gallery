@@ -9,27 +9,27 @@ CREATE TABLE artist
     id SERIAL PRIMARY KEY NOT NULL,
     first_name varchar(50) NOT NULL,
     last_name varchar(50) NOT NULL,
-    email varchar(255),
-    password text,
-    mobile_no integer,
+    email varchar(255) UNIQUE NOT NULL,
+    password text NOT NULL,
+    mobile_no integer UNIQUE,
     customized boolean DEFAULT false,
     reviews integer,
     profile_img text,
     social_media_accounts text
     [],
     budget DECIMAL
-    (10,2),
+    (10,2) DEFAULT 0 NOT NULL,
     bio text
 );
 
     CREATE TABLE customer
     (
         id SERIAL PRIMARY KEY NOT NULL,
-        first_name varchar(50),
-        last_name varchar(50),
-        email varchar(255),
-        password text,
-        budget DECIMAL(10,2)
+        first_name varchar(50) NOT NULL,
+        last_name varchar(50) NOT NULL,
+        email varchar(255) UNIQUE NOT NULL,
+        password text NOT NULL,
+        budget DECIMAL(10,2) DEFAULT 0 NOT NULL
     );
 
     CREATE TABLE painting
@@ -65,7 +65,6 @@ CREATE TABLE artist
     (
         id SERIAL PRIMARY KEY,
         painting_id INTEGER REFERENCES painting(id) ON UPDATE CASCADE ON DELETE CASCADE,
-        artist_id INTEGER REFERENCES artist(id) ON UPDATE CASCADE ON DELETE CASCADE,
         customer_id INTEGER REFERENCES customer(id) ON UPDATE CASCADE ON DELETE CASCADE,
         selling_date date NOT NULL
     );
