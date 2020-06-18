@@ -34,10 +34,10 @@ describe('Get Artist By Id', () => {
       });
   });
 
-  test('Route /profile/alaa status 404, json header, data.message = You enterd wrong artist ID ', (done) => {
+  test('Route /profile/alaa status 400, json header, data.message = You enterd wrong artist ID ', (done) => {
     return request(app)
       .get('/api/v1/profile/alaa')
-      .expect(404)
+      .expect(400)
       .expect('Content-Type', /json/)
       .end((err, res) => {
         if (err) return done(err);

@@ -15,8 +15,8 @@ const getArtist = async (req, res, next) => {
         });
       }
     } else {
-      res.status(404).json({
-        statusCode: 404,
+      res.status(400).json({
+        statusCode: 400,
         message: 'You enterd wrong artist ID',
       });
     }
