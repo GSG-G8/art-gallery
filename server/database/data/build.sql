@@ -1,6 +1,6 @@
 BEGIN;
-    DROP TABLE IF EXISTS artists,
-customers,products,feedback,cart,product_user
+    DROP TABLE IF EXISTS artist,
+customer,painting,feedback,cart,painting_user
     CASCADE;
 
 
@@ -32,10 +32,11 @@ CREATE TABLE artist
         budget DECIMAL(10,2)
     );
 
-    CREATE TABLE product
+    CREATE TABLE painting
     (
         id SERIAL PRIMARY KEY NOT NULL,
         title text NOT NULL,
+        img text NOT NULL,
         description text NOT NULL,
         category VARCHAR(50) NOT NULL,
         property text,
@@ -56,14 +57,14 @@ CREATE TABLE artist
     (
         id SERIAL PRIMARY KEY,
         customer_id INTEGER REFERENCES customer(id) ON UPDATE CASCADE ON DELETE CASCADE,
-        product_id INTEGER REFERENCES product(id) ON UPDATE CASCADE ON DELETE CASCADE,
+        painting_id INTEGER REFERENCES painting(id) ON UPDATE CASCADE ON DELETE CASCADE,
         price DECIMAL(10,2) NOT NULL
     );
 
-    CREATE TABLE product_user
+    CREATE TABLE painting_user
     (
         id SERIAL PRIMARY KEY,
-        product_id INTEGER REFERENCES product(id) ON UPDATE CASCADE ON DELETE CASCADE,
+        painting_id INTEGER REFERENCES painting(id) ON UPDATE CASCADE ON DELETE CASCADE,
         artist_id INTEGER REFERENCES artist(id) ON UPDATE CASCADE ON DELETE CASCADE,
         customer_id INTEGER REFERENCES customer(id) ON UPDATE CASCADE ON DELETE CASCADE,
         selling_date date NOT NULL
