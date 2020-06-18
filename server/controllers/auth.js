@@ -51,7 +51,7 @@ const registerController = async (req, res, next) => {
       res.cookie('artistToken', token);
       res.status(200).json({
         statusCode: 200,
-        message: `hello,${rows[0].first_name},your account created successfully`,
+        message: `welcome,${rows[0].first_name},your account created successfully`,
       });
     } else {
       const { rows } = await addCustomer(newUser);
@@ -60,7 +60,7 @@ const registerController = async (req, res, next) => {
       res.cookie('customerToken', token);
       res.status(200).json({
         statusCode: 200,
-        message: `hello,${rows[0].first_name},your account created successfully`,
+        message: `welcome,${rows[0].first_name},your account created successfully`,
       });
     }
   } catch (error) {
