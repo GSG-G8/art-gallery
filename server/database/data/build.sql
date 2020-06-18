@@ -40,14 +40,14 @@ CREATE TABLE artists
         category VARCHAR(50) NOT NULL,
         property text,
         count_sold INTEGER NOT NULL DEFAULT 0,
-        artist_id INTEGER REFERENCES artists(id)
+        artist_id INTEGER REFERENCES artists(id) ON UPDATE CASCADE ON DELETE CASCADE
     );
 
     CREATE TABLE feedBack
     (
         id SERIAL PRIMARY KEY,
-        artist_id INTEGER REFERENCES artists(id),
-        customer_id INTEGER REFERENCES customers(id),
+        artist_id INTEGER REFERENCES artists(id) ON UPDATE CASCADE ON DELETE CASCADE,
+        customer_id INTEGER REFERENCES customers(id) ON UPDATE CASCADE ON DELETE CASCADE,
         rate INTEGER NOT NULL,
         details VARCHAR(255) NOT NULL
     );
@@ -55,17 +55,17 @@ CREATE TABLE artists
     CREATE TABLE cart
     (
         id SERIAL PRIMARY KEY,
-        customer_id INTEGER REFERENCES customers(id),
-        product_id INTEGER REFERENCES products(id),
+        customer_id INTEGER REFERENCES customers(id) ON UPDATE CASCADE ON DELETE CASCADE,
+        product_id INTEGER REFERENCES products(id) ON UPDATE CASCADE ON DELETE CASCADE,
         price DECIMAL(10,2) NOT NULL
     );
 
     CREATE TABLE product_user
     (
         id SERIAL PRIMARY KEY,
-        product_id INTEGER REFERENCES products(id),
-        artist_id INTEGER REFERENCES artists(id),
-        customer_id INTEGER REFERENCES customers(id),
+        product_id INTEGER REFERENCES products(id) ON UPDATE CASCADE ON DELETE CASCADE,
+        artist_id INTEGER REFERENCES artists(id) ON UPDATE CASCADE ON DELETE CASCADE,
+        customer_id INTEGER REFERENCES customers(id) ON UPDATE CASCADE ON DELETE CASCADE,
         selling_date date NOT NULL
     );
     COMMIT;
