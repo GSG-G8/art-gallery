@@ -5,9 +5,8 @@ const getArtistPaints = async (req, res, next) => {
     const { artistId } = req.params;
     if (artistId > 0) {
       const { rows } = await getArtistPaintsQuery(artistId);
-      const data = { ...rows[0] };
-      if (data.id) {
-        res.json({ statusCode: 200, data });
+      if (rows.length !== 0) {
+        res.json({ statusCode: 200, data: rows });
       } else {
         res.status(404).json({
           statusCode: 404,

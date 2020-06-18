@@ -30,10 +30,8 @@ describe('Get artist paints by id', () => {
       .expect('Content-Type', /json/)
       .end((err, res) => {
         if (err) return done(err);
-        const {
-          data: { title },
-        } = res.body;
-        expect(title).toBe('طائر الاوز');
+        const { data } = res.body;
+        expect(data[0].title).toBe('طائر الاوز');
         done();
       });
   });
