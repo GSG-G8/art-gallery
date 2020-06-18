@@ -4,7 +4,8 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const { join } = require('path');
 
-const error = require('./controllers');
+const routes = require('./routes');
+const { error } = require('./controllers');
 
 const app = express();
 
@@ -21,6 +22,7 @@ const middleware = [
 ];
 
 app.use(middleware);
+app.use('/api/v1/', routes);
 
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 if (process.env.NODE_ENV === 'production') {

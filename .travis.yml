@@ -1,3 +1,15 @@
 language: node_js
 node_js:
   - lts/*
+services:
+  - postgresql
+before_script:
+  - psql -c "CREATE DATABASE artistdev;" -U postgres
+  - psql -c "CREATE USER artist WITH PASSWORD '123';" -U postgres
+  - "npm run build:db"
+env:
+  global:
+    - PGPORT=5432
+test:
+  adapter: postgresql
+  database: artistdev
