@@ -51,7 +51,7 @@ const registerController = async (req, res, next) => {
         res.cookie(`${roleUser}Token`, token);
         res.status(200).json({
           statusCode: 200,
-          message: `welcome,${rows[0].first_name},your account created successfully`,
+          message: `WELCOME,${rows[0].first_name},your account created successfully`,
         });
       } catch (error) {
         next(error);
