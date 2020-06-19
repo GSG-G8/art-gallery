@@ -43,26 +43,25 @@ const registerController = async (req, res, next) => {
       email,
       password: newPassword,
     };
+    const addUser = async (query, user, roleUser) => {
+      try {
+        const { rows } = await query(user);
+        const { id, name } = rows[0];
+        const token = jwt.sign({ id, name }, process.env.SECRET_KEY);
+        res.cookie(`${roleUser}Token`, token);
+        res.status(200).json({
+          statusCode: 200,
+          message: `welcome,${rows[0].first_name},your account created successfully`,
+        });
+      } catch (error) {
+        next(error);
+      }
+    };
 
     if (role === 'artist') {
-      const { rows } = await addArtist(newUser);
-      const { id, name } = rows[0];
-      const token = jwt.sign({ id, name }, process.env.SECRET_KEY);
-      res.cookie('artistToken', token);
-      res.status(200).json({
-        statusCode: 200,
-        message: `welcome,${rows[0].first_name},your account created successfully`,
-      });
-    } else {
-      const { rows } = await addCustomer(newUser);
-      const { id, name } = rows[0];
-      const token = jwt.sign({ id, name }, process.env.SECRET_KEY);
-      res.cookie('customerToken', token);
-      res.status(200).json({
-        statusCode: 200,
-        message: `welcome,${rows[0].first_name},your account created successfully`,
-      });
+      return addUser(addArtist, newUser, 'artist');
     }
+    return addUser(addCustomer, newUser, 'customer');
   } catch (error) {
     if (error.message === 'Choose your role') {
       return res.status(400).json({ statusCode: 400, message: error.message });
