@@ -1,3 +1,3 @@
-const { registerValidation } = require('./auth');
+const registerSchema = require('./registerSchema');
 
-module.exports = { registerValidation };
+module.exports = { registerSchema };

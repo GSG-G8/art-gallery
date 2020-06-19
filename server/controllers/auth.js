@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+
+const { sign } = require('jsonwebtoken');
+const { registerSchema } = require('../utils/validation');
 
 const {
   getArtistByEmail,
@@ -9,10 +11,16 @@ const {
 } = require('../database/queries');
 
 const registerController = async (req, res, next) => {
-  const {
-    body: { firstName, lastName, password, email, role },
-  } = req;
   try {
+    const {
+      firstName,
+      lastName,
+      password,
+      email,
+      role,
+    } = await registerSchema.validate(req.body, {
+      abortEarly: false,
+    });
     let existingUser;
     switch (role) {
       case 'artist':
@@ -46,9 +54,9 @@ const registerController = async (req, res, next) => {
     const addUser = async (query, user, roleUser) => {
       try {
         const { rows } = await query(user);
-        const { id, name } = rows[0];
-        const token = jwt.sign({ id, name }, process.env.SECRET_KEY);
-        res.cookie(`${roleUser}Token`, token);
+        const { id } = rows[0];
+        const token = sign({ id, role: roleUser }, process.env.SECRET_KEY);
+        res.cookie('token', token);
         res.status(200).json({
           statusCode: 200,
           message: `WELCOME,${rows[0].first_name},your account created successfully`,
@@ -66,7 +74,11 @@ const registerController = async (req, res, next) => {
     if (error.message === 'Choose your role') {
       return res.status(400).json({ statusCode: 400, message: error.message });
     }
-    next(error);
+    if (error.name === 'ValidationError') {
+      res.status(400).json({ statusCode: 400, message: error.errors[0] });
+    } else {
+      next(error);
+    }
   }
 };
 
