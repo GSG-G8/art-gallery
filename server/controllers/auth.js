@@ -1,16 +1,63 @@
-const bcrypt = require('bcrypt');
-
 const { sign } = require('jsonwebtoken');
-const { registerSchema } = require('../utils/validation');
-
+const { compare, hash } = require('bcrypt');
+const { loginSchema, registerSchema } = require('../utils/validation');
 const {
   getArtistByEmail,
   addArtist,
   addCustomer,
   checkCustomerEmail,
 } = require('../database/queries');
+require('dotenv').config();
 
-const registerController = async (req, res, next) => {
+exports.login = async (req, res, next) => {
+  try {
+    const { email, password, role } = await loginSchema.validate(req.body, {
+      abortEarly: false,
+    });
+    let existingUser;
+    switch (role) {
+      case 'artist':
+        existingUser = await getArtistByEmail(email);
+        break;
+
+      case 'user':
+        existingUser = await checkCustomerEmail(email);
+        break;
+      default:
+        throw new Error('Choose your role');
+    }
+    if (existingUser.rows[0]) {
+      const { id, password: hashedPasswored } = existingUser.rows[0];
+
+      const isCorrectPassword = await compare(password, hashedPasswored);
+
+      if (isCorrectPassword) {
+        const token = sign({ id, role }, process.env.SECRET_KEY);
+        res.cookie('token', token);
+        res.json({ statusCode: 200, message: 'logged in successfully' });
+      } else {
+        res
+          .status(400)
+          .json({ statusCode: 400, message: 'Incorrect Password' });
+      }
+    } else {
+      res
+        .status(400)
+        .json({ statusCode: 400, message: 'You have to sign up first' });
+    }
+  } catch (err) {
+    if (err.errors) {
+      res.status(400).json({
+        status: 400,
+        message: err.errors,
+      });
+    } else {
+      next(err);
+    }
+  }
+};
+
+exports.registerController = async (req, res, next) => {
   try {
     const {
       firstName,
@@ -40,8 +87,8 @@ const registerController = async (req, res, next) => {
 
     let newPassword;
     try {
-      const hash = await bcrypt.hash(password, 10);
-      newPassword = hash;
+      const hashPass = await hash(password, 10);
+      newPassword = hashPass;
     } catch (error) {
       next(error);
     }
@@ -81,5 +128,3 @@ const registerController = async (req, res, next) => {
     }
   }
 };
-
-module.exports = { registerController };

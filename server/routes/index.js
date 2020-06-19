@@ -1,9 +1,9 @@
 const router = require('express').Router();
 
-const paintings = require('./paintings');
 const auth = require('./auth');
+const paintings = require('./paintings');
 
-router.use(paintings);
 router.use(auth);
+router.use(paintings);
 
 module.exports = router;
