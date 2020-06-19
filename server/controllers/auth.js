@@ -7,7 +7,6 @@ const {
   addCustomer,
   checkCustomerEmail,
 } = require('../database/queries');
-require('dotenv').config();
 
 exports.login = async (req, res, next) => {
   try {
