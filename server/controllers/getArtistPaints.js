@@ -10,7 +10,7 @@ const getArtistPaints = async (req, res, next) => {
       } else {
         res.status(404).json({
           statusCode: 404,
-          message: "Sorry There's no artist for this id",
+          message: "Sorry There's no paintings for this artist",
         });
       }
     } else {

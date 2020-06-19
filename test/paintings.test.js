@@ -8,7 +8,7 @@ beforeAll(() => dbBuild());
 afterAll(() => connection.end());
 
 describe('Get all Paintings', () => {
-  test('Route /paintings status 200, json header, data', (done) => {
+  test('Route /paintings status 200, json header, data length to be checked', (done) => {
     return request(app)
       .get('/api/v1/paintings')
       .expect(200)
@@ -23,7 +23,7 @@ describe('Get all Paintings', () => {
 });
 
 describe('Get artist paints by id', () => {
-  test('Route /paintings/1 status 200, json header, data.name = ca-wiki ', (done) => {
+  test('Route /paintings/1 status 200, json header, data[0].title = طائر الاوز ', (done) => {
     return request(app)
       .get('/api/v1/paintings/1')
       .expect(200)
@@ -44,7 +44,7 @@ describe('Get artist paints by id', () => {
       .end((err, res) => {
         if (err) return done(err);
         const { message } = res.body;
-        expect(message).toBe("Sorry There's no artist for this id");
+        expect(message).toBe("Sorry There's no paintings for this artist");
         done();
       });
   });
