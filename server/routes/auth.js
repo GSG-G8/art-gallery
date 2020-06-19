@@ -3,7 +3,7 @@ const {
   auth: { registerController, login },
 } = require('../controllers');
 
-router.post('/register', registerController);
+router.post('/sign-up', registerController);
 
 router.post('/login', login);
 

@@ -7,9 +7,9 @@ const app = require('../server/app');
 beforeAll(() => dbBuild());
 
 describe('register endPoint', () => {
-  test('Route /register status 200,  data.message = WELCOME,user fist name,your account created successfully', (done) => {
+  test('Route /sign-up status 200,  data.message = WELCOME,user fist name,your account created successfully', (done) => {
     return request(app)
-      .post('/api/v1/register')
+      .post('/api/v1/sign-up')
       .set({
         'Content-Type': 'application/json',
       })
@@ -33,9 +33,9 @@ describe('register endPoint', () => {
       });
   });
 
-  test('Route /register status for bad request', (done) => {
+  test('Route /sign-up status for bad request', (done) => {
     return request(app)
-      .post('/api/v1/register')
+      .post('/api/v1/sign-up')
       .set({
         'Content-Type': 'application/json',
       })
@@ -46,9 +46,9 @@ describe('register endPoint', () => {
         return done();
       });
   });
-  test('Route /register status for email exist !!', (done) => {
+  test('Route /sign-up status for email exist !!', (done) => {
     return request(app)
-      .post('/api/v1/register')
+      .post('/api/v1/sign-up')
       .set({
         'Content-Type': 'application/json',
       })
