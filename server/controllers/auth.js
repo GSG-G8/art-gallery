@@ -20,7 +20,7 @@ exports.login = async (req, res, next) => {
         existingUser = await getArtistByEmail(email);
         break;
 
-      case 'user':
+      case 'customer':
         existingUser = await checkCustomerEmail(email);
         break;
       default:
