@@ -8,7 +8,7 @@ const registerSchema = object({
     .required(),
   firstName: string().min(3).required(),
   lastName: string().min(3).required(),
-  role: string().required(),
+  role: string().oneOf(['artist', 'customer']).required(),
 });
 
 module.exports = registerSchema;
