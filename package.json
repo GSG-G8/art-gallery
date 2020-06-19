@@ -14,6 +14,7 @@
     "heroku-postbuild": "cd client && npm install && npm run build",
     "test": "NODE_ENV=test jest --no-cache --runInBand --coverage",
     "kill": "fuser -k 5000/tcp",
+    "kill-run": "fuser -k 5000/tcp && npm run dev",
     "lint": "eslint server/",
     "lint-fix": "eslint server/ --fix",
     "lint:react": "cd client && npm run lint",
