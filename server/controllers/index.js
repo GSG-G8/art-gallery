@@ -1,3 +1,6 @@
 const error = require('./errorHandlers');
+const getPaintings = require('./getPaintings');
 
-module.exports = error;
+const auth = require('./auth');
+
+module.exports = { error, getPaintings, auth };
