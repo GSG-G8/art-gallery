@@ -1,5 +1,5 @@
 const { sign } = require('jsonwebtoken');
-const { compare, hash } = require('bcrypt');
+const { compare, hash, genSalt } = require('bcrypt');
 const { loginSchema, registerSchema } = require('../utils/validation');
 const {
   getArtistByEmail,
@@ -7,6 +7,7 @@ const {
   addCustomer,
   checkCustomerEmail,
 } = require('../database/queries');
+const addUser = require('../utils/addUser');
 
 exports.login = async (req, res, next) => {
   try {
@@ -86,7 +87,8 @@ exports.registerController = async (req, res, next) => {
 
     let newPassword;
     try {
-      const hashPass = await hash(password, 10);
+      const salt = await genSalt(10);
+      const hashPass = await hash(password, salt);
       newPassword = hashPass;
     } catch (error) {
       next(error);
@@ -97,25 +99,11 @@ exports.registerController = async (req, res, next) => {
       email,
       password: newPassword,
     };
-    const addUser = async (query, user, roleUser) => {
-      try {
-        const { rows } = await query(user);
-        const { id } = rows[0];
-        const token = sign({ id, role: roleUser }, process.env.SECRET_KEY);
-        res.cookie('token', token);
-        res.status(200).json({
-          statusCode: 200,
-          message: `WELCOME,${rows[0].first_name},your account created successfully`,
-        });
-      } catch (error) {
-        next(error);
-      }
-    };
 
     if (role === 'artist') {
-      return addUser(addArtist, newUser, 'artist');
+      return addUser(addArtist, newUser, res, 'artist');
     }
-    return addUser(addCustomer, newUser, 'customer');
+    return addUser(addCustomer, newUser, res, 'customer');
   } catch (error) {
     if (error.message === 'Choose your role') {
       return res.status(400).json({ statusCode: 400, message: error.message });
