@@ -1,4 +1,4 @@
-const { object, string, ref } = require('yup');
+const { object, string, ref, boolean } = require('yup');
 
 const registerSchema = object({
   email: string().email().required(),
@@ -9,6 +9,7 @@ const registerSchema = object({
   firstName: string().min(3).required(),
   lastName: string().min(3).required(),
   role: string().oneOf(['artist', 'customer']).required(),
+  customized: boolean(),
 });
 
 module.exports = registerSchema;

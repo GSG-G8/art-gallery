@@ -65,6 +65,7 @@ exports.registerController = async (req, res, next) => {
       password,
       email,
       role,
+      customized,
     } = await registerSchema.validate(req.body, {
       abortEarly: false,
     });
@@ -98,8 +99,8 @@ exports.registerController = async (req, res, next) => {
       lastName,
       email,
       password: newPassword,
+      customized,
     };
-
     if (role === 'artist') {
       return addUser(addArtist, newUser, res, 'artist');
     }
