@@ -1,7 +1,8 @@
 const { getPaintingsQuery } = require('./Paintings');
-const { postCartQuery } = require('./Cart');
+const { checkCartQuery, postCartQuery } = require('./Cart');
 
 module.exports = {
   getPaintingsQuery,
+  checkCartQuery,
   postCartQuery,
 };

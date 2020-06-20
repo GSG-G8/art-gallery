@@ -2,6 +2,6 @@ const router = require('express').Router();
 
 const { postCart } = require('../controllers');
 
-router.get('/cart', postCart);
+router.post('/cart', postCart);
 
 module.exports = router;
