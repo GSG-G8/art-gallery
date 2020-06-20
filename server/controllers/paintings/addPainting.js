@@ -33,6 +33,11 @@ exports.addPainting = async (req, res, next) => {
         status: 400,
         message: err.errors,
       });
+    } else if (err.message === 'upload image error') {
+      res.status(500).json({
+        status: 500,
+        message: "couldn't upload image",
+      });
     } else {
       next(err);
     }
