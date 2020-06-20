@@ -8,8 +8,8 @@ const addUser = async (query, user, res, role) => {
     const { id, first_name: userName } = info;
     const token = sign({ id, role }, process.env.SECRET_KEY);
     res.cookie('token', token);
-    res.status(200).json({
-      statusCode: 200,
+    res.status(201).json({
+      statusCode: 201,
       message: `WELCOME,${userName},your account created successfully`,
     });
   } catch (error) {

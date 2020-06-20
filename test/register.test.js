@@ -7,7 +7,7 @@ const app = require('../server/app');
 beforeAll(() => dbBuild());
 
 describe('register endPoint', () => {
-  test('Route /sign-up status 200,  data.message = WELCOME,user fist name,your account created successfully', (done) => {
+  test('Route /sign-up status 201,  data.message = WELCOME,user fist name,your account created successfully', (done) => {
     return request(app)
       .post('/api/v1/sign-up')
       .set({
@@ -23,7 +23,7 @@ describe('register endPoint', () => {
           role: 'artist',
         }),
       )
-      .expect(200)
+      .expect(201)
       .end((err, res) => {
         if (err) return done(err);
         expect(res.body.message).toBe(
