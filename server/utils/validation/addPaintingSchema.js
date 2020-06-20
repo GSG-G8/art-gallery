@@ -1,12 +1,11 @@
-const yup = require('yup');
+const { object, string } = require('yup');
 
-const addPaintingSchema = yup.object({
-  title: yup.string().required(),
-  description: yup.string().required(),
-  category: yup.string().required(),
-  property: yup.string().required(),
-  paintingImg: yup
-    .object()
+const addPaintingSchema = object({
+  title: string().required(),
+  description: string().required(),
+  category: string().required(),
+  property: string().required(),
+  paintingImg: object()
     .test('type', 'Should be an image png or jpeg', (value) => {
       return ['image/png', 'image/jpeg'].includes(value.type);
     })
