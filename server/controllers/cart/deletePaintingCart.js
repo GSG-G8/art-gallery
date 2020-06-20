@@ -36,7 +36,7 @@ const deletePantingCart = async (req, res, next) => {
   } else {
     res
       .status(403)
-      .json({ statusCode: 403, message: 'you cant delete the painting' });
+      .json({ statusCode: 403, message: "you can't delete the painting" });
   }
 };
 
