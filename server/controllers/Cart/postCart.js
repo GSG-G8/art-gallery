@@ -24,8 +24,8 @@ const postCart = async (req, res, next) => {
     if (err.errors) {
       res.status(400).json({ statusCode: 400, data: { message: err.errors } });
     } else if (err.detail) {
-      res.status(409).json({
-        statusCode: 409,
+      res.status(400).json({
+        statusCode: 400,
         data: {
           message: err.detail,
         },
