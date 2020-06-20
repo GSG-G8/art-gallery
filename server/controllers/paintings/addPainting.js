@@ -1,6 +1,6 @@
-const { addPaintingSchema } = require('../utils/validation');
-const uploadImg = require('../utils/uploadImg');
-const { addPaintingQuery } = require('../database/queries/Paintings');
+const { addPaintingSchema } = require('../../utils/validation');
+const uploadImg = require('../../utils/uploadImg');
+const { addPaintingQuery } = require('../../database/queries');
 
 exports.addPainting = async (req, res, next) => {
   try {

@@ -1,6 +1,11 @@
-const { getPaintingsQuery, getArtistPaintsQuery } = require('./Paintings');
+const {
+  getPaintingsQuery,
+  getArtistPaintsQuery,
+  addPaintingQuery,
+} = require('./Paintings');
 
 module.exports = {
   getPaintingsQuery,
   getArtistPaintsQuery,
+  addPaintingQuery,
 };
