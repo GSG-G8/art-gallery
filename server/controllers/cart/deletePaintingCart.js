@@ -11,7 +11,7 @@ const deletePantingCart = async (req, res, next) => {
     cookies: { token },
   } = req;
   const { id: customerId, role } = jwt.decode(token, process.env.SECRET_KEY);
-  if (role === 'user') {
+  if (role === 'user' && paintingsId > 0) {
     try {
       const { rows } = await getPaintingsForUser(customerId, paintingsId);
       if (rows[0]) {
@@ -22,7 +22,7 @@ const deletePantingCart = async (req, res, next) => {
         const { id } = info[0];
         res.json({
           statusCode: 200,
-          message: `you order with id ${id} deleted!!`,
+          message: `your order with id ${id} deleted!!`,
         });
       } else {
         res.status(400).json({
