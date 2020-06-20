@@ -27,7 +27,7 @@ describe('Add to cart', () => {
       });
   });
 
-  test('POST Route /cart status 409, json header, send data ', (done) => {
+  test('POST Route /cart status 400, json header, send data ', (done) => {
     request(app)
       .post('/api/v1/cart')
       .send({
@@ -46,7 +46,7 @@ describe('Add to cart', () => {
       });
   });
 
-  test('POST Route /cart status 400, json header, send invalid data ', (done) => {
+  test('POST Route /cart status 400, json header, add product doesn\t exist to cart ', (done) => {
     request(app)
       .post('/api/v1/cart')
       .send({
@@ -67,7 +67,7 @@ describe('Add to cart', () => {
       });
   });
 
-  test('POST Route /cart status 400, json header, send invalid request ', (done) => {
+  test('POST Route /cart status 400, json header, send invalid request params ', (done) => {
     request(app)
       .post('/api/v1/cart')
       .send({
