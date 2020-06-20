@@ -10,8 +10,6 @@ before_script:
 env:
   global:
     - PGPORT=5432
-    - CUSTOMER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InVzZXIiLCJpYXQiOjE1OTI2NTU4Njl9.6-nb0UUwpAbv7z8GmpKuTFO7DP3UzyQFDwuSDbJiZ7s
-
 test:
   adapter: postgresql
   database: artistdev
