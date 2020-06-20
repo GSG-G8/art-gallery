@@ -35,7 +35,7 @@ describe('Delete Paintings from cart for login user', () => {
         done();
       });
   });
-  test('Route /cart/:paintingsId status 403,message="you can\'t delete the painting"', (done) => {
+  test('Route /cart/:paintingsId status 403,message="you cant delete the painting"', (done) => {
     return request(app)
       .delete('/api/v1/cart/1')
       .set('Cookie', [`token=${process.env.ARTIST_TOKEN}`])
@@ -44,7 +44,7 @@ describe('Delete Paintings from cart for login user', () => {
       .end((err, res) => {
         if (err) return done(err);
         const { message } = res.body;
-        expect(message).toBe("you can't delete the painting");
+        expect(message).toBe('you cant delete the painting');
         done();
       });
   });
