@@ -11,7 +11,7 @@ const deletePantingCart = async (req, res, next) => {
     cookies: { token },
   } = req;
   const { id: customerId, role } = jwt.decode(token, process.env.SECRET_KEY);
-  if (role === 'customer' && paintingsId > 0) {
+  if (role === 'customer' && paintingsId > 0 && customerId) {
     try {
       const { rows } = await getPaintingsForUser(customerId, paintingsId);
       if (rows[0]) {

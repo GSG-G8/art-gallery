@@ -16,7 +16,7 @@ exports.login = async (req, res, next) => {
         existingUser = await getArtistByEmail(email);
         break;
 
-      case 'user':
+      case 'customer':
         existingUser = await getUserByEmail(email);
         break;
       default:
@@ -48,6 +48,7 @@ exports.login = async (req, res, next) => {
         message: err.errors,
       });
     } else {
+      console.log(err);
       next(err);
     }
   }
