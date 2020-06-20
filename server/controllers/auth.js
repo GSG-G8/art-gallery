@@ -48,7 +48,6 @@ exports.login = async (req, res, next) => {
         message: err.errors,
       });
     } else {
-      console.log(err);
       next(err);
     }
   }
