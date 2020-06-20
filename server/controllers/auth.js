@@ -86,19 +86,14 @@ exports.registerController = async (req, res, next) => {
         .status(400)
         .json({ statusCode: 400, message: 'email exist !!' });
 
-    let newPassword;
-    try {
-      const salt = await genSalt(10);
-      const hashPass = await hash(password, salt);
-      newPassword = hashPass;
-    } catch (error) {
-      next(error);
-    }
+    const salt = await genSalt(10);
+    const hashPass = await hash(password, salt);
+
     const newUser = {
       firstName,
       lastName,
       email,
-      password: newPassword,
+      password: hashPass,
       customized,
     };
     if (role === 'artist') {
