@@ -5,10 +5,9 @@ const getArtist = async (req, res, next) => {
     const {
       params: { artistId },
     } = req;
-    if (artistId > 0) {
-      const { rows } = await getArtistQuery(artistId);
-      const data = { ...rows[0] };
-      if (data.id) {
+    if (artistId && artistId > 0) {
+      const { rows: data } = await getArtistQuery(artistId);
+      if (data.length !== 0) {
         res.json({ statusCode: 200, data });
       } else {
         res.status(404).json({
@@ -19,7 +18,7 @@ const getArtist = async (req, res, next) => {
     } else {
       res.status(400).json({
         statusCode: 400,
-        message: 'You enterd wrong artist ID',
+        message: 'You entered wrong artist ID',
       });
     }
   } catch (err) {

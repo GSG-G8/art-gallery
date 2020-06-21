@@ -8,7 +8,7 @@ beforeAll(() => dbBuild());
 afterAll(() => connection.end());
 
 describe('Get Artist By Id', () => {
-  test('Route /profile/1 status 200, json header, data.first_name =Alaa ', (done) => {
+  test('Route /profile/1 status 200, json header, data.id=1 ', (done) => {
     return request(app)
       .get('/api/v1/profile/1')
       .expect(200)
@@ -16,25 +16,25 @@ describe('Get Artist By Id', () => {
       .end((err, res) => {
         if (err) return done(err);
         const { data } = res.body;
-        expect(data.first_name).toBe('Alaa');
+        expect(data[0].id).toBe(1);
         done();
       });
   });
 
-  test('Route /profile/8 status 404, json header, data.message = "Sorry There\'s no artist for this id" ', (done) => {
+  test('Route /profile/888 status 404, json header, data.message = "Sorry There\'s no artist for this id" ', (done) => {
     return request(app)
-      .get('/api/v1/profile/8')
+      .get('/api/v1/profile/888')
       .expect(404)
       .expect('Content-Type', /json/)
       .end((err, res) => {
         if (err) return done(err);
         const { message } = res.body;
+        console.log(res.body);
         expect(message).toBe("Sorry There's no artist for this id");
         done();
       });
   });
-
-  test('Route /profile/alaa status 400, json header, data.message = You enterd wrong artist ID ', (done) => {
+  test('Route /profile/alaa status 400, json header, data.message = You entered wrong artist ID ', (done) => {
     return request(app)
       .get('/api/v1/profile/alaa')
       .expect(400)
@@ -42,7 +42,7 @@ describe('Get Artist By Id', () => {
       .end((err, res) => {
         if (err) return done(err);
         const { message } = res.body;
-        expect(message).toBe('You enterd wrong artist ID');
+        expect(message).toBe('You entered wrong artist ID');
         done();
       });
   });
