@@ -67,6 +67,7 @@ describe('POST /painting', () => {
   const filePath = `${__dirname}/1610-Brain-Games-Study-workout.jpg`;
 
   test('Route /painting status 201,  data.message = Painting added successfully', (done) => {
+    // if this test doesn't pass and you get server error, that's mean u have problem with internet connection, try later
     return request(app)
       .post('/api/v1/painting')
       .set({
