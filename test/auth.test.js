@@ -80,9 +80,9 @@ describe('testing for /logout', () => {
       .set('Cookie', token)
       .expect(200)
       .end((err, res) => {
-        if (err) done(err);
+        if (err) return done(err);
         expect(res.body.message).toBe('logout success');
-        done();
+        return done();
       });
   });
 });
