@@ -5,8 +5,8 @@ const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const { join } = require('path');
-
 const routes = require('./routes');
+
 const { error } = require('./controllers');
 
 const app = express();
@@ -33,6 +33,8 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 app.use('/api/v1/', routes);
+
+app.use('/api/v1', routes);
 
 app.use(error);
 
