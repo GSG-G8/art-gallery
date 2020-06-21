@@ -20,7 +20,7 @@ const verifyUser = async (req, res, next) => {
   try {
     const decoded = await verify(req.cookies.token, process.env.SECRET_KEY);
     req.user = decoded;
-    if (decoded.role === 'user') {
+    if (decoded.role === 'customer') {
       next();
     } else {
       res.status(401).json({ statusCode: 401, message: 'User only endPoints' });
