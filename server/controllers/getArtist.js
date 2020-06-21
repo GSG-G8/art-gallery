@@ -2,7 +2,9 @@ const { getArtistQuery } = require('../database/queries');
 
 const getArtist = async (req, res, next) => {
   try {
-    const { artistId } = req.params;
+    const {
+      params: { artistId },
+    } = req;
     if (artistId > 0) {
       const { rows } = await getArtistQuery(artistId);
       const data = { ...rows[0] };

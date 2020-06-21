@@ -1,9 +1,9 @@
 const router = require('express').Router();
 
 const paintings = require('./paintings');
-const Artist = require('./artist');
+const artist = require('./artist');
 
 router.use(paintings);
-router.use(Artist);
+router.use(artist);
 
 module.exports = router;
