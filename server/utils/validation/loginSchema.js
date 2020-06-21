@@ -1,9 +1,9 @@
-const yup = require('yup');
+const { object, string } = require('yup');
 
-const loginSchema = yup.object({
-  email: yup.string().email().required(),
-  password: yup.string().min(8).required(),
-  role: yup.string().oneOf(['artist', 'customer']).required(),
+const loginSchema = object({
+  email: string().email().required(),
+  password: string().min(8).required(),
+  role: string().oneOf(['artist', 'customer']).required(),
 });
 
 module.exports = loginSchema;
