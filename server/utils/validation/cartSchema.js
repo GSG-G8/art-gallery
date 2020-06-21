@@ -1,8 +1,8 @@
-const yup = require('yup');
+const { object, number } = require('yup');
 
-const cartSchema = yup.object({
-  customerId: yup.number().positive().required(),
-  paintingId: yup.number().positive().required(),
+const cartSchema = object({
+  customerId: number().positive().required(),
+  paintingId: number().positive().required(),
 });
 
 module.exports = cartSchema;

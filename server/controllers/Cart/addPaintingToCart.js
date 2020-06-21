@@ -1,7 +1,7 @@
 const { checkCartQuery, postCartQuery } = require('../../database/queries');
 const { cartSchema } = require('../../utils/validation');
 
-const postCart = async (req, res, next) => {
+const addPaintingToCart = async (req, res, next) => {
   try {
     await cartSchema.validate(req.body, { abortEarly: false });
     const { rows: checkrows } = await checkCartQuery(req.body);
@@ -36,4 +36,4 @@ const postCart = async (req, res, next) => {
   }
 };
 
-module.exports = postCart;
+module.exports = addPaintingToCart;

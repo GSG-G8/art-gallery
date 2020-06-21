@@ -1,3 +1,3 @@
-const postCart = require('./postCart');
+const addPaintingToCart = require('./addPaintingToCart');
 
-module.exports = { postCart };
+module.exports = { addPaintingToCart };

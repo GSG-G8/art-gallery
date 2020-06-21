@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
-const { postCart } = require('../controllers');
+const { addPaintingToCart } = require('../controllers');
 
-router.post('/cart', postCart);
+router.post('/cart', addPaintingToCart);
 
 module.exports = router;
