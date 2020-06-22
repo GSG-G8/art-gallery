@@ -6,22 +6,35 @@ const {
   addArtist,
   addCustomer,
   checkCustomerEmail,
+  getAdminEmail,
 } = require('../database/queries');
 const addUser = require('../utils/addUser');
 
 exports.login = async (req, res, next) => {
   try {
+    const {
+      route: { path },
+    } = req;
     const { email, password, role } = await loginSchema.validate(req.body, {
       abortEarly: false,
     });
+    let userRole;
     let existingUser;
-    switch (role) {
+    if (path === '/admin/login') {
+      userRole = 'admin';
+    } else {
+      userRole = role;
+    }
+    switch (userRole) {
       case 'artist':
         existingUser = await getArtistByEmail(email);
         break;
 
       case 'customer':
         existingUser = await checkCustomerEmail(email);
+        break;
+      case 'admin':
+        existingUser = await getAdminEmail(email);
         break;
       default:
         throw new Error('Choose your role');
@@ -32,7 +45,7 @@ exports.login = async (req, res, next) => {
       const isCorrectPassword = await compare(password, hashedPasswored);
 
       if (isCorrectPassword) {
-        const token = sign({ id, role }, process.env.SECRET_KEY);
+        const token = sign({ id, role: userRole }, process.env.SECRET_KEY);
         res.cookie('token', token);
         res.json({ statusCode: 200, message: 'logged in successfully' });
       } else {

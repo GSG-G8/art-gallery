@@ -1,8 +1,7 @@
 BEGIN;
-    DROP TABLE IF EXISTS artist,
+    DROP TABLE IF EXISTS admin,artist,
 customer,painting,feedback,cart,painting_user
     CASCADE;
-
 
 CREATE TABLE artist
 (
@@ -67,5 +66,14 @@ CREATE TABLE artist
         painting_id INTEGER REFERENCES painting(id) ON UPDATE CASCADE ON DELETE CASCADE,
         customer_id INTEGER REFERENCES customer(id) ON UPDATE CASCADE ON DELETE CASCADE,
         selling_date date NOT NULL
+    );
+
+    CREATE TABLE admin
+    (
+        id SERIAL PRIMARY KEY NOT NULL,
+        name varchar(50) NOT NULL,
+        email varchar(255) UNIQUE NOT NULL,
+        password text NOT NULL,
+        mobile integer UNIQUE
     );
     COMMIT;
