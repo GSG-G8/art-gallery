@@ -1,6 +1,10 @@
 const buyPaintings = async (req, res, next) => {
   try {
-    res.json(req.body);
+    const {
+      body: { customerId, paintingId },
+    } = req;
+    const data = JSON.parse(paintingId);
+    res.json({ customerId, paintingId: data });
   } catch (err) {
     next(err);
   }
