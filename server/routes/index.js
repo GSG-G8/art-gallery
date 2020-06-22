@@ -5,7 +5,7 @@ const paintings = require('./paintings');
 const artist = require('./artist');
 
 router.use(auth);
-router.use(paintings);
 router.use(artist);
+router.use(paintings);
 
 module.exports = router;
