@@ -18,7 +18,9 @@ CREATE TABLE artist
     [],
     budget DECIMAL
     (10,2) DEFAULT 0 NOT NULL,
-    bio text
+    bio text,
+    active VARCHAR
+    (255) DEFAULT FALSE
 );
 
     CREATE TABLE customer

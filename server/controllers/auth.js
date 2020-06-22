@@ -1,4 +1,4 @@
-const { sign } = require('jsonwebtoken');
+const { sign, decode } = require('jsonwebtoken');
 const { compare, hash, genSalt } = require('bcrypt');
 const { loginSchema, registerSchema } = require('../utils/validation');
 const {
@@ -12,20 +12,11 @@ const addUser = require('../utils/addUser');
 
 exports.login = async (req, res, next) => {
   try {
-    const {
-      route: { path },
-    } = req;
     const { email, password, role } = await loginSchema.validate(req.body, {
       abortEarly: false,
     });
-    let userRole;
     let existingUser;
-    if (path === '/admin/login') {
-      userRole = 'admin';
-    } else {
-      userRole = role;
-    }
-    switch (userRole) {
+    switch (role) {
       case 'artist':
         existingUser = await getArtistByEmail(email);
         break;
@@ -45,8 +36,11 @@ exports.login = async (req, res, next) => {
       const isCorrectPassword = await compare(password, hashedPasswored);
 
       if (isCorrectPassword) {
-        const token = sign({ id, role: userRole }, process.env.SECRET_KEY);
+        const token = sign({ id, role }, process.env.SECRET_KEY);
         res.cookie('token', token);
+        const de = decode(req.cookies.token, process.env.SECRET_KEY);
+        console.log(process.env.SECRET_KEY);
+        console.log(de);
         res.json({ statusCode: 200, message: 'logged in successfully' });
       } else {
         res
