@@ -10,7 +10,7 @@ describe('GET /cart endPoint', () => {
   test('get cart for exisiting user with user token', (done) => {
     return request(app)
       .get('/api/v1/cart')
-      .set('Cookie', process.env.customer_token)
+      .set('Cookie', [`token=${process.env.CUSTOMER_TOKEN}`])
       .expect('Content-Type', /json/)
       .expect(200)
 
