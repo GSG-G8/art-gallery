@@ -8,6 +8,6 @@ const {
 
 router.get('/paintings', getPaintings);
 router.get('/paintings/:artistId', getArtistPaints);
-router.post('/buy/:productId', buyPaintings);
+router.post('/buy/:paintingsId', buyPaintings);
 
 module.exports = router;
