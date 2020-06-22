@@ -29,7 +29,6 @@ describe('Get Artist By Id', () => {
       .end((err, res) => {
         if (err) return done(err);
         const { message } = res.body;
-        console.log(res.body);
         expect(message).toBe("Sorry There's no artist for this id");
         done();
       });

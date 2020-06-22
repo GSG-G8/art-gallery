@@ -1,4 +1,4 @@
-const { sign, decode } = require('jsonwebtoken');
+const { sign } = require('jsonwebtoken');
 const { compare, hash, genSalt } = require('bcrypt');
 const { loginSchema, registerSchema } = require('../utils/validation');
 const {
@@ -31,16 +31,13 @@ exports.login = async (req, res, next) => {
         throw new Error('Choose your role');
     }
     if (existingUser.rows[0]) {
-      const { id, password: hashedPasswored } = existingUser.rows[0];
+      const { id, password: hashedPassword } = existingUser.rows[0];
 
-      const isCorrectPassword = await compare(password, hashedPasswored);
+      const isCorrectPassword = await compare(password, hashedPassword);
 
       if (isCorrectPassword) {
         const token = sign({ id, role }, process.env.SECRET_KEY);
         res.cookie('token', token);
-        const de = decode(req.cookies.token, process.env.SECRET_KEY);
-        console.log(process.env.SECRET_KEY);
-        console.log(de);
         res.json({ statusCode: 200, message: 'logged in successfully' });
       } else {
         res
