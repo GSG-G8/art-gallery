@@ -76,4 +76,8 @@ CREATE TABLE artist
         password text NOT NULL,
         mobile integer UNIQUE
     );
+    INSERT INTO admin
+        (id,name,email,password,mobile)
+    VALUES
+        ('1', 'artist Admin', 'admin-artist@gmail.com', '$2b$10$5Z1dB9i1D75mrT8bNcxJruyMjolMbjVQ/cxzzm2J4Trze4e7lecc6', '0590000000');
     COMMIT;
