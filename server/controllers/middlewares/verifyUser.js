@@ -2,6 +2,7 @@ const { verify } = require('jsonwebtoken');
 
 const verifyArtist = async (req, res, next) => {
   try {
+    console.log('artist');
     const decoded = await verify(req.cookies.token, process.env.SECRET_KEY);
     req.user = decoded;
     if (decoded.role === 'artist') {

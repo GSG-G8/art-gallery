@@ -1,23 +1,32 @@
 const { checkCartQuery, postCartQuery } = require('../../database/queries');
-const { cartSchema } = require('../../utils/validation');
 
 const addPaintingToCart = async (req, res, next) => {
   try {
-    await cartSchema.validate(req.body, { abortEarly: false });
-    const { rows: checkrows } = await checkCartQuery(req.body);
-    if (checkrows.length === 0) {
-      const { rows } = await postCartQuery(req.body);
-      const { customer_id: customerId, painting_id: paintingId } = rows[0];
-      res.status(201).json({
-        StatusCode: 201,
-        data: {
-          customerId,
-          paintingId,
-          message: `Painting with id = ${paintingId} was added successfully`,
-        },
+    const {
+      user: { id: customerId },
+      body: { paintingId },
+    } = req;
+    if (customerId > 0 && paintingId > 0) {
+      const { rows: checkrows } = await checkCartQuery({
+        customerId,
+        paintingId,
       });
+      if (checkrows.length === 0) {
+        await postCartQuery(req.body);
+        res.status(201).json({
+          StatusCode: 201,
+          data: {
+            customerId,
+            paintingId,
+            message: `Painting with id = ${paintingId} was added successfully`,
+          },
+        });
+      } else {
+        const err = { errors: 'Product is already in your cart' };
+        throw err;
+      }
     } else {
-      const err = { errors: 'Product is already in your cart' };
+      const err = { errors: 'Painting Id must be a number' };
       throw err;
     }
   } catch (err) {
