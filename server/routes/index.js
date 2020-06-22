@@ -6,8 +6,8 @@ const artist = require('./artist');
 const cart = require('./cart');
 
 router.use(auth);
-router.use(paintings);
 router.use(artist);
 router.use(cart);
+router.use(paintings);
 
 module.exports = router;

@@ -1,9 +1,8 @@
 const error = require('./errorHandlers');
-const { getPaintings, getArtistPaints } = require('./Paintings');
-const { addPaintingToCart } = require('./Cart');
-const { getArtist } = require('./Artist');
-
 const auth = require('./auth');
+const { getArtistPaints, getPaintings, addPainting } = require('./paintings');
+const { addPaintingToCart } = require('./Cart');
+const { getArtist } = require('./user');
 
 module.exports = {
   error,
@@ -12,4 +11,5 @@ module.exports = {
   getArtist,
   getArtistPaints,
   auth,
+  addPainting,
 };
