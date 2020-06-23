@@ -1,4 +1,4 @@
-const { deletePaintingsQuery } = require('../database/queries');
+const { deletePaintingsQuery } = require('../../database/queries/index');
 
 const deletePainting = async (req, res, next) => {
   try {
