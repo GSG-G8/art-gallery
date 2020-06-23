@@ -1,5 +1,3 @@
-const jwt = require('jsonwebtoken');
-
 const {
   getPaintingsForUser,
   deletePaintingFromCart,
@@ -8,35 +6,28 @@ const {
 const deletePantingCart = async (req, res, next) => {
   const {
     params: { paintingsId },
-    cookies: { token },
+    user: { id: customerId },
   } = req;
-  const { id: customerId, role } = jwt.decode(token, process.env.SECRET_KEY);
-  if (role === 'customer' && paintingsId > 0 && customerId) {
-    try {
-      const { rows } = await getPaintingsForUser(customerId, paintingsId);
-      if (rows[0]) {
-        const { rows: info } = await deletePaintingFromCart(
-          customerId,
-          paintingsId,
-        );
-        const { id } = info[0];
-        res.json({
-          statusCode: 200,
-          message: `your order with id ${id} deleted!!`,
-        });
-      } else {
-        res.status(400).json({
-          statusCode: 400,
-          message: "you don't have this painting on your cart!",
-        });
-      }
-    } catch (error) {
-      next(error);
+  try {
+    const { rows } = await getPaintingsForUser(customerId, paintingsId);
+    if (rows[0]) {
+      const { rows: info } = await deletePaintingFromCart(
+        customerId,
+        paintingsId,
+      );
+      const { id } = info[0];
+      res.json({
+        statusCode: 200,
+        message: `your order with id ${id} deleted!!`,
+      });
+    } else {
+      res.status(400).json({
+        statusCode: 400,
+        message: "you don't have this painting on your cart!",
+      });
     }
-  } else {
-    res
-      .status(403)
-      .json({ statusCode: 403, message: 'you cant delete the painting' });
+  } catch (error) {
+    next(error);
   }
 };
 
