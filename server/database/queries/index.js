@@ -12,6 +12,7 @@ const {
 const { addArtist, getArtistByEmail, getArtistQuery } = require('./artists');
 
 const { addCustomer, checkCustomerEmail } = require('./customers');
+const { getArtistReviews } = require('./review');
 
 module.exports = {
   getPaintingsQuery,
@@ -26,4 +27,5 @@ module.exports = {
   addCustomer,
   checkCustomerEmail,
   getArtistQuery,
+  getArtistReviews,
 };
