@@ -10,7 +10,7 @@ afterAll(() => connection.end());
 describe('Get all Paintings', () => {
   test('Route /paintings status 200, json header, data length to be checked', (done) => {
     return request(app)
-      .get('/api/v1/paintings')
+      .get('/api/v1/paintings/all')
       .expect(200)
       .expect('Content-Type', /json/)
       .end((err, res) => {
@@ -23,9 +23,9 @@ describe('Get all Paintings', () => {
 });
 
 describe('Get artist paints by id', () => {
-  test('Route /paintings/1 status 200, json header, data[0].title = طائر الاوز ', (done) => {
+  test('Route /paintingsArtist/1 status 200, json header, data[0].title = طائر الاوز ', (done) => {
     return request(app)
-      .get('/api/v1/paintings/1')
+      .get('/api/v1/paintingsArtist/1')
       .expect(200)
       .expect('Content-Type', /json/)
       .end((err, res) => {
@@ -36,9 +36,9 @@ describe('Get artist paints by id', () => {
       });
   });
 
-  test('Route /projects/18 status 200, json header ', (done) => {
+  test('Route /paintingsArtist/18 status 200, json header ', (done) => {
     return request(app)
-      .get('/api/v1/paintings/18')
+      .get('/api/v1/paintingsArtist/18')
       .expect(404)
       .expect('Content-Type', /json/)
       .end((err, res) => {
@@ -49,9 +49,9 @@ describe('Get artist paints by id', () => {
       });
   });
 
-  test('Route /projects/gg status 404, json header ', (done) => {
+  test('Route /paintingsArtist/gg status 404, json header ', (done) => {
     return request(app)
-      .get('/api/v1/paintings/gg')
+      .get('/api/v1/paintingsArtist/gg')
       .expect(400)
       .expect('Content-Type', /json/)
       .end((err, res) => {
