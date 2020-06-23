@@ -1,5 +1,13 @@
 const connection = require('../../connection');
 
+const checkCartQuery = (reqData) => {
+  const { customerId, paintingId } = reqData;
+  return connection.query({
+    text: 'SELECT * FROM cart where customer_id = $1 AND painting_id = $2;',
+    values: [customerId, paintingId],
+  });
+};
+
 const postCartQuery = (reqData) => {
   const { customerId, paintingId } = reqData;
   return connection.query({
@@ -9,4 +17,4 @@ const postCartQuery = (reqData) => {
   });
 };
 
-module.exports = postCartQuery;
+module.exports = { checkCartQuery, postCartQuery };
