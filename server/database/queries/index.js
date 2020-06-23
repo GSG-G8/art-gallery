@@ -4,7 +4,12 @@ const {
   addPaintingQuery,
 } = require('./Paintings');
 const { checkCartQuery, postCartQuery } = require('./Cart');
-const { addArtist, getArtistByEmail, getArtistQuery } = require('./artists');
+const {
+  addArtist,
+  getArtistByEmail,
+  getArtistQuery,
+  updateArtistQuery,
+} = require('./artists');
 const { addCustomer, checkCustomerEmail } = require('./customers');
 
 module.exports = {
@@ -18,4 +23,5 @@ module.exports = {
   addCustomer,
   checkCustomerEmail,
   getArtistQuery,
+  updateArtistQuery,
 };
