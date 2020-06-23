@@ -10,7 +10,7 @@ const { verifyArtist } = require('../controllers/middleware');
 
 router.get('/paintings/:category', getPaintings);
 router.get('/paintings/:artistId', getArtistPaints);
-router.delete('/paintings/:id', deletePainting);
+router.delete('/paintings/:id', verifyArtist, deletePainting);
 
 router.get('/paintingsArtist/:artistId', getArtistPaints);
 

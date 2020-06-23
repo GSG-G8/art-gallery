@@ -73,6 +73,7 @@ describe('Delete painting )', () => {
       .set('Cookie', artistToken)
       .expect(200)
       .expect('Content-Type', /json/)
+      .set('Cookie', [`token=${process.env.ARTIST_TOKEN}`])
       .end(async (err, res) => {
         const { message } = res.body;
         if (err) return done(err);
@@ -90,11 +91,14 @@ describe('Delete painting )', () => {
       .delete('/api/v1/paintings/15')
       .set('Cookie', artistToken)
       .expect(400)
+      .set('Cookie', [`token=${process.env.ARTIST_TOKEN}`])
       .expect('Content-Type', /json/)
       .end(async (err, res) => {
         const { message } = res.body;
         if (err) return done(err);
-        expect(message).toBe('Painting does not exist');
+        expect(message).toBe(
+          "Painting does not exist or you don't has permission",
+        );
         done();
       });
   });

@@ -1,9 +1,9 @@
 const connection = require('../../connection');
 
-const deletePaintingsQuery = (paintingId) =>
+const deletePaintingsQuery = (paintingId, artistId) =>
   connection.query({
-    text: 'DELETE FROM painting WHERE id = $1',
-    values: [paintingId],
+    text: 'DELETE FROM painting WHERE id = $1 AND artist_id = $2',
+    values: [paintingId, artistId],
   });
 
 module.exports = deletePaintingsQuery;
