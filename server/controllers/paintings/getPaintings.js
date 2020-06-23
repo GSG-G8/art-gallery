@@ -1,4 +1,4 @@
-const { getPaintingsQuery } = require('../database/queries');
+const { getPaintingsQuery } = require('../../database/queries');
 
 const getPaintings = async (req, res, next) => {
   try {

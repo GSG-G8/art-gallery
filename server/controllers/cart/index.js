@@ -1,3 +1,4 @@
 const deletePantingCart = require('./deletePaintingCart');
+const addPaintingToCart = require('./addPaintingToCart');
 
-module.exports = { deletePantingCart };
+module.exports = { deletePantingCart, addPaintingToCart };
