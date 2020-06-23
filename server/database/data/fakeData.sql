@@ -45,18 +45,18 @@ INSERT INTO painting (title,img,description,category,property,count_sold,artist_
 ('طبيعة ','https://upload.3dlat.com/do.php?img=1129422',
 'لوحة فنية جدارية من قماش الكانفس تتميز بالالوان الطبيعية','لوحات طبيعة','{40*60 : 70 , 100*120 : 150 , 140*200 : 250}','1','5');
 
-INSERT INTO cart (customer_id,painting_id,price) VALUES
-('1','1','70'),
-('1','2','150'),
-('2','3','70'),
-('2','4','70'),
-('3','5','70'),
-('3','6','70'),
-('4','7','250'),
-('4','8','70'),
-('5','9','150'),
-('5','10','150'),
-('5','6','250');
+INSERT INTO cart (customer_id,painting_id) VALUES
+('1','1'),
+('1','2'),
+('2','3'),
+('2','4'),
+('3','5'),
+('3','6'),
+('4','7'),
+('4','8'),
+('5','9'),
+('5','10'),
+('5','6');
 
 INSERT INTO painting_user (painting_id,customer_id,selling_date) VALUES
 ('1','1','2020-6-18'),

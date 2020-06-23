@@ -1,7 +1,7 @@
 const {
   getPaintingsQuery,
   getPaintingCategory,
-} = require('../database/queries');
+} = require('../../database/queries');
 
 const getPaintings = async (req, res, next) => {
   const {
