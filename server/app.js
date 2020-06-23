@@ -32,7 +32,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));
   });
 }
-app.use('/api/v1/', routes);
 
 app.use('/api/v1', routes);
 
