@@ -17,6 +17,8 @@ const {
 
 const { addCustomer, checkCustomerEmail } = require('./customers');
 
+const { addReview } = require('./review');
+
 module.exports = {
   getPaintingsQuery,
   deletePaintingFromCart,
@@ -32,4 +34,5 @@ module.exports = {
   checkCustomerEmail,
   getCustomerCarts,
   getPaintingCategory,
+  addReview,
 };
