@@ -1,4 +1,4 @@
-const { getArtistQuery } = require('../database/queries');
+const { getArtistQuery } = require('../../database/queries');
 
 const getArtist = async (req, res, next) => {
   try {
