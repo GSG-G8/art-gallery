@@ -3,6 +3,7 @@ const auth = require('./auth');
 const { getArtistPaints, getPaintings, addPainting } = require('./paintings');
 const { addPaintingToCart, deletePantingCart, getCart } = require('./cart');
 const { getArtist } = require('./user');
+const { addReview } = require('./review');
 
 module.exports = {
   getPaintings,
@@ -14,4 +15,5 @@ module.exports = {
   addPaintingToCart,
   addPainting,
   deletePantingCart,
+  addReview,
 };
