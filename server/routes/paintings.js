@@ -5,7 +5,7 @@ const {
   addPainting,
   getArtistPaints,
 } = require('../controllers');
-const { verifyArtist } = require('../controllers/middlewares/verifyUser');
+const { verifyArtist } = require('../controllers/middleware/verifyUser');
 
 router.get('/paintings', getPaintings);
 router.get('/paintings/:artistId', getArtistPaints);

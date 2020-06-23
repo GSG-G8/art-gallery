@@ -1,14 +1,22 @@
 const {
   getPaintingsQuery,
+  getPaintingsForUser,
   getArtistPaintsQuery,
   addPaintingQuery,
 } = require('./Paintings');
-const { checkCartQuery, postCartQuery } = require('./Cart');
+const {
+  deletePaintingFromCart,
+  checkCartQuery,
+  postCartQuery,
+} = require('./cart');
 const { addArtist, getArtistByEmail, getArtistQuery } = require('./artists');
+
 const { addCustomer, checkCustomerEmail } = require('./customers');
 
 module.exports = {
   getPaintingsQuery,
+  deletePaintingFromCart,
+  getPaintingsForUser,
   checkCartQuery,
   postCartQuery,
   getArtistPaintsQuery,

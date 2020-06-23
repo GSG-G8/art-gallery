@@ -9,5 +9,6 @@ router.use(auth);
 router.use(artist);
 router.use(cart);
 router.use(paintings);
+router.use(cart);
 
 module.exports = router;

@@ -1,8 +1,8 @@
 const router = require('express').Router();
+const { deletePantingCart, addPaintingToCart } = require('../controllers');
+const { verifyUser } = require('../controllers/middleware');
 
-const { verifyUser } = require('../controllers/middlewares/verifyUser');
-const { addPaintingToCart } = require('../controllers');
-
+router.delete('/cart/:paintingsId', verifyUser, deletePantingCart);
 router.post('/cart', verifyUser, addPaintingToCart);
 
 module.exports = router;
