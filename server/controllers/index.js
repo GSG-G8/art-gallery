@@ -1,5 +1,5 @@
 const error = require('./errorHandlers');
-
+const { getArtistReview } = require('./review');
 const auth = require('./auth');
 const { getArtistPaints, getPaintings, addPainting } = require('./paintings');
 const { addPaintingToCart, deletePantingCart } = require('./cart');
@@ -14,4 +14,5 @@ module.exports = {
   auth,
   addPainting,
   deletePantingCart,
+  getArtistReview,
 };
