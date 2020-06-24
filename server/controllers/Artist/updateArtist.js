@@ -21,7 +21,6 @@ const updateArtist = async (req, res, next) => {
       },
       { abortEarly: false },
     );
-    console.log('data :>> ', req.body);
     const { rowCount } = await updateArtistQuery(
       mobileNo,
       customized,
