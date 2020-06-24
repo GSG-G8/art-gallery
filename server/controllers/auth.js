@@ -6,6 +6,7 @@ const {
   addArtist,
   addCustomer,
   checkCustomerEmail,
+  getAdminEmail,
 } = require('../database/queries');
 const addUser = require('../utils/addUser');
 
@@ -23,13 +24,16 @@ exports.login = async (req, res, next) => {
       case 'customer':
         existingUser = await checkCustomerEmail(email);
         break;
+      case 'admin':
+        existingUser = await getAdminEmail(email);
+        break;
       default:
         throw new Error('Choose your role');
     }
     if (existingUser.rows[0]) {
-      const { id, password: hashedPasswored } = existingUser.rows[0];
+      const { id, password: hashedPassword } = existingUser.rows[0];
 
-      const isCorrectPassword = await compare(password, hashedPasswored);
+      const isCorrectPassword = await compare(password, hashedPassword);
 
       if (isCorrectPassword) {
         const token = sign({ id, role }, process.env.SECRET_KEY);
