@@ -82,7 +82,7 @@ describe('POST /painting', () => {
       .field('category', 'طبيعة')
       .field(
         'property',
-        "{ '40*60': '70', '100*120': '150', '140*200': '250' }",
+        JSON.stringify({ '40*60': '70', '100*120': '150', '140*200': '250' }),
       )
       .expect(201)
       .end((err, res) => {

@@ -3,11 +3,15 @@ const {
   // getCustomerBudget,
 } = require('../../database/queries');
 
+const { buyPaintingsSchema } = require('../../utils/validation');
+
 const buyPaintings = async (req, res, next) => {
   try {
     const {
-      body: { customerId, paintingId, property },
-    } = req;
+      customerId,
+      paintingId,
+      property,
+    } = await buyPaintingsSchema.validate(req.body, { abortEarly: false });
     const { rows } = await getPaintingPrice(paintingId);
     const { property: paintingProprty } = rows[0];
     if (paintingProprty[property]) {
