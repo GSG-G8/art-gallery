@@ -1,3 +1,4 @@
 const getArtist = require('./getArtist');
+const updateArtist = require('./updateArtist');
 
-module.exports = { getArtist };
+module.exports = { getArtist, updateArtist };

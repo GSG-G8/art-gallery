@@ -3,6 +3,7 @@ const auth = require('./auth');
 const { getArtistPaints, getPaintings, addPainting } = require('./paintings');
 const { addPaintingToCart } = require('./Cart');
 const { getArtist } = require('./user');
+const { updateArtist } = require('./Artist');
 
 module.exports = {
   error,
@@ -12,4 +13,5 @@ module.exports = {
   getArtistPaints,
   auth,
   addPainting,
+  updateArtist,
 };
