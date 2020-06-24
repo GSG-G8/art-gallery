@@ -1,10 +1,10 @@
 const deletePaintingFromCart = require('./deletePaintingFromCart');
 const { checkCartQuery, postCartQuery } = require('./postCartQuery');
-
-module.exports = { deletePaintingFromCart };
+const getCustomerCarts = require('./getCart');
 
 module.exports = {
   checkCartQuery,
   postCartQuery,
   deletePaintingFromCart,
+  getCustomerCarts,
 };

@@ -1,17 +1,35 @@
 const error = require('./errorHandlers');
 const { getArtistReview } = require('./review');
 const auth = require('./auth');
-const { getArtistPaints, getPaintings, addPainting } = require('./paintings');
-const { addPaintingToCart, deletePantingCart } = require('./cart');
-const { getArtist } = require('./user');
+
+const {
+  getArtistPaints,
+  getPaintings,
+  addPainting,
+  deletePainting,
+} = require('./paintings');
+
+const { addPaintingToCart, deletePantingCart, getCart } = require('./cart');
+
+const {
+  getArtist,
+  getAllArtist,
+  activateArtist,
+  getUserProfile,
+} = require('./user');
 
 module.exports = {
-  error,
   getPaintings,
-  addPaintingToCart,
-  getArtist,
   getArtistPaints,
   auth,
+  error,
+  getUserProfile,
+  deletePainting,
+  getArtist,
+  getAllArtist,
+  activateArtist,
+  getCart,
+  addPaintingToCart,
   addPainting,
   deletePantingCart,
   getArtistReview,

@@ -49,7 +49,7 @@ describe('login endPoint', () => {
       });
   });
 
-  test('Route /login for unexisting email', (done) => {
+  test('Route /login for not register email', (done) => {
     return request(app)
       .post('/api/v1/login')
       .set({
@@ -60,6 +60,46 @@ describe('login endPoint', () => {
           email: 'lina@gmail.com',
           password: '123456789',
           role: 'artist',
+        }),
+      )
+      .expect(400)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.body.message).toBe('You have to sign up first');
+        return done();
+      });
+  });
+  test('Route admin/login status 200,  data.message = logged in successfully', (done) => {
+    return request(app)
+      .post('/api/v1/admin')
+      .set({
+        'Content-Type': 'application/json',
+      })
+      .send(
+        JSON.stringify({
+          email: 'admin-artist@gmail.com',
+          password: 'admin123',
+          role: 'admin',
+        }),
+      )
+      .expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.body.message).toBe('logged in successfully');
+        return done();
+      });
+  });
+  test('Route admin/login for not register email', (done) => {
+    return request(app)
+      .post('/api/v1/admin')
+      .set({
+        'Content-Type': 'application/json',
+      })
+      .send(
+        JSON.stringify({
+          email: 'admin@gmail.com',
+          password: 'admin123',
+          role: 'admin',
         }),
       )
       .expect(400)
