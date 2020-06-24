@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { verifyArtist } = require('../controllers/middlewares/verifyUser');
+const { verifyArtist } = require('../controllers/middleware');
 
 const { getArtist, updateArtist } = require('../controllers');
 
