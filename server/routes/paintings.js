@@ -12,7 +12,7 @@ const { verifyArtist, verifyUser } = require('../controllers/middleware');
 router.get('/paintings/:category', getPaintings);
 router.get('/paintings/:artistId', getArtistPaints);
 router.post('/paintings/buy', verifyUser, buyPaintings);
-router.delete('/paintings/:id', verifyArtist, deletePainting);
+router.delete('/paintings/:paintingId', verifyArtist, deletePainting);
 
 router.get('/paintingsArtist/:artistId', getArtistPaints);
 

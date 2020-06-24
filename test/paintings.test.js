@@ -64,16 +64,12 @@ describe('Get artist paints by id', () => {
 });
 
 describe('Delete painting )', () => {
-  const artistToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImFydGlzdCIsImlhdCI6MTU5MjY3NTkwOX0.lLUsLRZqnPfEzSoH8W3aDDRnuq4ax5L5dpko07g7uhY';
-
   test('Route /paintings/1 status 200, data.message = Painting deleted successfully ', (done) => {
     return request(app)
       .delete('/api/v1/paintings/1')
-      .set('Cookie', artistToken)
       .expect(200)
-      .expect('Content-Type', /json/)
       .set('Cookie', [`token=${process.env.ARTIST_TOKEN}`])
+      .expect('Content-Type', /json/)
       .end(async (err, res) => {
         const { message } = res.body;
         if (err) return done(err);
@@ -89,9 +85,8 @@ describe('Delete painting )', () => {
   test('Route /paintings/15 status 400, data.message = Painting does not exist ', (done) => {
     return request(app)
       .delete('/api/v1/paintings/15')
-      .set('Cookie', artistToken)
-      .expect(400)
       .set('Cookie', [`token=${process.env.ARTIST_TOKEN}`])
+      .expect(400)
       .expect('Content-Type', /json/)
       .end(async (err, res) => {
         const { message } = res.body;
@@ -114,9 +109,7 @@ describe('POST /painting', () => {
       .set({
         'Content-Type': 'application/json',
       })
-      .set('Cookie', [
-        'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFydGlzdCIsImlhdCI6MTU5MjY0MDUxN30.KzX9yQLO6YvrUl6r--b-mzcvdVutoxehmTH8-JBaHao',
-      ])
+      .set('Cookie', [`token=${process.env.ARTIST_TOKEN}`])
       .attach('paintingImg', filePath)
       .field('title', 'لوحة فنية')
       .field('description', ' الحياة جميلة')
@@ -139,9 +132,7 @@ describe('POST /painting', () => {
       .set({
         'Content-Type': 'application/json',
       })
-      .set('Cookie', [
-        'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFydGlzdCIsImlhdCI6MTU5MjY0MDUxN30.KzX9yQLO6YvrUl6r--b-mzcvdVutoxehmTH8-JBaHao',
-      ])
+      .set('Cookie', [`token=${process.env.ARTIST_TOKEN}`])
       .attach('paintingImg', filePath)
       .field('title', '')
       .field('description', ' الحياة جميلة')
@@ -161,9 +152,7 @@ describe('POST /painting', () => {
       .set({
         'Content-Type': 'application/json',
       })
-      .set('Cookie', [
-        'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFydGlzdCIsImlhdCI6MTU5MjY0MDUxN30.KzX9yQLO6YvrUl6r--b-mzcvdVutoxehmTH8-JBaHao',
-      ])
+      .set('Cookie', [`token=${process.env.ARTIST_TOKEN}`])
       .attach('paintingImg', 'test/auth.test.js')
       .field('title', 'hi')
       .field('description', ' الحياة جميلة')

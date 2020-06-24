@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const clientError = (req, res) => {
   res.status(404).json({ statusCode: 404, message: 'page not found' });
 };

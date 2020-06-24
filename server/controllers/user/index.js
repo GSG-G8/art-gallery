@@ -1,5 +1,6 @@
 const getArtist = require('./getArtist');
-const getAllArtist = require('./getAllArtist');
+const { getUserProfile } = require('./getUserProfile');
 const activateArtist = require('./activateArtist');
+const getAllArtist = require('./getAllArtist');
 
-module.exports = { getArtist, getAllArtist, activateArtist };
+module.exports = { getArtist, getUserProfile, getAllArtist, activateArtist };
