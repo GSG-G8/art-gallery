@@ -71,7 +71,7 @@ describe('login endPoint', () => {
   });
   test('Route admin/login status 200,  data.message = logged in successfully', (done) => {
     return request(app)
-      .post('/api/v1/admin/login')
+      .post('/api/v1/admin')
       .set({
         'Content-Type': 'application/json',
       })
@@ -91,7 +91,7 @@ describe('login endPoint', () => {
   });
   test('Route admin/login for not register email', (done) => {
     return request(app)
-      .post('/api/v1/admin/login')
+      .post('/api/v1/admin')
       .set({
         'Content-Type': 'application/json',
       })

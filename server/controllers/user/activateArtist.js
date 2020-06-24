@@ -4,10 +4,10 @@ const { switchActivateArtist } = require('../../database/queries');
 const activateArtist = async (req, res, next) => {
   try {
     const {
-      params: { id },
+      params: { artistId },
     } = req;
-    if (id > 0 && !isNaN(id)) {
-      const { rows } = await switchActivateArtist(id);
+    if (artistId > 0 && !isNaN(artistId)) {
+      const { rows } = await switchActivateArtist(artistId);
       if (rows.length !== 0) {
         const { email, active } = rows[0];
         res.status(200).json({

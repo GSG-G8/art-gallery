@@ -78,7 +78,7 @@ CREATE TABLE artist
         budget DECIMAL
     );
     INSERT INTO admin
-        (id,name,email,password,mobile,budget)
+        (name,email,password,mobile,budget)
     VALUES
-        ('1', 'artist Admin', 'admin-artist@gmail.com', '$2b$10$5Z1dB9i1D75mrT8bNcxJruyMjolMbjVQ/cxzzm2J4Trze4e7lecc6', '0590000000', 0.00);
+        ('artist Admin', 'admin-artist@gmail.com', '$2b$10$5Z1dB9i1D75mrT8bNcxJruyMjolMbjVQ/cxzzm2J4Trze4e7lecc6', '0590000000', 0.00);
     COMMIT;
