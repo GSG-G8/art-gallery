@@ -28,6 +28,7 @@ const {
   getCustomerCarts,
 } = require('./cart');
 
+const { getArtistReviews } = require('./review');
 const { getAdminEmail } = require('./admin');
 
 module.exports = {
@@ -43,6 +44,7 @@ module.exports = {
   getArtistQuery,
   addCustomer,
   checkCustomerEmail,
+  getArtistReviews,
   getCustomerProfile,
   getAdminEmail,
   getArtists,
