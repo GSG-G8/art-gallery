@@ -39,7 +39,7 @@ CREATE TABLE artist
         img text NOT NULL,
         description text NOT NULL,
         category VARCHAR(50) NOT NULL,
-        property text,
+        property JSONB,
         count_sold INTEGER NOT NULL DEFAULT 0,
         artist_id INTEGER REFERENCES artist(id) ON UPDATE CASCADE ON DELETE CASCADE
     );

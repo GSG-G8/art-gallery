@@ -2,7 +2,7 @@ const connection = require('../../connection');
 
 const getPaintingPrice = (paintingId) =>
   connection.query({
-    text: 'SELECT price FROM painting WHERE id = $1',
+    text: 'SELECT property FROM painting WHERE id = $1',
     values: [paintingId],
   });
 

@@ -10,7 +10,7 @@ const { verifyArtist } = require('../controllers/middlewares/verifyUser');
 
 router.get('/paintings', getPaintings);
 router.get('/paintings/:artistId', getArtistPaints);
-router.post('/buy/:paintingsId', buyPaintings);
+router.post('/paintings/buy', buyPaintings);
 
 // Only artist endPoints
 router.use(verifyArtist);

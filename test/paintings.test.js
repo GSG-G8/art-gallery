@@ -80,7 +80,10 @@ describe('POST /painting', () => {
       .field('title', 'لوحة فنية')
       .field('description', ' الحياة جميلة')
       .field('category', 'طبيعة')
-      .field('property', '{40*60 : 70 , 100*120 : 150 , 140*200 : 250}')
+      .field(
+        'property',
+        "{ '40*60': '70', '100*120': '150', '140*200': '250' }",
+      )
       .expect(201)
       .end((err, res) => {
         if (err) return done(err);
