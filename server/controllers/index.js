@@ -1,5 +1,4 @@
 const error = require('./errorHandlers');
-const { getArtistReview } = require('./review');
 const auth = require('./auth');
 
 const {
@@ -10,7 +9,7 @@ const {
 } = require('./paintings');
 
 const { addPaintingToCart, deletePantingCart, getCart } = require('./cart');
-const { addReview } = require('./review');
+const { addReview, getArtistReview } = require('./review');
 
 const {
   getArtist,
