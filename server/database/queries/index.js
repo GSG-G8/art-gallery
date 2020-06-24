@@ -22,7 +22,11 @@ const {
   getCustomerCarts,
 } = require('./cart');
 
-const { addCustomer, checkCustomerEmail } = require('./customers');
+const {
+  addCustomer,
+  checkCustomerEmail,
+  updateCustomer,
+} = require('./customers');
 const { getAdminEmail } = require('./admin');
 
 module.exports = {
@@ -44,4 +48,5 @@ module.exports = {
   deletePaintingsQuery,
   getCustomerCarts,
   getPaintingCategory,
+  updateCustomer,
 };

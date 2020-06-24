@@ -7,7 +7,12 @@ const {
   deletePainting,
 } = require('./paintings');
 const { addPaintingToCart, deletePantingCart, getCart } = require('./cart');
-const { getArtist, getAllArtist, activateArtist } = require('./user');
+const {
+  getArtist,
+  getAllArtist,
+  activateArtist,
+  updateUserInfo,
+} = require('./user');
 
 module.exports = {
   getPaintings,
@@ -22,4 +27,5 @@ module.exports = {
   addPaintingToCart,
   addPainting,
   deletePantingCart,
+  updateUserInfo,
 };
