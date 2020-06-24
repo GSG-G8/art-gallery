@@ -23,9 +23,6 @@ describe('GET /cart endPoint', () => {
   });
 });
 
-const customerToken =
-  'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImN1c3RvbWVyIiwiaWF0IjoxNTkyODI4NzE4fQ.3E4sQYl5PBn7ZXnZNj7IUrCJvesQiC3YBDDM0GvTrJk';
-
 describe('Add to cart', () => {
   test('POST Route /cart status 201, json header, send data ', (done) => {
     request(app)
