@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals */
-const { switchActivateArtist } = require('../database/queries');
+const { switchActivateArtist } = require('../../database/queries');
 
 const activateArtist = async (req, res, next) => {
   try {
