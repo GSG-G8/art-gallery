@@ -65,6 +65,6 @@ CREATE TABLE artist
         id SERIAL PRIMARY KEY,
         painting_id INTEGER REFERENCES painting(id) ON UPDATE CASCADE ON DELETE CASCADE,
         customer_id INTEGER REFERENCES customer(id) ON UPDATE CASCADE ON DELETE CASCADE,
-        selling_date date NOT NULL
+        selling_date TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
     COMMIT;

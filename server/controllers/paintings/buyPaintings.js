@@ -1,6 +1,7 @@
 const {
   getPaintingPrice,
   getCustomerBudget,
+  updateBudgets,
 } = require('../../database/queries');
 
 const { buyPaintingsSchema } = require('../../utils/validation');
@@ -13,7 +14,10 @@ const buyPaintings = async (req, res, next) => {
       property,
     } = await buyPaintingsSchema.validate(req.body, { abortEarly: false });
     const { rows: paintingpriceRows } = await getPaintingPrice(paintingId);
-    const { property: paintingProprty } = paintingpriceRows[0];
+    const {
+      property: paintingProprty,
+      artist_id: artistId,
+    } = paintingpriceRows[0];
     if (paintingProprty[property]) {
       const paintingPrice = paintingProprty[property];
 
@@ -21,6 +25,7 @@ const buyPaintings = async (req, res, next) => {
       const { budget: customerBudget } = customerBudgetRows[0];
 
       if (Number(customerBudget) > Number(paintingPrice)) {
+        await updateBudgets(customerId, artistId, paintingId, paintingPrice);
         res.json({
           customerId,
           paintingId,
