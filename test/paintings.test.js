@@ -177,3 +177,96 @@ describe('POST /painting', () => {
       });
   });
 });
+
+describe('Buy Paintings', () => {
+  test('Successfully Buying Painting', (done) => {
+    return request(app)
+      .post('/api/v1/paintings/buy')
+      .set('Cookie', [`token=${process.env.CUSTOMER_TOKEN}`])
+      .send({ customerId: 2, paintingId: 2, property: '40*60' })
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .end(async (err, res) => {
+        if (err) return done(err);
+        const {
+          body: { message },
+        } = res;
+        expect(message).toBe(`Painting with id = 2 was added succesfully`);
+        done();
+      });
+  });
+
+  test('Trying to buy a product with nonexist property', (done) => {
+    return request(app)
+      .post('/api/v1/paintings/buy')
+      .set('Cookie', [`token=${process.env.CUSTOMER_TOKEN}`])
+      .send({ customerId: 2, paintingId: 2, property: '100*140' })
+      .expect(400)
+      .expect('Content-Type', /json/)
+      .end(async (err, res) => {
+        if (err) return done(err);
+        const {
+          body: { message },
+        } = res;
+        expect(message).toBe(`This property is not listed for this product`);
+        done();
+      });
+  });
+
+  test('Trying to buy a product without having enough budget', (done) => {
+    return request(app)
+      .post('/api/v1/paintings/buy')
+      .set('Cookie', [`token=${process.env.CUSTOMER_TOKEN}`])
+      .send({ customerId: 2, paintingId: 2, property: '200*140' })
+      .expect(400)
+      .expect('Content-Type', /json/)
+      .end(async (err, res) => {
+        if (err) return done(err);
+        const {
+          body: { message },
+        } = res;
+        expect(message).toBe(
+          `Sorry You don't have enough money for this operation`,
+        );
+        done();
+      });
+  });
+
+  test('Trying to buy a nonexist product', (done) => {
+    return request(app)
+      .post('/api/v1/paintings/buy')
+      .set('Cookie', [`token=${process.env.CUSTOMER_TOKEN}`])
+      .send({ customerId: 2, paintingId: 200, property: '40*60' })
+      .expect(400)
+      .expect('Content-Type', /json/)
+      .end(async (err, res) => {
+        if (err) return done(err);
+        const {
+          body: { message },
+        } = res;
+        expect(message).toBe(`Sorry there's no painting with this ID`);
+        done();
+      });
+  });
+
+  test('Trying to buy a product with wrong inputs', (done) => {
+    return request(app)
+      .post('/api/v1/paintings/buy')
+      .set('Cookie', [`token=${process.env.CUSTOMER_TOKEN}`])
+      .send({ customerId: 'Malek', paintingId: 'Font' })
+      .expect(400)
+      .expect('Content-Type', /json/)
+      .end(async (err, res) => {
+        if (err) return done(err);
+        const {
+          body: { message },
+        } = res;
+        expect(message).toEqual([
+          'customerId must be a `number` type, but the final value was: `NaN` (cast from the value `"Malek"`).',
+          'paintingId must be a `number` type, but the final value was: `NaN` (cast from the value `"Font"`).',
+          'property is a required field',
+        ]);
+        done();
+      });
+  });
+});
