@@ -20,26 +20,31 @@ const updateBudgets = async (
 ) => {
   try {
     await connection.query('BEGIN');
+
     await connection.query({
       text:
         'UPDATE customer SET budget = budget-$2 WHERE id = $1 RETURNING budget;',
       values: [customerId, paintingPrice],
     });
+
     await connection.query({
       text:
         'UPDATE artist SET budget = budget+$2*0.85 WHERE id = $1 RETURNING budget;',
       values: [artistId, paintingPrice],
     });
+
+    await connection.query({
+      text:
+        'UPDATE admin SET budget = budget+$1*0.15 WHERE id = 1 RETURNING budget;',
+      values: [paintingPrice],
+    });
+
     await connection.query({
       text:
         'INSERT INTO painting_user (painting_id, customer_id) VALUES ($1, $2);',
       values: [paintingId, customerId],
     });
-    await connection.query({
-      text:
-        'UPDATE artist SET budget = budget+$2*0.85 WHERE id = $1 RETURNING budget;',
-      values: [artistId, paintingPrice],
-    });
+
     await connection.query('COMMIT');
   } catch (e) {
     await connection.query('ROLLBACK');

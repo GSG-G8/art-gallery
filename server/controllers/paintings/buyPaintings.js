@@ -29,6 +29,7 @@ const buyPaintings = async (req, res, next) => {
         res.json({
           customerId,
           paintingId,
+          artistId,
           paintingProprty,
           paintingPrice,
           customerBudget,
