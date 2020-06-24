@@ -7,6 +7,13 @@ const {
 } = require('./artists');
 
 const {
+  addCustomer,
+  checkCustomerEmail,
+  getCustomerProfile,
+  updateCustomer,
+} = require('./customers');
+
+const {
   getPaintingsQuery,
   getPaintingsForUser,
   getArtistPaintsQuery,
@@ -22,12 +29,10 @@ const {
   getCustomerCarts,
 } = require('./cart');
 
-const {
-  addCustomer,
-  checkCustomerEmail,
-  updateCustomer,
-} = require('./customers');
+const { getArtistReviews } = require('./review');
 const { getAdminEmail } = require('./admin');
+
+const { addReview } = require('./review');
 
 module.exports = {
   getPaintingsQuery,
@@ -42,6 +47,8 @@ module.exports = {
   getArtistQuery,
   addCustomer,
   checkCustomerEmail,
+  getArtistReviews,
+  getCustomerProfile,
   getAdminEmail,
   getArtists,
   switchActivateArtist,
@@ -49,4 +56,5 @@ module.exports = {
   getCustomerCarts,
   getPaintingCategory,
   updateCustomer,
+  addReview,
 };

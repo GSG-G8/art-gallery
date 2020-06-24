@@ -1,10 +1,10 @@
+/* eslint-disable no-console */
 const clientError = (req, res) => {
   res.status(404).json({ statusCode: 404, message: 'page not found' });
 };
 
 // eslint-disable-next-line no-unused-vars
 const serverError = (err, req, res, next) => {
-  // eslint-disable-next-line no-console
   console.log('err :>> ', err);
 
   // eslint-disable-next-line no-console
