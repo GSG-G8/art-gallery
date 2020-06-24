@@ -21,11 +21,11 @@ VALUES
 INSERT INTO customer
     (first_name,last_name,email,password,budget)
 VALUES
-    ('Lina', 'Ebeid', 'lina@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK', '300.44'),
-    ('Muhammad', 'Abed', 'mu95@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK', '200.24'),
-    ('Ahmed', 'Safi', 'ahmed@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK', '200.31'),
-    ('Rawan', 'Abudahrouj', 'rwan@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK', '600.44'),
-    ('Abeer', 'Karam', 'abeer@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK', '1000.64');
+    ('Lina', 'Ebeid', 'lina@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK', 300.44),
+    ('Muhammad', 'Abed', 'mu95@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK', 200.24),
+    ('Ahmed', 'Safi', 'ahmed@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK', 200.31),
+    ('Rawan', 'Abudahrouj', 'rwan@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK', 600.44),
+    ('Abeer', 'Karam', 'abeer@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK', 1000.64);
 
 INSERT INTO painting
     (title,img,description,category,property,count_sold,artist_id)
@@ -54,17 +54,17 @@ VALUES
 INSERT INTO cart
     (customer_id,painting_id,price)
 VALUES
-    ('1', '1', '70'),
-    ('1', '2', '150'),
-    ('2', '3', '70'),
-    ('2', '4', '70'),
-    ('3', '5', '70'),
-    ('3', '6', '70'),
-    ('4', '7', '250'),
-    ('4', '8', '70'),
-    ('5', '9', '150'),
-    ('5', '10', '150'),
-    ('5', '6', '250');
+    ('1', '1', 70.00),
+    ('1', '2', 150.00),
+    ('2', '3', 70.00),
+    ('2', '4', 70.00),
+    ('3', '5', 70.00),
+    ('3', '6', 70.00),
+    ('4', '7', 250.00),
+    ('4', '8', 70.00),
+    ('5', '9', 150.00),
+    ('5', '10', 150.00),
+    ('5', '6', 250.00);
 
 INSERT INTO painting_user
     (painting_id,customer_id,selling_date)

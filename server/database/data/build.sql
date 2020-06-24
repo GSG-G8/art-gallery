@@ -75,10 +75,11 @@ CREATE TABLE artist
         name varchar(50) NOT NULL,
         email varchar(255) UNIQUE NOT NULL,
         password text NOT NULL,
-        mobile integer UNIQUE
+        mobile integer UNIQUE,
+        budget DECIMAL
     );
     INSERT INTO admin
-        (id,name,email,password,mobile)
+        (id,name,email,password,mobile,budget)
     VALUES
-        ('1', 'artist Admin', 'admin-artist@gmail.com', '$2b$10$5Z1dB9i1D75mrT8bNcxJruyMjolMbjVQ/cxzzm2J4Trze4e7lecc6', '0590000000');
+        ('1', 'artist Admin', 'admin-artist@gmail.com', '$2b$10$5Z1dB9i1D75mrT8bNcxJruyMjolMbjVQ/cxzzm2J4Trze4e7lecc6', '0590000000', 0.00);
     COMMIT;
