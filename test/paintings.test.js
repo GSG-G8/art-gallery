@@ -145,7 +145,7 @@ describe('POST /painting', () => {
       .field('category', 'طبيعة')
       .field('property', '{40*60 : 70 , 100*120 : 150 , 140*200 : 250}')
       .expect(400)
-      .end((err, res) => {
+      .end(async (err, res) => {
         if (err) return done(err);
         expect(res.body.message[0]).toBe('title is a required field');
         return done();
@@ -167,7 +167,7 @@ describe('POST /painting', () => {
       .field('category', 'طبيعة')
       .field('property', '{40*60 : 70 , 100*120 : 150 , 140*200 : 250}')
       .expect(400)
-      .end((err, res) => {
+      .end(async (err, res) => {
         if (err) return done(err);
         expect(res.body.message[0]).toBe('Should be an image png or jpeg');
         return done();
