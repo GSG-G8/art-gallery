@@ -31,6 +31,8 @@ const {
 const { getArtistReviews } = require('./review');
 const { getAdminEmail } = require('./admin');
 
+const { addReview } = require('./review');
+
 module.exports = {
   getPaintingsQuery,
   deletePaintingFromCart,
@@ -52,4 +54,5 @@ module.exports = {
   deletePaintingsQuery,
   getCustomerCarts,
   getPaintingCategory,
+  addReview,
 };
