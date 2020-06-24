@@ -26,28 +26,28 @@ const buyPaintings = async (req, res, next) => {
 
       if (Number(customerBudget) > Number(paintingPrice)) {
         await updateBudgets(customerId, artistId, paintingId, paintingPrice);
-        res.json({
-          customerId,
-          paintingId,
-          artistId,
-          paintingProprty,
-          paintingPrice,
-          customerBudget,
+        res.status(200).json({
+          statusCode: 200,
+          message: `Painting with id = ${paintingId} was added succesfully`,
         });
       } else {
-        res.json({
+        res.status(400).json({
           statusCode: 400,
           message: "Sorry You don't have enough money for this operation",
         });
       }
     } else {
-      res.json({
+      res.status(400).json({
         statusCode: 400,
         message: 'This property is not listed for this product',
       });
     }
   } catch (err) {
-    next(err);
+    if (err.errors) {
+      res.status(400).json({ statusCode: 400, message: err.errors });
+    } else {
+      next(err);
+    }
   }
 };
 

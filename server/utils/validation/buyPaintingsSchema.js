@@ -1,8 +1,8 @@
-const { object, string } = require('yup');
+const { object, number, string } = require('yup');
 
 const buyPaintingsSchema = object({
-  customerId: string().required(),
-  paintingId: string().required(),
+  customerId: number().positive().required(),
+  paintingId: number().positive().required(),
   property: string().required(),
 });
 
