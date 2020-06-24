@@ -1,22 +1,33 @@
 const { addReviewSchema } = require('../utils/validation');
-const { addReview, getArtistReviews } = require('../database/queries');
+const {
+  addReview,
+  getArtistReviews,
+  getArtistQuery,
+} = require('../database/queries');
 
 exports.addReview = async (req, res, next) => {
   try {
     const { id } = req.user;
     const { details, rate, artistID } = req.body;
-    if (Number.isInteger(rate)) {
+
+    if (rate % 1 === 0) {
       await addReviewSchema.validate(
         { details, rate, artistID },
         { abortEarly: false },
       );
-
-      const { rows } = await addReview(artistID, id, rate, details);
-      res.status(201).json({
-        StatusCode: 201,
-        data: { rows },
-        message: 'review added successfully',
-      });
+      const { rows: artistRow } = await getArtistQuery(artistID);
+      if (artistRow.length > 0) {
+        const { rows } = await addReview(artistID, id, rate, details);
+        res.status(201).json({
+          StatusCode: 201,
+          data: { rows },
+          message: 'review added successfully',
+        });
+      } else {
+        res
+          .status(400)
+          .json({ statusCode: 400, message: 'NO ARTIST FOR THIS ID' });
+      }
     } else {
       res
         .status(400)
