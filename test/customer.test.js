@@ -31,7 +31,7 @@ describe('get customer profile route', () => {
       .end((err, res) => {
         if (err) return done(err);
         const { message } = res.body;
-        expect(message).toBe('unauthorized');
+        expect(message).toBe('User only endPoints');
         done();
       });
   });

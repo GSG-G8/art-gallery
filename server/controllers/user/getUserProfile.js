@@ -1,4 +1,4 @@
-const { getCustomerProfile } = require('../database/queries');
+const { getCustomerProfile } = require('../../database/queries');
 
 exports.getUserProfile = async (req, res, next) => {
   try {

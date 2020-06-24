@@ -57,8 +57,7 @@ CREATE TABLE artist
     (
         id SERIAL PRIMARY KEY,
         customer_id INTEGER REFERENCES customer(id) ON UPDATE CASCADE ON DELETE CASCADE,
-        painting_id INTEGER REFERENCES painting(id) ON UPDATE CASCADE ON DELETE CASCADE,
-        price DECIMAL(10,2) NOT NULL
+        painting_id INTEGER REFERENCES painting(id) ON UPDATE CASCADE ON DELETE CASCADE
     );
 
     CREATE TABLE painting_user

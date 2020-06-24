@@ -1,4 +1,3 @@
-const { getPaintingsQuery, getArtistPaintsQuery } = require('./Paintings');
 const { addArtist, getArtistByEmail, getArtistQuery } = require('./artists');
 const {
   addCustomer,
@@ -6,13 +5,37 @@ const {
   getCustomerProfile,
 } = require('./customers');
 
-module.exports = {
+const {
   getPaintingsQuery,
   getArtistPaintsQuery,
+  getPaintingCategory,
+  getPaintingsForUser,
+  addPaintingQuery,
+  deletePaintingsQuery,
+} = require('./Paintings');
+
+const {
+  deletePaintingFromCart,
+  checkCartQuery,
+  postCartQuery,
+  getCustomerCarts,
+} = require('./cart');
+
+module.exports = {
+  getPaintingsQuery,
+  deletePaintingFromCart,
+  getPaintingsForUser,
+  checkCartQuery,
+  postCartQuery,
+  getArtistPaintsQuery,
+  addPaintingQuery,
   addArtist,
   getArtistByEmail,
+  getArtistQuery,
   addCustomer,
   checkCustomerEmail,
-  getArtistQuery,
   getCustomerProfile,
+  deletePaintingsQuery,
+  getCustomerCarts,
+  getPaintingCategory,
 };
