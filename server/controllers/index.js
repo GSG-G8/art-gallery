@@ -7,15 +7,17 @@ const {
   deletePainting,
 } = require('./paintings');
 const { addPaintingToCart, deletePantingCart, getCart } = require('./cart');
-const { getArtist } = require('./user');
+const { getArtist, getAllArtist, activateArtist } = require('./user');
 
 module.exports = {
   getPaintings,
-  deletePainting,
-  getArtistPaints,
   getArtist,
+  getArtistPaints,
+  getAllArtist,
+  activateArtist,
   auth,
   error,
+  deletePainting,
   getCart,
   addPaintingToCart,
   addPainting,
