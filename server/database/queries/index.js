@@ -4,6 +4,7 @@ const {
   getArtistQuery,
   updateArtistQuery,
   switchActivateArtist,
+  updateAvatarQuery,
   getArtists,
 } = require('./artists');
 
@@ -62,6 +63,7 @@ module.exports = {
   deletePaintingsQuery,
   getCustomerCarts,
   getPaintingCategory,
+  updateAvatarQuery,
   updateCustomer,
   addReview,
 };
