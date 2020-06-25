@@ -1,7 +1,10 @@
 const router = require('express').Router();
 
-const { getArtist } = require('../controllers');
+const { getArtist, getAllArtist, activateArtist } = require('../controllers');
+const { protectedAdmin } = require('../controllers/middleware');
 
 router.get('/profile/:artistId', getArtist);
+router.get('/admin/artist', protectedAdmin, getAllArtist);
+router.patch('/admin/artist/:artistId', protectedAdmin, activateArtist);
 
 module.exports = router;

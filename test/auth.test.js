@@ -49,7 +49,7 @@ describe('login endPoint', () => {
       });
   });
 
-  test('Route /login for unexisting email', (done) => {
+  test('Route /login for not register email', (done) => {
     return request(app)
       .post('/api/v1/login')
       .set({
@@ -69,15 +69,53 @@ describe('login endPoint', () => {
         return done();
       });
   });
+  test('Route admin/login status 200,  data.message = logged in successfully', (done) => {
+    return request(app)
+      .post('/api/v1/admin')
+      .set({
+        'Content-Type': 'application/json',
+      })
+      .send(
+        JSON.stringify({
+          email: 'admin-artist@gmail.com',
+          password: 'admin123',
+          role: 'admin',
+        }),
+      )
+      .expect(200)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.body.message).toBe('logged in successfully');
+        return done();
+      });
+  });
+  test('Route admin/login for not register email', (done) => {
+    return request(app)
+      .post('/api/v1/admin')
+      .set({
+        'Content-Type': 'application/json',
+      })
+      .send(
+        JSON.stringify({
+          email: 'admin@gmail.com',
+          password: 'admin123',
+          role: 'admin',
+        }),
+      )
+      .expect(400)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.body.message).toBe('You have to sign up first');
+        return done();
+      });
+  });
 });
 
 describe('testing for /logout', () => {
-  const token =
-    'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFydGlzdCIsImlhdCI6MTU5Mjc0MDcyNn0.MH6UIrt3EhlFnIog8WWXF3tb7LpmELBB8lfD_h15EM4';
   test('testing for /logout ', (done) => {
     request(app)
       .get('/api/v1/logout')
-      .set('Cookie', token)
+      .set('Cookie', [`token=${process.env.CUSTOMER_TOKEN}`])
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
