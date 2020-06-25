@@ -38,7 +38,7 @@ describe('get customer profile route', () => {
 });
 
 describe('update customer info', () => {
-  test('Route /profile/customer status 201, json header, message:user info updates successfully ', (done) => {
+  test('Route /profile/customer status 200, json header, message:user info updates successfully ', (done) => {
     return request(app)
       .patch('/api/v1/profile/customer')
       .set('Cookie', [`token=${process.env.CUSTOMER_TOKEN}`])
@@ -47,7 +47,7 @@ describe('update customer info', () => {
         lastName: 'isa',
         budget: 50.11,
       })
-      .expect(201)
+      .expect(200)
       .expect('Content-Type', /json/)
       .end((err, res) => {
         if (err) return done(err);

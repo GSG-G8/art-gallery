@@ -12,18 +12,17 @@ const updateUser = async (req, res, next) => {
     const { rows } = await updateCustomer(updatedData, id);
     if (rows.length !== 0) {
       const { first_name: name } = rows[0];
-      res.status(201).json({
-        statusCode: 201,
+      res.status(200).json({
+        statusCode: 200,
         message: `${name} info updates successfully`,
       });
-    } else {
-      res.status(404).json({ statusCode: 404, message: 'user not found' });
     }
   } catch (error) {
     if (error.name === 'ValidationError') {
-      return res.status(400).json({ statusCode: 400, message: 'bad  request' });
+      res.status(400).json({ statusCode: 400, message: error.errors });
+    } else {
+      next(error);
     }
-    next(error);
   }
 };
 module.exports = updateUser;
