@@ -1,3 +1,3 @@
-const { verifyArtist, verifyUser } = require('./verifyUser');
+const { verifyArtist, verifyUser, protectedAdmin } = require('./verifyUser');
 
-module.exports = { verifyArtist, verifyUser };
+module.exports = { verifyArtist, verifyUser, protectedAdmin };

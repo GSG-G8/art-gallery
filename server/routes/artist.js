@@ -7,7 +7,7 @@ const {
   getAllArtist,
   activateArtist,
 } = require('../controllers');
-const { protectedAdmin } = require('../middleware');
+const { protectedAdmin } = require('../controllers/middleware');
 
 router.get('/profile/:artistId', getArtist);
 router.patch('/artist', verifyArtist, updateArtist);

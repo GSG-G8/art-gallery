@@ -112,12 +112,10 @@ describe('login endPoint', () => {
 });
 
 describe('testing for /logout', () => {
-  const token =
-    'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFydGlzdCIsImlhdCI6MTU5Mjc0MDcyNn0.MH6UIrt3EhlFnIog8WWXF3tb7LpmELBB8lfD_h15EM4';
   test('testing for /logout ', (done) => {
     request(app)
       .get('/api/v1/logout')
-      .set('Cookie', token)
+      .set('Cookie', [`token=${process.env.CUSTOMER_TOKEN}`])
       .expect(200)
       .end((err, res) => {
         if (err) return done(err);
