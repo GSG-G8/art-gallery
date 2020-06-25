@@ -16,9 +16,6 @@ router.delete('/paintings/:paintingId', verifyArtist, deletePainting);
 
 router.get('/paintingsArtist/:artistId', getArtistPaints);
 
-// Only artist endPoints
-router.use(verifyArtist);
-
-router.post('/painting', addPainting);
+router.post('/painting', verifyArtist, addPainting);
 
 module.exports = router;

@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const { getArtist, getAllArtist, activateArtist } = require('../controllers');
-const { protectedAdmin } = require('../middleware');
+const { protectedAdmin } = require('../controllers/middleware');
 
 router.get('/profile/:artistId', getArtist);
 router.get('/admin/artist', protectedAdmin, getAllArtist);
