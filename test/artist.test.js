@@ -124,7 +124,7 @@ describe('PATCH artist', () => {
       .expect('Content-Type', /json/)
       .end(async (err, res) => {
         if (err) return done(err);
-        const { message } = res.body.data;
+        const { message } = res.body;
         const { rows } = await connection.query(
           'SELECT * from artist WHERE id = 1',
         );
@@ -135,7 +135,7 @@ describe('PATCH artist', () => {
       });
   });
 
-  test('PATCH Route /artist status 404, json header, send data ', (done) => {
+  test('PATCH Route /artist status 401, json header, send data ', (done) => {
     return request(app)
       .patch('/api/v1/artist')
       .set('Cookie', [`token=${process.env.CUSTOMER_TOKEN}`])
@@ -145,7 +145,6 @@ describe('PATCH artist', () => {
       .end(async (err, res) => {
         if (err) return done(err);
         const { message } = res.body;
-
         expect(message).toBe('Artist only endPoints');
         done();
       });

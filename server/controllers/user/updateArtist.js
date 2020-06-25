@@ -3,40 +3,29 @@ const { updateArtistSchema } = require('../../utils/validation');
 
 const updateArtist = async (req, res, next) => {
   try {
-    const { mobileNo, customized, socialMediaAccounts, bio } = req.body;
-    const { id } = req.user;
-    await updateArtistSchema.validate(
-      {
-        mobileNo,
-        customized,
-        socialMediaAccounts,
-        bio,
-      },
-      { abortEarly: false },
-    );
+    const { id: artistId } = req.user;
+    const {
+      mobileNo,
+      customized,
+      socialMediaAccounts,
+      bio,
+    } = await updateArtistSchema.validate(req.body, { abortEarly: false });
     const { rowCount } = await updateArtistQuery(
       mobileNo,
       customized,
       socialMediaAccounts,
       bio,
-      id,
+      artistId,
     );
     if (rowCount === 1) {
       res.json({
         statusCode: 200,
-        data: { message: 'Succefully update' },
-      });
-    } else {
-      res.status(404).json({
-        statusCode: 404,
-        data: {
-          message: "Can't edit artist profile",
-        },
+        message: 'Succefully update',
       });
     }
   } catch (err) {
     if (err.errors) {
-      res.status(400).json({ statusCode: 400, data: { message: err.errors } });
+      res.status(400).json({ statusCode: 400, message: err.errors });
     } else {
       next(err);
     }
