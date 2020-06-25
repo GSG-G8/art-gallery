@@ -9,14 +9,14 @@ const {
 } = require('./paintings');
 
 const { addPaintingToCart, deletePantingCart, getCart } = require('./cart');
-const { addReview, getArtistReview } = require('./review');
-
 const {
   getArtist,
   getAllArtist,
   activateArtist,
+  updateUserInfo,
   getUserProfile,
 } = require('./user');
+const { addReview, getArtistReview } = require('./review');
 
 module.exports = {
   getPaintings,
@@ -32,6 +32,7 @@ module.exports = {
   addPaintingToCart,
   addPainting,
   deletePantingCart,
+  updateUserInfo,
   addReview,
   getArtistReview,
 };

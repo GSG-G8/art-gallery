@@ -10,6 +10,7 @@ const {
   addCustomer,
   checkCustomerEmail,
   getCustomerProfile,
+  updateCustomer,
 } = require('./customers');
 
 const {
@@ -54,5 +55,6 @@ module.exports = {
   deletePaintingsQuery,
   getCustomerCarts,
   getPaintingCategory,
+  updateCustomer,
   addReview,
 };
