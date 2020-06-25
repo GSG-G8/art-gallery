@@ -2,8 +2,9 @@ const {
   addArtist,
   getArtistByEmail,
   getArtistQuery,
-  getArtists,
+  updateArtistQuery,
   switchActivateArtist,
+  getArtists,
 } = require('./artists');
 
 const {
@@ -24,7 +25,6 @@ const {
   addPaintingQuery,
   updateBudgets,
 } = require('./Paintings');
-
 const {
   deletePaintingFromCart,
   checkCartQuery,
@@ -50,6 +50,7 @@ module.exports = {
   getArtistQuery,
   addCustomer,
   checkCustomerEmail,
+  updateArtistQuery,
   getPaintingPrice,
   getCustomerBudget,
   updateBudgets,

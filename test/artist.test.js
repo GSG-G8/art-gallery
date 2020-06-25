@@ -107,3 +107,46 @@ describe('Admin Activation', () => {
       });
   });
 });
+
+describe('PATCH artist', () => {
+  const data = {
+    socialMediaAccounts: ['https://www.pinterest.com/'],
+    bio: 'Hello there',
+    mobileNo: '0592885555',
+    customized: true,
+  };
+  test('PATCH Route /artist status 200, json header, send data ', (done) => {
+    return request(app)
+      .patch('/api/v1/artist')
+      .set('Cookie', [`token=${process.env.ARTIST_TOKEN}`])
+      .send(data)
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .end(async (err, res) => {
+        if (err) return done(err);
+        const { message } = res.body;
+        const { rows } = await connection.query(
+          'SELECT * from artist WHERE id = 1',
+        );
+        expect(message).toBe('Succefully update');
+        expect(rows).toHaveLength(1);
+        expect(rows[0].bio).toBe('Hello there');
+        done();
+      });
+  });
+
+  test('PATCH Route /artist status 401, json header, send data ', (done) => {
+    return request(app)
+      .patch('/api/v1/artist')
+      .set('Cookie', [`token=${process.env.CUSTOMER_TOKEN}`])
+      .send(data)
+      .expect(401)
+      .expect('Content-Type', /json/)
+      .end(async (err, res) => {
+        if (err) return done(err);
+        const { message } = res.body;
+        expect(message).toBe('Artist only endPoints');
+        done();
+      });
+  });
+});
