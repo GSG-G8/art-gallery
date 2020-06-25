@@ -1,10 +1,10 @@
-const yup = require('yup');
+const { object, string, array } = require('yup');
 
-const updateArtistSchema = yup.object({
-  socialMediaAccounts: yup.array().required(),
-  bio: yup.string().required(),
-  mobileNo: yup.string().required(),
-  customized: yup.string().required(),
+const updateArtistSchema = object({
+  socialMediaAccounts: array().required(),
+  bio: string().required(),
+  mobileNo: string().required(),
+  customized: string().required(),
 });
 
 module.exports = updateArtistSchema;
