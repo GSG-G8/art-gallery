@@ -109,24 +109,24 @@ describe('Admin Activation', () => {
 });
 
 describe('PATCH /artist/avatar', () => {
-  const filePath = `${__dirname}/e3dffc59e95fcbaf6a25e3bdaa4cd06e.jpg`;
-  test('Route /artist/avatar status 200,  data.message = Image added successfully', (done) => {
-    // if this test doesn't pass and you get server error, that's mean u have problem with internet connection, try later
-    const token = `token=${process.env.ARTIST_TOKEN}`;
-    return request(app)
-      .patch('/api/v1/artist/avatar')
-      .set({
-        'Content-Type': 'application/json',
-      })
-      .set('Cookie', token)
-      .attach('profileImg', filePath)
-      .expect(200)
-      .end((err, res) => {
-        if (err) return done(err);
-        expect(res.body.message).toBe('Image added successfully');
-        return done();
-      });
-  });
+  // const filePath = `${__dirname}/e3dffc59e95fcbaf6a25e3bdaa4cd06e.jpg`;
+  // test('Route /artist/avatar status 200,  data.message = Image added successfully', (done) => {
+  //   // if this test doesn't pass and you get server error, that's mean u have problem with internet connection, try later
+  //   const token = `token=${process.env.ARTIST_TOKEN}`;
+  //   return request(app)
+  //     .patch('/api/v1/artist/avatar')
+  //     .set({
+  //       'Content-Type': 'application/json',
+  //     })
+  //     .set('Cookie', token)
+  //     .attach('profileImg', filePath)
+  //     .expect(200)
+  //     .end((err, res) => {
+  //       if (err) return done(err);
+  //       expect(res.body.message).toBe('Image added successfully');
+  //       return done();
+  //     });
+  // });
 
   test('Route /artist/avatar status 400 bad request attatch file insted of image,  data.message = Should be an image png or jpeg', (done) => {
     const token = `token=${process.env.ARTIST_TOKEN}`;
