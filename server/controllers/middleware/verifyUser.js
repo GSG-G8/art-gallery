@@ -1,8 +1,8 @@
-const { verify } = require('jsonwebtoken');
+const { verify } = require('../../utils/verify');
 
 const verifyArtist = async (req, res, next) => {
   try {
-    const decoded = await verify(req.cookies.token, process.env.SECRET_KEY);
+    const decoded = await verify(req.cookies.token);
     req.user = decoded;
     if (decoded.role === 'artist') {
       next();
@@ -18,7 +18,7 @@ const verifyArtist = async (req, res, next) => {
 
 const verifyUser = async (req, res, next) => {
   try {
-    const decoded = await verify(req.cookies.token, process.env.SECRET_KEY);
+    const decoded = await verify(req.cookies.token);
     req.user = decoded;
     if (decoded.role === 'customer') {
       next();
@@ -32,7 +32,7 @@ const verifyUser = async (req, res, next) => {
 
 const protectedAdmin = async (req, res, next) => {
   try {
-    const { role } = await verify(req.cookies.token, process.env.SECRET_KEY);
+    const { role } = await verify(req.cookies.token);
     if (role === 'admin') {
       next();
     } else {
