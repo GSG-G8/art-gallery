@@ -15,7 +15,7 @@ const updateArtistAvatar = async (req, res, next) => {
       const { public_id: imgID, format } = await uploadImg(profileImg.path);
 
       const { rowCount } = await updateAvatarQuery(`${imgID}.${format}`, id);
-      res.status(200).json({
+      res.json({
         StatusCode: 200,
         data: { rowCount },
         message: 'Image added successfully',
