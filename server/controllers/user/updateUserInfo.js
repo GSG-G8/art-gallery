@@ -12,7 +12,7 @@ const updateUser = async (req, res, next) => {
     const { rows } = await updateCustomer(updatedData, id);
     if (rows.length !== 0) {
       const { first_name: name } = rows[0];
-      res.status(200).json({
+      res.json({
         statusCode: 200,
         message: `${name} info updates successfully`,
       });
