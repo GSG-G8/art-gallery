@@ -3,7 +3,7 @@ const { deletePaintingsQuery } = require('../../database/queries/index');
 const deletePainting = async (req, res, next) => {
   try {
     const {
-      params: { id: paintingId },
+      params: { paintingId },
       user: { id: artistId },
     } = req;
     const check = await deletePaintingsQuery(paintingId, artistId);

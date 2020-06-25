@@ -2,9 +2,10 @@ const error = require('./errorHandlers');
 const auth = require('./auth');
 
 const {
-  getArtistPaints,
   getPaintings,
+  getArtistPaints,
   addPainting,
+  buyPaintings,
   deletePainting,
 } = require('./paintings');
 
@@ -35,4 +36,5 @@ module.exports = {
   updateUserInfo,
   addReview,
   getArtistReview,
+  buyPaintings,
 };

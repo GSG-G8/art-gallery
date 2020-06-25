@@ -17,9 +17,12 @@ const {
   getPaintingsQuery,
   getPaintingsForUser,
   getArtistPaintsQuery,
+  getPaintingPrice,
+  getCustomerBudget,
   deletePaintingsQuery,
   getPaintingCategory,
   addPaintingQuery,
+  updateBudgets,
 } = require('./Paintings');
 
 const {
@@ -47,6 +50,9 @@ module.exports = {
   getArtistQuery,
   addCustomer,
   checkCustomerEmail,
+  getPaintingPrice,
+  getCustomerBudget,
+  updateBudgets,
   getArtistReviews,
   getCustomerProfile,
   getAdminEmail,

@@ -5,6 +5,7 @@ const clientError = (req, res) => {
 
 // eslint-disable-next-line no-unused-vars
 const serverError = (err, req, res, next) => {
+  // eslint-disable-next-line no-console
   console.log('err :>> ', err);
 
   // eslint-disable-next-line no-console

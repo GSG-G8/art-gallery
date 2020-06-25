@@ -45,6 +45,9 @@ describe('Get Artist By Id', () => {
         done();
       });
   });
+});
+
+describe('Admin Activation', () => {
   test('Route /admin/artist status 200, json header,get all artist ', (done) => {
     const token = `token=${process.env.ADMIN_TOKEN}`;
     return request(app)
