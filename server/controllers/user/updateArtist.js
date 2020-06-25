@@ -3,19 +3,12 @@ const { updateArtistSchema } = require('../../utils/validation');
 
 const updateArtist = async (req, res, next) => {
   try {
-    const {
-      mobileNo,
-      customized,
-      profileImg,
-      socialMediaAccounts,
-      bio,
-    } = req.body;
+    const { mobileNo, customized, socialMediaAccounts, bio } = req.body;
     const { id } = req.user;
     await updateArtistSchema.validate(
       {
         mobileNo,
         customized,
-        profileImg,
         socialMediaAccounts,
         bio,
       },
@@ -24,7 +17,6 @@ const updateArtist = async (req, res, next) => {
     const { rowCount } = await updateArtistQuery(
       mobileNo,
       customized,
-      profileImg,
       socialMediaAccounts,
       bio,
       id,

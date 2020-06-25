@@ -108,8 +108,6 @@ describe('Get Artist By Id', () => {
 describe('PATCH artist', () => {
   const data = {
     socialMediaAccounts: ['https://www.pinterest.com/'],
-    profileImg:
-      'https://i.pinimg.com/236x/cf/33/14/cf33144a0706df281372bfe83d44a070.jpg',
     bio: 'Hello there',
     mobileNo: '0592885555',
     customized: true,
