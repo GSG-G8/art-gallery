@@ -3,6 +3,7 @@ const getArtistByEmail = require('./checkArtistExist');
 const getArtistQuery = require('./getArtistQuery');
 const getArtists = require('./getAllArtist');
 const switchActivateArtist = require('./switchActivateArtist');
+const updateAvatarQuery = require('./updateAvatarQuery');
 
 module.exports = {
   addArtist,
@@ -10,4 +11,5 @@ module.exports = {
   getArtistQuery,
   getArtists,
   switchActivateArtist,
+  updateAvatarQuery,
 };
