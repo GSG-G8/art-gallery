@@ -35,6 +35,12 @@ const updateBudgets = async (
 
     await connection.query({
       text:
+        'UPDATE painting SET count_sold = count_sold+1 WHERE id = $1 RETURNING count_sold;',
+      values: [paintingId],
+    });
+
+    await connection.query({
+      text:
         'UPDATE admin SET budget = budget+$1*0.15 WHERE id = 1 RETURNING budget;',
       values: [paintingPrice],
     });

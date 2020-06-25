@@ -9,10 +9,12 @@ const { buyPaintingsSchema } = require('../../utils/validation');
 const buyPaintings = async (req, res, next) => {
   try {
     const {
-      customerId,
-      paintingId,
-      property,
-    } = await buyPaintingsSchema.validate(req.body, { abortEarly: false });
+      user: { id: customerId },
+    } = req;
+    const { paintingId, property } = await buyPaintingsSchema.validate(
+      req.body,
+      { abortEarly: false },
+    );
     const { rows: paintingpriceRows } = await getPaintingPrice(paintingId);
     if (paintingpriceRows.length > 0) {
       const {
