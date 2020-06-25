@@ -45,6 +45,9 @@ describe('Get Artist By Id', () => {
         done();
       });
   });
+});
+
+describe('Admin Activation', () => {
   test('Route /admin/artist status 200, json header,get all artist ', (done) => {
     const token = `token=${process.env.ADMIN_TOKEN}`;
     return request(app)
@@ -107,17 +110,15 @@ describe('Get Artist By Id', () => {
 
 describe('PATCH /artist/avatar', () => {
   const filePath = `${__dirname}/e3dffc59e95fcbaf6a25e3bdaa4cd06e.jpg`;
-
   test('Route /artist/avatar status 200,  data.message = Image added successfully', (done) => {
     // if this test doesn't pass and you get server error, that's mean u have problem with internet connection, try later
+    const token = `token=${process.env.ARTIST_TOKEN}`;
     return request(app)
       .patch('/api/v1/artist/avatar')
       .set({
         'Content-Type': 'application/json',
       })
-      .set('Cookie', [
-        'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFydGlzdCIsImlhdCI6MTU5MjgyODgxN30.oHHkbyovV1jnjhoZpp-qsTAdnolhMgrisFZWGt1LscA',
-      ])
+      .set('Cookie', token)
       .attach('profileImg', filePath)
       .expect(200)
       .end((err, res) => {
@@ -128,20 +129,65 @@ describe('PATCH /artist/avatar', () => {
   });
 
   test('Route /artist/avatar status 400 bad request attatch file insted of image,  data.message = Should be an image png or jpeg', (done) => {
+    const token = `token=${process.env.ARTIST_TOKEN}`;
+
     return request(app)
       .patch('/api/v1/artist/avatar')
       .set({
         'Content-Type': 'application/json',
       })
-      .set('Cookie', [
-        'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFydGlzdCIsImlhdCI6MTU5MjgyODgxN30.oHHkbyovV1jnjhoZpp-qsTAdnolhMgrisFZWGt1LscA',
-      ])
+      .set('Cookie', token)
       .attach('profileImg', 'test/auth.test.js')
       .expect(400)
       .end((err, res) => {
         if (err) return done(err);
         expect(res.body.message[0]).toBe('Should be an image png or jpeg');
         return done();
+      });
+  });
+});
+
+describe('PATCH artist', () => {
+  const data = {
+    socialMediaAccounts: ['https://www.pinterest.com/'],
+    bio: 'Hello there',
+    mobileNo: '0592885555',
+    customized: true,
+  };
+  test('PATCH Route /artist status 200, json header, send data ', (done) => {
+    const token = `token=${process.env.ARTIST_TOKEN}`;
+    return request(app)
+      .patch('/api/v1/artist')
+      .set('Cookie', token)
+      .send(data)
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .end(async (err, res) => {
+        if (err) return done(err);
+        const { message } = res.body;
+        const { rows } = await connection.query(
+          'SELECT * from artist WHERE id = 1',
+        );
+        expect(message).toBe('Succefully update');
+        expect(rows).toHaveLength(1);
+        expect(rows[0].bio).toBe('Hello there');
+        done();
+      });
+  });
+
+  test('PATCH Route /artist status 401, json header, send data ', (done) => {
+    const token = `token=${process.env.CUSTOMER_TOKEN}`;
+    return request(app)
+      .patch('/api/v1/artist')
+      .set('Cookie', token)
+      .send(data)
+      .expect(401)
+      .expect('Content-Type', /json/)
+      .end(async (err, res) => {
+        if (err) return done(err);
+        const { message } = res.body;
+        expect(message).toBe('Artist only endPoints');
+        done();
       });
   });
 });

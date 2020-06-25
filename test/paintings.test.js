@@ -64,16 +64,12 @@ describe('Get artist paints by id', () => {
 });
 
 describe('Delete painting )', () => {
-  const artistToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6ImFydGlzdCIsImlhdCI6MTU5MjY3NTkwOX0.lLUsLRZqnPfEzSoH8W3aDDRnuq4ax5L5dpko07g7uhY';
-
   test('Route /paintings/1 status 200, data.message = Painting deleted successfully ', (done) => {
     return request(app)
       .delete('/api/v1/paintings/1')
-      .set('Cookie', artistToken)
       .expect(200)
-      .expect('Content-Type', /json/)
       .set('Cookie', [`token=${process.env.ARTIST_TOKEN}`])
+      .expect('Content-Type', /json/)
       .end(async (err, res) => {
         const { message } = res.body;
         if (err) return done(err);
@@ -89,9 +85,8 @@ describe('Delete painting )', () => {
   test('Route /paintings/15 status 400, data.message = Painting does not exist ', (done) => {
     return request(app)
       .delete('/api/v1/paintings/15')
-      .set('Cookie', artistToken)
-      .expect(400)
       .set('Cookie', [`token=${process.env.ARTIST_TOKEN}`])
+      .expect(400)
       .expect('Content-Type', /json/)
       .end(async (err, res) => {
         const { message } = res.body;
@@ -114,14 +109,15 @@ describe('POST /painting', () => {
       .set({
         'Content-Type': 'application/json',
       })
-      .set('Cookie', [
-        'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFydGlzdCIsImlhdCI6MTU5MjY0MDUxN30.KzX9yQLO6YvrUl6r--b-mzcvdVutoxehmTH8-JBaHao',
-      ])
+      .set('Cookie', [`token=${process.env.ARTIST_TOKEN}`])
       .attach('paintingImg', filePath)
       .field('title', 'لوحة فنية')
       .field('description', ' الحياة جميلة')
       .field('category', 'طبيعة')
-      .field('property', '{40*60 : 70 , 100*120 : 150 , 140*200 : 250}')
+      .field(
+        'property',
+        JSON.stringify({ '40*60': '70', '100*120': '150', '140*200': '250' }),
+      )
       .expect(201)
       .end((err, res) => {
         if (err) return done(err);
@@ -136,16 +132,14 @@ describe('POST /painting', () => {
       .set({
         'Content-Type': 'application/json',
       })
-      .set('Cookie', [
-        'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFydGlzdCIsImlhdCI6MTU5MjY0MDUxN30.KzX9yQLO6YvrUl6r--b-mzcvdVutoxehmTH8-JBaHao',
-      ])
+      .set('Cookie', [`token=${process.env.ARTIST_TOKEN}`])
       .attach('paintingImg', filePath)
       .field('title', '')
       .field('description', ' الحياة جميلة')
       .field('category', 'طبيعة')
       .field('property', '{40*60 : 70 , 100*120 : 150 , 140*200 : 250}')
       .expect(400)
-      .end((err, res) => {
+      .end(async (err, res) => {
         if (err) return done(err);
         expect(res.body.message[0]).toBe('title is a required field');
         return done();
@@ -158,19 +152,109 @@ describe('POST /painting', () => {
       .set({
         'Content-Type': 'application/json',
       })
-      .set('Cookie', [
-        'token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFydGlzdCIsImlhdCI6MTU5MjY0MDUxN30.KzX9yQLO6YvrUl6r--b-mzcvdVutoxehmTH8-JBaHao',
-      ])
+      .set('Cookie', [`token=${process.env.ARTIST_TOKEN}`])
       .attach('paintingImg', 'test/auth.test.js')
       .field('title', 'hi')
       .field('description', ' الحياة جميلة')
       .field('category', 'طبيعة')
       .field('property', '{40*60 : 70 , 100*120 : 150 , 140*200 : 250}')
       .expect(400)
-      .end((err, res) => {
+      .end(async (err, res) => {
         if (err) return done(err);
         expect(res.body.message[0]).toBe('Should be an image png or jpeg');
         return done();
+      });
+  });
+});
+
+describe('Buy Paintings', () => {
+  test('Successfully Buying Painting', (done) => {
+    return request(app)
+      .post('/api/v1/paintings/buy')
+      .set('Cookie', [`token=${process.env.CUSTOMER_TOKEN}`])
+      .send({ customerId: 1, paintingId: 2, property: '40*60' })
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .end(async (err, res) => {
+        if (err) return done(err);
+        const {
+          body: { message },
+        } = res;
+        expect(message).toBe(`Painting with id = 2 was added succesfully`);
+        done();
+      });
+  });
+
+  test('Trying to buy a product with nonexist property', (done) => {
+    return request(app)
+      .post('/api/v1/paintings/buy')
+      .set('Cookie', [`token=${process.env.CUSTOMER_TOKEN}`])
+      .send({ customerId: 1, paintingId: 2, property: '100*140' })
+      .expect(400)
+      .expect('Content-Type', /json/)
+      .end(async (err, res) => {
+        if (err) return done(err);
+        const {
+          body: { message },
+        } = res;
+        expect(message).toBe(`This property is not listed for this product`);
+        done();
+      });
+  });
+
+  test('Trying to buy a product without having enough budget', (done) => {
+    return request(app)
+      .post('/api/v1/paintings/buy')
+      .set('Cookie', [`token=${process.env.CUSTOMER_TOKEN}`])
+      .send({ customerId: 1, paintingId: 2, property: '200*140' })
+      .expect(400)
+      .expect('Content-Type', /json/)
+      .end(async (err, res) => {
+        if (err) return done(err);
+        const {
+          body: { message },
+        } = res;
+        expect(message).toBe(
+          `Sorry You don't have enough money for this operation`,
+        );
+        done();
+      });
+  });
+
+  test('Trying to buy a nonexist product', (done) => {
+    return request(app)
+      .post('/api/v1/paintings/buy')
+      .set('Cookie', [`token=${process.env.CUSTOMER_TOKEN}`])
+      .send({ customerId: 1, paintingId: 200, property: '40*60' })
+      .expect(400)
+      .expect('Content-Type', /json/)
+      .end(async (err, res) => {
+        if (err) return done(err);
+        const {
+          body: { message },
+        } = res;
+        expect(message).toBe(`Sorry there's no painting with this ID`);
+        done();
+      });
+  });
+
+  test('Trying to buy a product with wrong inputs', (done) => {
+    return request(app)
+      .post('/api/v1/paintings/buy')
+      .set('Cookie', [`token=${process.env.CUSTOMER_TOKEN}`])
+      .send({ paintingId: 'Font' })
+      .expect(400)
+      .expect('Content-Type', /json/)
+      .end(async (err, res) => {
+        if (err) return done(err);
+        const {
+          body: { message },
+        } = res;
+        expect(message).toEqual([
+          'paintingId must be a `number` type, but the final value was: `NaN` (cast from the value `"Font"`).',
+          'property is a required field',
+        ]);
+        done();
       });
   });
 });

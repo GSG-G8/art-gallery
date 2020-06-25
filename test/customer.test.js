@@ -36,3 +36,38 @@ describe('get customer profile route', () => {
       });
   });
 });
+
+describe('update customer info', () => {
+  test('Route /profile/customer status 200, json header, message:user info updates successfully ', (done) => {
+    return request(app)
+      .patch('/api/v1/profile/customer')
+      .set('Cookie', [`token=${process.env.CUSTOMER_TOKEN}`])
+      .send({
+        firstName: 'mariam',
+        lastName: 'isa',
+        budget: 50.11,
+      })
+      .expect(200)
+      .expect('Content-Type', /json/)
+      .end((err, res) => {
+        if (err) return done(err);
+        const { message } = res.body;
+        expect(message).toBe('mariam info updates successfully');
+        done();
+      });
+  });
+
+  test('Route /profile/customer status 401 Unauthorized ', (done) => {
+    return request(app)
+      .patch('/api/v1/profile/customer')
+      .set('Cookie', [`token=${process.env.ARTIST_TOKEN}`])
+      .expect(401)
+      .expect('Content-Type', /json/)
+      .end((err, res) => {
+        if (err) return done(err);
+        const { message } = res.body;
+        expect(message).toBe('User only endPoints');
+        done();
+      });
+  });
+});
