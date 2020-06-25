@@ -16,6 +16,7 @@ const {
   getAllArtist,
   activateArtist,
   getUserProfile,
+  updateArtistAvatar,
 } = require('./user');
 
 module.exports = {
@@ -33,4 +34,5 @@ module.exports = {
   addPainting,
   deletePantingCart,
   getArtistReview,
+  updateArtistAvatar,
 };
