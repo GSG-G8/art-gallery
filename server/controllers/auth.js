@@ -1,6 +1,7 @@
 const { sign } = require('jsonwebtoken');
 const { compare, hash, genSalt } = require('bcrypt');
 const { loginSchema, registerSchema } = require('../utils/validation');
+const { verify } = require('../utils/verify');
 const {
   getArtistByEmail,
   addArtist,
@@ -118,4 +119,13 @@ exports.registerController = async (req, res, next) => {
 
 exports.logout = (req, res) => {
   res.clearCookie('token').json({ status: 200, message: 'logout success' });
+};
+
+exports.isAuth = async (req, res) => {
+  try {
+    const { id, role } = await verify(req.cookies.token);
+    res.json({ statusCode: 200, data: { id, role } });
+  } catch (err) {
+    res.status(401).json({ statusCode: 401, message: 'Un-Authorized' });
+  }
 };
