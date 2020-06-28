@@ -7,7 +7,6 @@ function App() {
   return (
     <div className="App">
       <h1>Welcome to Art Gallery websites</h1>
-      <div>مرحبا</div>
       <Router>
         <Switch>
           <Route exact path={ROUTES} />
