@@ -15,12 +15,12 @@ const buyPaintings = async (req, res, next) => {
       req.body,
       { abortEarly: false },
     );
-    const { rows: paintingpriceRows } = await getPaintingPrice(paintingId);
-    if (paintingpriceRows.length > 0) {
+    const { rows: paintingPriceRows } = await getPaintingPrice(paintingId);
+    if (paintingPriceRows.length > 0) {
       const {
         property: paintingProprty,
         artist_id: artistId,
-      } = paintingpriceRows[0];
+      } = paintingPriceRows[0];
       if (paintingProprty[property]) {
         const paintingPrice = paintingProprty[property];
 
