@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const {
-  auth: { registerController, login, logout },
+  auth: { registerController, login, logout, isAuth },
 } = require('../controllers');
 
+router.get('/is-auth', isAuth);
 router.post('/sign-up', registerController);
 
 router.post('/admin', login);
