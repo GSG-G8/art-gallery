@@ -1,7 +1,7 @@
 @import '~antd/dist/antd.css';
 
 
-.container{
+.container__paintings{
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;

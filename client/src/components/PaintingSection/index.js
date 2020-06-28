@@ -7,7 +7,7 @@ function PaintingsSection({ paintings }) {
   return (
     <>
       {paintings && (
-        <div className="container">
+        <div className="container__paintings">
           {paintings.map((painting) => (
             <>
               <div className="flip-card">
