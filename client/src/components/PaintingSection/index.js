@@ -1,35 +1,38 @@
-import React, { useState } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
-import { Card } from 'antd';
 
 function PaintingsSection({ paintings }) {
-  const [hovered, setHovered] = useState(false);
+  const cloudinaryLink =
+    'https://res.cloudinary.com/dacf3uopo/image/upload/v1593353472/';
   return (
     <>
       {paintings && (
         <div className="container">
           {paintings.map((painting) => (
             <>
-              <Card
-                // loading
-                className="card"
-                hoverable
-                style={{ width: 300 }}
-                cover={
-                  <img
-                    className="card__img"
-                    alt={painting.title}
-                    src={`https://res.cloudinary.com/dacf3uopo/image/upload/v1593353472/${painting.img}`}
-                    onMouseEnter={() => setHovered(true)}
-                    onMouseLeave={() => setHovered(false)}
-                  />
-                }
-              >
-                <Card.Meta
-                  title={painting.title}
-                  description={painting.description}
-                />
-              </Card>
+              <div className="flip-card">
+                <div className="flip-card-inner">
+                  <div className="flip-card-front">
+                    <img
+                      alt={painting.title}
+                      src={`${cloudinaryLink}${painting.img}`}
+                      style={{ width: 300 }}
+                    />
+                  </div>
+                  <div
+                    className="flip-card-back"
+                    style={{
+                      width: 300,
+                      background: `linear-gradient(
+                        rgba(0, 0, 0,0.7),
+                        rgba(0, 0, 0,0.7)
+                      ),url(${cloudinaryLink}${painting.img})`,
+                    }}
+                  >
+                    <button type="button"> للمزيد ...</button>
+                  </div>
+                </div>
+              </div>
             </>
           ))}
         </div>
