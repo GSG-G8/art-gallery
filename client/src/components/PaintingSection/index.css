@@ -1,1 +1,30 @@
 @import '~antd/dist/antd.css';
+
+
+.container{
+  width: 90vw;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 5% auto;
+  /* align-items: center; */
+  justify-content: space-around;
+}
+.card__img:hover{
+  position: relative;
+
+}
+
+.card{
+  margin: 1em;
+}
+.card__leftSide{
+  width: 30px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background:red;
+  z-index: 5;
+
+
+}
