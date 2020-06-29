@@ -53,7 +53,11 @@ const buyPaintings = async (req, res, next) => {
             paintingSellingCounter: paintingCounter[0].count_sold,
             sellingDate: paintingUser[0].selling_date,
           });
-          await sendMail(customerId, newCustomerBudget[0], paintingUser[0]);
+          await sendMail(
+            customerId,
+            newCustomerBudget[0].budget,
+            paintingUser[0],
+          );
         } else {
           res.status(400).json({
             statusCode: 400,

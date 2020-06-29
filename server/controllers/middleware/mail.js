@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const sendMail = async (userId) => {
+const sendMail = async (userId, customerBudget, sellingOperation) => {
   const EMAIL_USERNAME = process.env.SENDER_EMAIL_ADDRESS;
   const nodemailerSettings = {
     host: 'smtp.gmail.com',
@@ -27,8 +27,13 @@ const sendMail = async (userId) => {
     html: `<h4 style="text-align : left">Dear ${userId}</h4>
           <p style="text-align : left; margin-bottom:0px;">Thank you for your purchase from Berwaz Gallery
           </p> 
-          <p style="text-align : left; margin-top:0px;">ORDER ID: 121</b></p>
-          <p style="text-align : left; margin-top:0px;">ORDER date: June 28, 2020</b></p>
+          <p style="text-align : left; margin-top:0px;">ORDER ID: ${
+            sellingOperation.id
+          }</b></p>
+          <p style="text-align : left; margin-top:0px;">ORDER date: ${new Date(
+            sellingOperation.selling_date,
+          )}</b></p>
+          <p style="text-align : left; margin-top:0px;">Your New Budget: ${customerBudget}</b></p>
           <p style="text-align : left">Berwaz Team</p>
    `,
   };
