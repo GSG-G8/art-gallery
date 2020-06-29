@@ -1,0 +1,109 @@
+.main-container {
+  position: absolute;
+  bottom: 0;
+}
+
+.footer-container {
+  height: 40vh;
+  display: flex;
+  background-color: #ecd4ff;
+}
+
+.logo-container {
+  width: 30%;
+  margin-right: 60px;
+}
+
+.logo-container img {
+  width: 100px;
+  margin-left: 300px;
+}
+
+.logo-container p {
+  text-align: right;
+  color: darkslategray;
+}
+
+.contact-container {
+  width: 30%;
+  margin-right: 150px;
+}
+
+.contact-container .contact-title {
+  color: purple;
+  text-align: right;
+}
+
+.contact-icons {
+  text-align: right;
+}
+
+.contact-icons p {
+  color: darkslategray;
+}
+
+.contact-icons :hover {
+  color: #b65fcf;
+}
+
+.copy-right {
+  display: flex;
+  justify-content: space-around;
+  width: 60%;
+}
+
+.copy-right p {
+  color: darkslategray;
+}
+
+.follow-container {
+  width: 30%;
+}
+
+.follow-container p {
+  text-align: right;
+  color: purple;
+}
+
+.follow-icons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  margin-left: 50px;
+}
+
+.follow-icons :hover {
+  color: #b65fcf;
+}
+
+.icon-1 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 170px;
+  margin-left: 245px;
+}
+
+.icon-2 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 170px;
+  margin-left: 245px;
+}
+
+.icon-3 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 220px;
+  margin-left: 200px;
+}
+
+.icon-4 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 170px;
+  margin-left: 255px;
+}
