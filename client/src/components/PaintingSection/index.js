@@ -1,5 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function PaintingsSection({ paintings }) {
   const cloudinaryLink =
@@ -29,7 +30,14 @@ function PaintingsSection({ paintings }) {
                       ),url(${cloudinaryLink}${painting.img})`,
                     }}
                   >
-                    <button type="button"> للمزيد ...</button>
+                    <button type="button" className="moreBtn">
+                      أضف إلى السلة
+                    </button>
+                    <br />
+                    <Link className="moreBtn" to={`/paintings/${painting.id}`}>
+                      {' '}
+                      ...للمزيد
+                    </Link>
                   </div>
                 </div>
               </div>

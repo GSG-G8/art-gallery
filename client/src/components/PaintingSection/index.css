@@ -5,12 +5,19 @@
   width: 80vw;
   margin: 5% auto;
 }
+.search__category{
+  width: 80%;
+  margin: 2% auto;
+}
 .container__paintings{
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   margin: 5% auto;
+  padding: 2% 0;
   justify-content: space-around;
+  background-color: rgb(240, 234, 234);
+
 }
 
 .flip-card {
@@ -48,4 +55,12 @@
   color: white;
   transform: rotateY(180deg);
   background-position: center;
+  }
+
+  .moreBtn{
+    background: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 40%;
   }

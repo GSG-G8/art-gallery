@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { notification, Button, Form, Input, Radio, Select } from 'antd';
+import { notification, Button, Form, Input, Radio, Select, Space } from 'antd';
 import PaintingSection from './index';
 import './index.css';
 
@@ -87,14 +87,25 @@ function App() {
               </Form>
             </div>
           )}
-          <Radio.Group
-            onChange={(e) => getPaintings(e.target.value)}
-            defaultValue="all"
-          >
-            {category.map((e) => (
-              <Radio.Button value={e.name[0]}>{e.name[1]}</Radio.Button>
-            ))}
-          </Radio.Group>
+          <br />
+          <div>
+            <Radio.Group
+              className="search__category"
+              onChange={(e) => getPaintings(e.target.value)}
+              defaultValue="all"
+            >
+              <Space size="middle">
+                {category.map((e) => (
+                  <Radio.Button
+                    style={{ width: 120, textAlign: 'center' }}
+                    value={e.name[0]}
+                  >
+                    {e.name[1]}
+                  </Radio.Button>
+                ))}
+              </Space>
+            </Radio.Group>
+          </div>
         </div>
         <PaintingSection paintings={paintings} />
       </div>
