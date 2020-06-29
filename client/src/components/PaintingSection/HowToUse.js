@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { notification, Button, Form, Input, AutoComplete } from 'antd';
+import { notification, Button, Form, Input, Radio } from 'antd';
 import PaintingSection from './index';
 import './index.css';
 
@@ -8,13 +8,18 @@ function App() {
   const [paintings, setPaintings] = useState();
   const [displaySearch, setDisplaySearch] = useState(false);
 
-  const category = ['طبيعة', 'تراث', 'سماء'];
+  const category = [
+    { name: ['hertage', 'تراث'] },
+    { name: ['sky', 'سماء'] },
+    { name: ['nature', 'طبيعة'] },
+    { name: ['all', 'الكل'] },
+  ];
 
-  const getPaintings = async () => {
+  const getPaintings = async (cat) => {
     try {
       const {
         data: { data },
-      } = await axios.get('/api/v1/paintings/all');
+      } = await axios.get(`/api/v1/paintings/${cat || 'all'}`);
       setPaintings(data);
     } catch (err) {
       notification.error('عذراً, لا يمكن تحميل اللوحات');
@@ -24,8 +29,6 @@ function App() {
   useEffect(() => {
     getPaintings();
   }, []);
-
-  // Object.keys(obj)[0];
 
   const onFinish = (values) => {
     if (values.price) {
@@ -52,6 +55,14 @@ function App() {
       <div className="container">
         <div className="container__filter">
           <Button onClick={() => setDisplaySearch(true)}> بحث متقدم</Button>
+          <Radio.Group
+            onChange={(e) => getPaintings(e.target.value)}
+            defaultValue="all"
+          >
+            {category.map((e) => (
+              <Radio.Button value={e.name[0]}>{e.name[1]}</Radio.Button>
+            ))}
+          </Radio.Group>
           {displaySearch && (
             <div>
               <Form name="basic" onFinish={onFinish}>
@@ -59,21 +70,6 @@ function App() {
                 <Form.Item label="أقل من" name="price">
                   <Input />
                 </Form.Item>
-                <h3>بحث حسب التصنيف</h3>
-                {/* <Form.Item label="التصنيف" name="category">
-                  <AutoComplete
-                    style={{
-                      width: 200,
-                    }}
-                    placeholder="التصنيف"
-                    // options=['طبيعة', 'تراث', 'سماء']
-                    filterOption={(inputValue, option) =>
-                      option.value
-                        .toUpperCase()
-                        .indexOf(inputValue.toUpperCase()) !== -1
-                    }
-                  />
-                </Form.Item> */}
                 <Button type="primary" htmlType="submit">
                   بحث
                 </Button>
