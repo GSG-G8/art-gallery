@@ -36,7 +36,10 @@ Our site provides artists with the ability to sell their paintings at reasonable
 ### As an user
 
 - I can sign up / login and have an account
-- I can buy paintings
+- I can Check artworks for different artists
+- I can Search and filter art works
+- I can buy paintings and add it to my cart
+- I can Checkout from cart
 - I can add a review for the artist
 
 ### As an admin
