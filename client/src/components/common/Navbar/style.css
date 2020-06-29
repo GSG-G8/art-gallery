@@ -1,36 +1,41 @@
+.main-navbar-container {
+  width: 100%;
+  background-color: #fff1f3;
+}
 .navbar-container {
-  justify-content: space-around;
-  margin-top: 20px;
+  margin: auto;
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
 }
 
-/* .nav-right {
-    justify-content: flex-end;
-  } */
+.nav-right {
+  width: 70px;
+  height: 70px;
+}
+
+.nav-logo {
+  width: 100%;
+}
 
 .nav-left {
   display: flex;
-  margin-left: 20px;
+  margin-top: 20px;
 }
 
 .nav-login-btn {
-  height: 30px;
-  width: 100px;
-  background-color: #00695c;
+  background-color: #955f83;
   color: white;
-  border: #00695c;
+  border: #955f83;
+  text-align: center;
 }
 
 .nav-link {
-  margin-right: 20px;
-  color: #00695c;
-}
-
-.nav-line {
-  border: ridge 1px #f5f5f5;
-  width: 100%;
-  margin-top: 10px;
+  color: #955f83;
+  width: 100px;
 }
 
 .cart-icon {
   margin-right: 20px;
+  color: #955f83;
 }
