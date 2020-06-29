@@ -6,7 +6,7 @@ import App from './app';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ConfigProvider locale={Arabic}>
+    <ConfigProvider direction="rtl" locale={Arabic}>
       <App />
     </ConfigProvider>
   </React.StrictMode>,
