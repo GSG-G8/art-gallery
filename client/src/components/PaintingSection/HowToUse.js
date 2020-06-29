@@ -1,19 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { notification, Button, Form, Input, Radio, Select, Space } from 'antd';
+import {
+  notification,
+  Form,
+  Input,
+  Radio,
+  Select,
+  Space,
+  AutoComplete,
+} from 'antd';
 import PaintingSection from './index';
 import './index.css';
 
-function App() {
-  const [paintings, setPaintings] = useState();
-  const [displaySearch, setDisplaySearch] = useState(false);
+const categories = [
+  { name: ['hertage', 'تراث'] },
+  { name: ['sky', 'سماء'] },
+  { name: ['nature', 'طبيعة'] },
+  { name: ['islamic', 'islam'] },
+  { name: ['all', 'الكل'] },
+];
 
-  const category = [
-    { name: ['hertage', 'تراث'] },
-    { name: ['sky', 'سماء'] },
-    { name: ['nature', 'طبيعة'] },
-    { name: ['all', 'الكل'] },
-  ];
+function PaintingContainer() {
+  const [paintings, setPaintings] = useState();
+  const [artists, setArtists] = useState();
 
   const getPaintings = async (cat) => {
     try {
@@ -26,40 +35,70 @@ function App() {
     }
   };
 
+  const getArtists = async () => {
+    try {
+      const {
+        data: { data },
+      } = await axios.get('/api/v1/artists');
+      const artistsArray = data.map(
+        ({ first_name: fName, last_name: lName, id }) => ({
+          value: `${fName} ${lName}`,
+          id,
+        })
+      );
+
+      setArtists(artistsArray);
+    } catch (err) {
+      notification.error('عذراً, لا يمكن عرض الفنانين ');
+    }
+  };
+
   useEffect(() => {
     getPaintings();
+    getArtists();
   }, []);
 
-  const filterAdvance = (value) => {
-    if (value === 'mostPopular') {
-      getPaintings();
-      const sorted = paintings.sort((a, b) => b.count_sold - a.count_sold);
-      setPaintings(sorted.slice(0, 10));
-    } else if (value === 'price') {
-      setDisplaySearch(true);
-    }
+  const [advance, setAdvance] = useState('mostPopular');
+  const [price, setPrice] = useState(500);
+  const [artist, setArtist] = useState(-1);
+  const [category, setCategory] = useState('all');
+
+  if (!paintings?.length || !artists?.length) return 'loading';
+
+  const artistID = artists.find((e) => e.value === artist)?.id;
+
+  const sortedPaintings =
+    advance === 'mostPopular'
+      ? [...paintings].sort((a, b) => b.count_sold - a.count_sold)
+      : paintings;
+
+  const minPriceOfPainting = (property) =>
+    Object.values(property).reduce((min, e) => (min > +e ? +e : min), 9999999);
+
+  const propertyFilter = ({ property, ...rest }) => ({
+    ...rest,
+    property,
+    minPrice: minPriceOfPainting(property),
+  });
+
+  const minPriceFilter = ({ minPrice }) => minPrice < price;
+
+  const categoryFilter = ({ category: paintCategory }) => {
+    if (category === 'all') return true;
+    return paintCategory === category;
   };
-  const searchByPrice = (values) => {
-    getPaintings();
-    if (values.price) {
-      const paintingsWithPrices = paintings.map((e) => {
-        const keys = Object.keys(e.property);
-        const newProperity = {};
-        for (let i = 0; i < keys.length; i += 1) {
-          if (Number(e.property[keys[i]]) <= values.price) {
-            newProperity[keys[i]] = e.property[keys[i]];
-          }
-        }
-        e.property = newProperity;
-        return e;
-      });
-      const result = paintingsWithPrices.filter(
-        (e) => Object.keys(e.property).length > 0
-      );
-      setPaintings(result);
-      setDisplaySearch(false);
-    }
+
+  const artistNameFilter = ({ artist_id: paintArtistId }) => {
+    if (artistID) return paintArtistId === artistID;
+    return true;
   };
+
+  const finalData = sortedPaintings
+    .map(propertyFilter)
+    .filter(minPriceFilter)
+    .filter(categoryFilter)
+    .filter(artistNameFilter);
+
   return (
     <>
       <div className="container">
@@ -68,34 +107,49 @@ function App() {
             <Select
               placeholder="بحث متقدم"
               style={{ width: 120 }}
-              onChange={filterAdvance}
+              onChange={(value) => {
+                if (value !== 'price') setPrice(999);
+                setAdvance(value);
+              }}
             >
               <Select.Option value="mostPopular">الأكثر مبيعاً</Select.Option>
               <Select.Option value="price">السعر</Select.Option>
             </Select>
+            <AutoComplete
+              style={{
+                width: 200,
+              }}
+              options={artists}
+              onChange={(value) => setArtist(value)}
+              placeholder="ابحث باسم الفنان"
+              filterOption={(inputValue, option) =>
+                option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !==
+                -1
+              }
+              allowClear
+            />
           </div>
-          {displaySearch && (
+          {advance === 'price' && (
             <div>
-              <Form name="basic" onFinish={searchByPrice}>
-                <h3>بحث حسب السعر</h3>
-                <Form.Item label="أقل من" name="price">
-                  <Input style={{ width: 120 }} />
-                </Form.Item>
-                <Button type="primary" htmlType="submit">
-                  بحث
-                </Button>
-              </Form>
+              <h3>بحث حسب السعر</h3>
+              <Form.Item label="أقل من" name="price">
+                <Input
+                  type="number"
+                  style={{ width: 120 }}
+                  onChange={(e) => setPrice(+e.target.value)}
+                />
+              </Form.Item>
             </div>
           )}
           <br />
           <div>
             <Radio.Group
               className="search__category"
-              onChange={(e) => getPaintings(e.target.value)}
+              onChange={(e) => setCategory(e.target.value)}
               defaultValue="all"
             >
               <Space size="middle">
-                {category.map((e) => (
+                {categories.map((e) => (
                   <Radio.Button
                     style={{ width: 120, textAlign: 'center' }}
                     value={e.name[0]}
@@ -107,10 +161,10 @@ function App() {
             </Radio.Group>
           </div>
         </div>
-        <PaintingSection paintings={paintings} />
+        <PaintingSection paintings={finalData} />
       </div>
     </>
   );
 }
 
-export default App;
+export default PaintingContainer;
