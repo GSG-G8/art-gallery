@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
-import { Form, Input, Button, message, Spin, Alert } from 'antd';
+import { Form, Input, Button, message, Spin, Alert, Radio } from 'antd';
+import propTypes from 'prop-types';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-const Login = () => {
+const Login = (props) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState();
   const [role, setRole] = useState('customer');
@@ -16,9 +17,10 @@ const Login = () => {
         password,
         role,
       });
-      //   const { history } = props;
+      const { history } = props;
       message.success(data.message);
-      //   history.push('/');
+      setLoaded(false);
+      history.push('/');
     } catch (err) {
       let e;
       if (err.response) {
@@ -32,13 +34,14 @@ const Login = () => {
   };
   return (
     <div>
-      <Button value="artist" onClick={() => setRole('artist')}>
-        artist
-      </Button>
-      <Button value="customer" onClick={() => setRole('customer')}>
-        customer
-      </Button>
       <Form name="normal_login" className="login-form" onFinish={onFinish}>
+        <Radio.Group
+          onChange={({ target: { value } }) => setRole(value)}
+          defaultValue="customer"
+        >
+          <Radio.Button value="artist">artist</Radio.Button>
+          <Radio.Button value="customer">customer</Radio.Button>
+        </Radio.Group>
         <Form.Item
           name="email"
           rules={[{ required: true, message: 'Please input your Email!' }]}
@@ -78,6 +81,12 @@ const Login = () => {
       </Form>
     </div>
   );
+};
+Login.propTypes = {
+  history: propTypes.shape({
+    push: propTypes.func.isRequired,
+    goBack: propTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default Login;
