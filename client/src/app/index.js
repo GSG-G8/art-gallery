@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'antd/dist/antd.css';
 
 import Login from '../components/Login';
+import * as ROUTES from '../constants/routes';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <h1>Welcome to Art Gallery websites</h1>
       <Router>
         <Switch>
+          <Route exact path={ROUTES.HOME_PAGE} />
           <Route exact path="/login" component={Login} />
         </Switch>
       </Router>

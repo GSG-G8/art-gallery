@@ -6,7 +6,7 @@ const {
 router.get('/is-auth', isAuth);
 router.post('/sign-up', registerController);
 
-router.post('/admin', login);
+router.post('/admin/login', login);
 
 router.post('/login', login);
 
