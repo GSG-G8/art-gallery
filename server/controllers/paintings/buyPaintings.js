@@ -5,6 +5,7 @@ const {
 } = require('../../database/queries');
 
 const { buyPaintingsSchema } = require('../../utils/validation');
+const sendMail = require('../middleware/mail');
 
 const buyPaintings = async (req, res, next) => {
   try {
@@ -30,11 +31,29 @@ const buyPaintings = async (req, res, next) => {
         const { budget: customerBudget } = customerBudgetRows[0];
 
         if (Number(customerBudget) > Number(paintingPrice)) {
-          await updateBudgets(customerId, artistId, paintingId, paintingPrice);
+          const results = await updateBudgets(
+            customerId,
+            artistId,
+            paintingId,
+            paintingPrice,
+          );
+          const {
+            customerBudget: { rows: newCustomerBudget },
+            artistBudget: { rows: artistBudget },
+            paintingCounter: { rows: paintingCounter },
+            adminBudget: { rows: adminBudget },
+            paintingUser: { rows: paintingUser },
+          } = results;
           res.status(200).json({
             statusCode: 200,
             message: `Painting with id = ${paintingId} was added succesfully`,
+            customerNewBudget: newCustomerBudget[0].budget,
+            artistNewBudget: artistBudget[0].budget,
+            adminNewBudget: adminBudget[0].budget,
+            paintingSellingCounter: paintingCounter[0].count_sold,
+            sellingDate: paintingUser[0].selling_date,
           });
+          await sendMail(customerId, newCustomerBudget[0], paintingUser[0]);
         } else {
           res.status(400).json({
             statusCode: 400,
