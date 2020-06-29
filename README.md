@@ -1,6 +1,6 @@
 # art-gallery
 
-[You can visit our site from this link]([])
+[You can visit our site from this link]([https://art-gallery-v1.herokuapp.com/])
 
 ## Team Leader
 
@@ -19,15 +19,29 @@ Art gallery is an Arab web application which allows artists to view their arts. 
 
 ## Challenge
 
+The inability of painters to sell their paintings and the difficulty in communicating with customers.
+
 ## Solution
+
+Our site provides artists with the ability to sell their paintings at reasonable prices and the ability to communicate with the customer appropriately.
 
 ## User Stories
 
 ### As an artist
 
+- I can sign up / login and have my own profile
+- I can edit my profile data
+- I can upload my paintings in my profile
+
 ### As an user
 
+- I can sign up / login and have an account
+- I can buy paintings
+- I can add a review for the artist
+
 ### As an admin
+
+- I can delete a artist/user/painting
 
 ## Set up the app locally
 
