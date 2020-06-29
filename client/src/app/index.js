@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import * as ROUTES from './Routes';
+import * as ROUTES from '../Routes';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <h1>Welcome to Art Gallery websites</h1>
       <Router>
         <Switch>
-          <Route exact path={ROUTES} />
+          <Route exact path={ROUTES.HOME_PAGE} />
         </Switch>
       </Router>
     </div>
