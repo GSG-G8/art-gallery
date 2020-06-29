@@ -30,7 +30,7 @@ function App() {
     getPaintings();
   }, []);
 
-  const onFinish = (values) => {
+  const filterAdvance = (values) => {
     if (values.price) {
       const paintingsWithPrices = paintings.map((e) => {
         const keys = Object.keys(e.property);
@@ -47,6 +47,9 @@ function App() {
         (e) => Object.keys(e.property).length > 0
       );
       setPaintings(result);
+    } else if (values.specific === 'mostPopular') {
+      const sorted = paintings.sort((a, b) => b.count_sold - a.count_sold);
+      setPaintings(sorted.slice(0, 10));
     }
   };
 
@@ -65,10 +68,16 @@ function App() {
           </Radio.Group>
           {displaySearch && (
             <div>
-              <Form name="basic" onFinish={onFinish}>
+              <Form name="basic" onFinish={filterAdvance}>
                 <h3>بحث حسب السعر</h3>
                 <Form.Item label="أقل من" name="price">
                   <Input />
+                </Form.Item>
+                <Form.Item label="بحث حسب" name="specific">
+                  <Radio.Group onChange={(e) => e.target.value}>
+                    <Radio value="mostPopular">الأكثر مبيعاَ</Radio>
+                    {/* <Radio value={1}>الأكثر مبيعاَ</Radio> */}
+                  </Radio.Group>
                 </Form.Item>
                 <Button type="primary" htmlType="submit">
                   بحث
