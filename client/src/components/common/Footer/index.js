@@ -13,7 +13,7 @@ import {
   faSkype,
   faPinterest,
 } from '@fortawesome/free-brands-svg-icons';
-import logo from '../../assets/images/berwaz.png';
+import logo from '../../../assets/images/berwaz.png';
 import './style.css';
 
 const Footer = () => {
