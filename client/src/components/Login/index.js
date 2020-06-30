@@ -69,6 +69,10 @@ const Login = (props) => {
                 required: true,
                 message: 'رجاءً قم بإدخال البريد الإلكتروني !',
               },
+              {
+                type: 'email',
+                message: 'ادخل بريد الكتروني صالح',
+              },
             ]}
           >
             <Input
@@ -80,7 +84,10 @@ const Login = (props) => {
           <Form.Item
             name="password"
             rules={[
-              { required: true, message: 'رجاءً قم بإدخال كلمة المرور !' },
+              {
+                required: true,
+                message: 'رجاءً قم بإدخال كلمة المرور !',
+              },
             ]}
           >
             <Input
