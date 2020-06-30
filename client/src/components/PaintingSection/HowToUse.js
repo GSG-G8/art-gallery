@@ -161,7 +161,7 @@ function PaintingContainer() {
             </Radio.Group>
           </div>
         </div>
-        <PaintingSection paintings={finalData} />
+        <PaintingSection paintings={finalData} getPaintings={getPaintings} />
       </div>
     </>
   );

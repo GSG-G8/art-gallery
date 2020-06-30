@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
+import { DeleteOutlined } from '@ant-design/icons';
 
 import { Pagination, message } from 'antd';
 import Axios from 'axios';
 
-function PaintingsSection({ paintings }) {
+function PaintingsSection({ paintings, getPaintings }) {
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(6);
   const cloudinaryLink =
@@ -22,7 +23,8 @@ function PaintingsSection({ paintings }) {
       setMaxValue(paintings.length <= value * 6 ? paintings.length : value * 6);
     }
   };
-  const role = 'customer';
+  const role = 'artist';
+  const id = 1;
   const addPaintingToCart = async (paintingId) => {
     try {
       const { data } = await Axios.post('/api/v1/cart', {
@@ -33,6 +35,18 @@ function PaintingsSection({ paintings }) {
       }
     } catch (data) {
       message.error('الصورة موجودة فعلاً في السلة');
+    }
+  };
+
+  const deletePainting = async (paintingID) => {
+    try {
+      const { data } = await Axios.delete(`/api/v1//paintings/${paintingID}`);
+      if (data.statusCode === 200) {
+        message.success('تم حذف اللوحة بنجاح');
+        getPaintings();
+      }
+    } catch (err) {
+      message.error('لا يمكن حذف اللوحة');
     }
   };
 
@@ -68,6 +82,13 @@ function PaintingsSection({ paintings }) {
                       ),url(${cloudinaryLink}${painting.img})`,
                         }}
                       >
+                        {role === 'admin' ||
+                          (role === 'artist' && painting.artist_id === id && (
+                            <DeleteOutlined
+                              onClick={() => deletePainting(painting.id)}
+                            />
+                          ))}
+
                         <button
                           type="button"
                           className="moreBtn"
@@ -111,5 +132,6 @@ function PaintingsSection({ paintings }) {
 }
 PaintingsSection.propTypes = {
   paintings: propTypes.arrayOf(propTypes.object).isRequired,
+  getPaintings: propTypes.func().isRequired,
 };
 export default PaintingsSection;
