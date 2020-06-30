@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Pagination } from 'antd';
+import { Link, useHistory } from 'react-router-dom';
+
+import { Pagination, message } from 'antd';
+import Axios from 'axios';
 
 function PaintingsSection({ paintings }) {
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(6);
   const cloudinaryLink =
     'https://res.cloudinary.com/dacf3uopo/image/upload/v1593353472/';
+
+  const history = useHistory();
 
   const handlePageChange = (value) => {
     if (value <= 1) {
@@ -18,6 +22,20 @@ function PaintingsSection({ paintings }) {
       setMaxValue(paintings.length <= value * 6 ? paintings.length : value * 6);
     }
   };
+  const role = 'customer';
+  const addPaintingToCart = async (paintingId) => {
+    try {
+      const { data } = await Axios.post('/api/v1/cart', {
+        paintingId,
+      });
+      if (data.StatusCode === 201) {
+        message.success('تم إضافة الصورة للسلة بنجاح');
+      }
+    } catch (data) {
+      message.error('الصورة موجودة فعلاً في السلة');
+    }
+  };
+
   return (
     <>
       {paintings && (
@@ -50,7 +68,17 @@ function PaintingsSection({ paintings }) {
                       ),url(${cloudinaryLink}${painting.img})`,
                         }}
                       >
-                        <button type="button" className="moreBtn">
+                        <button
+                          type="button"
+                          className="moreBtn"
+                          onClick={() => {
+                            if (role === 'customer') {
+                              addPaintingToCart(painting.id);
+                            } else {
+                              history.push('/login');
+                            }
+                          }}
+                        >
                           أضف إلى السلة
                         </button>
                         <br />
