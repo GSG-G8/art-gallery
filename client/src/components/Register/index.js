@@ -59,7 +59,7 @@ const Register = (props) => {
     <div className="main-form-container">
       <div className="form-container">
         <h2 className="form-title">أهلًا بكَ في موقع برواز</h2>
-        <h3 className="sub-title">سجل دخولك كـ</h3>
+        <h3 className="sub-title">سجل حسابك كـ</h3>
         <Form name="normal_login" className="login-form" onFinish={onFinish}>
           <Radio.Group
             onChange={({ target: { value } }) => setRole(value)}
