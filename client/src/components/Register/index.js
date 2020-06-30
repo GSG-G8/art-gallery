@@ -67,7 +67,7 @@ const Register = (props) => {
             className="radio-g"
           >
             <Radio.Button className="radio-btn" value="customer">
-              مشتري
+              مشترٍ
             </Radio.Button>
             <Radio.Button className="radio-btn" value="artist">
               فنان
