@@ -11,7 +11,11 @@ function App() {
       <Router>
         <Switch>
           <Route exact path={ROUTES.HOME_PAGE} />
-          <Route exact path={ROUTES.LOGIN_PAGE} component={Login} />
+          <Route
+            exact
+            path={ROUTES.LOGIN_PAGE}
+            render={(props) => <Login {...props} />}
+          />
         </Switch>
       </Router>
     </div>
