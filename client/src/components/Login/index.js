@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import Axios from 'axios';
 import { Form, Input, Button, message, Spin, Alert, Radio } from 'antd';
 import propTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import * as ROUTES from '../../constants/routes';
 import './style.css';
 
 const Login = (props) => {
@@ -97,9 +99,9 @@ const Login = (props) => {
               {loaded ? <Spin /> : 'تسجيل الدخول'}
             </Button>
             <br />
-            <a className="sign-up-btn" href="/signup">
+            <Link className="sign-up-btn" to={ROUTES.SIGNUP_PAGE}>
               مستخدم جديد
-            </a>
+            </Link>
           </Form.Item>
           {error && <Alert message={error} type="error" />}
         </Form>
