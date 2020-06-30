@@ -1,137 +1,166 @@
-import React, { useState } from 'react';
-import propTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
-import { DeleteOutlined } from '@ant-design/icons';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { notification, Form, Input, Radio, Select, AutoComplete } from 'antd';
+import PaintingSection from './PaintingsSection.js';
+import './index.css';
 
-import { Pagination, message } from 'antd';
-import Axios from 'axios';
+const categories = [
+  { name: ['hertage', 'تراث'] },
+  { name: ['sky', 'سماء'] },
+  { name: ['nature', 'طبيعة'] },
+  { name: ['islamic', 'islam'] },
+  { name: ['all', 'الكل'] },
+];
 
-function PaintingsSection({ paintings, getPaintings }) {
-  const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(6);
-  const cloudinaryLink =
-    'https://res.cloudinary.com/dacf3uopo/image/upload/v1593353472/';
+function PaintingContainer() {
+  const [paintings, setPaintings] = useState();
+  const [artists, setArtists] = useState();
 
-  const history = useHistory();
-
-  const handlePageChange = (value) => {
-    if (value <= 1) {
-      setMinValue(0);
-      setMaxValue(6);
-    } else {
-      setMinValue(maxValue);
-      setMaxValue(paintings.length <= value * 6 ? paintings.length : value * 6);
-    }
-  };
-  const role = 'artist';
-  const id = 1;
-  const addPaintingToCart = async (paintingId) => {
+  const getPaintings = async (cat) => {
     try {
-      const { data } = await Axios.post('/api/v1/cart', {
-        paintingId,
-      });
-      if (data.StatusCode === 201) {
-        message.success('تم إضافة الصورة للسلة بنجاح');
-      }
-    } catch (data) {
-      message.error('الصورة موجودة فعلاً في السلة');
-    }
-  };
-
-  const deletePainting = async (paintingID) => {
-    try {
-      const { data } = await Axios.delete(`/api/v1//paintings/${paintingID}`);
-      if (data.statusCode === 200) {
-        message.success('تم حذف اللوحة بنجاح');
-        getPaintings();
-      }
+      const {
+        data: { data },
+      } = await axios.get(`/api/v1/paintings/${cat || 'all'}`);
+      setPaintings(data);
     } catch (err) {
-      message.error('لا يمكن حذف اللوحة');
+      notification.error('عذراً, لا يمكن تحميل اللوحات');
     }
   };
+
+  const getArtists = async () => {
+    try {
+      const {
+        data: { data },
+      } = await axios.get('/api/v1/artists');
+      const artistsArray = data.map(
+        ({ first_name: fName, last_name: lName, id }) => ({
+          value: `${fName} ${lName}`,
+          id,
+        })
+      );
+
+      setArtists(artistsArray);
+    } catch (err) {
+      notification.error('عذراً, لا يمكن عرض الفنانين ');
+    }
+  };
+
+  useEffect(() => {
+    getPaintings();
+    getArtists();
+  }, []);
+
+  const [advance, setAdvance] = useState('mostPopular');
+  const [price, setPrice] = useState(500);
+  const [artist, setArtist] = useState(-1);
+  const [category, setCategory] = useState('all');
+
+  if (!paintings?.length || !artists?.length) return 'loading';
+
+  const artistID = artists.find((e) => e.value === artist)?.id;
+
+  const sortedPaintings =
+    advance === 'mostPopular'
+      ? [...paintings].sort((a, b) => b.count_sold - a.count_sold)
+      : paintings;
+
+  const minPriceOfPainting = (property) =>
+    Object.values(property).reduce((min, e) => (min > +e ? +e : min), 9999999);
+
+  const propertyFilter = ({ property, ...rest }) => ({
+    ...rest,
+    property,
+    minPrice: minPriceOfPainting(property),
+  });
+
+  const minPriceFilter = ({ minPrice }) => minPrice < price;
+
+  const categoryFilter = ({ category: paintCategory }) => {
+    if (category === 'all') return true;
+    return paintCategory === category;
+  };
+
+  const artistNameFilter = ({ artist_id: paintArtistId }) => {
+    if (artistID) return paintArtistId === artistID;
+    return true;
+  };
+
+  const finalData = sortedPaintings
+    .map(propertyFilter)
+    .filter(minPriceFilter)
+    .filter(categoryFilter)
+    .filter(artistNameFilter);
 
   return (
     <>
-      {paintings && (
-        <>
-          <div className="container__paintings">
-            {paintings.length > 0 &&
-              paintings.slice(minValue, maxValue).map((painting) => (
-                <>
-                  <div className="flip-card">
-                    <div className="flip-card-inner">
-                      <div className="flip-card-front">
-                        <img
-                          alt={painting.title}
-                          src={`${cloudinaryLink}${painting.img}`}
-                          style={{
-                            width: 300,
-                            height: 300,
-                            objectFit: 'cover',
-                          }}
-                        />
-                      </div>
-                      <div
-                        className="flip-card-back"
-                        style={{
-                          width: 300,
-
-                          background: `linear-gradient(
-                        rgba(0, 0, 0,0.7),
-                        rgba(0, 0, 0,0.7)
-                      ),url(${cloudinaryLink}${painting.img})`,
-                        }}
-                      >
-                        {role === 'admin' ||
-                          (role === 'artist' && painting.artist_id === id && (
-                            <DeleteOutlined
-                              onClick={() => deletePainting(painting.id)}
-                            />
-                          ))}
-
-                        <button
-                          type="button"
-                          className="moreBtn"
-                          onClick={() => {
-                            if (role === 'customer') {
-                              addPaintingToCart(painting.id);
-                            } else {
-                              history.push('/login');
-                            }
-                          }}
-                        >
-                          أضف إلى السلة
-                        </button>
-                        <br />
-                        <Link
-                          className="moreBtn"
-                          to={`/paintings/${painting.id}`}
-                        >
-                          {' '}
-                          ...للمزيد
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              ))}
+      <div className="container">
+        <div className="container__filter">
+          <div>
+            <Select
+              placeholder="بحث متقدم"
+              style={{ width: 120 }}
+              onChange={(value) => {
+                if (value !== 'price') setPrice(999);
+                setAdvance(value);
+              }}
+            >
+              <Select.Option value="mostPopular">الأكثر مبيعاً</Select.Option>
+              <Select.Option value="price">السعر</Select.Option>
+            </Select>
+            <AutoComplete
+              style={{
+                width: 200,
+              }}
+              options={artists}
+              onChange={(value) => setArtist(value)}
+              placeholder="ابحث باسم الفنان"
+              filterOption={(inputValue, option) =>
+                option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !==
+                -1
+              }
+              allowClear
+            />
           </div>
-          <Pagination
-            total={paintings.length}
-            showTotal={(total, range) =>
-              `${range[0]}-${range[1]} of ${total} items`
-            }
-            defaultCurrent={1}
-            defaultPageSize={6}
-            onChange={handlePageChange}
-          />
-        </>
-      )}
+          {advance === 'price' && (
+            <div>
+              <h3>بحث حسب السعر</h3>
+              <Form.Item label="أقل من" name="price">
+                <Input
+                  type="number"
+                  style={{ width: 120 }}
+                  onChange={(e) => setPrice(+e.target.value)}
+                />
+              </Form.Item>
+            </div>
+          )}
+          <br />
+          <div>
+            <Radio.Group
+              className="search__category"
+              onChange={(e) => setCategory(e.target.value)}
+              defaultValue="all"
+            >
+              <div className="middle">
+                {categories.map((e) => (
+                  <Radio.Button
+                    style={{
+                      width: 120,
+                      textAlign: 'center',
+                      marginRight: '5px',
+                    }}
+                    value={e.name[0]}
+                  >
+                    {e.name[1]}
+                  </Radio.Button>
+                ))}
+              </div>
+            </Radio.Group>
+          </div>
+        </div>
+        <PaintingSection paintings={finalData} getPaintings={getPaintings} />
+      </div>
     </>
   );
 }
-PaintingsSection.propTypes = {
-  paintings: propTypes.arrayOf(propTypes.object).isRequired,
-  getPaintings: propTypes.func().isRequired,
-};
-export default PaintingsSection;
+
+export default PaintingContainer;
