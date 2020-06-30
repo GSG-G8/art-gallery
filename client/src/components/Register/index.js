@@ -11,6 +11,7 @@ const Register = (props) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState();
   const [role, setRole] = useState('customer');
+  const [customized, setCustomized] = useState(false);
 
   const onFinish = async ({
     email,
@@ -22,12 +23,13 @@ const Register = (props) => {
     try {
       setLoaded(true);
       const { data } = await Axios.post(`/api/v1/sign-up`, {
-        email,
+        email: email.trim(),
         password,
         confirmPassword,
-        firstName,
-        lastName,
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
         role,
+        customized,
       });
       const { history } = props;
       message.success(data.message);
@@ -78,7 +80,7 @@ const Register = (props) => {
             <Input
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="text"
-              placeholder="اسمك الاول"
+              placeholder="الاسم الاول"
               className="form-input"
             />
           </Form.Item>
@@ -89,7 +91,7 @@ const Register = (props) => {
             <Input
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="text"
-              placeholder="اسمك الثاني"
+              placeholder="الاسم الثاني"
               className="form-input"
             />
           </Form.Item>
@@ -132,6 +134,15 @@ const Register = (props) => {
               className="form-input"
             />
           </Form.Item>
+          {role === 'artist' && (
+            <div className="radio-container">
+              <p> هل تقوم بالرسم حسب الطلب؟ </p>
+              <Radio.Group onChange={(e) => setCustomized(e.target.value)}>
+                <Radio value="true">نعم</Radio>
+                <Radio value="false">لا</Radio>
+              </Radio.Group>
+            </div>
+          )}
           <Form.Item>
             <Button
               type="primary"
@@ -142,7 +153,7 @@ const Register = (props) => {
             </Button>
             <br />
             <Link className="sign-up-btn" to={ROUTES.LOGIN_PAGE}>
-              مستخدم جديد
+              تسجيل الدخول بدلاً من ذلك
             </Link>
           </Form.Item>
           {error && <Alert message={error} type="error" />}
