@@ -3,7 +3,7 @@ import Axios from 'axios';
 import { Form, Input, Button, message, Spin, Alert, Radio } from 'antd';
 import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { AiOutlineMail, AiOutlineUser, AiOutlineLock } from 'react-icons/ai';
 import * as ROUTES from '../../constants/routes';
 import '../Login/style.css';
 
@@ -78,7 +78,7 @@ const Register = (props) => {
             rules={[{ required: true, message: '!رجاء قم بادخال اسمك الاول' }]}
           >
             <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
+              prefix={<AiOutlineUser className="site-form-item-icon" />}
               type="text"
               placeholder="الاسم الاول"
               className="form-input"
@@ -89,7 +89,7 @@ const Register = (props) => {
             rules={[{ required: true, message: '!رجاء قم بادخال اسمك الثاني' }]}
           >
             <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
+              prefix={<AiOutlineUser className="site-form-item-icon" />}
               type="text"
               placeholder="الاسم الثاني"
               className="form-input"
@@ -107,7 +107,7 @@ const Register = (props) => {
             ]}
           >
             <Input
-              prefix={<UserOutlined className="site-form-item-icon" />}
+              prefix={<AiOutlineMail className="site-form-item-icon" />}
               placeholder="الايميل"
               className="form-input"
             />
@@ -117,7 +117,7 @@ const Register = (props) => {
             rules={[{ required: true, message: '!رجاء قم بادخال كلمة المرور' }]}
           >
             <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
+              prefix={<AiOutlineLock className="site-form-item-icon" />}
               type="password"
               placeholder="كلمة المرور"
               className="form-input"
@@ -128,7 +128,7 @@ const Register = (props) => {
             rules={[{ required: true, message: '!رجاء قم بادخال كلمة المرور' }]}
           >
             <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
+              prefix={<AiOutlineLock className="site-form-item-icon" />}
               type="password"
               placeholder="تاكيد كلمة المرور"
               className="form-input"
