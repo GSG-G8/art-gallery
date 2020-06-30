@@ -15,7 +15,11 @@ const CartPage = () => {
       const {
         data: { data },
       } = await axios.get('/api/v1/cart');
-      setCartData(data);
+      if (data) {
+        setCartData(data);
+      } else {
+        setCartData([]);
+      }
     } catch (err) {
       const {
         response: {
@@ -31,7 +35,7 @@ const CartPage = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [cartData]);
 
   const deleteCart = (id, title) => {
     confirm({
@@ -43,7 +47,11 @@ const CartPage = () => {
       cancelText: 'لا',
       onOk: async () => {
         try {
-          console.log('Its okaaaaaaay');
+          await axios.delete(`/api/v1/cart/${id}`);
+          notification.success({
+            message: 'تم حذف اللوحة من عربة التسوق',
+          });
+          setCartData(cartData);
         } catch (err) {
           const {
             response: {
@@ -103,7 +111,7 @@ const CartPage = () => {
       {cartData.length === 0 ? (
         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="empty" />
       ) : (
-        <Table columns={columns} dataSource={cartData} />
+        <Table columns={columns} dataSource={cartData} rowKey="id" />
       )}
     </div>
   );
