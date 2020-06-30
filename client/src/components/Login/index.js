@@ -23,7 +23,7 @@ const Login = (props) => {
       const { history } = props;
       message.success('تم تسجيل الدخول بنجاح');
       setLoaded(false);
-      history.push('/');
+      history.push(ROUTES.HOME_PAGE);
     } catch (err) {
       let e;
       if (err.response) {
