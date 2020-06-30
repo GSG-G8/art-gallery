@@ -20,43 +20,25 @@
 }
 .form-container .radio-g{
     margin-bottom: 20px;
-    border: none;
     color: #2D616C !important;
-
 }
 .form-container .radio-g  .ant-radio-button-wrapper-checked{
     background-color: #955F83;
     color: white;
 }
-.form-container .radio-g  .ant-radio-button-wrapper-checked:hover{
-    border-color: #CFB7C4 !important;
-}
 .form-container .login-form-forgot{
     color: #2D616C !important;
 }
 .form-container .login-form-button{
-    background-color: #955F83;
     color: aliceblue;
     width: 100%;
-    border: none;
-    margin-top: 20px;
 }
 .form-container .sign-up-btn{
     text-align: center !important;
-    margin: auto;
     display: block;
+    line-height: 30px;
     color: #2D616C;
     margin-top: 6px;
     height: 30px;
 }
-.form-container .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover::before {
-    background-color: #955F83;
 
-}
-.form-container .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
-    border-color: #955F83 !important;
-    color: #2D616C;
-}
-.form-container .radio-g span{
-    color: #2D616C;
-}
