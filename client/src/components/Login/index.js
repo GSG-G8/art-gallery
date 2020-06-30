@@ -13,19 +13,28 @@ const Login = (props) => {
   const onFinish = async ({ email, password }) => {
     try {
       setLoaded(true);
-      const { data } = await Axios.post(`/api/v1/login`, {
+      await Axios.post(`/api/v1/login`, {
         email,
         password,
         role,
       });
       const { history } = props;
-      message.success(data.message);
+      message.success('تم تسجيل الدخول بنجاح');
       setLoaded(false);
       history.push('/');
     } catch (err) {
       let e;
       if (err.response) {
-        e = err.response.data.message;
+        switch (err.response.data.message) {
+          case 'You have to sign up first':
+            e = 'قم بتسجيل حسابك !';
+            break;
+          case 'Incorrect Password':
+            e = 'كلمة المرور خاطئة !';
+            break;
+          default:
+            e = 'حصل خطأ غير متوقع حاول مجددًا مرةً أخرى';
+        }
       } else {
         e = 'حصل خطأ غير متوقع حاول مجددًا مرةً أخرى';
       }
