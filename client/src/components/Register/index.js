@@ -31,8 +31,9 @@ const Register = (props) => {
         role,
         customized,
       });
+      const name = data.message?.split(',');
       const { history } = props;
-      message.success(data.message);
+      message.success(`مرحبا, ${name[1]} تم تسجيل حسابك بنجاح`);
       setLoaded(false);
       history.push(ROUTES.HOME_PAGE);
     } catch (err) {
@@ -75,7 +76,10 @@ const Register = (props) => {
           </Radio.Group>
           <Form.Item
             name="firstName"
-            rules={[{ required: true, message: '!رجاء قم بادخال اسمك الاول' }]}
+            rules={[
+              { required: true, message: '!رجاء قم بادخال اسمك الاول' },
+              { min: 3, message: ' الاسم يجب ان يكون اكثر من 3 حروف' },
+            ]}
           >
             <Input
               prefix={<AiOutlineUser className="site-form-item-icon" />}
@@ -86,7 +90,10 @@ const Register = (props) => {
           </Form.Item>
           <Form.Item
             name="lastName"
-            rules={[{ required: true, message: '!رجاء قم بادخال اسمك الثاني' }]}
+            rules={[
+              { required: true, message: '!رجاء قم بادخال اسمك الثاني' },
+              { min: 3, message: 'الاسم يجب ان يكون اكثر من 3 حروف' },
+            ]}
           >
             <Input
               prefix={<AiOutlineUser className="site-form-item-icon" />}
