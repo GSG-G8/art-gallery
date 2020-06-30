@@ -1,0 +1,44 @@
+.main-form-container{
+    width: 100%;
+    height: 100vh;
+    background-image: url('../../assets//images/login.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-position: 50% 50%;
+}
+.form-container{
+    width: 30%;
+    margin: auto;
+    padding-top: 100px;
+}
+.form-container .form-title{
+    color:#2D616C ;
+}
+.form-container .sub-title{
+    color:#955F83;
+}
+.form-container .radio-g{
+    margin-bottom: 20px;
+    color: #2D616C !important;
+}
+.form-container .radio-g  .ant-radio-button-wrapper-checked{
+    background-color: #955F83;
+    color: white;
+}
+.form-container .login-form-forgot{
+    color: #2D616C !important;
+}
+.form-container .login-form-button{
+    color: aliceblue;
+    width: 100%;
+}
+.form-container .sign-up-btn{
+    text-align: center !important;
+    display: block;
+    line-height: 30px;
+    color: #2D616C;
+    margin-top: 6px;
+    height: 30px;
+}
+
