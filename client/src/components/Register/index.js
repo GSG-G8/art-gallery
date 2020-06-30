@@ -58,7 +58,7 @@ const Register = (props) => {
   return (
     <div className="main-form-container">
       <div className="form-container">
-        <h2 className="form-title">اهلا بك في موقع برواز</h2>
+        <h2 className="form-title">أهلًا بكَ في موقع برواز</h2>
         <h3 className="sub-title">سجل دخولك كـ</h3>
         <Form name="normal_login" className="login-form" onFinish={onFinish}>
           <Radio.Group
@@ -108,7 +108,7 @@ const Register = (props) => {
           >
             <Input
               prefix={<AiOutlineMail className="site-form-item-icon" />}
-              placeholder="الايميل"
+              placeholder="البريد الالكتروني"
               className="form-input"
             />
           </Form.Item>
@@ -130,7 +130,7 @@ const Register = (props) => {
             <Input
               prefix={<AiOutlineLock className="site-form-item-icon" />}
               type="password"
-              placeholder="تاكيد كلمة المرور"
+              placeholder="تأكيد كلمة المرور"
               className="form-input"
             />
           </Form.Item>
