@@ -132,6 +132,6 @@ function PaintingsSection({ paintings, getPaintings }) {
 }
 PaintingsSection.propTypes = {
   paintings: propTypes.arrayOf(propTypes.object).isRequired,
-  getPaintings: propTypes.func().isRequired,
+  getPaintings: propTypes.func.isRequired,
 };
 export default PaintingsSection;
