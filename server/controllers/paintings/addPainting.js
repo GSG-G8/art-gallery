@@ -6,7 +6,6 @@ exports.addPainting = async (req, res, next) => {
   try {
     const { title, description, category, property } = req.body;
     const { id } = req.user;
-    console.log(req.files, 11111111111);
     if (req.files && req.files.paintingImg) {
       const { paintingImg } = req.files;
       await addPaintingSchema.validate(
