@@ -6,13 +6,13 @@ exports.addPainting = async (req, res, next) => {
   try {
     const { title, description, category, property } = req.body;
     const { id } = req.user;
+    console.log(req.files, 11111111111);
     if (req.files && req.files.paintingImg) {
       const { paintingImg } = req.files;
       await addPaintingSchema.validate(
         { title, description, category, property, paintingImg },
         { abortEarly: false },
       );
-
       const { public_id: imgID, format } = await uploadImg(paintingImg.path);
 
       const { rows } = await addPaintingQuery(

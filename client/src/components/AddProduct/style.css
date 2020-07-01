@@ -1,0 +1,13 @@
+.addProduct-form{
+    width: 30%;
+    margin:80px auto;
+}
+.addProduct-form .title-add{
+    color:#955F83;
+}
+.addProduct-form .cat-div{
+    margin-bottom: 10px;
+}
+.addProduct-form .ant-btn-primary{
+    color: aliceblue;
+}

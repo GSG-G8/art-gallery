@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import 'antd/dist/antd.css';
 
 import Login from '../components/Login';
+import AddProduct from '../components/AddProduct';
 import * as ROUTES from '../constants/routes';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
             path={ROUTES.LOGIN_PAGE}
             render={(props) => <Login {...props} />}
           />
+          <Route exact path="/add" component={AddProduct} />
         </Switch>
       </Router>
     </div>
