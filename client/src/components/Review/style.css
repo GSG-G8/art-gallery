@@ -29,7 +29,6 @@
 
 .title-1 {
   font-weight: bold;
-  color: #003461;
 }
 
 .title-2 {
@@ -42,7 +41,6 @@
 
 .title-3 {
   font-weight: bold;
-  color: #003461;
 }
 
 .review-btn {
@@ -51,8 +49,8 @@
   width: 320px;
   color: white;
   font-weight: bold;
-  background-color: #b851c7;
-  border: #b851c7;
+  background-color: #955f83;
+  border: #955f83;
 }
 
 .review-img-container {

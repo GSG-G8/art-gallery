@@ -1,6 +1,6 @@
 import React from 'react';
 import { Rate, Button } from 'antd';
-import reviewPhoto from '../../assets/images/review.png';
+import reviewPhoto from '../../assets/images/review.svg';
 
 import './style.css';
 
