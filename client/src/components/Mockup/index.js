@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Upload } from 'antd';
+import { Rnd } from 'react-rnd';
 import { PlusOutlined } from '@ant-design/icons';
+import propTypes from 'prop-types';
 import './style.css';
-import 'antd/dist/antd.css';
 
 const readFile = (file) =>
   new Promise((resolve, reject) => {
@@ -12,8 +13,10 @@ const readFile = (file) =>
     reader.onerror = (error) => reject(error);
   });
 
-function PictureWall() {
+function PictureWall({ paintingSrc }) {
   const [previewImage, setPreviewImage] = useState('');
+  const [paintingWidth, setPaintingWidth] = useState(200);
+
   const handlePreview = async (file) => {
     if (!file.preview) {
       setPreviewImage(await readFile(file.originFileObj));
@@ -23,7 +26,7 @@ function PictureWall() {
     setPreviewImage('');
   };
   return (
-    <>
+    <div className="dargContainer">
       <Upload
         accept="image/*"
         multiple={false}
@@ -34,13 +37,38 @@ function PictureWall() {
         {!previewImage && (
           <div>
             <PlusOutlined />
-            <div className="ant-upload-text">Upload</div>
+            <div className="ant-upload-text">إضافة صورة الحائط</div>
           </div>
         )}
       </Upload>
-      {previewImage && <img alt="hi" src={previewImage} />}
-    </>
+      {previewImage && (
+        <div
+          className="devConta"
+          style={{
+            height: '100vh',
+            background: `url(${previewImage}) center  no-repeat`,
+          }}
+        >
+          <Rnd
+            bounds="parent"
+            onResize={(e, direction, ref) => {
+              setPaintingWidth(ref.offsetWidth);
+            }}
+          >
+            <img
+              alt="painting"
+              src={paintingSrc}
+              style={{ width: `${paintingWidth}px` }}
+            />
+          </Rnd>
+        </div>
+      )}
+    </div>
   );
 }
+
+PictureWall.propTypes = {
+  paintingSrc: propTypes.string.isRequired,
+};
 
 export default PictureWall;
