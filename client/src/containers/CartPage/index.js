@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
   notification,
-  Empty,
   Table,
   Space,
   Button,
@@ -216,7 +215,7 @@ const CartPage = () => {
       dataIndex: 'img',
       key: 'img',
       render: (img) => (
-        <img src={img} alt="Painting" style={{ width: '150px' }} />
+        <img src={img} alt="Painting" style={{ width: '100px' }} />
       ),
     },
     {
@@ -259,9 +258,14 @@ const CartPage = () => {
   return (
     <div className="cart-cards-container">
       {cartData.length === 0 ? (
-        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="empty" />
+        <Table loading />
       ) : (
-        <Table columns={columns} dataSource={cartData} rowKey="id" />
+        <Table
+          columns={columns}
+          dataSource={cartData}
+          rowKey="id"
+          size="middle"
+        />
       )}
       <div>
         <CollectionCreateForm />
