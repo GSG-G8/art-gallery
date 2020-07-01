@@ -1,0 +1,19 @@
+.not-found-container img {
+  width: 600px;
+  height: 400px;
+}
+
+.not-found-container h1 {
+  font-weight: bold;
+  text-align: center;
+}
+
+.not-found-container p {
+  color: gray;
+  text-align: center;
+}
+
+.not-found-container .ant-btn {
+  color: white;
+  background-color: purple;
+}
