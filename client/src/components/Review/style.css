@@ -1,0 +1,67 @@
+.page-container {
+  display: flex;
+}
+
+.review-container {
+  width: 100%;
+  text-align: right;
+  height: 100vh;
+}
+
+.rate-container {
+  margin-top: 100px;
+  margin-right: 150px;
+  text-align: right;
+}
+
+.textarea-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-end;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.textarea-review {
+  text-align: right;
+}
+
+.title-1 {
+  font-weight: bold;
+  color: #003461;
+}
+
+.title-2 {
+  color: gray;
+}
+
+.star-rate {
+  font-size: 40px;
+}
+
+.title-3 {
+  font-weight: bold;
+  color: #003461;
+}
+
+.review-btn {
+  margin-top: 10px;
+  height: 40px;
+  width: 320px;
+  color: white;
+  font-weight: bold;
+  background-color: #b851c7;
+  border: #b851c7;
+}
+
+.review-img-container {
+  width: 100%;
+}
+
+.review-img {
+  width: 70%;
+  height: 70vh;
+  margin-top: 80px;
+  margin-left: 80px;
+}
