@@ -1,10 +1,9 @@
 .main-form-container{
     width: 100%;
     height: 100vh;
-    background-image: url('../../assets//images/login.svg');
+    background-image: url('../../assets/images/login.svg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: 50% 50%;
     background-position: 50% 50%;
 }
 .form-container{
@@ -41,4 +40,20 @@
     margin-top: 6px;
     height: 30px;
 }
+.form-container .radio-container{
+    margin-bottom: 20px;
+}
+@media (max-width: 800px){
+    .form-container{
+        width: 45%;
+        padding-top: 50px;
+    }
 
+}
+@media (max-width: 500px){
+    .form-container{
+        width: 60%;
+        padding-top: 50px;
+    }
+
+}
