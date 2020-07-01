@@ -81,9 +81,36 @@ const CartPage = () => {
     });
   };
 
-  const onCreate = (values) => {
-    console.log('Received values of form: ', values);
-    setVisible(false);
+  const onCreate = async (values) => {
+    try {
+      const { paintingId, property } = values;
+      // console.log('Received values of form: ', values);
+      await axios.post('/api/v1/paintings/buy', {
+        paintingId,
+        property,
+      });
+      notification.success({
+        message: 'تمت عملية الشراء بنجاح',
+      });
+      setVisible(false);
+    } catch (err) {
+      const {
+        response: {
+          data: { message },
+        },
+      } = err;
+      if (message === "Sorry You don't have enough money for this operation") {
+        notification.error({
+          message: 'لا يوجد رصيد كافٍ',
+          description:
+            'عذرًا ولكنك لا تملك في رصيدك ما يكفي لإتمام هذه العملية، يُرجى المحاولة بعد شحن الرصيد',
+        });
+      } else {
+        notification.error({
+          message,
+        });
+      }
+    }
   };
 
   const CollectionCreateForm = () => {
@@ -104,9 +131,9 @@ const CartPage = () => {
             ]}
           >
             <Select className="select-before">
-              {keys.map((x) => (
-                <Option value={x}>
-                  الأبعاد: {x} , السعر: {checkoutData.property[x]}
+              {keys.map((key) => (
+                <Option value={key}>
+                  الأبعاد: {key} , السعر: {checkoutData.property[key]}
                 </Option>
               ))}
             </Select>
