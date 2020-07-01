@@ -84,14 +84,16 @@ const CartPage = () => {
   const onCreate = async (values) => {
     try {
       const { paintingId, property } = values;
-      // console.log('Received values of form: ', values);
+      const { id } = checkoutData;
       await axios.post('/api/v1/paintings/buy', {
         paintingId,
         property,
       });
+      await axios.delete(`/api/v1/cart/${id}`);
       notification.success({
         message: 'تمت عملية الشراء بنجاح',
       });
+      setCartData(cartData.filter((painting) => painting.id !== id));
       setVisible(false);
     } catch (err) {
       const {
