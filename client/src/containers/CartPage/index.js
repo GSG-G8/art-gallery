@@ -1,14 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { notification, Empty, Table, Space, Button, Modal } from 'antd';
+import {
+  notification,
+  Empty,
+  Table,
+  Space,
+  Button,
+  Modal,
+  Form,
+  Input,
+  Select,
+} from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 import './style.css';
+
+const { Option } = Select;
 
 const { confirm } = Modal;
 
 const CartPage = () => {
   const [cartData, setCartData] = useState([]);
+  const [visible, setVisible] = useState(false);
+  const [checkoutData, setCheckoutData] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -35,7 +49,7 @@ const CartPage = () => {
 
   useEffect(() => {
     fetchData();
-  }, [cartData]);
+  }, []);
 
   const deleteCart = (id, title) => {
     confirm({
@@ -51,7 +65,7 @@ const CartPage = () => {
           notification.success({
             message: 'تم حذف اللوحة من عربة التسوق',
           });
-          setCartData(cartData);
+          setCartData(cartData.filter((painting) => painting.id !== id));
         } catch (err) {
           const {
             response: {
@@ -65,6 +79,106 @@ const CartPage = () => {
         }
       },
     });
+  };
+
+  const onCreate = (values) => {
+    console.log('Received values of form: ', values);
+    setVisible(false);
+  };
+
+  const CollectionCreateForm = () => {
+    const [form] = Form.useForm();
+
+    const PropertyForm = () => {
+      if (checkoutData) {
+        const keys = Object.keys(checkoutData.property);
+
+        return (
+          <Form.Item
+            name="property"
+            label="السعر"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Select className="select-before">
+              {keys.map((x) => (
+                <Option value={x}>
+                  الأبعاد: {x} , السعر: {checkoutData.property[x]}
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
+        );
+      }
+
+      return <Select className="select-before" />;
+    };
+
+    return (
+      <Modal
+        visible={visible}
+        title="شراء اللوحة"
+        okText="شراء"
+        cancelText="إلغاء"
+        onCancel={() => {
+          setVisible(false);
+        }}
+        onOk={() => {
+          form
+            .validateFields()
+            .then((values) => {
+              form.resetFields();
+              onCreate(values);
+            })
+            .catch((info) => {
+              notification.error({
+                message: 'خطأ في إدخال المعلومات',
+                description: info.errorFields[0].errors,
+              });
+            });
+        }}
+      >
+        <Form
+          form={form}
+          layout="horizontal"
+          name="form_in_modal"
+          initialValues={{
+            paintingId: checkoutData.painting_id,
+            title: checkoutData.title,
+            description: checkoutData.description,
+            category: checkoutData.category,
+          }}
+        >
+          <Form.Item
+            name="paintingId"
+            label="رقم اللوحة"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input disabled />
+          </Form.Item>
+
+          <Form.Item name="title" label="اسم اللوحة">
+            <Input disabled />
+          </Form.Item>
+
+          <Form.Item name="description" label="الوصف">
+            <Input type="textarea" disabled />
+          </Form.Item>
+
+          <Form.Item name="category" label="التصنيف">
+            <Input disabled />
+          </Form.Item>
+          <PropertyForm />
+        </Form>
+      </Modal>
+    );
   };
 
   const columns = [
@@ -97,7 +211,14 @@ const CartPage = () => {
       key: 'action',
       render: (dataIndex) => (
         <Space size="middle">
-          <Button>شراء</Button>
+          <Button
+            onClick={() => {
+              setVisible(true);
+              setCheckoutData(dataIndex);
+            }}
+          >
+            شراء
+          </Button>
           <Button onClick={() => deleteCart(dataIndex.id, dataIndex.title)}>
             حذف
           </Button>
@@ -113,6 +234,9 @@ const CartPage = () => {
       ) : (
         <Table columns={columns} dataSource={cartData} rowKey="id" />
       )}
+      <div>
+        <CollectionCreateForm />
+      </div>
     </div>
   );
 };
