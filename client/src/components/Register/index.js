@@ -78,7 +78,8 @@ const Register = (props) => {
             name="firstName"
             rules={[
               { required: true, message: '!رجاء قم بادخال اسمك الاول' },
-              { min: 3, message: ' الاسم يجب ان يكون اكثر من 3 حروف' },
+              { min: 2, message: ' الاسم يجب ان يكون اكثر من حروفين' },
+              { max: 20, message: 'لقد تجاوزت الحد المسموح' },
             ]}
           >
             <Input
@@ -92,7 +93,8 @@ const Register = (props) => {
             name="lastName"
             rules={[
               { required: true, message: '!رجاء قم بادخال اسمك الثاني' },
-              { min: 3, message: 'الاسم يجب ان يكون اكثر من 3 حروف' },
+              { min: 2, message: 'الاسم يجب ان يكون اكثر من حروفين' },
+              { max: 20, message: 'لقد تجاوزت الحد المسموح' },
             ]}
           >
             <Input
