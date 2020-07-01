@@ -41,15 +41,15 @@ VALUES
     ('طبيعة ', 'https://upload.3dlat.com/do.php?img=1129422',
         'لوحة فنية جدارية من قماش الكانفس تتميز بالالوان الطبيعية', 'لوحات مدن', '{"40*60":"70","120*160":"150", "200*140":"250"}', '1', '3'),
     ('طبيعة ', 'https://upload.3dlat.com/do.php?img=1129422',
-        'لوحة فنية جدارية من قماش الكانفس تتميز بالالوان الطبيعية', 'لوحات تاريخية', '{"40*60":"70","120*160":"150", "200*140":"250"}', '2', '3'),
-    ('طبيعة ', 'https://upload.3dlat.com/do.php?img=1129422',
-        'لوحة فنية جدارية من قماش الكانفس تتميز بالالوان الطبيعية', 'لوحات طبيعة', '{"40*60":"70","120*160":"150", "200*140":"250"}', '1', '4'),
-    ('طبيعة ', 'https://upload.3dlat.com/do.php?img=1129422',
-        'لوحة فنية جدارية من قماش الكانفس تتميز بالالوان الطبيعية', 'لوحات طبيعة', '{"40*60":"70","120*160":"150", "200*140":"250"}', '1', '4'),
-    ('طبيعة ', 'https://upload.3dlat.com/do.php?img=1129422',
-        'لوحة فنية جدارية من قماش الكانفس تتميز بالالوان الطبيعية', 'لوحات طبيعة', '{"40*60":"70","120*160":"150", "200*140":"250"}', '1', '4'),
-    ('طبيعة ', 'https://upload.3dlat.com/do.php?img=1129422',
-        'لوحة فنية جدارية من قماش الكانفس تتميز بالالوان الطبيعية', 'لوحات طبيعة', '{"40*60":"70","120*160":"150", "200*140":"250"}', '1', '5');
+        'لوحة فنية جدارية من قماش الكانفس تتميز بالالوان الطبيعية', 'لوحات تاريخية', '{"40*60":"70","120*160":"150", "200*140":"250"}', '10', '3'),
+    ('طائر جميل ', 'https://cdn.shopify.com/s/files/1/0071/1167/1926/products/Diamond_Painting_Canvas_Animal_Cute_Bird_5d_Diy_Diamond_Painting_Kits_UK_VM89381_grande.jpg?v=1571723908',
+        'لوحة فنية جدارية من قماش الكانفس تتميز بالالوان الطبيعية', 'لوحات طيور', '{"40*60":"70","120*160":"150", "200*140":"250"}', '7', '4'),
+    ('طبيعة ', 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/73408617-26b8-448f-917a-700a75e39e53/d7j32p3-f2f4e29c-c16b-4b62-a9c3-d081dcdb1252.jpg/v1/fill/w_1024,h_768,q_75,strp/11427_beautiful_paintings_of_nature_531_1_by_impfeatherdejudejinx_d7j32p3-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD03NjgiLCJwYXRoIjoiXC9mXC83MzQwODYxNy0yNmI4LTQ0OGYtOTE3YS03MDBhNzVlMzllNTNcL2Q3ajMycDMtZjJmNGUyOWMtYzE2Yi00YjYyLWE5YzMtZDA4MWRjZGIxMjUyLmpwZyIsIndpZHRoIjoiPD0xMDI0In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.RXxZk_qvM-bu8PqDilL7QKr9Jv4tW-lNaw-dGXgPpLQ',
+        'لوحة فنية جدارية من قماش الكانفس تتميز بالالوان الطبيعية', 'لوحات طبيعة', '{"40*60":"70","120*160":"150", "200*140":"250"}', '9', '4'),
+    ('خط عربي ', 'https://i.pinimg.com/originals/30/ac/c4/30acc4c772806c0360f548b8740d34b9.jpg',
+        'لوحة فنية جدارية من قماش الكانفس تتميز بالالوان الطبيعية', 'لوحات اسلامية', '{"40*60":"70","120*160":"150", "200*140":"250"}', '8', '4'),
+    ('طائر أزرق ', 'https://i.pinimg.com/originals/93/23/fe/9323fe007b1efecc6127d26549fe7900.jpg',
+        'لوحة فنية جدارية من قماش الكانفس تتميز بالالوان الطبيعية', 'لوحات طيور', '{"40*60":"70","120*160":"150", "200*140":"250"}', '12', '5');
 
 INSERT INTO cart
     (customer_id,painting_id)
