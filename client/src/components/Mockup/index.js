@@ -25,6 +25,8 @@ function PictureWall({ paintingSrc }) {
   const removeImg = () => {
     setPreviewImage('');
   };
+  const cloudinaryLink =
+    'https://res.cloudinary.com/dacf3uopo/image/upload/v1593353472/';
   return (
     <div className="dargContainer">
       <Upload
@@ -57,7 +59,7 @@ function PictureWall({ paintingSrc }) {
           >
             <img
               alt="painting"
-              src={paintingSrc}
+              src={cloudinaryLink + paintingSrc}
               style={{ width: `${paintingWidth}px` }}
             />
           </Rnd>

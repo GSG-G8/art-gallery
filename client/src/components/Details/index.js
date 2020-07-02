@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Radio, Select, Spin, notification } from 'antd';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import propTypes from 'prop-types';
 import AuthorizationContext from '../../Contexts/AuthorizationContext';
+import PictureWall from '../Mockup';
 import './style.css';
 
 function PaintingsDetail({ match }) {
@@ -11,7 +12,6 @@ function PaintingsDetail({ match }) {
   const [painting, setPainting] = useState();
   const [size, setSize] = useState();
 
-  const history = useHistory();
   const getPaintingByID = async (id) => {
     try {
       const { data } = await Axios.get(`/api/v1/painting/${id}`);
@@ -81,31 +81,29 @@ function PaintingsDetail({ match }) {
                 <strong className="price">{painting.property[size]}$ </strong>
                 <br />
                 <AuthorizationContext.Consumer>
-                  {({ user }) => (
-                    <Button
-                      className="addBtn"
-                      onClick={() => {
-                        if (user.role === 'customer') {
-                          addPaintingToCart(painting.id);
-                        } else {
-                          history.push('/login');
-                        }
-                      }}
-                    >
-                      إضافة إلى السلة
-                    </Button>
-                  )}
+                  {({ user }) =>
+                    user.role === 'customer' && (
+                      <Button
+                        className="addBtn"
+                        onClick={() => addPaintingToCart(painting.id)}
+                      >
+                        إضافة إلى السلة
+                      </Button>
+                    )
+                  }
                 </AuthorizationContext.Consumer>
               </label>
             </div>
           </div>
           <div className="container__image">
-            {imgPreview === 'previewImg' && (
+            {imgPreview === 'previewImg' ? (
               <img
                 className="imgPreview"
                 alt={painting.title}
                 src={painting.img}
               />
+            ) : (
+              <PictureWall paintingSrc={painting.img} />
             )}
           </div>
         </div>

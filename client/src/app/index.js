@@ -30,7 +30,7 @@ function App() {
         data: {
           data: { id, role },
         },
-      } = await axios.get('api/v1/is-auth');
+      } = await axios.get('/api/v1/is-auth');
       setUser({ id, role });
       switch (role) {
         case 'customer':
