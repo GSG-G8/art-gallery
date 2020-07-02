@@ -222,7 +222,7 @@ const CartPage = () => {
       title: 'العنوان',
       dataIndex: 'title',
       key: 'title',
-      render: (text) => <h2>{text}</h2>,
+      render: (text) => <h3>{text}</h3>,
     },
     {
       title: 'وصف اللوحة',
@@ -247,7 +247,10 @@ const CartPage = () => {
           >
             شراء
           </Button>
-          <Button onClick={() => deleteCart(dataIndex.id, dataIndex.title)}>
+          <Button
+            type="danger"
+            onClick={() => deleteCart(dataIndex.id, dataIndex.title)}
+          >
             حذف
           </Button>
         </Space>
@@ -264,7 +267,7 @@ const CartPage = () => {
           columns={columns}
           dataSource={cartData}
           rowKey="id"
-          size="middle"
+          // size="middle"
         />
       )}
       <div>
