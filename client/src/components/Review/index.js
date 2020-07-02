@@ -14,10 +14,13 @@ const layout = {
 };
 
 const ReviewPage = () => {
-  const onFinish = async ({ rate, detalis }) => {
+  const onFinish = async ({ rate, details }) => {
+    console.log('details :>> ', details);
+    console.log('rate :>> ', rate);
+
     try {
       await axios
-        .post('/api/v1/review', { rate, detalis })
+        .post('/api/v1/review', { rate, details })
         .then(() => message.success('شكرا على اتصالاك نهارك سعيد'));
     } catch (err) {
       let error;
@@ -68,7 +71,12 @@ const ReviewPage = () => {
           </Form.Item>
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-            <Button className="review-btn" type="primary" htmlType="submit">
+            <Button
+              className="review-btn"
+              type="primary"
+              htmlType="submit"
+              onClick={(e) => e.target.value}
+            >
               ارسال التعليق
             </Button>
           </Form.Item>
