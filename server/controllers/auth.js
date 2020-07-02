@@ -118,7 +118,7 @@ exports.registerController = async (req, res, next) => {
 };
 
 exports.logout = (req, res) => {
-  res.clearCookie('token').json({ status: 200, message: 'logout success' });
+  res.clearCookie('token').json({ statusCode: 200, message: 'logout success' });
 };
 
 exports.isAuth = async (req, res) => {

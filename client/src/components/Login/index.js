@@ -20,9 +20,10 @@ const Login = (props) => {
         password,
         role,
       });
-      const { history } = props;
+      const { history, setLogged } = props;
       message.success('تم تسجيل الدخول بنجاح');
       setLoaded(false);
+      setLogged(true);
       history.push(ROUTES.HOME_PAGE);
     } catch (err) {
       let e;
@@ -121,6 +122,7 @@ Login.propTypes = {
     push: propTypes.func.isRequired,
     goBack: propTypes.func.isRequired,
   }).isRequired,
+  setLogged: propTypes.func.isRequired,
 };
 
 export default Login;
