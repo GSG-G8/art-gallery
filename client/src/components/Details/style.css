@@ -1,0 +1,40 @@
+.container{
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  /* margin-left: 10vw;
+  margin-right: 10vw; */
+  margin: 2vh 2vw;
+
+}
+.container__details{
+  width: 50%;
+
+  background: rgb(202, 180, 180);
+}
+.painting{
+  width: 60%;
+  padding: 5%;
+  border: 1px solid black;
+  margin: 5% auto;
+}
+/* .ant-radio-button-checked{
+  background: red;
+} */
+.price{
+  padding: 10%;
+  /* width: 10rem;
+  background: rgba(232, 80, 186, 0.514);
+  color: rgb(255, 255, 255); */
+}
+.paintingView{
+  width: 10rem;
+}
+.container__image{
+  width: 50%;
+  background: rgb(59, 58, 58);
+}
+.imgPreview{
+  width: 60%;
+  margin: 5% 20%;
+}
