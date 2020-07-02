@@ -8,7 +8,7 @@ cloudinary.config({
 
 const uploadImg = (path) =>
   new Promise((resolve, reject) => {
-    cloudinary.uploader.upload(path, (err, result) => {
+    cloudinary.upload(path, (err, result) => {
       if (err) reject(err);
       else resolve(result);
     });

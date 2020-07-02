@@ -4,6 +4,7 @@ import 'antd/dist/antd.css';
 
 import Login from '../components/Login';
 import AddProduct from '../components/AddProduct';
+import ArtistProfile from '../components/ArtistProfile';
 import * as ROUTES from '../constants/routes';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             render={(props) => <Login {...props} />}
           />
           <Route exact path="/add" component={AddProduct} />
+          <Route exact path="/profile" component={ArtistProfile} />
         </Switch>
       </Router>
     </div>

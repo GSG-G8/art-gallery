@@ -1,20 +1,10 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
-import {
-  Form,
-  Input,
-  Button,
-  message,
-  Spin,
-  Alert,
-  Upload,
-  Select,
-} from 'antd';
+import { Form, Input, Button, Spin, Alert, Select, message } from 'antd';
 import {
   RiPriceTag2Line,
   MdPhotoSizeSelectLarge,
   MdDescription,
-  AiOutlineCloudUpload,
   MdSubtitles,
 } from 'react-icons/all';
 import './style.css';
@@ -27,48 +17,34 @@ const AddProduct = () => {
   const [paintingImg, setPaintingImg] = useState();
   const [category, setCategory] = useState();
 
-  const props = {
-    name: 'file',
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-    headers: {
-      authorization: 'authorization-text',
-    },
-    onChange(info) {
-      //   console.log(info);
-      if (info.file.status !== 'uploading') {
-        // eslint-disable-next-line no-console
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === 'done') {
-        setPaintingImg(info.file.name);
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
   const handleCategories = (value) => {
     setCategory(value);
   };
+
   const onFinish = async ({ title, description, size, price }) => {
-    try {
-      setLoaded(true);
-      await Axios.post(`/api/v1/painting`, {
+    const formData = new FormData();
+    formData.append('paintingImg', paintingImg[0]);
+    formData.append(
+      'data',
+      JSON.stringify({
         title,
         description,
         property: JSON.stringify({ size, price }),
         category,
-        paintingImg,
+      })
+    );
+    try {
+      setLoaded(true);
+      await Axios.post(`/api/v1/painting`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
       setLoaded(false);
+      message.success('تم إضافة اللوحة بنجاح');
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err.response);
       setError(err.response.data.message);
       setLoaded(false);
     }
   };
-
   return (
     <div>
       <Form name="add_product" className="addProduct-form" onFinish={onFinish}>
@@ -105,11 +81,7 @@ const AddProduct = () => {
         </Form.Item>
         <div className="cat-div">
           <span>نوع اللوحة : </span>
-          <Select
-            defaultValue="lucy"
-            style={{ width: 120 }}
-            onChange={handleCategories}
-          >
+          <Select style={{ width: 120 }} onChange={handleCategories}>
             <Option value="jack">Jack</Option>
             <Option value="lucy">Lucy</Option>
           </Select>
@@ -144,11 +116,9 @@ const AddProduct = () => {
             className="form-input"
           />
         </Form.Item>
-        <Upload {...props} multiple={false} customRequest={() => {}}>
-          <Button>
-            <AiOutlineCloudUpload /> تحميل صورة
-          </Button>
-        </Upload>
+        <Form.Item name="paintingImg">
+          <input type="file" onChange={(e) => setPaintingImg(e.target.files)} />
+        </Form.Item>
 
         <Form.Item>
           <Button type="primary" htmlType="submit">
