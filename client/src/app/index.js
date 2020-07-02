@@ -5,6 +5,7 @@ import 'antd/dist/antd.css';
 import Login from '../components/Login';
 import * as ROUTES from '../constants/routes';
 import Register from '../components/Register';
+import Painting from '../components/Details';
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
             exact
             path={ROUTES.LOGIN_PAGE}
             render={(props) => <Login {...props} />}
+          />
+          <Route
+            path={ROUTES.ART_PAGE}
+            render={(props) => <Painting {...props} />}
           />
         </Switch>
       </Router>
