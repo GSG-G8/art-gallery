@@ -1,6 +1,7 @@
 export const HOME_PAGE = '/';
 export const LOGIN_PAGE = '/login';
 export const SIGNUP_PAGE = '/signup';
+export const CHECKOUT_PAGE = '/checkout';
 export const CART_PAGE = '/cart';
 export const REVIEW_PAGE = '/review';
 export const ART_PAGE = '/art/:artId';
