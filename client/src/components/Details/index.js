@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Radio, Select, Spin, notification } from 'antd';
+import { Link, useHistory } from 'react-router-dom';
 import Axios from 'axios';
+import propTypes from 'prop-types';
+import AuthorizationContext from '../../Contexts/AuthorizationContext';
 import './style.css';
 
 function PaintingsDetail({ match }) {
@@ -8,6 +11,7 @@ function PaintingsDetail({ match }) {
   const [painting, setPainting] = useState();
   const [size, setSize] = useState();
 
+  const history = useHistory();
   const getPaintingByID = async (id) => {
     try {
       const { data } = await Axios.get(`/api/v1/painting/${id}`);
@@ -20,19 +24,21 @@ function PaintingsDetail({ match }) {
     getPaintingByID(match.params.artId);
   }, []);
 
-  // const painting = {
-  //   title: 'طائر الاوز',
-  //   img:
-  //     'https://media.zid.store/0651e4a4-a220-4670-8922-c62f64ff8293/c69cd11f-6321-46b6-91fc-d4ea9769fbdf.jpeg',
-  //   description: 'لوحة فنية جدارية من قماش الكانفس تتميز بالالوان الطبيعية',
-  //   category: 'لوحات طيور',
-  //   property: '{"40*60":"70","120*160":"150", "200*140":"250"}',
-  //   count_sold: '1',
-  //   artist_id: '1',
-  // };
-
   const handleSizeChange = (value) => {
     setSize(value);
+  };
+
+  const addPaintingToCart = async (paintingId) => {
+    try {
+      const { data } = await Axios.post('/api/v1/cart', {
+        paintingId,
+      });
+      if (data.StatusCode === 201) {
+        notification.success('تم إضافة الصورة للسلة بنجاح');
+      }
+    } catch (data) {
+      notification.error('الصورة موجودة فعلاً في السلة');
+    }
   };
   return (
     <>
@@ -41,6 +47,9 @@ function PaintingsDetail({ match }) {
           <div className="container__details">
             <div className="painting">
               <h1>{painting.title}</h1>
+              <Link className="artistName" to={`/artist/${painting.artist_id}`}>
+                {`${painting.first_name} ${painting.last_name}`}
+              </Link>
               <p>{painting.description}</p>
               <Radio.Group
                 buttonStyle="solid"
@@ -71,9 +80,22 @@ function PaintingsDetail({ match }) {
                 </Select>
                 <strong className="price">{painting.property[size]}$ </strong>
                 <br />
-                <Button>
-                  -إضافة إلى السلة <strong>{painting.property[size]} </strong>
-                </Button>
+                <AuthorizationContext.Consumer>
+                  {({ user }) => (
+                    <Button
+                      className="addBtn"
+                      onClick={() => {
+                        if (user.role === 'customer') {
+                          addPaintingToCart(painting.id);
+                        } else {
+                          history.push('/login');
+                        }
+                      }}
+                    >
+                      إضافة إلى السلة
+                    </Button>
+                  )}
+                </AuthorizationContext.Consumer>
               </label>
             </div>
           </div>
@@ -93,4 +115,13 @@ function PaintingsDetail({ match }) {
     </>
   );
 }
+
+PaintingsDetail.propTypes = {
+  match: propTypes.shape({
+    params: propTypes.shape({
+      artId: propTypes.node,
+    }).isRequired,
+  }).isRequired,
+};
+
 export default PaintingsDetail;
