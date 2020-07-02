@@ -8,8 +8,13 @@
   height: 100vh;
 }
 
-.rate-container {
+.titles-container {
   margin-top: 100px;
+  margin-right: 150px;
+  text-align: right;
+}
+
+.rate-container {
   margin-right: 150px;
   text-align: right;
 }
@@ -36,7 +41,7 @@
 }
 
 .star-rate {
-  font-size: 40px;
+  font-size: 35px;
 }
 
 .title-3 {
@@ -45,8 +50,9 @@
 
 .review-btn {
   margin-top: 10px;
+  margin-right: 40px;
   height: 40px;
-  width: 320px;
+  width: 200px;
   color: white;
   font-weight: bold;
   background-color: #955f83;
