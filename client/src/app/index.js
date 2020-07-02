@@ -51,6 +51,7 @@ function App() {
           setRedirect(true);
       }
     } catch (err) {
+      setLogged(false);
       setArtistAuth(false);
       setCustomerAuth(false);
       setRedirect(true);
@@ -62,10 +63,12 @@ function App() {
   const logout = async () => {
     try {
       await axios.get('api/v1/logout');
+      setLogged(false);
       setCustomerAuth(false);
       setArtistAuth(false);
       setRedirect(true);
     } catch (err) {
+      setLogged(logged);
       setCustomerAuth(customerAuth);
       setArtistAuth(artistAuth);
       setRedirect(redirect);
