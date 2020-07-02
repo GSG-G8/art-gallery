@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
-import { Form, Input, Button, Spin, Alert, Select, message } from 'antd';
 import {
+  Form,
+  Input,
+  Button,
+  Spin,
+  Alert,
+  Select,
+  message,
+  Upload,
+} from 'antd';
+import {
+  BsUpload,
   RiPriceTag2Line,
   MdPhotoSizeSelectLarge,
   MdDescription,
   MdSubtitles,
 } from 'react-icons/all';
+
 import './style.css';
 
 const { Option } = Select;
@@ -23,7 +34,7 @@ const AddProduct = () => {
 
   const onFinish = async ({ title, description, size, price }) => {
     const formData = new FormData();
-    formData.append('paintingImg', paintingImg[0]);
+    formData.append('paintingImg', paintingImg);
     formData.append(
       'data',
       JSON.stringify({
@@ -117,7 +128,19 @@ const AddProduct = () => {
           />
         </Form.Item>
         <Form.Item name="paintingImg">
-          <input type="file" onChange={(e) => setPaintingImg(e.target.files)} />
+          <Upload
+            type="file"
+            beforeUpload={(file) => {
+              setPaintingImg(file);
+              return false;
+            }}
+            onRemove={() => setPaintingImg(null)}
+            value={paintingImg}
+          >
+            <Button>
+              <BsUpload /> تحميل صورة اللوحة
+            </Button>
+          </Upload>
         </Form.Item>
 
         <Form.Item>
@@ -125,7 +148,7 @@ const AddProduct = () => {
             {loaded ? (
               <span>
                 <Spin />
-                loading
+                جاري التحميل
               </span>
             ) : (
               'اضافة لوحة '
