@@ -7,6 +7,7 @@ const {
   addPainting,
   buyPaintings,
   deletePainting,
+  getPaintingInfo,
 } = require('./paintings');
 
 const { addPaintingToCart, deletePantingCart, getCart } = require('./cart');
@@ -41,4 +42,5 @@ module.exports = {
   getArtistReview,
   updateArtistAvatar,
   buyPaintings,
+  getPaintingInfo,
 };
