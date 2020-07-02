@@ -7,4 +7,5 @@ module.exports = {
   '@pagination-item-bg': '#F3E9EA',
   '@pagination-item-bg-active': '@primary-color',
   '@pagination-item-link-bg': '#F3E9EA',
+  '@shadow-color': '#955F83',
 };
