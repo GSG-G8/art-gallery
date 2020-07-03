@@ -1,0 +1,21 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --main-color: rgba(232, 80, 186, 0.514);
+    --content-grey: #636D73;
+    --header-font: 'Open Sans bold';
+    --content-font: 'Open Sans regular';
+  }
+  
+  html {
+    font-size: 1vw;
+  }
+  
+  .App {
+    text-align: center;
+  }
+  
