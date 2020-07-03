@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { notification, Form, Input, Radio, Select, AutoComplete } from 'antd';
+import {
+  notification,
+  Form,
+  Input,
+  Radio,
+  Select,
+  AutoComplete,
+  message,
+} from 'antd';
 import PaintingSection from './PaintingsSection.js';
 import './index.css';
 
@@ -8,13 +16,17 @@ const categories = [
   { name: ['hertage', 'تراث'] },
   { name: ['sky', 'سماء'] },
   { name: ['nature', 'طبيعة'] },
-  { name: ['islamic', 'islam'] },
+  { name: ['islamic', 'فن إسلامي'] },
   { name: ['all', 'الكل'] },
 ];
 
 function PaintingContainer() {
   const [paintings, setPaintings] = useState();
   const [artists, setArtists] = useState();
+  const [advance, setAdvance] = useState('mostPopular');
+  const [price, setPrice] = useState(500);
+  const [artist, setArtist] = useState(-1);
+  const [category, setCategory] = useState('all');
 
   const getPaintings = async (cat) => {
     try {
@@ -50,10 +62,17 @@ function PaintingContainer() {
     getArtists();
   }, []);
 
-  const [advance, setAdvance] = useState('mostPopular');
-  const [price, setPrice] = useState(500);
-  const [artist, setArtist] = useState(-1);
-  const [category, setCategory] = useState('all');
+  const deletePainting = async (paintingID) => {
+    try {
+      const { data } = await axios.delete(`/api/v1//paintings/${paintingID}`);
+      if (data.statusCode === 200) {
+        message.success('تم حذف اللوحة بنجاح');
+        setPaintings(paintings.filter((e) => e.id !== paintingID));
+      }
+    } catch (err) {
+      message.error('لا يمكن حذف اللوحة');
+    }
+  };
 
   if (!paintings?.length || !artists?.length) return 'loading';
 
@@ -143,6 +162,7 @@ function PaintingContainer() {
               <div className="middle">
                 {categories.map((e) => (
                   <Radio.Button
+                    key={e.name[0]}
                     style={{
                       width: 120,
                       textAlign: 'center',
@@ -157,7 +177,10 @@ function PaintingContainer() {
             </Radio.Group>
           </div>
         </div>
-        <PaintingSection paintings={finalData} getPaintings={getPaintings} />
+        <PaintingSection
+          paintings={finalData}
+          deletePainting={deletePainting}
+        />
       </div>
     </>
   );

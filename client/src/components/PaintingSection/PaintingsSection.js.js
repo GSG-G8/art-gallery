@@ -3,10 +3,10 @@ import propTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 import { DeleteOutlined } from '@ant-design/icons';
 
-import { Pagination, message } from 'antd';
+import { Pagination, message, Popconfirm } from 'antd';
 import Axios from 'axios';
 
-function PaintingsSection({ paintings, getPaintings }) {
+function PaintingsSection({ paintings, deletePainting }) {
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(6);
   const cloudinaryLink =
@@ -38,18 +38,6 @@ function PaintingsSection({ paintings, getPaintings }) {
     }
   };
 
-  const deletePainting = async (paintingID) => {
-    try {
-      const { data } = await Axios.delete(`/api/v1//paintings/${paintingID}`);
-      if (data.statusCode === 200) {
-        message.success('تم حذف اللوحة بنجاح');
-        getPaintings();
-      }
-    } catch (err) {
-      message.error('لا يمكن حذف اللوحة');
-    }
-  };
-
   return (
     <>
       {paintings && (
@@ -57,66 +45,68 @@ function PaintingsSection({ paintings, getPaintings }) {
           <div className="container__paintings">
             {paintings.length > 0 &&
               paintings.slice(minValue, maxValue).map((painting) => (
-                <>
-                  <div className="flip-card">
-                    <div className="flip-card-inner">
-                      <div className="flip-card-front">
-                        <img
-                          alt={painting.title}
-                          src={`${cloudinaryLink}${painting.img}`}
-                          style={{
-                            width: 300,
-                            height: 300,
-                            objectFit: 'cover',
-                          }}
-                        />
-                      </div>
-                      <div
-                        className="flip-card-back"
+                <div className="flip-card" key={painting.id}>
+                  <div className="flip-card-inner">
+                    <div className="flip-card-front">
+                      <img
+                        alt={painting.title}
+                        src={`${cloudinaryLink}${painting.img}`}
                         style={{
                           width: 300,
-
-                          background: `linear-gradient(
+                          height: 300,
+                          objectFit: 'cover',
+                        }}
+                      />
+                    </div>
+                    <div
+                      className="flip-card-back"
+                      style={{
+                        width: 300,
+                        backgroundSize: 'cover',
+                        background: `linear-gradient(
                         rgba(0, 0, 0,0.7),
                         rgba(0, 0, 0,0.7)
-                      ),url(${cloudinaryLink}${painting.img})`,
+                      ),url(${cloudinaryLink}${painting.img}) center no-repeat`,
+                      }}
+                    >
+                      {role === 'admin' ||
+                        (role === 'artist' && painting.artist_id === id && (
+                          <div className="deleteBtn">
+                            <Popconfirm
+                              title="هل أنت متأكد من حذف هذه اللوحة؟"
+                              onConfirm={() => deletePainting(painting.id)}
+                              okText="نعم"
+                              cancelText="لا"
+                            >
+                              <DeleteOutlined width="2em" />
+                            </Popconfirm>
+                          </div>
+                        ))}
+
+                      <button
+                        type="button"
+                        className="moreBtn"
+                        onClick={() => {
+                          if (role === 'customer') {
+                            addPaintingToCart(painting.id);
+                          } else {
+                            history.push('/login');
+                          }
                         }}
                       >
-                        {role === 'admin' ||
-                          (role === 'artist' && painting.artist_id === id && (
-                            <div className="deleteBtn">
-                              <DeleteOutlined
-                                width="2em"
-                                onClick={() => deletePainting(painting.id)}
-                              />
-                            </div>
-                          ))}
-
-                        <button
-                          type="button"
-                          className="moreBtn"
-                          onClick={() => {
-                            if (role === 'customer') {
-                              addPaintingToCart(painting.id);
-                            } else {
-                              history.push('/login');
-                            }
-                          }}
-                        >
-                          أضف إلى السلة
-                        </button>
-                        <br />
-                        <Link
-                          className="moreBtn"
-                          to={`/paintings/${painting.id}`}
-                        >
-                          {' '}
-                          ...للمزيد
-                        </Link>
-                      </div>
+                        أضف إلى السلة
+                      </button>
+                      <br />
+                      <Link
+                        className="moreBtn"
+                        to={`/paintings/${painting.id}`}
+                      >
+                        {' '}
+                        ...للمزيد
+                      </Link>
                     </div>
                   </div>
-                </>
+                </div>
               ))}
           </div>
           <Pagination
@@ -135,6 +125,6 @@ function PaintingsSection({ paintings, getPaintings }) {
 }
 PaintingsSection.propTypes = {
   paintings: propTypes.arrayOf(propTypes.object).isRequired,
-  getPaintings: propTypes.func.isRequired,
+  deletePainting: propTypes.func.isRequired,
 };
 export default PaintingsSection;
