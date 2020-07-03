@@ -142,7 +142,7 @@ function PaintingContainer() {
           </div>
           {advance === 'price' && (
             <div>
-              <h3>بحث حسب السعر</h3>
+              <span>بحث حسب السعر</span>
               <Form.Item label="أقل من" name="price">
                 <Input
                   type="number"
@@ -153,27 +153,26 @@ function PaintingContainer() {
             </div>
           )}
           <br />
-          <div>
+          <div className="catInputs">
             <Radio.Group
               className="search__category"
               onChange={(e) => setCategory(e.target.value)}
               defaultValue="all"
+              buttonStyle="solid"
             >
-              <div className="middle">
-                {categories.map((e) => (
-                  <Radio.Button
-                    key={e.name[0]}
-                    style={{
-                      width: 120,
-                      textAlign: 'center',
-                      marginRight: '5px',
-                    }}
-                    value={e.name[0]}
-                  >
-                    {e.name[1]}
-                  </Radio.Button>
-                ))}
-              </div>
+              {categories.map((e) => (
+                <Radio.Button
+                  key={e.name[0]}
+                  style={{
+                    width: 120,
+                    textAlign: 'center',
+                    marginRight: '5px',
+                  }}
+                  value={e.name[0]}
+                >
+                  {e.name[1]}
+                </Radio.Button>
+              ))}
             </Radio.Group>
           </div>
         </div>

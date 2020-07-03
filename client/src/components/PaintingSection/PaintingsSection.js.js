@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 import { DeleteOutlined } from '@ant-design/icons';
-
 import { Pagination, message, Popconfirm } from 'antd';
 import Axios from 'axios';
+
+import AuthorizationContext from '../../Contexts/AuthorizationContext';
 
 function PaintingsSection({ paintings, deletePainting }) {
   const [minValue, setMinValue] = useState(0);
@@ -23,8 +24,7 @@ function PaintingsSection({ paintings, deletePainting }) {
       setMaxValue(paintings.length <= value * 6 ? paintings.length : value * 6);
     }
   };
-  const role = 'artist';
-  const id = 1;
+
   const addPaintingToCart = async (paintingId) => {
     try {
       const { data } = await Axios.post('/api/v1/cart', {
@@ -69,33 +69,48 @@ function PaintingsSection({ paintings, deletePainting }) {
                       ),url(${cloudinaryLink}${painting.img}) center no-repeat`,
                       }}
                     >
-                      {role === 'admin' ||
-                        (role === 'artist' && painting.artist_id === id && (
-                          <div className="deleteBtn">
-                            <Popconfirm
-                              title="هل أنت متأكد من حذف هذه اللوحة؟"
-                              onConfirm={() => deletePainting(painting.id)}
-                              okText="نعم"
-                              cancelText="لا"
+                      <AuthorizationContext.Consumer>
+                        {({ user }) => (
+                          <>
+                            {user.role === 'admin' ||
+                              (user.role === 'artist' &&
+                                painting.artist_id === user.id && (
+                                  <div className="deleteBtn">
+                                    <Popconfirm
+                                      title="هل أنت متأكد من حذف هذه اللوحة؟"
+                                      onConfirm={() =>
+                                        deletePainting(painting.id)
+                                      }
+                                      okText="نعم"
+                                      cancelText="لا"
+                                    >
+                                      <DeleteOutlined width="2em" />
+                                    </Popconfirm>
+                                  </div>
+                                ))}
+                            <button
+                              type="button"
+                              className="moreBtn"
+                              onClick={() => {
+                                if (user.role === 'customer') {
+                                  addPaintingToCart(painting.id);
+                                } else if (
+                                  user.role === 'customer' ||
+                                  'admin'
+                                ) {
+                                  message.warn(
+                                    'عليك تسجيل الدخول بحساب مشترٍ لتتم العملية'
+                                  );
+                                } else {
+                                  history.push('/login');
+                                }
+                              }}
                             >
-                              <DeleteOutlined width="2em" />
-                            </Popconfirm>
-                          </div>
-                        ))}
-
-                      <button
-                        type="button"
-                        className="moreBtn"
-                        onClick={() => {
-                          if (role === 'customer') {
-                            addPaintingToCart(painting.id);
-                          } else {
-                            history.push('/login');
-                          }
-                        }}
-                      >
-                        أضف إلى السلة
-                      </button>
+                              أضف إلى السلة
+                            </button>
+                          </>
+                        )}
+                      </AuthorizationContext.Consumer>
                       <br />
                       <Link
                         className="moreBtn"

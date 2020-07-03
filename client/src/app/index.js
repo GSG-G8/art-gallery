@@ -15,6 +15,7 @@ import 'antd/dist/antd.css';
 
 import Login from '../components/Login';
 import Register from '../components/Register';
+import LandingPage from '../containers/LandingPage';
 
 function App() {
   const [user, setUser] = useState({});
@@ -29,7 +30,7 @@ function App() {
         data: {
           data: { id, role },
         },
-      } = await axios.get('api/v1/is-auth');
+      } = await axios.get('/api/v1/is-auth');
       setUser({ id, role });
       switch (role) {
         case 'customer':
@@ -83,7 +84,7 @@ function App() {
               <Route
                 exact
                 path={ROUTES.HOME_PAGE}
-                render={() => <h1>Home Page</h1>}
+                render={() => <LandingPage />}
               />
               <Route
                 exact

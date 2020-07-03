@@ -1,23 +1,21 @@
-@import '~antd/dist/antd.css';
+@import "~antd/dist/antd.css";
 
-
-.container{
+.container {
   width: 80vw;
   margin: 5% auto;
 }
-.search__category{
+.search__category {
   width: 80%;
-  margin: 2% auto;
+  margin: 0 auto;
 }
-.container__paintings{
+.container__paintings {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  margin: 5% auto;
+  margin: 0 auto;
   padding: 2% 0;
   justify-content: space-around;
   background-color: rgb(240, 234, 234);
-
 }
 
 .flip-card {
@@ -37,7 +35,8 @@
   transform: rotateY(180deg);
 }
 
-.flip-card-front, .flip-card-back {
+.flip-card-front,
+.flip-card-back {
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden;
 }
@@ -54,17 +53,18 @@
   height: 100%;
   color: white;
   transform: rotateY(180deg);
-  }
+  font-size: larger;
+}
 
-  .moreBtn{
-    background: none;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin-top: 40%;
-  }
+.moreBtn {
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 40%;
+}
 
-  .deleteBtn{
-    margin-left: 200px;
-    margin-top: 20px;
-  }
+.deleteBtn {
+  margin-left: 200px;
+  margin-top: 20px;
+}
