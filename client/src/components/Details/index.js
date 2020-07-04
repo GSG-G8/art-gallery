@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Radio, Select, Spin, notification } from 'antd';
-import { Link } from 'react-router-dom';
+import { Button, Radio, Select, Spin, notification, message } from 'antd';
+import { Link, useHistory } from 'react-router-dom';
 import Axios from 'axios';
 import propTypes from 'prop-types';
 import AuthorizationContext from '../../Contexts/AuthorizationContext';
@@ -11,6 +11,10 @@ function PaintingsDetail({ match }) {
   const [imgPreview, setimgPreview] = useState('previewImg');
   const [painting, setPainting] = useState();
   const [size, setSize] = useState();
+
+  const history = useHistory();
+  const cloudinaryLink =
+    'https://res.cloudinary.com/dacf3uopo/image/upload/v1593353472/';
 
   const getPaintingByID = async (id) => {
     try {
@@ -47,11 +51,18 @@ function PaintingsDetail({ match }) {
           <div className="container__details">
             <div className="painting">
               <h1>{painting.title}</h1>
-              <Link className="artistName" to={`/artist/${painting.artist_id}`}>
-                {`${painting.first_name} ${painting.last_name}`}
-              </Link>
               <p>{painting.description}</p>
+              <h3>
+                {' '}
+                التصنيف <strong>{painting.category}</strong>
+              </h3>
+              <Link className="artistName" to={`/artist/${painting.artist_id}`}>
+                {`ل  ${painting.first_name} ${painting.last_name} `}
+              </Link>
+              <br />
+
               <Radio.Group
+                className="viewBtn"
                 buttonStyle="solid"
                 defaultValue="previewImg"
                 onChange={(e) => setimgPreview(e.target.value)}
@@ -71,7 +82,7 @@ function PaintingsDetail({ match }) {
                 <Select
                   id="size"
                   defaultValue={Object.keys(painting.property)[0]}
-                  style={{ width: 120 }}
+                  style={{ width: 120, margin: '10px' }}
                   onChange={handleSizeChange}
                 >
                   {Object.keys(painting.property).map((e) => (
@@ -81,16 +92,24 @@ function PaintingsDetail({ match }) {
                 <strong className="price">{painting.property[size]}$ </strong>
                 <br />
                 <AuthorizationContext.Consumer>
-                  {({ user }) =>
-                    user.role === 'customer' && (
-                      <Button
-                        className="addBtn"
-                        onClick={() => addPaintingToCart(painting.id)}
-                      >
-                        إضافة إلى السلة
-                      </Button>
-                    )
-                  }
+                  {({ user }) => (
+                    <Button
+                      className="addBtn"
+                      onClick={() => {
+                        if (user.role === 'customer') {
+                          addPaintingToCart(painting.id);
+                        } else if (user.role === 'customer' || 'admin') {
+                          message.warn(
+                            'عليك تسجيل الدخول بحساب مشترٍ لتتم العملية'
+                          );
+                        } else {
+                          history.push('/login');
+                        }
+                      }}
+                    >
+                      إضافة إلى السلة
+                    </Button>
+                  )}
                 </AuthorizationContext.Consumer>
               </label>
             </div>
@@ -100,7 +119,7 @@ function PaintingsDetail({ match }) {
               <img
                 className="imgPreview"
                 alt={painting.title}
-                src={painting.img}
+                src={cloudinaryLink + painting.img}
               />
             ) : (
               <PictureWall paintingSrc={painting.img} />

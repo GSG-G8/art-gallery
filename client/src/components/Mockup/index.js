@@ -32,7 +32,7 @@ function PictureWall({ paintingSrc }) {
       <Upload
         accept="image/*"
         multiple={false}
-        listType="picture-card"
+        listType="picture"
         onPreview={handlePreview}
         onRemove={removeImg}
       >
@@ -47,8 +47,7 @@ function PictureWall({ paintingSrc }) {
         <div
           className="devConta"
           style={{
-            height: '100vh',
-            background: `url(${previewImage}) center  no-repeat`,
+            background: `url(${previewImage})  center no-repeat`,
           }}
         >
           <Rnd
