@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const sendMail = async (userId, customerBudget, sellingOperation) => {
+const sendMail = async (userId, customerData, sellingOperation) => {
   const EMAIL_USERNAME = process.env.SENDER_EMAIL_ADDRESS;
   const nodemailerSettings = {
     host: 'smtp.gmail.com',
@@ -19,22 +19,25 @@ const sendMail = async (userId, customerBudget, sellingOperation) => {
   };
 
   const transporter = nodemailer.createTransport(nodemailerSettings);
-
   const options = {
     from: `"Berwaz Gallery" <${process.env.SENDER_EMAIL_ADDRESS}>`,
-    to: 'Mu7ammadabed@gmail.com',
+    to: customerData.email,
     subject: `Berwaz Gallery`,
-    html: `<h4 style="text-align : left">Dear ${userId}</h4>
-          <p style="text-align : left; margin-bottom:0px;">Thank you for your purchase from Berwaz Gallery
-          </p> 
-          <p style="text-align : left; margin-top:0px;">ORDER ID: ${
+    html: `<h3 style="text-align : left">Dear ${customerData.first_name} ${
+      customerData.last_name
+    }</h3>
+          <h2 style="text-align : left; margin-bottom:0px;">Thank you for your purchase from Berwaz Gallery
+          </h2> 
+          <h3 style="text-align : left; margin-top:0px;">ORDER ID: ${
             sellingOperation.id
-          }</b></p>
-          <p style="text-align : left; margin-top:0px;">ORDER date: ${new Date(
+          }</b></h3>
+          <h3 style="text-align : left; margin-top:0px;">ORDER DATE: ${new Date(
             sellingOperation.selling_date,
-          )}</b></p>
-          <p style="text-align : left; margin-top:0px;">Your New Budget: ${customerBudget}</b></p>
-          <p style="text-align : left">Berwaz Team</p>
+          )}</b></h3>
+          <h3 style="text-align : left; margin-top:0px;">Your New Budget: ${
+            customerData.budget
+          }</b></h3>
+          <h2 style="text-align : left">Berwaz Team</h2>
    `,
   };
 

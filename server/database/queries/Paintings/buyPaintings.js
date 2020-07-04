@@ -23,7 +23,7 @@ const updateBudgets = async (
 
     const customerBudget = await connection.query({
       text:
-        'UPDATE customer SET budget = budget-$2 WHERE id = $1 RETURNING budget;',
+        'UPDATE customer SET budget = budget-$2 WHERE id = $1 RETURNING first_name, last_name, email, budget;',
       values: [customerId, paintingPrice],
     });
 

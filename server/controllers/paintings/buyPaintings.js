@@ -38,7 +38,7 @@ const buyPaintings = async (req, res, next) => {
             paintingPrice,
           );
           const {
-            customerBudget: { rows: newCustomerBudget },
+            customerBudget: { rows: customerData },
             artistBudget: { rows: artistBudget },
             paintingCounter: { rows: paintingCounter },
             adminBudget: { rows: adminBudget },
@@ -47,17 +47,13 @@ const buyPaintings = async (req, res, next) => {
           res.status(200).json({
             statusCode: 200,
             message: `Painting with id = ${paintingId} was added succesfully`,
-            customerNewBudget: newCustomerBudget[0].budget,
+            customerNewBudget: customerData[0].budget,
             artistNewBudget: artistBudget[0].budget,
             adminNewBudget: adminBudget[0].budget,
             paintingSellingCounter: paintingCounter[0].count_sold,
             sellingDate: paintingUser[0].selling_date,
           });
-          await sendMail(
-            customerId,
-            newCustomerBudget[0].budget,
-            paintingUser[0],
-          );
+          await sendMail(customerId, customerData[0], paintingUser[0]);
         } else {
           res.status(400).json({
             statusCode: 400,
