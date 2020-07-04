@@ -6,8 +6,8 @@ const registerSchema = object({
   confirmPassword: string()
     .oneOf([ref('password'), null], 'Passwords must match')
     .required(),
-  firstName: string().min(3).required(),
-  lastName: string().min(3).required(),
+  firstName: string().min(2).max(20).required(),
+  lastName: string().min(2).max(20).required(),
   role: string().oneOf(['artist', 'customer']).required(),
   customized: boolean(),
 });
