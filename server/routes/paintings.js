@@ -9,7 +9,6 @@ const {
   getPaintingInfo,
 } = require('../controllers');
 const { verifyArtist, verifyUser } = require('../controllers/middleware');
-const sendMail = require('../controllers/middleware/mail');
 
 router.get('/paintings/:category', getPaintings);
 router.get('/paintings/:artistId', getArtistPaints);
@@ -22,5 +21,4 @@ router.get('/paintingsArtist/:artistId', getArtistPaints);
 
 router.post('/painting', verifyArtist, addPainting);
 
-router.post('/mail', sendMail);
 module.exports = router;
