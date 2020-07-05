@@ -112,8 +112,11 @@ const AddProduct = ({ showForm, hideForm }) => {
           <div className="cat-div">
             <span>نوع اللوحة : </span>
             <Select style={{ width: 120 }} onChange={handleCategories}>
-              <Option value="jack">Jack</Option>
-              <Option value="lucy">Lucy</Option>
+              <Option value="nature">طبيعة</Option>
+              <Option value="islamic">اسلامي</Option>
+              <Option value="sky">سماء</Option>
+              <Option value="culture">ثقافة</Option>
+              <Option value="noton">غير ذلك</Option>
             </Select>
           </div>
           <Form.Item
