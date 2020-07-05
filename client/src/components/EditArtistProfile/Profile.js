@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import Axios from 'axios';
 import { message, Button } from 'antd';
-
 import EditProfileForm from './index';
 import AuthorizationContext from '../../Contexts/AuthorizationContext';
 
@@ -20,6 +19,7 @@ function Profile({ match }) {
     }
   };
   const hideForm = () => setShowForm(false);
+
   useEffect(() => {
     getArtistProfile(artistId);
   }, []);
@@ -40,6 +40,8 @@ function Profile({ match }) {
           profileData={profileData}
           showForm={showForm}
           hideForm={hideForm}
+          updateProfile={getArtistProfile}
+          artistId={artistId}
         />
       )}
     </>
