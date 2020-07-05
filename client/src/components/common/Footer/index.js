@@ -37,7 +37,7 @@ const Footer = () => {
             </div>
             <div className="icon-3">
               <a
-                href="mailto:berwaz@gmail.com"
+                href="mailto:berwaz.g@gmail.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
