@@ -3,7 +3,7 @@ import Axios from 'axios';
 import { Form, Input, Button, message, Spin, Alert, Radio } from 'antd';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
 import * as ROUTES from '../../constants/routes';
 import './style.css';
 
@@ -20,9 +20,10 @@ const Login = (props) => {
         password,
         role,
       });
-      const { history } = props;
+      const { history, setLogged } = props;
       message.success('تم تسجيل الدخول بنجاح');
       setLoaded(false);
+      setLogged(true);
       history.push(ROUTES.HOME_PAGE);
     } catch (err) {
       let e;
@@ -76,8 +77,8 @@ const Login = (props) => {
             ]}
           >
             <Input
-              prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="الإيميل"
+              prefix={<AiOutlineMail className="site-form-item-icon" />}
+              placeholder="البريد الالكتروني"
               className="form-input"
             />
           </Form.Item>
@@ -91,7 +92,7 @@ const Login = (props) => {
             ]}
           >
             <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
+              prefix={<AiOutlineLock className="site-form-item-icon" />}
               type="password"
               placeholder="كلمة المرور"
               className="form-input"
@@ -121,6 +122,7 @@ Login.propTypes = {
     push: propTypes.func.isRequired,
     goBack: propTypes.func.isRequired,
   }).isRequired,
+  setLogged: propTypes.func.isRequired,
 };
 
 export default Login;
