@@ -57,7 +57,12 @@ function PaintingsDetail({ match }) {
                 التصنيف <strong>{painting.category}</strong>
               </h3>
               <Link className="artistName" to={`/artist/${painting.artist_id}`}>
-                {`ل  ${painting.first_name} ${painting.last_name} `}
+                <h3>
+                  الفنان
+                  <strong>
+                    {`${painting.first_name} ${painting.last_name} `}
+                  </strong>
+                </h3>
               </Link>
               <br />
 
