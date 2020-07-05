@@ -1,21 +1,30 @@
 @import "~antd/dist/antd.css";
 
 .container {
-  width: 80vw;
+  width: 80%;
   margin: 5% auto;
 }
 .search__category {
   width: 80%;
   margin: 0 auto;
 }
+.ant-radio-group{
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap;
+}
 .container__paintings {
+  width: 95%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  margin: 0 auto;
-  padding: 2% 0;
+  margin: 30px auto;
+  padding: 2% ;
   justify-content: space-around;
-  background-color: rgb(240, 234, 234);
+  border: 2px solid #bbb;
+}
+.container__paintings img{
+  padding: 10px;
 }
 .ant-pagination-rtl {
   margin-top: 10px !important;
@@ -70,4 +79,17 @@
 .deleteBtn {
   margin-left: 200px;
   margin-top: 20px;
+}
+.paintings{
+  margin-top: 20px;
+}
+.ant-pagination-item-active a{
+  color: white !important;
+}
+@media  (max-width: 600px) {
+  .container__paintings {
+    width: 100%;
+    border:none;
+  }
+
 }

@@ -25,12 +25,6 @@
     margin-bottom: 20px;
     padding:0px 20px ;
 }
-.profile-container .paintings{
-    margin-top: 20px;
-}
-.profile-container .ant-pagination-item-active a{
-    color: white !important;
-}
 .profile-container .social_media{
     font-size: 2rem;
     padding: 0px 10px;
