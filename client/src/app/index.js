@@ -60,9 +60,11 @@ function App() {
   useEffect(() => {
     getAuth();
   }, [logged]);
+
   const logout = async () => {
     try {
       await axios.get('api/v1/logout');
+      setUser({});
       setLogged(false);
       setCustomerAuth(false);
       setArtistAuth(false);

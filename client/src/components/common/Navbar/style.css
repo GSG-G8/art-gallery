@@ -12,6 +12,7 @@
 .nav-right {
   width: 70px;
   height: 70px;
+  align-items: flex-start;
 }
 
 .nav-logo {
@@ -23,19 +24,26 @@
   margin-top: 20px;
 }
 
-.nav-login-btn {
+.nav-logout-btn {
   background-color: #955f83;
   color: white;
   border: #955f83;
   text-align: center;
 }
 
-.nav-link {
+.sign-up-link {
+  color: #955f83;
+  width: 100px;
+}
+
+.login-link {
   color: #955f83;
   width: 100px;
 }
 
 .cart-icon {
-  margin-right: 20px;
+  margin-left: 25px;
+  margin-right: 10px;
   color: #955f83;
+  font-size: 25px;
 }
