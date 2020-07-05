@@ -15,6 +15,7 @@ import 'antd/dist/antd.css';
 
 import Login from '../components/Login';
 import Register from '../components/Register';
+import ProfilePage from '../containers/ProfilePage';
 
 function App() {
   const [user, setUser] = useState({});
@@ -29,7 +30,7 @@ function App() {
         data: {
           data: { id, role },
         },
-      } = await axios.get('api/v1/is-auth');
+      } = await axios.get('/api/v1/is-auth');
       setUser({ id, role });
       switch (role) {
         case 'customer':
@@ -107,9 +108,7 @@ function App() {
               <Route
                 exact
                 path={ROUTES.ARTIST_PAGE}
-                render={(props) => (
-                  <h1>Welcome to Artist {props.match.params.artistId} Page</h1>
-                )}
+                render={(props) => <ProfilePage {...props} />}
               />
 
               {customerAuth ? (
