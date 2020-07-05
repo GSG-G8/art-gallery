@@ -15,6 +15,7 @@ import 'antd/dist/antd.css';
 
 import Login from '../components/Login';
 import Register from '../components/Register';
+import LandingPage from '../containers/LandingPage';
 import ProfilePage from '../containers/ProfilePage';
 
 function App() {
@@ -84,7 +85,7 @@ function App() {
               <Route
                 exact
                 path={ROUTES.HOME_PAGE}
-                render={() => <h1>Home Page</h1>}
+                render={() => <LandingPage />}
               />
               <Route
                 exact
