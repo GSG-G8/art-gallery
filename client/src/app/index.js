@@ -48,6 +48,10 @@ function App() {
           setCustomerAuth(false);
           setRedirect(false);
           break;
+        case 'admin':
+          setLogged(true);
+          setRedirect(false);
+          break;
         default:
           setLogged(false);
           setArtistAuth(false);
@@ -66,7 +70,7 @@ function App() {
   }, [logged]);
   const logout = async () => {
     try {
-      await axios.get('api/v1/logout');
+      await axios.get('/api/v1/logout');
       setLogged(false);
       setCustomerAuth(false);
       setArtistAuth(false);
