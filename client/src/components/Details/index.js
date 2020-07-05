@@ -47,7 +47,7 @@ function PaintingsDetail({ match }) {
   return (
     <>
       {painting ? (
-        <div className="container">
+        <div className="containerD">
           <div className="container__details">
             <div className="painting">
               <h1>{painting.title}</h1>
@@ -89,7 +89,10 @@ function PaintingsDetail({ match }) {
                     <Select.Option value={e}>{e}</Select.Option>
                   ))}
                 </Select>
-                <strong className="price">{painting.property[size]}$ </strong>
+                <strong className="price">
+                  {painting.property[size || Object.keys(painting.property)[0]]}
+                  $
+                </strong>
                 <br />
                 <AuthorizationContext.Consumer>
                   {({ user }) => (
@@ -98,7 +101,10 @@ function PaintingsDetail({ match }) {
                       onClick={() => {
                         if (user.role === 'customer') {
                           addPaintingToCart(painting.id);
-                        } else if (user.role === 'customer' || 'admin') {
+                        } else if (
+                          user.role === 'artist' ||
+                          user.role === 'admin'
+                        ) {
                           message.warn(
                             'عليك تسجيل الدخول بحساب مشترٍ لتتم العملية'
                           );

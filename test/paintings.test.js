@@ -23,7 +23,7 @@ describe('Get all Paintings', () => {
 });
 
 describe('Get artist paints by id', () => {
-  test('Route /paintingsArtist/1 status 200, json header, data[0].title = طائر الاوز ', (done) => {
+  test('Route /paintingsArtist/1 status 200, json header, data[0].title = تراث ', (done) => {
     return request(app)
       .get('/api/v1/paintingsArtist/1')
       .expect(200)
@@ -31,7 +31,7 @@ describe('Get artist paints by id', () => {
       .end((err, res) => {
         if (err) return done(err);
         const { data } = res.body;
-        expect(data[0].title).toBe('طائر الاوز');
+        expect(data[0].title).toBe('تراث');
         done();
       });
   });

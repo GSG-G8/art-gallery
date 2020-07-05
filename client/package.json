@@ -18,7 +18,11 @@
     "react-icons": "^3.10.0",
     "react-rnd": "^10.1.10",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "less": "^3.11.1",
+    "less-loader": "^5.0.0",
+    "@umijs/plugin-antd": "^0.6.0",
+    "babel-plugin-import": "^1.13.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -29,8 +33,6 @@
     "lint-fix": "eslint src/ --fix"
   },
   "devDependencies": {
-    "@umijs/plugin-antd": "^0.6.0",
-    "babel-plugin-import": "^1.13.0",
     "eslint": "^6.6.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-plugin-import": "^2.20.1",
@@ -38,8 +40,6 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
-    "less": "^3.11.1",
-    "less-loader": "^5.0.0",
     "prettier": "^2.0.2"
   },
   "eslintConfig": {
