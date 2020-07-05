@@ -1,6 +1,6 @@
 .main-navbar-container {
   width: 100%;
-  background-color: #fff1f3;
+  background-color: #f3e9ea;
 }
 .navbar-container {
   margin: auto;
@@ -33,6 +33,7 @@
 .nav-link {
   color: #955f83;
   width: 100px;
+  margin-top: 7px;
 }
 
 .cart-icon {

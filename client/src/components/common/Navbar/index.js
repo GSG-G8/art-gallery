@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+// import { faShoppingCart } from 'react-icons/fa';
 import * as ROUTES from '../../../constants/routes';
 import navLogo from '../../../assets/images/berwaz.png';
 import './style.css';
@@ -13,11 +12,7 @@ const NavbarComponent = () => {
       <div className="navbar-container">
         <div className="nav-left">
           <Link to={ROUTES.CART_PAGE}>
-            <FontAwesomeIcon
-              className="cart-icon"
-              icon={faShoppingCart}
-              size="lg"
-            />
+            <faShoppingCart className="cart-icon" size="lg" />
           </Link>
           <Link to={ROUTES.SIGNUP_PAGE} className="nav-link">
             مستخدم جديد
