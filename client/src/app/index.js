@@ -16,6 +16,7 @@ import 'antd/dist/antd.css';
 import Login from '../components/Login';
 import Register from '../components/Register';
 import LandingPage from '../containers/LandingPage';
+import ProfilePage from '../containers/ProfilePage';
 
 function App() {
   const [user, setUser] = useState({});
@@ -108,9 +109,7 @@ function App() {
               <Route
                 exact
                 path={ROUTES.ARTIST_PAGE}
-                render={(props) => (
-                  <h1>Welcome to Artist {props.match.params.artistId} Page</h1>
-                )}
+                render={(props) => <ProfilePage {...props} />}
               />
 
               {customerAuth ? (

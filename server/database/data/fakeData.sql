@@ -22,10 +22,10 @@ INSERT INTO customer
     (first_name,last_name,email,password,budget)
 VALUES
     ('Lina', 'Ebeid', 'lina@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK', 300.44),
-    ('Muhammad', 'Abed', 'mu95@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK', 200.24),
+    ('Muhammad', 'Abdulhadi', 'mu7ammadabed@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK', 1000.00),
     ('Ahmed', 'Safi', 'ahmed@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK', 200.31),
     ('Rawan', 'Abudahrouj', 'rwan@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK', 600.44),
-    ('Abeer', 'Karam', 'abeer@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK', 1000.64);
+    ('Abeer', 'Karam', 'abeer@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK', 250.00);
 
 INSERT INTO painting
     (title,img,description,category,property,count_sold,artist_id)
