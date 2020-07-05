@@ -18,6 +18,7 @@ const categories = [
   { name: ['nature', 'طبيعة'] },
   { name: ['islamic', 'فن إسلامي'] },
   { name: ['all', 'الكل'] },
+  { name: ['other', 'غير ذلك'] },
 ];
 
 function PaintingContainer() {
@@ -92,7 +93,7 @@ function PaintingContainer() {
     minPrice: minPriceOfPainting(property),
   });
 
-  const minPriceFilter = ({ minPrice }) => minPrice < price;
+  const minPriceFilter = ({ minPrice }) => minPrice <= price;
 
   const categoryFilter = ({ category: paintCategory }) => {
     if (category === 'all') return true;

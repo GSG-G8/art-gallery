@@ -95,8 +95,8 @@ function PaintingsSection({ paintings, deletePainting }) {
                                 if (user.role === 'customer') {
                                   addPaintingToCart(painting.id);
                                 } else if (
-                                  user.role === 'customer' ||
-                                  'admin'
+                                  user.role === 'artist' ||
+                                  user.role === 'admin'
                                 ) {
                                   message.warn(
                                     'عليك تسجيل الدخول بحساب مشترٍ لتتم العملية'
