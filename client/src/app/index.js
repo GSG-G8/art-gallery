@@ -65,7 +65,7 @@ function App() {
   }, [logged]);
   const logout = async () => {
     try {
-      await axios.get('api/v1/logout');
+      await axios.get('/api/v1/logout');
       setLogged(false);
       setCustomerAuth(false);
       setArtistAuth(false);
