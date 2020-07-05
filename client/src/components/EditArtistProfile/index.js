@@ -1,6 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { Modal, Form, Input, Radio } from 'antd';
+import Axios from 'axios';
 
 function EditProfileForm({ profileData, showForm, hideForm }) {
   const {
@@ -10,6 +11,23 @@ function EditProfileForm({ profileData, showForm, hideForm }) {
     bio,
   } = profileData;
   const formRef = React.createRef();
+
+  const updateProfile = async (values) => {
+    const { mobileNu, custome, biog, facebook, instagram } = values;
+    console.log({ mobileNu, custome, biog, facebook, instagram }, 'form');
+
+    try {
+      const { data } = await Axios.patch('/api/v1/artist', {
+        mobileNo: mobileNu,
+        customized: custome,
+        bio: biog,
+        socialMediaAccounts: [facebook, instagram],
+      });
+      console.log({ data });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -24,16 +42,16 @@ function EditProfileForm({ profileData, showForm, hideForm }) {
         <Form
           ref={formRef}
           initialValues={{
-            mobileNo,
-            customized,
-            bio,
+            mobileNu: mobileNo,
+            custome: customized,
+            biog: bio,
             facebook: accounts[0],
             instagram: accounts[1],
           }}
-          onFinish={(value) => console.log(value)}
+          onFinish={updateProfile}
         >
           <Form.Item
-            name="mobileNo"
+            name="mobileNu"
             label="رقم الجوال"
             rules={[
               {
@@ -44,13 +62,13 @@ function EditProfileForm({ profileData, showForm, hideForm }) {
           >
             <Input />
           </Form.Item>
-          <Form.Item name="customized" label="هل تقوم بتنفيذ أعمال بحسب الطلب">
+          <Form.Item name="custome" label="هل تقوم بتنفيذ أعمال بحسب الطلب">
             <Radio.Group>
               <Radio value>نعم</Radio>
               <Radio value={false}>لا</Radio>
             </Radio.Group>
           </Form.Item>
-          <Form.Item name="bio" label="أضف نبذة شخصية">
+          <Form.Item name="biog" label="أضف نبذة شخصية">
             <Input />
           </Form.Item>
           <Form.Item

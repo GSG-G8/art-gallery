@@ -2,6 +2,7 @@ const { updateArtistQuery } = require('../../database/queries');
 const { updateArtistSchema } = require('../../utils/validation');
 
 const updateArtist = async (req, res, next) => {
+  console.log(req.body);
   try {
     const { id: artistId } = req.user;
     const {
@@ -25,6 +26,7 @@ const updateArtist = async (req, res, next) => {
     }
   } catch (err) {
     if (err.errors) {
+      console.log(err.errors);
       res.status(400).json({ statusCode: 400, message: err.errors });
     } else {
       next(err);
