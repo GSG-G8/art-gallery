@@ -13,8 +13,9 @@ import AuthorizationContext from '../Contexts/AuthorizationContext';
 import 'antd/dist/antd.css';
 import Login from '../components/Login';
 import Register from '../components/Register';
-import LandingPage from '../containers/LandingPage';
+import Painting from '../components/Details';
 import ProfilePage from '../containers/ProfilePage';
+import LandingPage from '../containers/LandingPage';
 
 function App() {
   const [user, setUser] = useState({});
@@ -110,6 +111,10 @@ function App() {
                 exact
                 path={ROUTES.ARTIST_PAGE}
                 render={(props) => <ProfilePage {...props} />}
+              />
+              <Route
+                path={ROUTES.ART_PAGE}
+                render={(props) => <Painting {...props} />}
               />
 
               {customerAuth ? (

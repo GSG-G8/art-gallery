@@ -112,10 +112,7 @@ function PaintingsSection({ paintings, deletePainting }) {
                         )}
                       </AuthorizationContext.Consumer>
                       <br />
-                      <Link
-                        className="moreBtn"
-                        to={`/paintings/${painting.id}`}
-                      >
+                      <Link className="moreBtn" to={`/art/${painting.id}`}>
                         {' '}
                         ...للمزيد
                       </Link>

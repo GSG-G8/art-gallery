@@ -1,5 +1,7 @@
-.dargContainer{
-  width: 40vw;
-  margin: 2% auto;
-  border: 1px solid black;
+.dargContainer {
+  height: 100vh;
+}
+.devConta {
+  height: 80%;
+  background-size: cover;
 }
