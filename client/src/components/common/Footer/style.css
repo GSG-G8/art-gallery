@@ -12,6 +12,7 @@
 .logo-container {
   width: 30%;
   margin-right: 60px;
+  margin-top: 20px;
 }
 
 .logo-container img {
@@ -27,6 +28,7 @@
 .contact-container {
   width: 30%;
   margin-right: 150px;
+  margin-top: 40px;
 }
 
 .contact-container .contact-title {
@@ -51,6 +53,7 @@
   display: flex;
   justify-content: space-around;
   width: 60%;
+  margin-top: 20px;
 }
 
 .copy-right p {
@@ -58,6 +61,7 @@
 }
 
 .follow-container {
+  margin-top: 40px;
   width: 30%;
 }
 
@@ -108,4 +112,8 @@
   align-items: center;
   width: 170px;
   margin-left: 255px;
+}
+
+.icons {
+  color: #636d73;
 }

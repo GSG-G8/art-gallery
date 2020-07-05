@@ -28,11 +28,11 @@ const Footer = () => {
           <h3 className="contact-title">تواصل معنا</h3>
           <div className="contact-icons">
             <div className="icon-1">
-              <FaMapMarker color="#636D73" size="1.2em" />
+              <FaMapMarker className="icons" size="1.2em" />
               <p>غزة - فلسطين</p>
             </div>
             <div className="icon-2">
-              <FaPhone color="#636D73" size="1.2em" />
+              <FaPhone className="icons" size="1.2em" />
               <p>+972-000000</p>
             </div>
             <div className="icon-3">
@@ -41,9 +41,9 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaEnvelope color="#636D73" size="1.2em" />
+                <FaEnvelope className="icons" size="1.2em" />
               </a>
-              <p>berwaz@gmail.com</p>
+              <p>berwaz.g@gmail.com</p>
             </div>
             <div className="icon-4">
               <a
@@ -51,7 +51,7 @@ const Footer = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaSkype color="#636D73" size="1.4em" />
+                <FaSkype className="icons" size="1.4em" />
               </a>
               <p>berwaz</p>
             </div>
@@ -65,21 +65,21 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaTwitter color="#636D73" size="2em" />
+              <FaTwitter className="icons" size="2em" />
             </a>
             <a
               href="https://pinterest.com"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaPinterest color="#636D73" size="2em" />
+              <FaPinterest className="icons" size="2em" />
             </a>
             <a
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaInstagram color="#636D73" size="2em" />
+              <FaInstagram className="icons" size="2em" />
             </a>
 
             <a
@@ -87,14 +87,14 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaFacebook color="#636D73" size="2em" />
+              <FaFacebook className="icons" size="2em" />
             </a>
             <a
               href="https://www.behance.net"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaBehance color="#636D73" size="2em" />
+              <FaBehance className="icons" size="2em" />
             </a>
           </div>
         </div>
@@ -103,7 +103,7 @@ const Footer = () => {
         <p>سياسات المتجر</p>
         <p> الأسئلة الشائعة</p>
         <p> فريق العمل</p>
-        <p> ‫©‬ ‫‪2020‬‬ ‫‪All‬‬ ‫‪rights‬‬ ‫‪reserved.BARWAZ‬‬</p>
+        <p>‫‪2020‬‬ ‫‪All‬‬ ‫‪rights‬‬ ‫‪reserved.BERWAZ‬‬ &copy;</p>
       </div>
     </div>
   );
