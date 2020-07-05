@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'antd';
-// import { faShoppingCart } from 'react-icons/fa';
+import { faShoppingCart } from 'react-icons/fa';
 import * as ROUTES from '../../../constants/routes';
 import navLogo from '../../../assets/images/berwaz.png';
 import './style.css';
@@ -12,13 +11,13 @@ const NavbarComponent = () => {
       <div className="navbar-container">
         <div className="nav-left">
           <Link to={ROUTES.CART_PAGE}>
-            <faShoppingCart className="cart-icon" size="lg" />
+            <faShoppingCart className="cart-icon" />
           </Link>
           <Link to={ROUTES.SIGNUP_PAGE} className="nav-link">
             مستخدم جديد
           </Link>
-          <Link to={ROUTES.LOGIN_PAGE}>
-            <Button className="nav-login-btn">تسجيل الدخول</Button>
+          <Link to={ROUTES.LOGIN_PAGE} className="btn btn-primary">
+            تسجيل الدخول
           </Link>
         </div>
         <div className="nav-right">
