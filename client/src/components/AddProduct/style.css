@@ -1,6 +1,6 @@
 .addProduct-form{
     width: 50%;
-    margin:80px auto;
+    margin: auto;
 }
 .addProduct-form .title-add{
     color:#955F83;
@@ -9,5 +9,8 @@
     margin-bottom: 10px;
 }
 .addProduct-form .ant-btn-primary{
+    color: aliceblue;
+}
+.ant-modal-wrap-rtl .ant-modal-footer button + button {
     color: aliceblue;
 }

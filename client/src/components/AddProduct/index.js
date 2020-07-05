@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
+import propTypes from 'prop-types';
 import {
   Form,
   Input,
@@ -9,6 +10,7 @@ import {
   Select,
   message,
   Upload,
+  Modal,
 } from 'antd';
 import {
   BsUpload,
@@ -22,7 +24,8 @@ import './style.css';
 
 const { Option } = Select;
 
-const AddProduct = () => {
+// eslint-disable-next-line react/prop-types
+const AddProduct = ({ showForm, hideForm }) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState();
   const [paintingImg, setPaintingImg] = useState();
@@ -34,6 +37,7 @@ const AddProduct = () => {
 
   const onFinish = async ({ title, description, size, price }) => {
     const formData = new FormData();
+
     formData.append('paintingImg', paintingImg);
     formData.append(
       'data',
@@ -56,109 +60,124 @@ const AddProduct = () => {
       setLoaded(false);
     }
   };
+  const formRef = React.createRef();
+
   return (
     <div>
-      <Form name="add_product" className="addProduct-form" onFinish={onFinish}>
-        <h2 className="title-add">اضافة لوحة</h2>
-        <Form.Item
-          name="title"
-          rules={[
-            {
-              required: true,
-              message: 'رجاءً قم بادخال اسم اللوحة   !',
-            },
-          ]}
+      <Modal
+        visible={showForm}
+        title="اضافة لوحة "
+        okText="اضافة اللوحة"
+        cancelText="إلغاء"
+        onCancel={hideForm}
+        onOk={() => formRef.current.submit()}
+      >
+        <Form
+          ref={formRef}
+          name="add_product"
+          className="addProduct-form"
+          onFinish={onFinish}
         >
-          <Input
-            prefix={<MdSubtitles />}
-            placeholder="اسم اللوحة"
-            className="form-input"
-          />
-        </Form.Item>
-        <Form.Item
-          name="description"
-          rules={[
-            {
-              required: true,
-              message: 'رجاءً قم بادخال تفاصيل اللوحة   !',
-            },
-          ]}
-        >
-          <Input
-            prefix={<MdDescription />}
-            placeholder="تفاصيل اللوحة"
-            className="form-input"
-          />
-        </Form.Item>
-        <div className="cat-div">
-          <span>نوع اللوحة : </span>
-          <Select style={{ width: 120 }} onChange={handleCategories}>
-            <Option value="jack">Jack</Option>
-            <Option value="lucy">Lucy</Option>
-          </Select>
-        </div>
-        <Form.Item
-          name="size"
-          rules={[
-            {
-              required: true,
-              message: 'رجاءً قم بادخال حجم اللوحة   !',
-            },
-          ]}
-        >
-          <Input
-            prefix={<MdPhotoSizeSelectLarge />}
-            placeholder="حجم اللوحة"
-            className="form-input"
-          />
-        </Form.Item>
-        <Form.Item
-          name="price"
-          rules={[
-            {
-              required: true,
-              message: 'رجاءً قم بادخال سعر اللوحة   !',
-            },
-          ]}
-        >
-          <Input
-            prefix={<RiPriceTag2Line />}
-            placeholder="سعر اللوحة"
-            className="form-input"
-          />
-        </Form.Item>
-        <Form.Item name="paintingImg">
-          <Upload
-            type="file"
-            beforeUpload={(file) => {
-              setPaintingImg(file);
-              return false;
-            }}
-            onRemove={() => setPaintingImg(null)}
-            value={paintingImg}
+          <h2 className="title-add">اضافة لوحة</h2>
+          <Form.Item
+            name="title"
+            rules={[
+              {
+                required: true,
+                message: 'رجاءً قم بادخال اسم اللوحة   !',
+              },
+            ]}
           >
-            <Button>
-              <BsUpload /> تحميل صورة اللوحة
-            </Button>
-          </Upload>
-        </Form.Item>
+            <Input
+              prefix={<MdSubtitles />}
+              placeholder="اسم اللوحة"
+              className="form-input"
+            />
+          </Form.Item>
+          <Form.Item
+            name="description"
+            rules={[
+              {
+                required: true,
+                message: 'رجاءً قم بادخال تفاصيل اللوحة   !',
+              },
+            ]}
+          >
+            <Input
+              prefix={<MdDescription />}
+              placeholder="تفاصيل اللوحة"
+              className="form-input"
+            />
+          </Form.Item>
+          <div className="cat-div">
+            <span>نوع اللوحة : </span>
+            <Select style={{ width: 120 }} onChange={handleCategories}>
+              <Option value="jack">Jack</Option>
+              <Option value="lucy">Lucy</Option>
+            </Select>
+          </div>
+          <Form.Item
+            name="size"
+            rules={[
+              {
+                required: true,
+                message: 'رجاءً قم بادخال حجم اللوحة   !',
+              },
+            ]}
+          >
+            <Input
+              prefix={<MdPhotoSizeSelectLarge />}
+              placeholder="حجم اللوحة"
+              className="form-input"
+            />
+          </Form.Item>
+          <Form.Item
+            name="price"
+            rules={[
+              {
+                required: true,
+                message: 'رجاءً قم بادخال سعر اللوحة   !',
+              },
+            ]}
+          >
+            <Input
+              prefix={<RiPriceTag2Line />}
+              placeholder="سعر اللوحة"
+              className="form-input"
+            />
+          </Form.Item>
+          <Form.Item name="paintingImg">
+            <Upload
+              type="file"
+              beforeUpload={(file) => {
+                setPaintingImg(file);
+                return false;
+              }}
+              onRemove={() => setPaintingImg(null)}
+              value={paintingImg}
+            >
+              <Button>
+                <BsUpload /> تحميل صورة اللوحة
+              </Button>
+            </Upload>
+          </Form.Item>
 
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            {loaded ? (
-              <span>
-                <Spin />
-                جاري التحميل
-              </span>
-            ) : (
-              'اضافة لوحة '
-            )}
-          </Button>
-        </Form.Item>
-        {error && <Alert message={error} type="error" />}
-      </Form>
+          {loaded && (
+            <span>
+              <Spin />
+              جاري التحميل
+            </span>
+          )}
+          {error && <Alert message={error} type="error" />}
+        </Form>
+      </Modal>
     </div>
   );
+};
+AddProduct.propTypes = {
+  profileData: propTypes.shape({
+    title: propTypes.string,
+  }).isRequired,
 };
 
 export default AddProduct;

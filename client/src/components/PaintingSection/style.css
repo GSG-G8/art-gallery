@@ -17,7 +17,10 @@
   justify-content: space-around;
   background-color: rgb(240, 234, 234);
 }
+.ant-pagination-rtl {
+  margin-top: 10px !important;
 
+}
 .flip-card {
   background-color: transparent;
   border: 1px solid #f1f1f1;

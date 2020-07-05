@@ -10,7 +10,7 @@ import {
   message,
 } from 'antd';
 import PaintingSection from './PaintingsSection.js';
-import './index.css';
+import './style.css';
 
 const categories = [
   { name: ['hertage', 'تراث'] },

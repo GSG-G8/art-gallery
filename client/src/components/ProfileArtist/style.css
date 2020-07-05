@@ -1,0 +1,43 @@
+.profile-container{
+    width: 80%;
+    margin:20px auto;
+    color: #955F83;
+}
+.profile-container .header-profile{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+}
+.profile-container .right-header p {
+    padding-right: 10px;
+}
+.profile-container .right-header p span {
+    color: #2D616C;
+}
+
+.profile-container .ant-btn-rtl {
+    margin-top: 20px;
+    background-color: #955F83;
+    color: white;
+}
+.profile-container .circle-img{
+    border-radius: 50%;
+    margin-bottom: 20px;
+    padding:0px 20px ;
+}
+.profile-container .paintings{
+    margin-top: 20px;
+}
+.profile-container .ant-pagination-item-active a{
+    color: white !important;
+}
+.profile-container .social_media{
+    font-size: 2rem;
+    padding: 0px 10px;
+}
+.profile-container .social_media .facebook{
+    color: rgb(26, 56, 190);
+}
+.profile-container .social_media .facebook:hover{
+    opacity: .8;
+}
