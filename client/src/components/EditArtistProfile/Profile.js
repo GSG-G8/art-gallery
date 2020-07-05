@@ -14,11 +14,12 @@ function Profile({ match }) {
   const getArtistProfile = async (id) => {
     try {
       const { data: artistData } = await Axios.get(`/api/v1//profile/${id}`);
-      setProfileData(artistData.data);
+      setProfileData(artistData.data[0]);
     } catch (err) {
       message.error('تعذر جلب بيانات الفنان');
     }
   };
+  const hideForm = () => setShowForm(false);
   useEffect(() => {
     getArtistProfile(artistId);
   }, []);
@@ -34,7 +35,13 @@ function Profile({ match }) {
             );
         }}
       </AuthorizationContext.Consumer>
-      {showForm && <EditProfileForm profileData={profileData} />}
+      {showForm && (
+        <EditProfileForm
+          profileData={profileData}
+          showForm={showForm}
+          hideForm={hideForm}
+        />
+      )}
     </>
   );
 }
