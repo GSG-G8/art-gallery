@@ -26,14 +26,14 @@ function Profile({ match }) {
   return (
     <>
       <AuthorizationContext.Consumer>
-        {({ user }) => {
-          if (user.role === 'artist' && user.id === +artistId)
-            return (
-              <Button onClick={() => setShowForm(true)}>
-                تعديل بيانات الحساب
-              </Button>
-            );
-        }}
+        {({ user }) =>
+          user.role === 'artist' &&
+          user.id === +artistId && (
+            <Button onClick={() => setShowForm(true)}>
+              تعديل بيانات الحساب
+            </Button>
+          )
+        }
       </AuthorizationContext.Consumer>
       {showForm && (
         <EditProfileForm

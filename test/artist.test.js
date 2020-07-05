@@ -48,10 +48,10 @@ describe('Get Artist By Id', () => {
 });
 
 describe('Admin Activation', () => {
-  test('Route /admin/artist status 200, json header,get all artist ', (done) => {
+  test('Route/artists status 200, json header,get all artist ', (done) => {
     const token = `token=${process.env.ADMIN_TOKEN}`;
     return request(app)
-      .get('/api/v1/admin/artist')
+      .get('/api/v1/artists')
       .expect(200)
       .expect('Content-Type', /json/)
       .set('Cookie', token)
