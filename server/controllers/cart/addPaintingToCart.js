@@ -7,12 +7,12 @@ const addPaintingToCart = async (req, res, next) => {
       body: { paintingId },
     } = req;
     if (customerId > 0 && paintingId > 0) {
-      const { rows: checkrows } = await checkCartQuery({
+      const { rows } = await checkCartQuery({
         customerId,
         paintingId,
       });
-      if (checkrows.length === 0) {
-        await postCartQuery(req.body);
+      if (rows.length === 0) {
+        await postCartQuery({ customerId, paintingId });
         res.status(201).json({
           StatusCode: 201,
           data: {
