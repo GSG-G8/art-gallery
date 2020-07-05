@@ -11,9 +11,10 @@ import * as ROUTES from '../constants/routes';
 import LogoutContext from '../Contexts/LogoutContext';
 import AuthorizationContext from '../Contexts/AuthorizationContext';
 import 'antd/dist/antd.css';
-import NavbarComponent from '../components/common/Navbar';
 import Login from '../components/Login';
 import Register from '../components/Register';
+import LandingPage from '../containers/LandingPage';
+import ProfilePage from '../containers/ProfilePage';
 
 function App() {
   const [user, setUser] = useState({});
@@ -28,7 +29,7 @@ function App() {
         data: {
           data: { id, role },
         },
-      } = await axios.get('api/v1/is-auth');
+      } = await axios.get('/api/v1/is-auth');
       setUser({ id, role });
       switch (role) {
         case 'customer':
@@ -76,16 +77,13 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Switch>
-          <Route exact path={ROUTES.HOME_PAGE} component={NavbarComponent} />
-        </Switch>
         <AuthorizationContext.Provider value={{ user }}>
           <LogoutContext.Provider value={{ logout }}>
             <Switch>
               <Route
                 exact
                 path={ROUTES.HOME_PAGE}
-                render={() => <h1>Home Page</h1>}
+                render={() => <LandingPage />}
               />
               <Route
                 exact
@@ -109,9 +107,7 @@ function App() {
               <Route
                 exact
                 path={ROUTES.ARTIST_PAGE}
-                render={(props) => (
-                  <h1>Welcome to Artist {props.match.params.artistId} Page</h1>
-                )}
+                render={(props) => <ProfilePage {...props} />}
               />
 
               {customerAuth ? (

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import * as ROUTES from '../../../constants/routes';
 import AuthorizationContext from '../../../Contexts/AuthorizationContext';
-import LogoutContext from '../../../Contexts/LogoutContext';
+// import LogoutContext from '../../../Contexts/LogoutContext';
 import navLogo from '../../../assets/images/berwaz.png';
 import './style.css';
 
@@ -13,6 +13,7 @@ const NavbarComponent = () => {
       <AuthorizationContext.Consumer>
         {({ user }) => (
           <div className="navbar-container">
+            {console.log(user)}
             <div className="nav-left">
               <Link to={ROUTES.CART_PAGE}>
                 <FaShoppingCart className="cart-icon" />
