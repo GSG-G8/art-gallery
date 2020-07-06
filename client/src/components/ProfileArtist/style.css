@@ -43,3 +43,14 @@
 .painting-container{
     padding: 15px;
 }
+.container-edit-img .edit-img-btn{
+    opacity: 0;
+    font-size: 1.4rem;
+    transition: opacity .35s ease;
+    background-color: whitesmoke;
+}
+
+.container-edit-img:hover .edit-img-btn {
+    opacity: 1;
+}
+

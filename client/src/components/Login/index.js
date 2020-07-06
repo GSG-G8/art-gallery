@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import Axios from 'axios';
 import { Form, Input, Button, message, Spin, Alert, Radio } from 'antd';
 import propTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
 import * as ROUTES from '../../constants/routes';
 import './style.css';
 
-const Login = (props) => {
+const Login = ({ setLogged }) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState();
   const [role, setRole] = useState('customer');
+
+  const history = useHistory();
 
   const onFinish = async ({ email, password }) => {
     try {
@@ -20,7 +22,6 @@ const Login = (props) => {
         password,
         role,
       });
-      const { history, setLogged } = props;
       message.success('تم تسجيل الدخول بنجاح');
       setLoaded(false);
       setLogged(true);
@@ -38,8 +39,6 @@ const Login = (props) => {
           default:
             e = 'حصل خطأ غير متوقع حاول مجددًا مرةً أخرى';
         }
-      } else {
-        e = 'حصل خطأ غير متوقع حاول مجددًا مرةً أخرى';
       }
       setError(e);
       setLoaded(false);

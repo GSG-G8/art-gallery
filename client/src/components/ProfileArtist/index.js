@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import Axios from 'axios';
-import { FaFacebook, FaInstagram } from 'react-icons/all';
+import { FaFacebook, FaInstagram, FcEditImage } from 'react-icons/all';
 import { message, Spin, Button, Alert } from 'antd';
 
 import AddProduct from '../AddProduct';
@@ -91,11 +91,16 @@ function Profile({ match }) {
             />
           ) : profileData ? (
             <>
-              <img
-                className="circle-img"
-                alt="profile img"
-                src={profileData.profile_img}
-              />
+              <div className="container-edit-img">
+                <img
+                  className="circle-img"
+                  alt="profile img"
+                  src={profileData.profile_img}
+                />
+                <Button className="edit-img-btn">
+                  <FcEditImage />{' '}
+                </Button>
+              </div>
               <p>
                 <span>اسم الفنان :</span> {profileData.first_name}{' '}
                 {profileData.last_name}
