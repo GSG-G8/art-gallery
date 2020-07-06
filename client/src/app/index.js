@@ -15,6 +15,7 @@ import 'antd/dist/antd.css';
 
 import Login from '../components/Login';
 import Register from '../components/Register';
+import Painting from '../components/Details';
 import LandingPage from '../containers/LandingPage';
 import ProfilePage from '../containers/ProfilePage';
 
@@ -64,7 +65,7 @@ function App() {
   }, [logged]);
   const logout = async () => {
     try {
-      await axios.get('api/v1/logout');
+      await axios.get('/api/v1/logout');
       setLogged(false);
       setCustomerAuth(false);
       setArtistAuth(false);
@@ -110,6 +111,10 @@ function App() {
                 exact
                 path={ROUTES.ARTIST_PAGE}
                 render={(props) => <ProfilePage {...props} />}
+              />
+              <Route
+                path={ROUTES.ART_PAGE}
+                render={(props) => <Painting {...props} />}
               />
 
               {customerAuth ? (
