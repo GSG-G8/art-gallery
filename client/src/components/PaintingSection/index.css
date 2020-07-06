@@ -1,23 +1,21 @@
-@import "~antd/dist/antd.css";
-
 .container {
-  width: 80vw;
+  width: 80%;
   margin: 5% auto;
 }
-.search__category {
-  width: 80%;
-  margin: 0 auto;
-}
+
 .container__paintings {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  margin: 0 auto;
+  margin: 2% auto;
   padding: 2% 0;
   justify-content: space-around;
   background-color: rgb(240, 234, 234);
 }
-
+.catInputs {
+  width: 75%;
+  margin: 0 auto;
+}
 .flip-card {
   background-color: transparent;
   border: 1px solid #f1f1f1;
@@ -67,4 +65,8 @@
 .deleteBtn {
   margin-left: 200px;
   margin-top: 20px;
+}
+.paintingsPag {
+  width: 35%;
+  margin: 2% auto;
 }
