@@ -12,7 +12,7 @@ const NavbarComponent = () => {
   return (
     <div className="main-navbar-container">
       <AuthorizationContext.Consumer>
-        {({ user: { role } }) => (
+        {({ user: { role, id } }) => (
           <LogoutContext.Consumer>
             {({ logout }) => (
               <div className="navbar-container">
@@ -43,6 +43,7 @@ const NavbarComponent = () => {
                 )}
                 {role === 'artist' && (
                   <div className="nav-left">
+                    <Link to={`/artist/${id}`}>الصفحة الشخصية</Link>
                     <Button className="nav-logout-btn" onClick={logout}>
                       تسجيل الخروج
                     </Button>

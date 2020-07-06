@@ -10,7 +10,7 @@ import {
   message,
 } from 'antd';
 import PaintingSection from './PaintingsSection.js';
-import './index.css';
+import './style.css';
 
 const categories = [
   { name: ['hertage', 'تراث'] },
@@ -113,7 +113,7 @@ function PaintingContainer() {
 
   return (
     <>
-      <div className="container">
+      <div className="landing__container">
         <div className="container__filter">
           <div>
             <Select
