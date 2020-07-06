@@ -64,7 +64,7 @@ function App() {
 
   const logout = async () => {
     try {
-      await axios.get('api/v1/logout');
+      await axios.get('/api/v1/logout');
       setUser({});
       setLogged(false);
       setCustomerAuth(false);
