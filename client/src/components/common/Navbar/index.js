@@ -35,7 +35,7 @@ const NavbarComponent = (props) => {
                 )}
                 {role === 'customer' && (
                   <div className="nav-left">
-                    {pageType === 'cohort' ? null : (
+                    {pageType === 'cart' ? null : (
                       <Link to={ROUTES.CART_PAGE}>
                         <FaShoppingCart className="cart-icon" />
                       </Link>

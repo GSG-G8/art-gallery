@@ -268,7 +268,7 @@ const CartPage = () => {
 
   return (
     <div>
-      <Navbar pageType="cohort" />
+      <Navbar pageType="cart" />
       {cartData.length === 0 ? (
         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="empty" />
       ) : (
