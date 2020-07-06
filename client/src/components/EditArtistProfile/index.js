@@ -59,8 +59,8 @@ function EditProfileForm({
           mobileNo,
           customized,
           bio,
-          facebook: accounts[0],
-          instagram: accounts[1],
+          facebook: accounts ? accounts[0] : null,
+          instagram: accounts ? accounts[1] : null,
         }}
         onFinish={patchProfile}
       >
