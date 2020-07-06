@@ -139,7 +139,9 @@ function App() {
                 </Switch>
               ) : redirect ? (
                 <Redirect to={ROUTES.LOGIN_PAGE} />
-              ) : null}
+              ) : (
+                <Redirect to={ROUTES.HOME_PAGE} />
+              )}
             </Switch>
           </LogoutContext.Provider>
         </AuthorizationContext.Provider>
