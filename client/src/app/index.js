@@ -16,12 +16,14 @@ import Register from '../components/Register';
 import Painting from '../components/Details';
 import ProfilePage from '../containers/ProfilePage';
 import LandingPage from '../containers/LandingPage';
+import AdminLogin from '../components/Admin/login';
 
 function App() {
   const [user, setUser] = useState({});
   const [logged, setLogged] = useState(false);
   const [customerAuth, setCustomerAuth] = useState(false);
   const [artistAuth, setArtistAuth] = useState(false);
+  const [adminAuth, setAdminAuth] = useState(false);
   const [redirect, setRedirect] = useState();
 
   const getAuth = async () => {
@@ -43,6 +45,11 @@ function App() {
           setLogged(true);
           setArtistAuth(true);
           setCustomerAuth(false);
+          setRedirect(false);
+          break;
+        case 'admin':
+          setLogged(true);
+          setAdminAuth(true);
           setRedirect(false);
           break;
         default:
@@ -106,6 +113,17 @@ function App() {
                   )
                 }
               />
+              <Route
+                exact
+                path={ROUTES.ADMIN_LOGIN_PAGE}
+                render={(props) =>
+                  !logged ? (
+                    <AdminLogin {...props} setLogged={setLogged} />
+                  ) : (
+                    <Redirect to={ROUTES.ADMIN_DASHBOARD_PAGE} />
+                  )
+                }
+              />
 
               <Route
                 exact
@@ -139,6 +157,16 @@ function App() {
                 <Redirect to={ROUTES.LOGIN_PAGE} />
               ) : null}
             </Switch>
+
+            {adminAuth ? (
+              <Route
+                exact
+                path={ROUTES.ADMIN_DASHBOARD_PAGE}
+                render={() => <h1>DASH PAGE</h1>}
+              />
+            ) : redirect ? (
+              <Redirect to={ROUTES.ADMIN_LOGIN_PAGE} />
+            ) : null}
           </LogoutContext.Provider>
         </AuthorizationContext.Provider>
       </Router>
