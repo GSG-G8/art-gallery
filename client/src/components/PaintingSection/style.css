@@ -1,4 +1,3 @@
-@import "~antd/dist/antd.css";
 
 .container {
   width: 80%;
@@ -19,9 +18,8 @@
   flex-wrap: wrap;
   flex-direction: row;
   margin: 30px auto;
-  padding: 2% ;
+  padding: 2% auto;
   justify-content: space-around;
-  border: 2px solid #bbb;
 }
 .container__paintings img{
   padding: 10px;
@@ -32,7 +30,6 @@
 }
 .flip-card {
   background-color: transparent;
-  border: 1px solid #f1f1f1;
 }
 
 .flip-card-inner {
