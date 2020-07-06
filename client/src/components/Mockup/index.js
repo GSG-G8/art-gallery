@@ -35,6 +35,7 @@ function PictureWall({ paintingSrc }) {
         listType="picture"
         onPreview={handlePreview}
         onRemove={removeImg}
+        beforeUpload={() => false}
       >
         {!previewImage && (
           <div>
