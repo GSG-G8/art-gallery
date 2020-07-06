@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import Axios from 'axios';
-import { FaFacebook, FaInstagram, FcEditImage } from 'react-icons/all';
-import { message, Spin, Button, Alert } from 'antd';
+import { FaFacebook, FaInstagram, FiEdit } from 'react-icons/all';
+import { message, Spin, Button, Alert, Upload, Form } from 'antd';
 
 import AddProduct from '../AddProduct';
 import AuthorizationContext from '../../Contexts/AuthorizationContext';
@@ -15,6 +15,10 @@ function Profile({ match }) {
   const [showForm, setShowForm] = useState(false);
   const [paintings, setPaintings] = useState();
   const [error, setError] = useState(null);
+  const [loaded, setLoaded] = useState(false);
+  const [ArtistImg, setArtistImg] = useState();
+  const cloudinaryLink =
+    'https://res.cloudinary.com/dacf3uopo/image/upload/v1593353472/';
 
   const getArtistProfile = async (id) => {
     try {
@@ -52,7 +56,7 @@ function Profile({ match }) {
   };
   useEffect(() => {
     getArtistProfile(match.params.artistId);
-  }, []);
+  }, [ArtistImg]);
 
   useEffect(() => {
     getAllPainting(match.params.artistId);
@@ -72,6 +76,31 @@ function Profile({ match }) {
       }
     } catch (err) {
       message.error('حدث خطا في عملية الحذف');
+    }
+  };
+
+  const onFinish = async () => {
+    try {
+      setLoaded(true);
+      const formData = new FormData();
+      formData.append('profileImg', ArtistImg);
+      const {
+        data: { message: msg, statusCode },
+      } = await Axios.patch('/api/v1/artist/avatar', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      if (statusCode === 200 && msg === 'Image added successfully') {
+        setLoaded(false);
+        message.success('تم تعديل الصورة الشخصية بنجاح');
+        getArtistProfile(match.params.artistId);
+      }
+    } catch (err) {
+      if (err.response.data.message[0] === 'Should be an image png or jpeg') {
+        message.error('يجب ادخال صورة بامتداد png , jpeg');
+        setLoaded(false);
+      } else {
+        message.error(' فشل تحميل الصورة الرجاء المحاولة مرة اخرى');
+      }
     }
   };
 
@@ -95,15 +124,43 @@ function Profile({ match }) {
                 <img
                   className="circle-img"
                   alt="profile img"
-                  src={profileData.profile_img}
+                  src={`${cloudinaryLink}${profileData.profile_img}`}
                 />
-                <Button className="edit-img-btn">
-                  <FcEditImage />{' '}
-                </Button>
+                {loaded && <Spin />}
+                <Form
+                  className="form-edit-img"
+                  layout="inline"
+                  name="edit-img-form"
+                  onFinish={onFinish}
+                >
+                  <Form.Item name="artistImg">
+                    <Upload
+                      type="file"
+                      beforeUpload={(file) => {
+                        setArtistImg(file);
+                        return false;
+                      }}
+                      onRemove={() => setArtistImg(null)}
+                      value={ArtistImg}
+                    >
+                      <Button onClick className="edit-img-btn">
+                        <FiEdit />
+                      </Button>
+                    </Upload>
+                  </Form.Item>
+                  <Form.Item>
+                    <Button
+                      className="edit-img-btn submit"
+                      type="primary"
+                      htmlType="submit"
+                    >
+                      حفظ الصورة
+                    </Button>
+                  </Form.Item>
+                </Form>
               </div>
               <p>
-                <span>اسم الفنان :</span> {profileData.first_name}{' '}
-                {profileData.last_name}
+                {profileData.first_name} {profileData.last_name}
               </p>
               <AuthorizationContext.Consumer>
                 {({ user }) =>
@@ -115,9 +172,7 @@ function Profile({ match }) {
                   )
                 }
               </AuthorizationContext.Consumer>
-              <p>
-                <span>المزيد من المعلومات : </span> {profileData.bio}
-              </p>
+              <p>{profileData.bio}</p>
               <p>
                 <span>رقم الهاتف : </span> {profileData.mobile_no}
               </p>
