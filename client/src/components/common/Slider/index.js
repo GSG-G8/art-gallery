@@ -1,9 +1,9 @@
 import React from 'react';
 import { Carousel } from 'antd';
-import pic1 from '../../assets/images/ Calligraphy.jpg';
-import pic2 from '../../assets/images/Womens.jpg';
-import pic3 from '../../assets/images/Jerusalem.jpg';
-import pic4 from '../../assets/images/EgyptPyramids.jpg';
+import pic1 from '../../../assets/images/ Calligraphy.jpg';
+import pic2 from '../../../assets/images/Womens.jpg';
+import pic3 from '../../../assets/images/Jerusalem.jpg';
+import pic4 from '../../../assets/images/EgyptPyramids.jpg';
 import './style.css';
 
 const SlideShow = () => {
