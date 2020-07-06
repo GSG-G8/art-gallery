@@ -1,0 +1,24 @@
+.admin-artist-container{
+    width: 80%;
+    margin: auto;
+}
+#artists-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #artists-table td, #artists-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #artists-table tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #artists-table tr:hover {background-color: #ddd;}
+  
+  #artists-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #955F83;
+    color: white;
+  }

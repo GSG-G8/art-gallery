@@ -16,6 +16,7 @@ import Register from '../components/Register';
 import Painting from '../components/Details';
 import ProfilePage from '../containers/ProfilePage';
 import LandingPage from '../containers/LandingPage';
+import AdminDashboard from '../components/Admin';
 
 import CartPage from '../containers/CartPage';
 
@@ -93,6 +94,11 @@ function App() {
                 exact
                 path={ROUTES.HOME_PAGE}
                 render={() => <LandingPage />}
+              />
+              <Route
+                exact
+                path={ROUTES.ADMIN_DASHBOARD_PAGE}
+                component={AdminDashboard}
               />
               <Route
                 exact
