@@ -5,6 +5,7 @@ import Axios from 'axios';
 import propTypes from 'prop-types';
 import AuthorizationContext from '../../Contexts/AuthorizationContext';
 import PictureWall from '../Mockup';
+import Navbar from '../common/Navbar';
 import './style.css';
 
 function PaintingsDetail({ match }) {
@@ -26,7 +27,7 @@ function PaintingsDetail({ match }) {
   };
   useEffect(() => {
     getPaintingByID(match.params.artId);
-  }, []);
+  });
 
   const handleSizeChange = (value) => {
     setSize(value);
@@ -46,6 +47,7 @@ function PaintingsDetail({ match }) {
   };
   return (
     <>
+      <Navbar />
       {painting ? (
         <div className="containerD">
           <div className="container__details">

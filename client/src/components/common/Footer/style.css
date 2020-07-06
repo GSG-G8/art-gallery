@@ -14,24 +14,26 @@
   width: 100px;
   margin-left: 300px;
 }
-
 .logo-container p {
   text-align: right;
   color: darkslategray;
 }
 
 .contact-container {
-  width: 30%;
-  margin-right: 150px;
-  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
 }
-
+.follow-icons {
+  width: 30%;
+}
 .contact-container .contact-title {
   color: #955f83;
   text-align: right;
   font-weight: bold;
 }
-
+.contact-container {
+  margin: auto;
+}
 .contact-icons {
   text-align: right;
 }
@@ -43,7 +45,11 @@
 .contact-icons :hover {
   color: #955f83;
 }
-
+.footer-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 .copy-right {
   display: flex;
   justify-content: space-around;
@@ -56,8 +62,9 @@
 }
 
 .follow-container {
-  margin-top: 40px;
-  width: 30%;
+  width: 150px;
+  margin-top: 50px;
+  margin-left: 20px;
 }
 
 .follow-container h3 {
@@ -69,46 +76,17 @@
 .follow-icons {
   display: flex;
   justify-content: space-between;
-  margin-top: 40px;
-  margin-left: 50px;
+  width: 100%;
 }
 
 .follow-icons :hover {
   color: #955f83;
 }
 
-.icon-1 {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 170px;
-  margin-left: 245px;
+.iconDev {
+  margin: 5px;
 }
-
-.icon-2 {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 170px;
-  margin-left: 245px;
-}
-
-.icon-3 {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 220px;
-  margin-left: 200px;
-}
-
-.icon-4 {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 170px;
-  margin-left: 255px;
-}
-
 .icons {
   color: #636d73;
+  margin-left: 10px;
 }

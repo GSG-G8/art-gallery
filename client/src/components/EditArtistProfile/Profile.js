@@ -16,7 +16,7 @@ function Profile({ match }) {
   };
   useEffect(() => {
     getArtistProfile(match.params.artistId);
-  }, []);
+  });
   return <>{profileData ? <h1>hiii</h1> : <Spin />}</>;
 }
 Profile.propTypes = {
