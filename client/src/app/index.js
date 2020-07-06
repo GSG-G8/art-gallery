@@ -7,16 +7,17 @@ import {
 } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-
 import * as ROUTES from '../constants/routes';
 import LogoutContext from '../Contexts/LogoutContext';
 import AuthorizationContext from '../Contexts/AuthorizationContext';
 import 'antd/dist/antd.css';
-
 import Login from '../components/Login';
 import Register from '../components/Register';
-import LandingPage from '../containers/LandingPage';
+import Painting from '../components/Details';
 import ProfilePage from '../containers/ProfilePage';
+import LandingPage from '../containers/LandingPage';
+
+import CartPage from '../containers/CartPage';
 
 function App() {
   const [user, setUser] = useState({});
@@ -46,6 +47,10 @@ function App() {
           setCustomerAuth(false);
           setRedirect(false);
           break;
+        case 'admin':
+          setLogged(true);
+          setRedirect(false);
+          break;
         default:
           setLogged(false);
           setArtistAuth(false);
@@ -62,9 +67,11 @@ function App() {
   useEffect(() => {
     getAuth();
   }, [logged]);
+
   const logout = async () => {
     try {
-      await axios.get('api/v1/logout');
+      await axios.get('/api/v1/logout');
+      setUser({});
       setLogged(false);
       setCustomerAuth(false);
       setArtistAuth(false);
@@ -111,14 +118,14 @@ function App() {
                 path={ROUTES.ARTIST_PAGE}
                 render={(props) => <ProfilePage {...props} />}
               />
+              <Route
+                path={ROUTES.ART_PAGE}
+                render={(props) => <Painting {...props} />}
+              />
 
               {customerAuth ? (
                 <Switch>
-                  <Route
-                    exact
-                    path={ROUTES.CART_PAGE}
-                    render={() => <h1>CART PAGE</h1>}
-                  />
+                  <Route exact path={ROUTES.CART_PAGE} component={CartPage} />
                   <Route
                     exact
                     path={ROUTES.CHECKOUT_PAGE}
@@ -132,7 +139,9 @@ function App() {
                 </Switch>
               ) : redirect ? (
                 <Redirect to={ROUTES.LOGIN_PAGE} />
-              ) : null}
+              ) : (
+                <Redirect to={ROUTES.HOME_PAGE} />
+              )}
             </Switch>
           </LogoutContext.Provider>
         </AuthorizationContext.Provider>
