@@ -13,6 +13,8 @@ import {
 } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
+import Navbar from '../../components/common/Navbar';
+
 const { Option } = Select;
 
 const { confirm } = Modal;
@@ -265,7 +267,8 @@ const CartPage = () => {
   ];
 
   return (
-    <div className="cart__container">
+    <div>
+      <Navbar pageType="cohort" />
       {cartData.length === 0 ? (
         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="empty" />
       ) : (
