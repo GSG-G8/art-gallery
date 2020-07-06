@@ -12,7 +12,7 @@ function Profile({ match }) {
 
   const getArtistProfile = async (id) => {
     try {
-      const { data: artistData } = await Axios.get(`/api/v1//profile/${id}`);
+      const { data: artistData } = await Axios.get(`/api/v1/profile/${id}`);
       setProfileData(artistData.data[0]);
     } catch (err) {
       message.error('تعذر جلب بيانات الفنان');
@@ -26,9 +26,9 @@ function Profile({ match }) {
   return (
     <>
       <AuthorizationContext.Consumer>
-        {({ user }) =>
-          user.role === 'artist' &&
-          user.id === +artistId && (
+        {({ user: { role, id } }) =>
+          role === 'artist' &&
+          id === +artistId && (
             <Button onClick={() => setShowForm(true)}>
               تعديل بيانات الحساب
             </Button>
