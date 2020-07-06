@@ -9,10 +9,9 @@ import {
   Form,
   Input,
   Select,
+  Empty,
 } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-
-import './style.css';
 
 const { Option } = Select;
 
@@ -22,6 +21,9 @@ const CartPage = () => {
   const [cartData, setCartData] = useState([]);
   const [visible, setVisible] = useState(false);
   const [checkoutData, setCheckoutData] = useState([]);
+
+  const cloudinaryLink =
+    'https://res.cloudinary.com/dacf3uopo/image/upload/v1593353472/';
 
   const fetchData = async () => {
     try {
@@ -215,7 +217,11 @@ const CartPage = () => {
       dataIndex: 'img',
       key: 'img',
       render: (img) => (
-        <img src={img} alt="Painting" style={{ width: '100px' }} />
+        <img
+          src={`${cloudinaryLink}${img}`}
+          alt="Painting"
+          style={{ width: '100px' }}
+        />
       ),
     },
     {
@@ -259,15 +265,16 @@ const CartPage = () => {
   ];
 
   return (
-    <div className="cart-cards-container">
+    <div className="cart__container">
       {cartData.length === 0 ? (
-        <Table loading />
+        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="empty" />
       ) : (
         <Table
           columns={columns}
           dataSource={cartData}
           rowKey="id"
-          // size="middle"
+          size="middle"
+          className="cart__table"
         />
       )}
       <div>
