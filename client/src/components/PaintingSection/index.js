@@ -9,7 +9,7 @@ import {
   AutoComplete,
   message,
 } from 'antd';
-import PaintingSection from './PaintingsSection.js';
+import PaintingSection from './PaintingsSection';
 import './index.css';
 
 const categories = [
@@ -65,7 +65,7 @@ function PaintingContainer() {
 
   const deletePainting = async (paintingID) => {
     try {
-      const { data } = await axios.delete(`/api/v1//paintings/${paintingID}`);
+      const { data } = await axios.delete(`/api/v1/paintings/${paintingID}`);
       if (data.statusCode === 200) {
         message.success('تم حذف اللوحة بنجاح');
         setPaintings(paintings.filter((e) => e.id !== paintingID));
