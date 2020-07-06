@@ -124,7 +124,9 @@ function Profile({ match }) {
                 <img
                   className="circle-img"
                   alt="profile img"
-                  src={`${cloudinaryLink}${profileData.profile_img}`}
+                  src={
+                    ArtistImg && `${cloudinaryLink}${profileData.profile_img}`
+                  }
                 />
                 {loaded && <Spin />}
                 <Form

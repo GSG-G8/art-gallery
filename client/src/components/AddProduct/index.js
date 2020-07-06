@@ -24,7 +24,6 @@ import './style.css';
 
 const { Option } = Select;
 
-// eslint-disable-next-line react/prop-types
 const AddProduct = ({ showForm, hideForm }) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState();
@@ -115,8 +114,8 @@ const AddProduct = ({ showForm, hideForm }) => {
               <Option value="nature">طبيعة</Option>
               <Option value="islamic">اسلامي</Option>
               <Option value="sky">سماء</Option>
-              <Option value="culture">ثقافة</Option>
-              <Option value="noton">غير ذلك</Option>
+              <Option value="hertage">ثقافة</Option>
+              <Option value="other">غير ذلك</Option>
             </Select>
           </div>
           <Form.Item
@@ -180,6 +179,12 @@ const AddProduct = ({ showForm, hideForm }) => {
 AddProduct.propTypes = {
   profileData: propTypes.shape({
     title: propTypes.string,
+  }).isRequired,
+  showForm: propTypes.shape({
+    showForm: propTypes.string,
+  }).isRequired,
+  hideForm: propTypes.shape({
+    title: propTypes.func,
   }).isRequired,
 };
 

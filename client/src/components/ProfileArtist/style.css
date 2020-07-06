@@ -7,6 +7,8 @@
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #ddd;
+    background-repeat: no-repeat;
+    background-size: 300px;
 }
 .profile-container .right-header p {
     padding-right: 10px;
@@ -47,8 +49,8 @@
     padding: 15px;
 }
 .form-edit-img{
-    margin-top: -40px;
-    margin-bottom: 20px;
+    margin-top: -50px;
+    margin-bottom: 10px;
 }
 .container-edit-img .edit-img-btn{
     opacity: 0;
