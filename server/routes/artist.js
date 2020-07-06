@@ -11,7 +11,7 @@ const { protectedAdmin } = require('../controllers/middleware');
 
 router.get('/profile/:artistId', getArtist);
 router.patch('/artist', verifyArtist, updateArtist);
-router.get('/admin/artist', protectedAdmin, getAllArtist);
+router.get('/artists', getAllArtist);
 router.patch('/admin/artist/:artistId', protectedAdmin, activateArtist);
 router.patch('/artist/avatar', verifyArtist, updateArtistAvatar);
 
