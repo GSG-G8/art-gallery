@@ -7,17 +7,15 @@ import {
 } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-
 import * as ROUTES from '../constants/routes';
 import LogoutContext from '../Contexts/LogoutContext';
 import AuthorizationContext from '../Contexts/AuthorizationContext';
 import 'antd/dist/antd.css';
-
 import Login from '../components/Login';
 import Register from '../components/Register';
 import Painting from '../components/Details';
-import LandingPage from '../containers/LandingPage';
 import ProfilePage from '../containers/ProfilePage';
+import LandingPage from '../containers/LandingPage';
 
 function App() {
   const [user, setUser] = useState({});
@@ -63,9 +61,11 @@ function App() {
   useEffect(() => {
     getAuth();
   }, [logged]);
+
   const logout = async () => {
     try {
       await axios.get('/api/v1/logout');
+      setUser({});
       setLogged(false);
       setCustomerAuth(false);
       setArtistAuth(false);
