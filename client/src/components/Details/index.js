@@ -27,7 +27,7 @@ function PaintingsDetail({ match }) {
   };
   useEffect(() => {
     getPaintingByID(match.params.artId);
-  });
+  }, [match.params.artId]);
 
   const handleSizeChange = (value) => {
     setSize(value);

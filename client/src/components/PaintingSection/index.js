@@ -13,7 +13,7 @@ import PaintingSection from './PaintingsSection';
 import './style.css';
 
 const categories = [
-  { name: ['hertage', 'تراث'] },
+  { name: ['heritage', 'تراث'] },
   { name: ['sky', 'سماء'] },
   { name: ['nature', 'طبيعة'] },
   { name: ['islamic', 'فن إسلامي'] },
