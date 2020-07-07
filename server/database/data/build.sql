@@ -10,7 +10,7 @@ CREATE TABLE artist
     last_name varchar(50) NOT NULL,
     email varchar(255) UNIQUE NOT NULL,
     password text NOT NULL,
-    mobile_no integer UNIQUE,
+    mobile_no text UNIQUE,
     customized boolean DEFAULT false,
     reviews integer,
     profile_img text,
@@ -74,7 +74,7 @@ CREATE TABLE artist
         name varchar(50) NOT NULL,
         email varchar(255) UNIQUE NOT NULL,
         password text NOT NULL,
-        mobile integer UNIQUE,
+        mobile text UNIQUE,
         budget DECIMAL
     );
     INSERT INTO admin

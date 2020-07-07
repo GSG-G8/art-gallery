@@ -14,16 +14,3 @@
 .admin-container .form-title {
   color: #2d616c;
 }
-
-/* @media (max-width: 800px) {
-  .admin-container {
-    width: 45%;
-    padding-top: 50px;
-  }
-}
-@media (max-width: 500px) {
-  .admin-container {
-    width: 60%;
-    padding-top: 50px;
-  }
-} */

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Axios from 'axios';
 import { Form, Input, Button, message, Spin, Alert } from 'antd';
 import propTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
 import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
 import * as ROUTES from '../../../constants/routes';
 import './style.css';
@@ -29,9 +28,6 @@ const AdminLogin = (props) => {
       let e;
       if (err.response) {
         switch (err.response.data.message) {
-          case 'You have to sign up first':
-            e = 'قم بتسجيل حسابك !';
-            break;
           case 'Incorrect Password':
             e = 'كلمة المرور خاطئة !';
             break;

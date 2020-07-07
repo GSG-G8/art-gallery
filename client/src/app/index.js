@@ -17,6 +17,7 @@ import Painting from '../components/Details';
 import ProfilePage from '../containers/ProfilePage';
 import LandingPage from '../containers/LandingPage';
 import AdminLogin from '../components/Admin/login';
+import CartPage from '../containers/CartPage';
 
 function App() {
   const [user, setUser] = useState({});
@@ -36,31 +37,34 @@ function App() {
       setUser({ id, role });
       switch (role) {
         case 'customer':
-          setLogged(true);
           setCustomerAuth(true);
           setArtistAuth(false);
+          setAdminAuth(false);
           setRedirect(false);
           break;
         case 'artist':
-          setLogged(true);
           setArtistAuth(true);
           setCustomerAuth(false);
+          setAdminAuth(false);
           setRedirect(false);
           break;
         case 'admin':
-          setLogged(true);
           setAdminAuth(true);
+          setArtistAuth(false);
+          setCustomerAuth(false);
           setRedirect(false);
           break;
         default:
           setLogged(false);
           setArtistAuth(false);
           setCustomerAuth(false);
+          setAdminAuth(false);
           setRedirect(true);
       }
     } catch (err) {
       setLogged(false);
       setArtistAuth(false);
+      setAdminAuth(false);
       setCustomerAuth(false);
       setRedirect(true);
     }
@@ -76,11 +80,13 @@ function App() {
       setLogged(false);
       setCustomerAuth(false);
       setArtistAuth(false);
+      setAdminAuth(false);
       setRedirect(true);
     } catch (err) {
       setLogged(logged);
       setCustomerAuth(customerAuth);
       setArtistAuth(artistAuth);
+      setAdminAuth(adminAuth);
       setRedirect(redirect);
     }
   };
@@ -135,38 +141,46 @@ function App() {
                 render={(props) => <Painting {...props} />}
               />
 
-              {customerAuth ? (
-                <Switch>
-                  <Route
-                    exact
-                    path={ROUTES.CART_PAGE}
-                    render={() => <h1>CART PAGE</h1>}
-                  />
-                  <Route
-                    exact
-                    path={ROUTES.CHECKOUT_PAGE}
-                    render={() => <h1>CHECKOUT page</h1>}
-                  />
-                  <Route
-                    exact
-                    path={ROUTES.REVIEW_PAGE}
-                    render={() => <h1>REVIEW PAGE</h1>}
-                  />
-                </Switch>
-              ) : redirect ? (
-                <Redirect to={ROUTES.LOGIN_PAGE} />
-              ) : null}
-            </Switch>
-
-            {adminAuth ? (
+              <Route
+                exact
+                path={ROUTES.CART_PAGE}
+                render={() => {
+                  return customerAuth ? (
+                    <CartPage />
+                  ) : redirect ? (
+                    <Redirect to={ROUTES.LOGIN_PAGE} />
+                  ) : (
+                    <Redirect to={ROUTES.HOME_PAGE} />
+                  );
+                }}
+              />
+              {/* 
               <Route
                 exact
                 path={ROUTES.ADMIN_DASHBOARD_PAGE}
-                render={() => <h1>DASH PAGE</h1>}
-              />
-            ) : redirect ? (
-              <Redirect to={ROUTES.ADMIN_LOGIN_PAGE} />
-            ) : null}
+                render={() => {
+                  return adminAuth ? (
+                    <h1>Admin Dash</h1>
+                  ) : redirect ? (
+                    <Redirect to={ROUTES.ADMIN_LOGIN_PAGE} />
+                  ) : (
+                    <Redirect to={ROUTES.HOME_PAGE} />
+                  );
+                }}
+              /> */}
+
+              {adminAuth ? (
+                <Route
+                  exact
+                  path={ROUTES.ADMIN_DASHBOARD_PAGE}
+                  render={() => {
+                    return <h1>DASH PAGE</h1>;
+                  }}
+                />
+              ) : redirect ? (
+                <Redirect to={ROUTES.ADMIN_LOGIN_PAGE} />
+              ) : null}
+            </Switch>
           </LogoutContext.Provider>
         </AuthorizationContext.Provider>
       </Router>

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 import { Button } from 'antd';
@@ -8,7 +9,8 @@ import LogoutContext from '../../../Contexts/LogoutContext';
 import navLogo from '../../../assets/images/berwaz.png';
 import './style.css';
 
-const NavbarComponent = () => {
+const NavbarComponent = (props) => {
+  const { pageType } = props;
   return (
     <div className="main-navbar-container">
       <AuthorizationContext.Consumer>
@@ -33,9 +35,12 @@ const NavbarComponent = () => {
                 )}
                 {role === 'customer' && (
                   <div className="nav-left">
-                    <Link to={ROUTES.CART_PAGE}>
-                      <FaShoppingCart className="cart-icon" />
-                    </Link>
+                    {pageType === 'cart' ? null : (
+                      <Link to={ROUTES.CART_PAGE}>
+                        <FaShoppingCart className="cart-icon" />
+                      </Link>
+                    )}
+
                     <Button className="nav-logout-btn" onClick={logout}>
                       تسجيل الخروج
                     </Button>
@@ -55,6 +60,14 @@ const NavbarComponent = () => {
       </AuthorizationContext.Consumer>
     </div>
   );
+};
+
+NavbarComponent.defaultProps = {
+  pageType: undefined,
+};
+
+NavbarComponent.propTypes = {
+  pageType: PropTypes.string,
 };
 
 export default NavbarComponent;
