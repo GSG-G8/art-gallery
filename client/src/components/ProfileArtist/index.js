@@ -25,12 +25,15 @@ function Profile({ match }) {
 
   const getArtistProfile = async (id) => {
     try {
-      const { data: artistData } = await Axios.get(`/api/v1/profile/${id}`);
-      setProfileData(artistData.data[0]);
+      const {
+        data: { data: artistData },
+      } = await Axios.get(`/api/v1/profile/${id}`);
+      setProfileData(artistData[0]);
+      setArtistImg(artistData[0].profile_img);
     } catch (err) {
       let e;
       if (err.response.data.message === "Sorry There's no artist for this id") {
-        e = 'لا يوجد فنان لهذا الاي دي';
+        e = 'لا يوجد فنان بهذا المعرف';
       } else {
         e = 'تعذر جلب بيانات الفنان';
       }
@@ -47,8 +50,9 @@ function Profile({ match }) {
     } catch (err) {
       let e;
       if (
+        err &&
         err.response.data.message ===
-        "Sorry There's no paintings for this artist"
+          "Sorry There's no paintings for this artist"
       ) {
         e = 'لا يوجد لوحات لهذا الفنان';
       } else {
@@ -57,9 +61,10 @@ function Profile({ match }) {
       message.error(e);
     }
   };
+
   useEffect(() => {
     getArtistProfile(artistId);
-  }, [ArtistImg]);
+  }, []);
 
   useEffect(() => {
     getAllPainting(artistId);
@@ -67,10 +72,6 @@ function Profile({ match }) {
 
   const hideForm = () => setShowForm(false);
   const hideFormEdit = () => setShowFormEdit(false);
-
-  useEffect(() => {
-    getArtistProfile(artistId);
-  }, []);
 
   const deletePainting = async (paintingID) => {
     try {
@@ -182,18 +183,28 @@ function Profile({ match }) {
               <p>
                 <span>رقم الهاتف : </span> {profileData.mobile_no}
               </p>
-              <div className="social_media">
-                {profileData.social_media_accounts[0] && (
-                  <a href={profileData.social_media_accounts[0]}>
+              {profileData.social_media_accounts && (
+                <div className="social_media">
+                  <a
+                    href={
+                      profileData.social_media_accounts
+                        ? profileData.social_media_accounts[0]
+                        : null
+                    }
+                  >
                     <FaFacebook className="facebook" />
                   </a>
-                )}
-                {profileData.social_media_accounts[1] && (
-                  <a href={profileData.social_media_accounts[1]}>
+                  <a
+                    href={
+                      profileData.social_media_accounts
+                        ? profileData.social_media_accounts[1]
+                        : 'www.google.com'
+                    }
+                  >
                     <FaInstagram />
                   </a>
-                )}
-              </div>
+                </div>
+              )}
             </>
           ) : (
             <Spin />
