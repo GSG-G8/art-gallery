@@ -34,3 +34,11 @@
 .download-table-xls-button:hover{
   opacity: .8;
 }
+
+.admin-budget{
+  color: rgb(161, 123, 149);
+}
+.budget-mark{
+  background-color:#f2f2f2;
+  padding: 2px;
+}

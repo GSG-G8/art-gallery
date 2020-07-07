@@ -8,6 +8,23 @@ const AdminPage = () => {
   const [artists, setArtists] = useState([]);
   const [loaded, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [budgetAdmin, setBudgetAdmin] = useState('');
+
+  const getAdminBudget = async () => {
+    try {
+      const {
+        data: { data },
+      } = await Axios.get('/api/v1/admin');
+      setBudgetAdmin(`${data[0].budget}$`);
+    } catch (err) {
+      if (err.response) {
+        setError('حدث خطا في جلب بيانات الادمن');
+      }
+    }
+  };
+  useEffect(() => {
+    getAdminBudget();
+  }, []);
 
   const getAllArtistData = async () => {
     try {
@@ -41,8 +58,9 @@ const AdminPage = () => {
 
   return (
     <div className="admin-artist-container">
-      <p>حساب الادمن يساوي : 500دولار</p>
-      <h4>يحتوي هذا الجدول على جميع الرسامين وحالة الحساب </h4>
+      <h3 className="admin-budget">
+        حساب الادمن يساوي :<span className="budget-mark">{budgetAdmin}</span>{' '}
+      </h3>
       {error ? (
         <Alert type="error" message={error} />
       ) : loaded ? (
