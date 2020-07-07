@@ -8,7 +8,6 @@ const AdminPage = () => {
   const [artists, setArtists] = useState([]);
   const [loaded, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  // const [active, setActive] = useState();
 
   const getAllArtistData = async () => {
     try {
@@ -39,45 +38,7 @@ const AdminPage = () => {
   useEffect(() => {
     getAllArtistData();
   }, []);
-  // const columns = [
-  //   {
-  //     title: 'الاسم الاول',
-  //     dataIndex: 'first_name',
-  //     key: 'last_name',
-  //   },
-  //   {
-  //     title: 'الاسم الثاني',
-  //     dataIndex: 'last_name',
-  //     key: 'last_name',
-  //   },
-  //   {
-  //     title: 'البريد الالكتروني',
-  //     dataIndex: 'email',
-  //     key: 'email',
-  //   },
-  //   {
-  //     title: 'حالة الحساب',
-  //     dataIndex: 'active',
-  //     key: 'active',
-  //     render: (dataIndex) => {
-  //       setActive(dataIndex);
-  //     },
-  //   },
-  //   {
-  //     title: 'تفعيل/تعطيل',
-  //     dataIndex: 'id',
-  //     key: 'id',
-  //     render: (dataIndex) => (
-  //       <Button
-  //         onClick={() => {
-  //           switchActive(dataIndex);
-  //         }}
-  //       >
-  //         `{active ? 'تعطيل' : 'تفعيل'}`
-  //       </Button>
-  //     ),
-  //   },
-  // ];
+
   return (
     <div className="admin-artist-container">
       <p>حساب الادمن يساوي : 500دولار</p>
@@ -105,6 +66,8 @@ const AdminPage = () => {
                 <th>البريد الالكتروني</th>
                 <th>حالة الحساب</th>
                 <th>تفعيل/تعطيل</th>
+                <th>رقم الجوال</th>
+                <th>$الرصيد</th>
               </tr>
             </thead>
             <tbody>
@@ -117,11 +80,15 @@ const AdminPage = () => {
                     email,
                     active,
                     id,
+                    mobile_no: mobile,
+                    budget,
                   }) => (
                     <tr key={firstName}>
                       <td>{`${firstName} ${lastName}`} </td>
                       <td>{email}</td>
                       <td>{active ? 'نشط' : 'غير نشط'}</td>
+                      <td>{mobile || 'لا يوجد'}</td>
+                      <td>{budget}$$</td>
                       <td>
                         <Button
                           type={active ? 'danger' : ''}
@@ -136,7 +103,6 @@ const AdminPage = () => {
                 )}
             </tbody>
           </table>
-          {/* <Table dataSource={artists} columns={columns} /> */}
         </div>
       )}
     </div>
