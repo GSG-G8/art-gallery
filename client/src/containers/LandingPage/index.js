@@ -2,15 +2,16 @@ import React from 'react';
 import PaintingsSection from '../../components/PaintingSection';
 import Navbar from '../../components/common/Navbar';
 import Footer from '../../components/common/Footer';
-import SlideShow from '../../components/common/Slider';
+import Slider from '../../components/common/Slider';
+import './style.css';
 
 function LandingPage() {
   return (
     <div>
       <Navbar />
-      <SlideShow />
+      <Slider />
       <PaintingsSection />
-      <Footer />
+      <Footer className="landingP__footer" />
     </div>
   );
 }

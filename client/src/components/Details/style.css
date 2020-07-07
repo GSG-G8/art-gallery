@@ -1,16 +1,15 @@
 .containerD {
   display: flex;
   flex-direction: row;
-  height: 100vh;
-  margin: 2vh 2vw;
+  height: 80vh;
+  margin: 4vh 2vw;
 }
 .container__details {
-  width: 30%;
+  width: 35%;
 }
 .painting {
   width: 95%;
   padding: 5%;
-  margin: 20% auto;
 }
 
 .price {
@@ -21,14 +20,13 @@
   font-weight: bold;
 }
 .artistName {
-  font-size: large;
   font-weight: bold;
 }
 .viewBtn {
   margin-top: 5%;
 }
 .container__image {
-  width: 70%;
+  width: 65%;
 }
 .addBtn {
   margin: 7% 0;

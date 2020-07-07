@@ -1,6 +1,6 @@
 .main-navbar-container {
   width: 100%;
-  background-color: #f3e9ea;
+  box-shadow: 0px 1px 10px #955f83c2;
 }
 .navbar-container {
   margin: auto;
@@ -21,16 +21,20 @@
 
 .nav-left {
   display: flex;
+  align-items: center;
   margin-top: 20px;
 }
 
 .nav-logout-btn {
-  background-color: #955f83;
-  color: white;
-  border: #955f83;
-  text-align: center;
+  background: none;
+  color: #955f83;
+  border: none;
 }
-
+.nav-logout-btn:hover {
+  background: none;
+  color: #955f83;
+  border: none;
+}
 .sign-up-link {
   color: #955f83;
   width: 100px;
