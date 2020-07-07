@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { Alert, Spin, Empty, Button, message } from 'antd';
-import { CSVLink } from 'react-csv';
-
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import './style.css';
 
 const AdminPage = () => {
   const [artists, setArtists] = useState([]);
   const [loaded, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  //   const [active, setActive] = useState();
+  // const [active, setActive] = useState();
 
   const getAllArtistData = async () => {
     try {
@@ -40,45 +39,45 @@ const AdminPage = () => {
   useEffect(() => {
     getAllArtistData();
   }, []);
-  //   const columns = [
-  //     {
-  //       title: 'الاسم الاول',
-  //       dataIndex: 'first_name',
-  //       key: 'last_name',
+  // const columns = [
+  //   {
+  //     title: 'الاسم الاول',
+  //     dataIndex: 'first_name',
+  //     key: 'last_name',
+  //   },
+  //   {
+  //     title: 'الاسم الثاني',
+  //     dataIndex: 'last_name',
+  //     key: 'last_name',
+  //   },
+  //   {
+  //     title: 'البريد الالكتروني',
+  //     dataIndex: 'email',
+  //     key: 'email',
+  //   },
+  //   {
+  //     title: 'حالة الحساب',
+  //     dataIndex: 'active',
+  //     key: 'active',
+  //     render: (dataIndex) => {
+  //       setActive(dataIndex);
   //     },
-  //     {
-  //       title: 'الاسم الثاني',
-  //       dataIndex: 'last_name',
-  //       key: 'last_name',
-  //     },
-  //     {
-  //       title: 'البريد الالكتروني',
-  //       dataIndex: 'email',
-  //       key: 'email',
-  //     },
-  //     {
-  //       title: 'حالة الحساب',
-  //       dataIndex: 'active',
-  //       key: 'active',
-  //       render: (dataIndex) => {
-  //         setActive(dataIndex);
-  //       },
-  //     },
-  //     {
-  //       title: 'تفعيل/تعطيل',
-  //       dataIndex: 'id',
-  //       key: 'id',
-  //       render: (dataIndex) => (
-  //         <Button
-  //           onClick={() => {
-  //             switchActive(dataIndex);
-  //           }}
-  //         >
-  //           `{active ? 'تعطيل' : 'تفعيل'}`
-  //         </Button>
-  //       ),
-  //     },
-  //   ];
+  //   },
+  //   {
+  //     title: 'تفعيل/تعطيل',
+  //     dataIndex: 'id',
+  //     key: 'id',
+  //     render: (dataIndex) => (
+  //       <Button
+  //         onClick={() => {
+  //           switchActive(dataIndex);
+  //         }}
+  //       >
+  //         `{active ? 'تعطيل' : 'تفعيل'}`
+  //       </Button>
+  //     ),
+  //   },
+  // ];
   return (
     <div className="admin-artist-container">
       <p>حساب الادمن يساوي : 500دولار</p>
@@ -91,11 +90,14 @@ const AdminPage = () => {
         <Empty />
       ) : (
         <div>
-          <Button variant="warning">
-            <CSVLink data={artists} filename="artists">
-              تصدير معلومات الفنانين
-            </CSVLink>
-          </Button>
+          <ReactHTMLTableToExcel
+            id="test-table-xls-button"
+            className="download-table-xls-button"
+            table="artists-table"
+            filename="tablexls"
+            sheet="tablexls"
+            buttonText="تحميل لملف اكسل"
+          />
           <table id="artists-table" className="table-artist">
             <thead>
               <tr>
@@ -134,9 +136,8 @@ const AdminPage = () => {
                 )}
             </tbody>
           </table>
+          {/* <Table dataSource={artists} columns={columns} /> */}
         </div>
-
-        // <Table dataSource={artists} columns={columns} />
       )}
     </div>
   );
