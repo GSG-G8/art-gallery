@@ -1,0 +1,92 @@
+.footer-container {
+  height: 40vh;
+  display: flex;
+  background-color: #f3e9ea;
+}
+
+.logo-container {
+  width: 30%;
+  margin-right: 60px;
+  margin-top: 20px;
+}
+
+.logo-container img {
+  width: 100px;
+  margin-left: 300px;
+}
+.logo-container p {
+  text-align: right;
+  color: darkslategray;
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: column;
+}
+.follow-icons {
+  width: 30%;
+}
+.contact-container .contact-title {
+  color: #955f83;
+  text-align: right;
+  font-weight: bold;
+}
+.contact-container {
+  margin: auto;
+}
+.contact-icons {
+  text-align: right;
+}
+
+.contact-icons p {
+  color: darkslategray;
+}
+
+.contact-icons :hover {
+  color: #955f83;
+}
+.footer-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.copy-right {
+  display: flex;
+  justify-content: space-around;
+  width: 60%;
+  margin-top: 20px;
+}
+
+.copy-right p {
+  color: darkslategray;
+}
+
+.follow-container {
+  width: 150px;
+  margin-top: 50px;
+  margin-left: 20px;
+}
+
+.follow-container h3 {
+  text-align: right;
+  color: #955f83;
+  font-weight: bold;
+}
+
+.follow-icons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.follow-icons :hover {
+  color: #955f83;
+}
+
+.iconDev {
+  margin: 5px;
+}
+.icons {
+  color: #636d73;
+  margin-left: 10px;
+}

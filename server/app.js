@@ -25,9 +25,11 @@ const middleware = [
 ];
 
 app.use(middleware);
-app.use('/api/v1', routes);
 
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
+
+app.use('/api/v1', routes);
+
 if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
     res.sendFile(join(__dirname, '..', 'client', 'build', 'index.html'));

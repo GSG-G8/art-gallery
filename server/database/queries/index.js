@@ -25,6 +25,7 @@ const {
   getPaintingCategory,
   addPaintingQuery,
   updateBudgets,
+  getPaintQuery,
 } = require('./Paintings');
 const {
   deletePaintingFromCart,
@@ -66,4 +67,5 @@ module.exports = {
   updateAvatarQuery,
   updateCustomer,
   addReview,
+  getPaintQuery,
 };
