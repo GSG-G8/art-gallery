@@ -37,18 +37,21 @@ function App() {
       setUser({ id, role });
       switch (role) {
         case 'customer':
+          setLogged(true);
           setCustomerAuth(true);
           setArtistAuth(false);
           setAdminAuth(false);
           setRedirect(false);
           break;
         case 'artist':
+          setLogged(true);
           setArtistAuth(true);
           setCustomerAuth(false);
           setAdminAuth(false);
           setRedirect(false);
           break;
         case 'admin':
+          setLogged(true);
           setAdminAuth(true);
           setArtistAuth(false);
           setCustomerAuth(false);
@@ -130,6 +133,19 @@ function App() {
                   )
                 }
               />
+              <Route
+                exact
+                path={ROUTES.ADMIN_DASHBOARD_PAGE}
+                render={() =>
+                  !logged ? (
+                    <Redirect to={ROUTES.ADMIN_LOGIN_PAGE} />
+                  ) : artistAuth || customerAuth ? (
+                    <Redirect to={ROUTES.HOME_PAGE} />
+                  ) : adminAuth ? (
+                    <h1>Dash Board</h1>
+                  ) : null
+                }
+              />
 
               <Route
                 exact
@@ -154,32 +170,6 @@ function App() {
                   );
                 }}
               />
-              {/* 
-              <Route
-                exact
-                path={ROUTES.ADMIN_DASHBOARD_PAGE}
-                render={() => {
-                  return adminAuth ? (
-                    <h1>Admin Dash</h1>
-                  ) : redirect ? (
-                    <Redirect to={ROUTES.ADMIN_LOGIN_PAGE} />
-                  ) : (
-                    <Redirect to={ROUTES.HOME_PAGE} />
-                  );
-                }}
-              /> */}
-
-              {adminAuth ? (
-                <Route
-                  exact
-                  path={ROUTES.ADMIN_DASHBOARD_PAGE}
-                  render={() => {
-                    return <h1>DASH PAGE</h1>;
-                  }}
-                />
-              ) : redirect ? (
-                <Redirect to={ROUTES.ADMIN_LOGIN_PAGE} />
-              ) : null}
             </Switch>
           </LogoutContext.Provider>
         </AuthorizationContext.Provider>
@@ -187,10 +177,6 @@ function App() {
     </div>
   );
 }
-
-App.defaultProps = {
-  match: undefined,
-};
 
 App.propTypes = {
   match: PropTypes.string,
