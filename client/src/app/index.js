@@ -17,6 +17,8 @@ import Painting from '../components/Details';
 import ProfilePage from '../containers/ProfilePage';
 import LandingPage from '../containers/LandingPage';
 
+import CartPage from '../containers/CartPage';
+
 function App() {
   const [user, setUser] = useState({});
   const [logged, setLogged] = useState(false);
@@ -43,6 +45,10 @@ function App() {
           setLogged(true);
           setArtistAuth(true);
           setCustomerAuth(false);
+          setRedirect(false);
+          break;
+        case 'admin':
+          setLogged(true);
           setRedirect(false);
           break;
         default:
@@ -119,11 +125,7 @@ function App() {
 
               {customerAuth ? (
                 <Switch>
-                  <Route
-                    exact
-                    path={ROUTES.CART_PAGE}
-                    render={() => <h1>CART PAGE</h1>}
-                  />
+                  <Route exact path={ROUTES.CART_PAGE} component={CartPage} />
                   <Route
                     exact
                     path={ROUTES.CHECKOUT_PAGE}
@@ -137,7 +139,9 @@ function App() {
                 </Switch>
               ) : redirect ? (
                 <Redirect to={ROUTES.LOGIN_PAGE} />
-              ) : null}
+              ) : (
+                <Redirect to={ROUTES.HOME_PAGE} />
+              )}
             </Switch>
           </LogoutContext.Provider>
         </AuthorizationContext.Provider>
