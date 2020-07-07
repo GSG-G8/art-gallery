@@ -5,12 +5,37 @@ import { message, Button } from 'antd';
 import EditProfileForm from './index';
 import AuthorizationContext from '../../Contexts/AuthorizationContext';
 import AddReview from '../ReviewForm';
+import ReviewContainer from '../ReviewForm/ReviewContainer';
 
 function Profile({ match }) {
   const [profileData, setProfileData] = useState();
   const [showForm, setShowForm] = useState(false);
   const [reviewVisible, setReviewVisible] = useState(false);
+  const [reviews, setReviews] = useState();
   const { artistId } = match.params;
+
+  const getArtistReviews = async (id) => {
+    try {
+      const { data } = await Axios.get(`/api/v1/review/${id}`);
+      if (data.statusCode === 200) {
+        setReviews(data.data);
+      }
+    } catch (err) {
+      let e;
+      if (err.response) {
+        switch (err.response.data.message) {
+          case 'Artist ID should be number':
+            e = 'لا يمكن العثور على هذا الفنان';
+            break;
+          default:
+            e = 'فشلت العملية, يرجى المحاولة لاحقاً';
+        }
+      } else {
+        e = 'فشلت العملية, يرجى المحاولة لاحقاً';
+      }
+      message.error(e);
+    }
+  };
 
   const getArtistProfile = async (id) => {
     try {
@@ -25,7 +50,8 @@ function Profile({ match }) {
 
   useEffect(() => {
     getArtistProfile(artistId);
-  }, []);
+    getArtistReviews(artistId);
+  }, [artistId]);
   return (
     <>
       <AuthorizationContext.Consumer>
@@ -64,6 +90,7 @@ function Profile({ match }) {
           artistId={artistId}
         />
       )}
+      {reviews && <ReviewContainer reviews={reviews} />}
     </>
   );
 }
