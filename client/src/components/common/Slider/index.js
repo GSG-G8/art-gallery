@@ -1,6 +1,6 @@
 import React from 'react';
 import { Carousel } from 'antd';
-import pic1 from '../../../assets/images/ Calligraphy.jpg';
+// import pic1 from '../../../assets/images/Calligraphy';
 import pic3 from '../../../assets/images/Jerusalem.jpg';
 import pic4 from '../../../assets/images/EgyptPyramids.jpg';
 import pic5 from '../../../assets/images/words.jpg';
@@ -19,9 +19,9 @@ const SlideShow = () => {
           <div className="image-container">
             <img className="slider-image" src={pic5} alt="pic1" />
           </div>
-          <div className="image-container">
+          {/* <div className="image-container">
             <img className="slider-image" src={pic1} alt="pic1" />
-          </div>
+          </div> */}
           <div className="image-container">
             <img src={pic3} alt="pic1" className="slider-image" />
           </div>

@@ -16,7 +16,6 @@ import Register from '../components/Register';
 import Painting from '../components/Details';
 import ProfilePage from '../containers/ProfilePage';
 import LandingPage from '../containers/LandingPage';
-
 import CartPage from '../containers/CartPage';
 
 function App() {
