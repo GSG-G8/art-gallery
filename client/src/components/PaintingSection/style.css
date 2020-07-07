@@ -71,6 +71,9 @@
   cursor: pointer;
   margin-top: 40%;
 }
+.moreBtn:hover {
+  color: white;
+}
 
 .deleteBtn {
   margin-left: 200px;
