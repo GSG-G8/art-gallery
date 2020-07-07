@@ -6,19 +6,22 @@ import { message, Spin, Button, Alert, Upload, Form } from 'antd';
 
 import AddProduct from '../AddProduct';
 import AuthorizationContext from '../../Contexts/AuthorizationContext';
-import PaintingSection from '../PaintingSection/PaintingsSection.js';
+import PaintingSection from '../PaintingSection/PaintingsSection';
+import EditArtistProfile from '../EditArtistProfile';
 
 import './style.css';
 
 function Profile({ match }) {
   const [profileData, setProfileData] = useState();
   const [showForm, setShowForm] = useState(false);
+  const [showFormEdit, setShowFormEdit] = useState(false);
   const [paintings, setPaintings] = useState();
   const [error, setError] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [ArtistImg, setArtistImg] = useState();
   const cloudinaryLink =
     'https://res.cloudinary.com/dacf3uopo/image/upload/v1593353472/';
+  const { artistId } = match.params;
 
   const getArtistProfile = async (id) => {
     try {
@@ -35,9 +38,9 @@ function Profile({ match }) {
     }
   };
 
-  const getAllPainting = async (artistId) => {
+  const getAllPainting = async (id) => {
     try {
-      const { data } = await Axios.get(`/api/v1/paintingsArtist/${artistId}`);
+      const { data } = await Axios.get(`/api/v1/paintingsArtist/${id}`);
       if (data.statusCode === 200) {
         setPaintings(data.data);
       }
@@ -55,16 +58,18 @@ function Profile({ match }) {
     }
   };
   useEffect(() => {
-    getArtistProfile(match.params.artistId);
+    getArtistProfile(artistId);
   }, [ArtistImg]);
 
   useEffect(() => {
-    getAllPainting(match.params.artistId);
+    getAllPainting(artistId);
   }, []);
 
   const hideForm = () => setShowForm(false);
+  const hideFormEdit = () => setShowFormEdit(false);
+
   useEffect(() => {
-    getArtistProfile(match.params.artistId);
+    getArtistProfile(artistId);
   }, []);
 
   const deletePainting = async (paintingID) => {
@@ -92,7 +97,7 @@ function Profile({ match }) {
       if (statusCode === 200 && msg === 'Image added successfully') {
         setLoaded(false);
         message.success('تم تعديل الصورة الشخصية بنجاح');
-        getArtistProfile(match.params.artistId);
+        getArtistProfile(artistId);
       }
     } catch (err) {
       if (err.response.data.message[0] === 'Should be an image png or jpeg') {
@@ -104,8 +109,7 @@ function Profile({ match }) {
     }
   };
 
-  const isAuth = (user) =>
-    user.role === 'artist' && user.id === +match.params.artistId;
+  const isAuth = (user) => user.role === 'artist' && user.id === +artistId;
 
   return (
     <div className="profile-container">
@@ -197,8 +201,23 @@ function Profile({ match }) {
         </div>
         <div className="left-header">
           <AuthorizationContext.Consumer>
-            {({ user }) => isAuth(user) && <Button>تعديل البيانات</Button>}
+            {({ user }) =>
+              isAuth(user) && (
+                <Button onClick={() => setShowFormEdit(true)}>
+                  تعديل بيانات الحساب
+                </Button>
+              )
+            }
           </AuthorizationContext.Consumer>
+          {showFormEdit && (
+            <EditArtistProfile
+              profileData={profileData}
+              showForm={showFormEdit}
+              hideForm={hideFormEdit}
+              updateProfile={getArtistProfile}
+              artistId={artistId}
+            />
+          )}
         </div>
       </header>
       <div className="painting-container">
