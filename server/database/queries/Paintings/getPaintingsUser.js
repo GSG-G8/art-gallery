@@ -1,9 +1,9 @@
 const connection = require('../../connection');
 
-const getPaintingsForUser = (cId, pId) =>
+const getPaintingsForUser = (cId) =>
   connection.query({
-    text: 'SELECT * FROM cart WHERE customer_id=$1 and painting_id=$2',
-    values: [cId, pId],
+    text: 'SELECT * FROM cart WHERE customer_id=$1',
+    values: [cId],
   });
 
 module.exports = getPaintingsForUser;
