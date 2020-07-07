@@ -174,14 +174,15 @@ function Profile({ match }) {
                   isAuth(user) && (
                     <p>
                       <span>رصيدك الحالي يساوي :</span>
-                      {profileData.budget} شيكل{' '}
+                      {profileData.budget ? profileData.budget : ' '} $
                     </p>
                   )
                 }
               </AuthorizationContext.Consumer>
-              <p>{profileData.bio}</p>
+              <p>{profileData.bio ? profileData.bio : ' '}</p>
               <p>
-                <span>رقم الهاتف : </span> {profileData.mobile_no}
+                <span>رقم الهاتف : </span>{' '}
+                {profileData.mobile_no ? profileData.mobile_no : ''}
               </p>
               {profileData.social_media_accounts && (
                 <div className="social_media">
