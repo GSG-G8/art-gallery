@@ -29,21 +29,38 @@ const AddProduct = ({ showForm, hideForm }) => {
   const [error, setError] = useState();
   const [paintingImg, setPaintingImg] = useState();
   const [category, setCategory] = useState();
+  const [sizeProp, setSizeProp] = useState([]);
+  const [priceProp, setPriceProp] = useState([]);
+  // const [property, setProperty] = useState({});
+
+  const requiredField = sizeProp.length && priceProp.length ? 'false' : 'true';
+
+  // const obj = {};
+  // for (const i in sizeProp) {
+  //   for (const j in priceProp) {
+  //     obj[i] = j;
+  //   }
+  // }
+  // setProperty({ ...property, obj });
 
   const handleCategories = (value) => {
     setCategory(value);
   };
+  const addProp = ({ size, price }) => {
+    setSizeProp([...sizeProp, size]);
+    setPriceProp([...priceProp, price]);
+    // setProperty([...property, { [size]: price }]);
+  };
 
-  const onFinish = async ({ title, description, size, price }) => {
+  const onFinish = async ({ title, description }) => {
     const formData = new FormData();
-
     formData.append('paintingImg', paintingImg);
     formData.append(
       'data',
       JSON.stringify({
         title,
         description,
-        property: JSON.stringify({ size, price }),
+        property: JSON.stringify({ sizeProp, priceProp }),
         category,
       })
     );
@@ -111,43 +128,65 @@ const AddProduct = ({ showForm, hideForm }) => {
           <div className="cat-div">
             <span>نوع اللوحة : </span>
             <Select style={{ width: 120 }} onChange={handleCategories}>
-              <Option value="nature">طبيعة</Option>
+              <Option value="landscape">طبيعة</Option>
               <Option value="islamic">اسلامي</Option>
               <Option value="sky">سماء</Option>
-              <Option value="hertage">ثقافة</Option>
+              <Option value="hertiage">ثقافة</Option>
               <Option value="other">غير ذلك</Option>
             </Select>
           </div>
-          <Form.Item
-            name="size"
-            rules={[
-              {
-                required: true,
-                message: 'رجاءً قم بادخال حجم اللوحة   !',
-              },
-            ]}
+          <Form
+            layout="inline"
+            className="addProduct-form-prop"
+            onFinish={addProp}
           >
-            <Input
-              prefix={<MdPhotoSizeSelectLarge />}
-              placeholder="حجم اللوحة"
-              className="form-input"
-            />
-          </Form.Item>
-          <Form.Item
-            name="price"
-            rules={[
-              {
-                required: true,
-                message: 'رجاءً قم بادخال سعر اللوحة   !',
-              },
-            ]}
-          >
-            <Input
-              prefix={<RiPriceTag2Line />}
-              placeholder="سعر اللوحة"
-              className="form-input"
-            />
-          </Form.Item>
+            <Form.Item
+              name="size"
+              rules={[
+                {
+                  required: { requiredField },
+                  message: 'رجاءً قم بادخال حجم اللوحة   !',
+                },
+              ]}
+            >
+              <Input
+                prefix={<MdPhotoSizeSelectLarge />}
+                placeholder="حجم اللوحة"
+                className="form-input"
+              />
+            </Form.Item>
+            <Form.Item
+              name="price"
+              rules={[
+                {
+                  required: { requiredField },
+                  message: 'رجاءً قم بادخال سعر اللوحة   !',
+                },
+              ]}
+            >
+              <Input
+                prefix={<RiPriceTag2Line />}
+                placeholder="سعر اللوحة"
+                className="form-input"
+              />
+            </Form.Item>
+            <Form.Item>
+              <Button className="btn-prop" type="primary" htmlType="submit">
+                اضافة خاصية
+              </Button>
+            </Form.Item>{' '}
+          </Form>
+          <div className="div-prop">
+            <div>
+              {sizeProp.length > 0 &&
+                sizeProp.map((el) => <p key={`${el}11`}>{el}</p>)}
+            </div>
+            <div>
+              {' '}
+              {priceProp.length &&
+                priceProp.map((el) => <p key={`${el}11`}>{el}$</p>)}
+            </div>
+          </div>
           <Form.Item name="paintingImg">
             <Upload
               type="file"
@@ -156,7 +195,7 @@ const AddProduct = ({ showForm, hideForm }) => {
                 return false;
               }}
               onRemove={() => setPaintingImg(null)}
-              value={paintingImg}
+              fileList={paintingImg}
             >
               <Button>
                 <BsUpload /> تحميل صورة اللوحة
