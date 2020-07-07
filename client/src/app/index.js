@@ -6,7 +6,6 @@ import {
   Redirect,
 } from 'react-router-dom';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import * as ROUTES from '../constants/routes';
 import LogoutContext from '../Contexts/LogoutContext';
 import AuthorizationContext from '../Contexts/AuthorizationContext';
@@ -178,7 +177,4 @@ function App() {
   );
 }
 
-App.propTypes = {
-  match: PropTypes.string,
-};
 export default App;

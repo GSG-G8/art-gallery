@@ -4,7 +4,7 @@ import { Form, Input, Button, message, Spin, Alert } from 'antd';
 import propTypes from 'prop-types';
 import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
 import * as ROUTES from '../../../constants/routes';
-import './style.css';
+import '../../Login/style.css';
 
 const AdminLogin = (props) => {
   const [loaded, setLoaded] = useState(false);
@@ -42,8 +42,8 @@ const AdminLogin = (props) => {
     }
   };
   return (
-    <div className="admin-form-container">
-      <div className="admin-container">
+    <div className="main-form-container">
+      <div className="form-container">
         <h2 className="form-title">أهلًا بك</h2>
         <Form
           name="normal_login"
