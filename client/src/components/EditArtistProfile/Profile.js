@@ -22,7 +22,7 @@ function Profile({ match }) {
 
   useEffect(() => {
     getArtistProfile(artistId);
-  }, []);
+  }, [artistId]);
   return (
     <>
       <AuthorizationContext.Consumer>

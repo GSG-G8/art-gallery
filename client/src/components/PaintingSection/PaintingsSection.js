@@ -125,15 +125,20 @@ function PaintingsSection({ paintings, deletePainting }) {
               <Empty />
             )}
           </div>
-          <Pagination
-            total={paintings.length}
-            showTotal={(total, range) =>
-              `${range[0]}-${range[1]} of ${total} items`
-            }
-            defaultCurrent={1}
-            defaultPageSize={6}
-            onChange={handlePageChange}
-          />
+          <div className="paintingsPag">
+            {' '}
+            <div className="paintingsPag">
+              <Pagination
+                total={paintings.length}
+                showTotal={(total, range) =>
+                  `${range[0]}-${range[1]} of ${total} items`
+                }
+                defaultCurrent={1}
+                defaultPageSize={6}
+                onChange={handlePageChange}
+              />
+            </div>
+          </div>
         </>
       )}
     </>

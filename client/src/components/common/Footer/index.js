@@ -27,15 +27,15 @@ const Footer = () => {
         <div className="contact-container">
           <h3 className="contact-title">تواصل معنا</h3>
           <div className="contact-icons">
-            <div className="icon-1">
+            <div className="iconDev">
               <FaMapMarker className="icons" size="1.2em" />
-              <p>غزة - فلسطين</p>
+              <span>غزة - فلسطين</span>
             </div>
-            <div className="icon-2">
+            <div className="iconDev">
               <FaPhone className="icons" size="1.2em" />
-              <p>+972-000000</p>
+              <span>+972-000000</span>
             </div>
-            <div className="icon-3">
+            <div className="iconDev">
               <a
                 href="mailto:berwaz.g@gmail.com"
                 target="_blank"
@@ -43,17 +43,17 @@ const Footer = () => {
               >
                 <FaEnvelope className="icons" size="1.2em" />
               </a>
-              <p>berwaz.g@gmail.com</p>
+              <span>berwaz.g@gmail.com</span>
             </div>
-            <div className="icon-4">
+            <div className="iconDev">
               <a
                 href="https://skype.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaSkype className="icons" size="1.4em" />
+                <FaSkype className="icons" size="1.2em" />
               </a>
-              <p>berwaz</p>
+              <span>berwaz</span>
             </div>
           </div>
         </div>
@@ -65,21 +65,21 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaTwitter className="icons" size="2em" />
+              <FaTwitter size="1.2em" />
             </a>
             <a
               href="https://pinterest.com"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaPinterest className="icons" size="2em" />
+              <FaPinterest size="1.2em" />
             </a>
             <a
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaInstagram className="icons" size="2em" />
+              <FaInstagram size="1.2em" />
             </a>
 
             <a
@@ -87,14 +87,14 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaFacebook className="icons" size="2em" />
+              <FaFacebook size="1.2em" />
             </a>
             <a
               href="https://www.behance.net"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaBehance className="icons" size="2em" />
+              <FaBehance size="1.2em" />
             </a>
           </div>
         </div>
