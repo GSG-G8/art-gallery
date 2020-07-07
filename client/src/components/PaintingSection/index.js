@@ -10,10 +10,10 @@ import {
   message,
 } from 'antd';
 import PaintingSection from './PaintingsSection';
-import './index.css';
+import './style.css';
 
 const categories = [
-  { name: ['hertage', 'تراث'] },
+  { name: ['heritage', 'تراث'] },
   { name: ['sky', 'سماء'] },
   { name: ['nature', 'طبيعة'] },
   { name: ['islamic', 'فن إسلامي'] },
@@ -113,7 +113,7 @@ function PaintingContainer() {
 
   return (
     <>
-      <div className="container">
+      <div className="landing__container">
         <div className="container__filter">
           <div>
             <Select

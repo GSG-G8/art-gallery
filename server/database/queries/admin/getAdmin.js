@@ -6,8 +6,6 @@ const getAdminEmail = (email) =>
     values: [email],
   });
 const getAdminBudget = () =>
-  connection.query({
-    text: `SELECT budget FROM admin WHERE id=1`,
-  });
+  connection.query('SELECT budget FROM admin WHERE id=1');
 
 module.exports = { getAdminEmail, getAdminBudget };

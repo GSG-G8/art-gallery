@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import Axios from 'axios';
 import {
-  notification,
   Table,
   Space,
   Button,
@@ -10,6 +9,7 @@ import {
   Input,
   Select,
   Empty,
+  message,
 } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
@@ -31,22 +31,14 @@ const CartPage = () => {
     try {
       const {
         data: { data },
-      } = await axios.get('/api/v1/cart');
+      } = await Axios.get('/api/v1/cart');
       if (data) {
         setCartData(data);
       } else {
         setCartData([]);
       }
     } catch (err) {
-      const {
-        response: {
-          data: { message },
-        },
-      } = err;
-      notification.error({
-        message: 'خطأ في السيرفر، يرجى المحاولة لاحقًا',
-        description: message,
-      });
+      message.error('خطأ في السيرفر، يرجى المحاولة لاحقًا');
     }
   };
 
@@ -64,21 +56,13 @@ const CartPage = () => {
       cancelText: 'لا',
       onOk: async () => {
         try {
-          await axios.delete(`/api/v1/cart/${id}`);
-          notification.success({
-            message: 'تم حذف اللوحة من عربة التسوق',
-          });
-          setCartData(cartData.filter((painting) => painting.id !== id));
+          await Axios.delete(`/api/v1/cart/${id}`);
+          message.success('تم حذف اللوحة من عربة التسوق');
+          setCartData(
+            cartData.filter((painting) => painting.painting_id !== id)
+          );
         } catch (err) {
-          const {
-            response: {
-              data: { message },
-            },
-          } = err;
-          notification.error({
-            message: 'Error 401 Un-Authorized',
-            description: message,
-          });
+          message.error('حدث خطا في حذف اللوحة');
         }
       },
     });
@@ -87,33 +71,26 @@ const CartPage = () => {
   const onCreate = async (values) => {
     try {
       const { paintingId, property } = values;
-      const { id } = checkoutData;
-      await axios.post('/api/v1/paintings/buy', {
+      await Axios.post('/api/v1/paintings/buy', {
         paintingId,
         property,
       });
-      await axios.delete(`/api/v1/cart/${id}`);
-      notification.success({
-        message: 'تمت عملية الشراء بنجاح',
-      });
-      setCartData(cartData.filter((painting) => painting.id !== id));
+      await Axios.delete(`/api/v1/cart/${paintingId}`);
+      message.success('تمت عملية الشراء بنجاح');
+      setCartData(
+        cartData.filter((painting) => painting.painting_id !== paintingId)
+      );
       setVisible(false);
     } catch (err) {
-      const {
-        response: {
-          data: { message },
-        },
-      } = err;
-      if (message === "Sorry You don't have enough money for this operation") {
-        notification.error({
-          message: 'لا يوجد رصيد كافٍ',
-          description:
-            'عذرًا ولكنك لا تملك في رصيدك ما يكفي لإتمام هذه العملية، يُرجى المحاولة بعد شحن الرصيد',
-        });
+      if (
+        err.response.data.message ===
+        "Sorry You don't have enough money for this operation"
+      ) {
+        message.error(
+          'عذرًا ولكنك لا تملك في رصيدك ما يكفي لإتمام هذه العملية، يُرجى المحاولة بعد شحن الرصيد'
+        );
       } else {
-        notification.error({
-          message,
-        });
+        message.error('حدث خطا في عملية الشراء');
       }
     }
   };
@@ -166,7 +143,7 @@ const CartPage = () => {
               onCreate(values);
             })
             .catch((info) => {
-              notification.error({
+              message.error({
                 message: 'خطأ في إدخال المعلومات',
                 description: info.errorFields[0].errors,
               });
@@ -257,7 +234,7 @@ const CartPage = () => {
           </Button>
           <Button
             type="danger"
-            onClick={() => deleteCart(dataIndex.id, dataIndex.title)}
+            onClick={() => deleteCart(dataIndex.painting_id, dataIndex.title)}
           >
             حذف
           </Button>

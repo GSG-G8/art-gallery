@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
 import { Form, Input, Button, message, Spin, Alert, Radio } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { AiOutlineMail, AiOutlineUser, AiOutlineLock } from 'react-icons/ai';
 import * as ROUTES from '../../constants/routes';
 import '../Login/style.css';
 
-const Register = (props) => {
+const Register = () => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState();
   const [role, setRole] = useState('customer');
   const [customized, setCustomized] = useState(false);
+
+  const history = useHistory();
 
   const onFinish = async ({
     email,
@@ -32,7 +34,6 @@ const Register = (props) => {
         customized,
       });
       const name = data.message?.split(',');
-      const { history } = props;
       message.success(`مرحبا, ${name[1]} تم تسجيل حسابك بنجاح`);
       setLoaded(false);
       history.push(ROUTES.HOME_PAGE);
@@ -49,8 +50,6 @@ const Register = (props) => {
           default:
             e = 'حصل خطأ غير متوقع حاول مجددًا مرةً أخرى';
         }
-      } else {
-        e = 'حصل خطأ غير متوقع حاول مجددًا مرةً أخرى';
       }
       setError(e);
       setLoaded(false);

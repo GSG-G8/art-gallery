@@ -26,7 +26,7 @@ const AdminPage = () => {
     getAdminBudget();
   }, []);
 
-  const getAllArtistData = async () => {
+  const getAllArtistsData = async () => {
     try {
       setLoading(true);
       const { data } = await Axios.get('/api/v1/artists');
@@ -44,7 +44,7 @@ const AdminPage = () => {
       } = await Axios.patch(`/api/v1/admin/artist/${id}`);
       if (statusCode === 200 && msg) {
         message.success('تم تفعيل /الغاء تفعيل الحساب بنجاح');
-        getAllArtistData();
+        getAllArtistsData();
       }
     } catch (err) {
       if (err.response) {
@@ -53,7 +53,7 @@ const AdminPage = () => {
     }
   };
   useEffect(() => {
-    getAllArtistData();
+    getAllArtistsData();
   }, []);
 
   return (
