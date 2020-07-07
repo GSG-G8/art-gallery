@@ -36,7 +36,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.use('/api/v1', routes);
 app.use(error);
 
 module.exports = app;
