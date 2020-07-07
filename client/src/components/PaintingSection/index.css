@@ -1,0 +1,70 @@
+@import "~antd/dist/antd.css";
+
+.container {
+  width: 80vw;
+  margin: 5% auto;
+}
+.search__category {
+  width: 80%;
+  margin: 0 auto;
+}
+.container__paintings {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 0 auto;
+  padding: 2% 0;
+  justify-content: space-around;
+  background-color: rgb(240, 234, 234);
+}
+
+.flip-card {
+  background-color: transparent;
+  border: 1px solid #f1f1f1;
+}
+
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.flip-card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  color: white;
+  transform: rotateY(180deg);
+  font-size: larger;
+}
+
+.moreBtn {
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 40%;
+}
+
+.deleteBtn {
+  margin-left: 200px;
+  margin-top: 20px;
+}

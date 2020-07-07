@@ -9,6 +9,7 @@ const {
 } = require('./buyPaintings');
 const deletePaintingsQuery = require('./deletePaintingsQuery');
 const getPaintingCategory = require('./getPaintingCategory');
+const getPaintQuery = require('./getPaintingInfoQ');
 
 module.exports = {
   getPaintingsQuery,
@@ -20,4 +21,5 @@ module.exports = {
   getPaintingCategory,
   addPaintingQuery,
   updateBudgets,
+  getPaintQuery,
 };

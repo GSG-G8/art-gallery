@@ -1,0 +1,49 @@
+.main-navbar-container {
+  width: 100%;
+  background-color: #f3e9ea;
+}
+.navbar-container {
+  margin: auto;
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+}
+
+.nav-right {
+  width: 70px;
+  height: 70px;
+  align-items: flex-start;
+}
+
+.nav-logo {
+  width: 100%;
+}
+
+.nav-left {
+  display: flex;
+  margin-top: 20px;
+}
+
+.nav-logout-btn {
+  background-color: #955f83;
+  color: white;
+  border: #955f83;
+  text-align: center;
+}
+
+.sign-up-link {
+  color: #955f83;
+  width: 100px;
+}
+
+.login-link {
+  color: #955f83;
+  width: 100px;
+}
+
+.cart-icon {
+  margin-left: 25px;
+  margin-right: 10px;
+  color: #955f83;
+  font-size: 25px;
+}
