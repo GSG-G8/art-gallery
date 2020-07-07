@@ -6,7 +6,7 @@
   width: 80%;
   margin: 0 auto;
 }
-.ant-radio-group {
+.catInputs .ant-radio-group {
   display: flex !important;
   justify-content: center !important;
   flex-wrap: wrap;
@@ -20,19 +20,11 @@
   padding: 2% auto;
   justify-content: space-around;
 }
-<<<<<<< HEAD:client/src/components/PaintingSection/style.css
-.container__paintings img{
-=======
 .container__paintings img {
->>>>>>> 92665a410a4ee39a371375e6fd692b392fc57462:client/src/components/PaintingSection/style.css
   padding: 10px;
 }
 .ant-pagination-rtl {
   margin-top: 10px !important;
-<<<<<<< HEAD:client/src/components/PaintingSection/style.css
-
-=======
->>>>>>> 92665a410a4ee39a371375e6fd692b392fc57462:client/src/components/PaintingSection/style.css
 }
 .flip-card {
   background-color: transparent;
@@ -87,20 +79,6 @@
   margin-left: 200px;
   margin-top: 20px;
 }
-<<<<<<< HEAD:client/src/components/PaintingSection/style.css
-.paintings{
-  margin-top: 20px;
-}
-.ant-pagination-item-active a{
-  color: white !important;
-}
-@media  (max-width: 600px) {
-  .container__paintings {
-    width: 100%;
-    border:none;
-  }
-
-=======
 .paintings {
   margin-top: 20px;
 }
@@ -116,5 +94,4 @@
     width: 100%;
     border: none;
   }
->>>>>>> 92665a410a4ee39a371375e6fd692b392fc57462:client/src/components/PaintingSection/style.css
 }
