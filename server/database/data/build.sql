@@ -50,7 +50,9 @@ CREATE TABLE artist
         artist_id INTEGER REFERENCES artist(id) ON UPDATE CASCADE ON DELETE CASCADE,
         customer_id INTEGER REFERENCES customer(id) ON UPDATE CASCADE ON DELETE CASCADE,
         rate INTEGER NOT NULL,
-        details text NOT NULL
+        details text NOT NULL,
+        review_date TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+
     );
 
     CREATE TABLE cart
