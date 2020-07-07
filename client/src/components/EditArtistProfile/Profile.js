@@ -4,10 +4,12 @@ import Axios from 'axios';
 import { message, Button } from 'antd';
 import EditProfileForm from './index';
 import AuthorizationContext from '../../Contexts/AuthorizationContext';
+import AddReview from '../ReviewForm';
 
 function Profile({ match }) {
   const [profileData, setProfileData] = useState();
   const [showForm, setShowForm] = useState(false);
+  const [reviewVisible, setReviewVisible] = useState(false);
   const { artistId } = match.params;
 
   const getArtistProfile = async (id) => {
@@ -19,6 +21,7 @@ function Profile({ match }) {
     }
   };
   const hideForm = () => setShowForm(false);
+  const hideReview = () => setReviewVisible(false);
 
   useEffect(() => {
     getArtistProfile(artistId);
@@ -35,6 +38,23 @@ function Profile({ match }) {
           )
         }
       </AuthorizationContext.Consumer>
+      <AuthorizationContext.Consumer>
+        {({ user: { role } }) =>
+          role === 'customer' && (
+            <Button onClick={() => setReviewVisible(true)}>
+              {' '}
+              أضف تقييم الفنان
+            </Button>
+          )
+        }
+      </AuthorizationContext.Consumer>
+      {reviewVisible && (
+        <AddReview
+          reviewVisible={reviewVisible}
+          hideReview={hideReview}
+          artistID={artistId}
+        />
+      )}
       {showForm && (
         <EditProfileForm
           profileData={profileData}
