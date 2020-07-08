@@ -176,6 +176,7 @@ const AddProduct = ({ showForm, hideForm }) => {
                       </>
 
                       <FiMinusCircle
+                        className="btn-add-icon"
                         onClick={() => {
                           remove(field.name);
                         }}
