@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import Axios from 'axios';
 import { FaFacebook, FaInstagram, FiEdit } from 'react-icons/all';
-import { message, Spin, Button, Alert, Upload, Form } from 'antd';
+import { message, Spin, Button, Alert, Upload, Form, Rate } from 'antd';
 
 import AddProduct from '../AddProduct';
 import AuthorizationContext from '../../Contexts/AuthorizationContext';
@@ -23,6 +23,7 @@ function Profile({ match }) {
   const [loaded, setLoaded] = useState(false);
   const [ArtistImg, setArtistImg] = useState();
   const [reviewVisible, setReviewVisible] = useState(false);
+  const [totalReviews, setTotalReviews] = useState();
   const [reviews, setReviews] = useState();
 
   const cloudinaryLink =
@@ -52,6 +53,10 @@ function Profile({ match }) {
       const { data } = await Axios.get(`/api/v1/review/${id}`);
       if (data.statusCode === 200) {
         setReviews(data.data);
+        const totalRate =
+          data.data.reduce((sum, current) => sum + current.rate, 0) /
+          data.data.length;
+        setTotalReviews(totalRate);
       }
     } catch (err) {
       let e;
@@ -215,6 +220,9 @@ function Profile({ match }) {
                 }
               </AuthorizationContext.Consumer>
               <p>{profileData.bio ? profileData.bio : ' '}</p>
+              {totalReviews && (
+                <Rate allowHalf disabled defaultValue={totalReviews} />
+              )}
               <p>
                 <span>رقم الهاتف : </span>{' '}
                 {profileData.mobile_no ? profileData.mobile_no : ''}
