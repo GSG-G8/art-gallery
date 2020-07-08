@@ -14,8 +14,8 @@ import {
 } from 'antd';
 import {
   BsUpload,
-  FaMinus,
-  FaPlus,
+  FiMinusCircle,
+  FiPlusCircle,
   MdDescription,
   MdSubtitles,
 } from 'react-icons/all';
@@ -175,7 +175,7 @@ const AddProduct = ({ showForm, hideForm }) => {
                         </Form.Item>
                       </>
 
-                      <FaMinus
+                      <FiMinusCircle
                         onClick={() => {
                           remove(field.name);
                         }}
@@ -191,7 +191,7 @@ const AddProduct = ({ showForm, hideForm }) => {
                       }}
                       block
                     >
-                      <FaPlus /> أضف حجماً جديد
+                      <FiPlusCircle /> أضف حجماً جديد
                     </Button>
                   </Form.Item>
                 </div>
