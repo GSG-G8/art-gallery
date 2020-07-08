@@ -1,13 +1,19 @@
+.main-container-footer{
+  width: 100%;
+  background-color:#f3e9ea ;
+
+}
 .footer-container {
-  height: 40vh;
   display: flex;
+  width: 90%;
   background-color: #f3e9ea;
+  margin: auto;
+  padding: 40px;
 }
 
 .logo-container {
   width: 30%;
-  margin-right: 60px;
-  margin-top: 20px;
+  align-self: center;
 }
 
 .logo-container img {
@@ -17,11 +23,14 @@
 .logo-container p {
   text-align: right;
   color: darkslategray;
+  width: 85%;
 }
 
 .contact-container {
   display: flex;
   flex-direction: column;
+  align-self: center;
+  justify-content: center;
 }
 .follow-icons {
   width: 30%;
@@ -30,9 +39,6 @@
   color: #955f83;
   text-align: right;
   font-weight: bold;
-}
-.contact-container {
-  margin: auto;
 }
 .contact-icons {
   text-align: right;
@@ -50,11 +56,17 @@
   flex-direction: row;
   justify-content: space-between;
 }
+.copy-right-container{
+  width: 100%;
+  background-color: white;
+}
 .copy-right {
   display: flex;
   justify-content: space-around;
+  padding-top: 10px;
   width: 60%;
-  margin-top: 20px;
+  margin-right:50px;
+  background-color: white;
 }
 
 .copy-right p {
@@ -63,8 +75,9 @@
 
 .follow-container {
   width: 150px;
-  margin-top: 50px;
-  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
 }
 
 .follow-container h3 {
@@ -89,4 +102,22 @@
 .icons {
   color: #636d73;
   margin-left: 10px;
+}
+@media(max-width: 700px){
+  .footer-container{
+    flex-direction: column;
+  }
+  .logo-container{
+    width: 80%;
+  }
+  .contact-container{
+    width: 80%;
+    margin: auto;
+  }
+  .follow-container{
+    justify-content: flex-end;
+    margin-right: 60px;
+    align-self: flex-start;
+    margin-top: 10px;
+  }
 }
