@@ -33,20 +33,14 @@ const AddProduct = ({ showForm, hideForm }) => {
   const onFinish = async ({ props, size, price, ...values }) => {
     const obj = {};
     obj[size] = price;
-    let body;
-    if (props.length !== 0) {
+    if (props) {
       // eslint-disable-next-line no-return-assign
       props.map((el) => (obj[el.size] = el.price));
-      body = {
-        ...values,
-        property: obj,
-      };
-    } else {
-      body = {
-        ...values,
-        obj,
-      };
     }
+    const body = {
+      ...values,
+      property: obj,
+    };
 
     const formData = new FormData();
 
