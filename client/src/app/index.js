@@ -5,7 +5,7 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
-import axios from 'axios';
+import Axios from 'axios';
 import * as ROUTES from '../constants/routes';
 import LogoutContext from '../Contexts/LogoutContext';
 import AuthorizationContext from '../Contexts/AuthorizationContext';
@@ -15,6 +15,7 @@ import Register from '../components/Register';
 import Painting from '../components/Details';
 import ProfilePage from '../containers/ProfilePage';
 import LandingPage from '../containers/LandingPage';
+import AdminDashboard from '../components/Admin';
 import AdminLogin from '../components/Admin/login';
 import CartPage from '../containers/CartPage';
 
@@ -32,7 +33,7 @@ function App() {
         data: {
           data: { id, role },
         },
-      } = await axios.get('/api/v1/is-auth');
+      } = await Axios.get('/api/v1/is-auth');
       setUser({ id, role });
       switch (role) {
         case 'customer':
@@ -77,7 +78,7 @@ function App() {
 
   const logout = async () => {
     try {
-      await axios.get('/api/v1/logout');
+      await Axios.get('/api/v1/logout');
       setUser({});
       setLogged(false);
       setCustomerAuth(false);
@@ -127,6 +128,19 @@ function App() {
               />
               <Route
                 exact
+                path={ROUTES.ADMIN_DASHBOARD_PAGE}
+                render={() =>
+                  !logged ? (
+                    <Redirect to={ROUTES.ADMIN_LOGIN_PAGE} />
+                  ) : artistAuth || customerAuth ? (
+                    <Redirect to={ROUTES.HOME_PAGE} />
+                  ) : adminAuth ? (
+                    <AdminDashboard />
+                  ) : null
+                }
+              />
+              <Route
+                exact
                 path={ROUTES.ADMIN_LOGIN_PAGE}
                 render={(props) =>
                   !logged ? (
@@ -139,14 +153,12 @@ function App() {
               <Route
                 exact
                 path={ROUTES.ADMIN_DASHBOARD_PAGE}
-                render={() =>
-                  !logged ? (
+                render={(props) =>
+                  logged && adminAuth ? (
+                    <AdminDashboard {...props} setLogged={setLogged} />
+                  ) : (
                     <Redirect to={ROUTES.ADMIN_LOGIN_PAGE} />
-                  ) : artistAuth || customerAuth ? (
-                    <Redirect to={ROUTES.HOME_PAGE} />
-                  ) : adminAuth ? (
-                    <h1>Dash Board</h1>
-                  ) : null
+                  )
                 }
               />
 

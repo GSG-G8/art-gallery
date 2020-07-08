@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Axios from 'axios';
 import { Form, Input, Button, message, Spin, Alert } from 'antd';
 import propTypes from 'prop-types';
@@ -9,6 +10,7 @@ import '../../Login/style.css';
 const AdminLogin = (props) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState();
+  const history = useHistory();
 
   const onFinish = async ({ email, password }) => {
     try {
@@ -18,7 +20,7 @@ const AdminLogin = (props) => {
         password,
         role: 'admin',
       });
-      const { history, setLogged } = props;
+      const { setLogged } = props;
       message.success('تم تسجيل الدخول بنجاح');
       setLoaded(false);
       setLogged(true);
