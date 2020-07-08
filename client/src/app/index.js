@@ -5,8 +5,7 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
-import axios from 'axios';
-import PropTypes from 'prop-types';
+import Axios from 'axios';
 import * as ROUTES from '../constants/routes';
 import LogoutContext from '../Contexts/LogoutContext';
 import AuthorizationContext from '../Contexts/AuthorizationContext';
@@ -17,7 +16,7 @@ import Painting from '../components/Details';
 import ProfilePage from '../containers/ProfilePage';
 import LandingPage from '../containers/LandingPage';
 import AdminDashboard from '../components/Admin';
-
+import AdminLogin from '../components/Admin/login';
 import CartPage from '../containers/CartPage';
 
 function App() {
@@ -25,6 +24,7 @@ function App() {
   const [logged, setLogged] = useState(false);
   const [customerAuth, setCustomerAuth] = useState(false);
   const [artistAuth, setArtistAuth] = useState(false);
+  const [adminAuth, setAdminAuth] = useState(false);
   const [redirect, setRedirect] = useState();
 
   const getAuth = async () => {
@@ -33,34 +33,41 @@ function App() {
         data: {
           data: { id, role },
         },
-      } = await axios.get('/api/v1/is-auth');
+      } = await Axios.get('/api/v1/is-auth');
       setUser({ id, role });
       switch (role) {
         case 'customer':
           setLogged(true);
           setCustomerAuth(true);
           setArtistAuth(false);
+          setAdminAuth(false);
           setRedirect(false);
           break;
         case 'artist':
           setLogged(true);
           setArtistAuth(true);
           setCustomerAuth(false);
+          setAdminAuth(false);
           setRedirect(false);
           break;
         case 'admin':
           setLogged(true);
+          setAdminAuth(true);
+          setArtistAuth(false);
+          setCustomerAuth(false);
           setRedirect(false);
           break;
         default:
           setLogged(false);
           setArtistAuth(false);
           setCustomerAuth(false);
+          setAdminAuth(false);
           setRedirect(true);
       }
     } catch (err) {
       setLogged(false);
       setArtistAuth(false);
+      setAdminAuth(false);
       setCustomerAuth(false);
       setRedirect(true);
     }
@@ -71,16 +78,18 @@ function App() {
 
   const logout = async () => {
     try {
-      await axios.get('/api/v1/logout');
+      await Axios.get('/api/v1/logout');
       setUser({});
       setLogged(false);
       setCustomerAuth(false);
       setArtistAuth(false);
+      setAdminAuth(false);
       setRedirect(true);
     } catch (err) {
       setLogged(logged);
       setCustomerAuth(customerAuth);
       setArtistAuth(artistAuth);
+      setAdminAuth(adminAuth);
       setRedirect(redirect);
     }
   };
@@ -94,11 +103,6 @@ function App() {
                 exact
                 path={ROUTES.HOME_PAGE}
                 render={() => <LandingPage />}
-              />
-              <Route
-                exact
-                path={ROUTES.ADMIN_DASHBOARD_PAGE}
-                component={AdminDashboard}
               />
               <Route
                 exact
@@ -118,6 +122,41 @@ function App() {
                   )
                 }
               />
+              <Route
+                exact
+                path={ROUTES.ADMIN_DASHBOARD_PAGE}
+                render={() =>
+                  !logged ? (
+                    <Redirect to={ROUTES.ADMIN_LOGIN_PAGE} />
+                  ) : artistAuth || customerAuth ? (
+                    <Redirect to={ROUTES.HOME_PAGE} />
+                  ) : adminAuth ? (
+                    <AdminDashboard />
+                  ) : null
+                }
+              />
+              <Route
+                exact
+                path={ROUTES.ADMIN_LOGIN_PAGE}
+                render={(props) =>
+                  !logged ? (
+                    <AdminLogin {...props} setLogged={setLogged} />
+                  ) : (
+                    <Redirect to={ROUTES.ADMIN_DASHBOARD_PAGE} />
+                  )
+                }
+              />
+              <Route
+                exact
+                path={ROUTES.ADMIN_DASHBOARD_PAGE}
+                render={(props) =>
+                  logged && adminAuth ? (
+                    <AdminDashboard {...props} setLogged={setLogged} />
+                  ) : (
+                    <Redirect to={ROUTES.ADMIN_LOGIN_PAGE} />
+                  )
+                }
+              />
 
               <Route
                 exact
@@ -129,25 +168,19 @@ function App() {
                 render={(props) => <Painting {...props} />}
               />
 
-              {customerAuth ? (
-                <Switch>
-                  <Route exact path={ROUTES.CART_PAGE} component={CartPage} />
-                  <Route
-                    exact
-                    path={ROUTES.CHECKOUT_PAGE}
-                    render={() => <h1>CHECKOUT page</h1>}
-                  />
-                  <Route
-                    exact
-                    path={ROUTES.REVIEW_PAGE}
-                    render={() => <h1>REVIEW PAGE</h1>}
-                  />
-                </Switch>
-              ) : redirect ? (
-                <Redirect to={ROUTES.LOGIN_PAGE} />
-              ) : (
-                <Redirect to={ROUTES.HOME_PAGE} />
-              )}
+              <Route
+                exact
+                path={ROUTES.CART_PAGE}
+                render={() => {
+                  return customerAuth ? (
+                    <CartPage />
+                  ) : redirect ? (
+                    <Redirect to={ROUTES.LOGIN_PAGE} />
+                  ) : (
+                    <Redirect to={ROUTES.HOME_PAGE} />
+                  );
+                }}
+              />
             </Switch>
           </LogoutContext.Provider>
         </AuthorizationContext.Provider>
@@ -156,11 +189,4 @@ function App() {
   );
 }
 
-App.defaultProps = {
-  match: undefined,
-};
-
-App.propTypes = {
-  match: PropTypes.string,
-};
 export default App;

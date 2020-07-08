@@ -1,6 +1,6 @@
 .admin-artist-container{
     width: 80%;
-    margin: auto;
+    margin:50px auto;
 }
 #artists-table {
     border-collapse: collapse;
@@ -14,21 +14,21 @@
   
 #artists-table tr:nth-child(even){background-color: #f2f2f2;}
   
-#artists-table tr:hover {background-color: #ddd;}
-  
 #artists-table th {
     padding-top: 12px;
     padding-bottom: 12px;
-    background-color: rgb(161, 123, 149);
-    color: white;
+    background-color: #F3E9EA
+    ;
+    color: #955F83;
 }
 
  .download-table-xls-button{
-      background-color: rgb(161, 123, 149); 
-      color: white; 
-      border: 1px solid rgb(161, 123, 149) !important;
+     background-color: #F3E9EA;
+      border: 1px solid #955F83 !important;
       padding: 10px;
+      color: #955F83;
       margin: 20px 0px;
+      cursor: pointer;
 }
 
 .download-table-xls-button:hover{
@@ -36,7 +36,9 @@
 }
 
 .admin-budget{
-  color: rgb(161, 123, 149);
+  color: #2D616C
+
+  ;
 }
 .budget-mark{
   background-color:#f2f2f2;

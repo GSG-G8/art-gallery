@@ -74,7 +74,7 @@ CREATE TABLE artist
         name varchar(50) NOT NULL,
         email varchar(255) UNIQUE NOT NULL,
         password text NOT NULL,
-        mobile integer UNIQUE,
+        mobile text UNIQUE,
         budget DECIMAL
     );
     INSERT INTO admin

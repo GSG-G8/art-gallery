@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { Alert, Spin, Empty, Button, message } from 'antd';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import NavBar from '../common/Navbar';
+import Footer from '../common/Footer';
 import './style.css';
 
 const AdminPage = () => {
@@ -57,73 +59,77 @@ const AdminPage = () => {
   }, []);
 
   return (
-    <div className="admin-artist-container">
-      <h3 className="admin-budget">
-        حساب الادمن يساوي :<span className="budget-mark">{budgetAdmin}</span>{' '}
-      </h3>
-      {error ? (
-        <Alert type="error" message={error} />
-      ) : loaded ? (
-        <Spin>loading ...</Spin>
-      ) : !artists.length ? (
-        <Empty />
-      ) : (
-        <div>
-          <ReactHTMLTableToExcel
-            id="test-table-xls-button"
-            className="download-table-xls-button"
-            table="artists-table"
-            filename="tablexls"
-            sheet="tablexls"
-            buttonText="تحميل لملف اكسل"
-          />
-          <table id="artists-table" className="table-artist">
-            <thead>
-              <tr>
-                <th>الاسم</th>
-                <th>البريد الالكتروني</th>
-                <th>حالة الحساب</th>
-                <th>تفعيل/تعطيل</th>
-                <th>رقم الجوال</th>
-                <th>$الرصيد</th>
-              </tr>
-            </thead>
-            <tbody>
-              {artists
-                .sort((a, b) => a.id - b.id)
-                .map(
-                  ({
-                    first_name: firstName,
-                    last_name: lastName,
-                    email,
-                    active,
-                    id,
-                    mobile_no: mobile,
-                    budget,
-                  }) => (
-                    <tr key={firstName}>
-                      <td>{`${firstName} ${lastName}`} </td>
-                      <td>{email}</td>
-                      <td>{active ? 'نشط' : 'غير نشط'}</td>
-                      <td>{mobile || 'لا يوجد'}</td>
-                      <td>{budget}$$</td>
-                      <td>
-                        <Button
-                          type={active ? 'danger' : ''}
-                          onClick={() => switchActive(id)}
-                          className="btn-active"
-                        >
-                          {active ? 'تعطيل' : 'تفعيل'}
-                        </Button>
-                      </td>
-                    </tr>
-                  )
-                )}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </div>
+    <>
+      <NavBar />
+      <div className="admin-artist-container">
+        <h3 className="admin-budget">
+          حساب الادمن يساوي :<span className="budget-mark">{budgetAdmin}</span>{' '}
+        </h3>
+        {error ? (
+          <Alert type="error" message={error} />
+        ) : loaded ? (
+          <Spin>loading ...</Spin>
+        ) : !artists.length ? (
+          <Empty />
+        ) : (
+          <div>
+            <ReactHTMLTableToExcel
+              id="test-table-xls-button"
+              className="download-table-xls-button"
+              table="artists-table"
+              filename="tablexls"
+              sheet="tablexls"
+              buttonText="تحميل لملف اكسل"
+            />
+            <table id="artists-table" className="table-artist">
+              <thead>
+                <tr>
+                  <th>الاسم</th>
+                  <th>البريد الالكتروني</th>
+                  <th>حالة الحساب</th>
+                  <th>تفعيل/تعطيل</th>
+                  <th>رقم الجوال</th>
+                  <th>$الرصيد</th>
+                </tr>
+              </thead>
+              <tbody>
+                {artists
+                  .sort((a, b) => a.id - b.id)
+                  .map(
+                    ({
+                      first_name: firstName,
+                      last_name: lastName,
+                      email,
+                      active,
+                      id,
+                      mobile_no: mobile,
+                      budget,
+                    }) => (
+                      <tr key={firstName}>
+                        <td>{`${firstName} ${lastName}`} </td>
+                        <td>{email}</td>
+                        <td>{active ? 'نشط' : 'غير نشط'}</td>
+                        <td>{mobile || 'لا يوجد'}</td>
+                        <td>{budget}$$</td>
+                        <td>
+                          <Button
+                            type={active ? 'danger' : ''}
+                            onClick={() => switchActive(id)}
+                            className="btn-active"
+                          >
+                            {active ? 'تعطيل' : 'تفعيل'}
+                          </Button>
+                        </td>
+                      </tr>
+                    )
+                  )}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+      <Footer />
+    </>
   );
 };
 
