@@ -33,12 +33,21 @@ const AddProduct = ({ showForm, hideForm }) => {
   const onFinish = async ({ props, size, price, ...values }) => {
     const obj = {};
     obj[size] = price;
-    // eslint-disable-next-line no-return-assign
-    props.map((el) => (obj[el.size] = el.price));
-    const body = {
-      ...values,
-      property: obj,
-    };
+    let body;
+    if (props.length !== 0) {
+      // eslint-disable-next-line no-return-assign
+      props.map((el) => (obj[el.size] = el.price));
+      body = {
+        ...values,
+        property: obj,
+      };
+    } else {
+      body = {
+        ...values,
+        obj,
+      };
+    }
+
     const formData = new FormData();
 
     formData.append('paintingImg', paintingImg);
@@ -235,6 +244,9 @@ AddProduct.propTypes = {
     title: propTypes.func,
   }).isRequired,
   map: propTypes.shape({
+    title: propTypes.func,
+  }).isRequired,
+  length: propTypes.shape({
     title: propTypes.func,
   }).isRequired,
 };
