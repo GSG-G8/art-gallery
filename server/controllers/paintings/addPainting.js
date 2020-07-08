@@ -4,15 +4,16 @@ const { addPaintingQuery } = require('../../database/queries');
 
 exports.addPainting = async (req, res, next) => {
   try {
-    const { title, description, category, property } = req.body;
+    const { title, description, category, property } = JSON.parse(
+      req.body.data,
+    );
+    const { paintingImg } = req.files;
     const { id } = req.user;
     if (req.files && req.files.paintingImg) {
-      const { paintingImg } = req.files;
       await addPaintingSchema.validate(
         { title, description, category, property, paintingImg },
         { abortEarly: false },
       );
-
       const { public_id: imgID, format } = await uploadImg(paintingImg.path);
 
       const { rows } = await addPaintingQuery(

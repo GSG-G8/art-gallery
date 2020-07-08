@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 import { DeleteOutlined } from '@ant-design/icons';
-import { Pagination, message, Popconfirm } from 'antd';
+import { Pagination, message, Popconfirm, Empty } from 'antd';
+
 import Axios from 'axios';
 
 import AuthorizationContext from '../../Contexts/AuthorizationContext';
@@ -43,7 +44,7 @@ function PaintingsSection({ paintings, deletePainting }) {
       {paintings && (
         <>
           <div className="container__paintings">
-            {paintings.length > 0 &&
+            {paintings.length > 0 ? (
               paintings.slice(minValue, maxValue).map((painting) => (
                 <div className="flip-card" key={painting.id}>
                   <div className="flip-card-inner">
@@ -119,17 +120,25 @@ function PaintingsSection({ paintings, deletePainting }) {
                     </div>
                   </div>
                 </div>
-              ))}
+              ))
+            ) : (
+              <Empty />
+            )}
           </div>
-          <Pagination
-            total={paintings.length}
-            showTotal={(total, range) =>
-              `${range[0]}-${range[1]} of ${total} items`
-            }
-            defaultCurrent={1}
-            defaultPageSize={6}
-            onChange={handlePageChange}
-          />
+          <div className="paintingsPag">
+            {' '}
+            <div className="paintingsPag">
+              <Pagination
+                total={paintings.length}
+                showTotal={(total, range) =>
+                  `${range[0]}-${range[1]} of ${total} items`
+                }
+                defaultCurrent={1}
+                defaultPageSize={6}
+                onChange={handlePageChange}
+              />
+            </div>
+          </div>
         </>
       )}
     </>

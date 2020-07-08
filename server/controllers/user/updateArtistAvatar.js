@@ -16,7 +16,7 @@ const updateArtistAvatar = async (req, res, next) => {
 
       const { rowCount } = await updateAvatarQuery(`${imgID}.${format}`, id);
       res.json({
-        StatusCode: 200,
+        statusCode: 200,
         data: { rowCount },
         message: 'Image added successfully',
       });

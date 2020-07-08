@@ -11,7 +11,7 @@ const {
 const { verifyArtist, verifyUser } = require('../controllers/middleware');
 
 router.get('/paintings/:category', getPaintings);
-router.get('/paintings/:artistId', getArtistPaints);
+router.get('/paintingsArtist/:artistId', getArtistPaints);
 router.get('/painting/:paintingId', getPaintingInfo);
 
 router.post('/paintings/buy', verifyUser, buyPaintings);

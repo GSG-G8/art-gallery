@@ -1,0 +1,64 @@
+.profile-container{
+    width: 80%;
+    margin:20px auto;
+    color: #955F83;
+}
+.profile-container .header-profile{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    background-repeat: no-repeat;
+    background-size: 300px;
+}
+.profile-container .right-header p {
+    padding-right: 10px;
+}
+.profile-container .right-header p span {
+    color: #2D616C;
+}
+
+.profile-container .ant-btn-rtl {
+    margin-top: 20px;
+    background-color: #955F83;
+    color: white;
+}
+.profile-container .circle-img{
+    border-radius: 50%;
+    margin-bottom: 20px;
+    padding: 20px ;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+.profile-container .social_media{
+    font-size: 2rem;
+    padding: 0px 10px;
+}
+.profile-container .social_media .facebook{
+    color: rgb(26, 56, 190);
+}
+.profile-container .social_media .facebook:hover{
+    opacity: .8;
+}
+.profile-container .left-header{
+    align-self: flex-end;
+    padding-left: 10px;
+    padding-bottom: 20px;
+}
+.painting-container{
+    padding: 15px;
+}
+.form-edit-img{
+    margin-top: -50px;
+    margin-bottom: 10px;
+}
+.container-edit-img .edit-img-btn{
+    opacity: 0;
+    transition: opacity .35s ease;
+    background-color: whitesmoke;
+    color: #955F83;
+}
+
+.container-edit-img:hover .edit-img-btn {
+    opacity: 1;
+}
