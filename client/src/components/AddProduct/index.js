@@ -25,7 +25,7 @@ import FormItem from 'antd/lib/form/FormItem';
 
 const { Option } = Select;
 
-const AddProduct = ({ showForm, hideForm }) => {
+const AddProduct = ({ showForm, hideForm, getPaintings, artistId }) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState();
   const [paintingImg, setPaintingImg] = useState();
@@ -54,6 +54,7 @@ const AddProduct = ({ showForm, hideForm }) => {
       setLoaded(false);
       message.success('تم إضافة اللوحة بنجاح');
       hideForm();
+      getPaintings(artistId);
     } catch (err) {
       setError(err.response.data.message);
       setLoaded(false);
@@ -243,6 +244,8 @@ AddProduct.propTypes = {
   length: propTypes.shape({
     title: propTypes.func,
   }).isRequired,
+  getPaintings: propTypes.func.isRequired,
+  artistId: propTypes.number.isRequired,
 };
 
 export default AddProduct;

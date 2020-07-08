@@ -296,6 +296,8 @@ function Profile({ match }) {
             className="add-btn"
             showForm={showForm}
             hideForm={hideForm}
+            getPaintings={getAllPainting}
+            artistId={artistId}
           />
         )}
         <div className="paintings">
