@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Radio, Select, Spin, notification, message } from 'antd';
+import { Button, Radio, Select, Spin, message } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import Axios from 'axios';
 import propTypes from 'prop-types';
@@ -22,7 +22,7 @@ function PaintingsDetail({ match }) {
       const { data } = await Axios.get(`/api/v1/painting/${id}`);
       setPainting(data.data);
     } catch (err) {
-      notification.error('حدث خطأ ');
+      message.error('حدث خطأ ');
     }
   };
   useEffect(() => {
@@ -39,10 +39,10 @@ function PaintingsDetail({ match }) {
         paintingId,
       });
       if (data.StatusCode === 201) {
-        notification.success('تم إضافة الصورة للسلة بنجاح');
+        message.success('تم إضافة الصورة للسلة بنجاح');
       }
     } catch (data) {
-      notification.error('الصورة موجودة فعلاً في السلة');
+      message.error('الصورة موجودة فعلاً في السلة');
     }
   };
   return (
