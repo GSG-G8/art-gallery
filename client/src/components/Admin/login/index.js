@@ -9,7 +9,6 @@ import '../../Login/style.css';
 const AdminLogin = (props) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState();
-  const [role] = useState('admin');
 
   const onFinish = async ({ email, password }) => {
     try {
@@ -17,7 +16,7 @@ const AdminLogin = (props) => {
       await Axios.post(`/api/v1/admin/login`, {
         email,
         password,
-        role,
+        role: 'admin',
       });
       const { history, setLogged } = props;
       message.success('تم تسجيل الدخول بنجاح');
@@ -29,7 +28,10 @@ const AdminLogin = (props) => {
       if (err.response) {
         switch (err.response.data.message) {
           case 'Incorrect Password':
-            e = 'كلمة المرور خاطئة !';
+            e = ' كلمة المرور خاطئة!';
+            break;
+          case 'You have to sign up first':
+            e = 'البريد الإلكتروني خاطئ';
             break;
           default:
             e = 'حصل خطأ غير متوقع حاول مجددًا مرةً أخرى';

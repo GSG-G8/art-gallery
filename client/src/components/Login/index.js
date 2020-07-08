@@ -31,7 +31,7 @@ const Login = ({ setLogged }) => {
       if (err.response) {
         switch (err.response.data.message) {
           case 'You have to sign up first':
-            e = 'قم بتسجيل حسابك !';
+            e = 'البريد الإلكتروني خاطئ';
             break;
           case 'Incorrect Password':
             e = 'كلمة المرور خاطئة !';
