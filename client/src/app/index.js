@@ -17,7 +17,6 @@ import Painting from '../components/Details';
 import ProfilePage from '../containers/ProfilePage';
 import LandingPage from '../containers/LandingPage';
 import CartPage from '../containers/CartPage';
-import Checkout from '../components/Checkout';
 
 function App() {
   const [user, setUser] = useState({});
@@ -89,7 +88,6 @@ function App() {
         <AuthorizationContext.Provider value={{ user }}>
           <LogoutContext.Provider value={{ logout }}>
             <Switch>
-              <Route exact path="/stripe" component={Checkout} />
               <Route
                 exact
                 path={ROUTES.HOME_PAGE}

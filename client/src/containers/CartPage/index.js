@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { StripeProvider, Elements } from 'react-stripe-elements';
 import Axios from 'axios';
 import {
   Table,
@@ -12,6 +13,7 @@ import {
   message,
 } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import CheckoutForm from './CheckoutForm';
 
 import Navbar from '../../components/common/Navbar';
 
@@ -22,6 +24,7 @@ const { confirm } = Modal;
 const CartPage = () => {
   const [cartData, setCartData] = useState([]);
   const [visible, setVisible] = useState(false);
+  const [budgetVisible, setBudgetVisible] = useState(false);
   const [checkoutData, setCheckoutData] = useState([]);
 
   const cloudinaryLink =
@@ -243,9 +246,32 @@ const CartPage = () => {
     },
   ];
 
+  const AddBudgetForm = () => {
+    return (
+      <Modal
+        visible={budgetVisible}
+        title="إضافة الرصيد"
+        cancelText="إغلاق"
+        onCancel={() => {
+          setBudgetVisible(false);
+        }}
+      >
+        <StripeProvider apiKey="pk_test_51H2XOsGP4bG3BNnqIuJs1B3aTgxkO5WB9lgYI9Szn7sfNcwYq24XuOh4zuYIECpbYAcRhIzwdo7HSbrb59cj2rwS00G9CnMEz5">
+          <Elements>
+            <CheckoutForm />
+          </Elements>
+        </StripeProvider>
+      </Modal>
+    );
+  };
+
   return (
     <div>
       <Navbar pageType="cart" />
+      <Button danger onClick={() => setBudgetVisible(true)}>
+        Add Budget
+      </Button>
+      <AddBudgetForm />
       {cartData.length === 0 ? (
         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="empty" />
       ) : (

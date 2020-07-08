@@ -9,18 +9,17 @@ import {
   injectStripe,
 } from 'react-stripe-elements';
 import axios from 'axios';
+import { Form, Button, Input } from 'antd';
 
-const CheckoutForm = ({ selectedProduct, stripe }) => {
+const CheckoutForm = ({ stripe }) => {
   const [receiptUrl, setReceiptUrl] = useState('');
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
+  const handleSubmit = async (values) => {
     const { token } = await stripe.createToken();
-    console.log(token.id);
+    const { amount } = values;
 
-    const order = await axios.post('/api/v1/stripe', {
-      amount: selectedProduct.price.toString().replace('.', ''),
+    const order = await axios.post('/api/v1/stripe/charge', {
+      amount: amount.toString().replace('.', ''),
       source: token.id,
       receipt_email: 'mu7ammadabed@gmail.com',
     });
@@ -38,24 +37,25 @@ const CheckoutForm = ({ selectedProduct, stripe }) => {
   }
   return (
     <div className="checkout-form">
-      <p>Amount: ${selectedProduct.price}</p>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Card details
+      <Form layout="vertical" onFinish={handleSubmit}>
+        <Form.Item label="قيمة المبلغ المراد إضافته" name="amount">
+          <Input />
+        </Form.Item>
+        <Form.Item label="Credit Card Details">
           <CardNumberElement />
-        </label>
-        <label>
-          Expiration date
+        </Form.Item>
+        <Form.Item label="Credit Card Expiry Date">
           <CardExpiryElement />
-        </label>
-        <label>
-          CVC
+        </Form.Item>
+        <Form.Item label="Credit Card CVC">
           <CardCVCElement />
-        </label>
-        <button type="submit" className="order-button">
-          Pay
-        </button>
-      </form>
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 };
