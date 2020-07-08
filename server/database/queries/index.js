@@ -35,7 +35,7 @@ const {
 } = require('./cart');
 
 const { getArtistReviews } = require('./review');
-const { getAdminEmail } = require('./admin');
+const { getAdminEmail, getAdminBudget } = require('./admin');
 
 const { addReview } = require('./review');
 
@@ -68,4 +68,5 @@ module.exports = {
   updateCustomer,
   addReview,
   getPaintQuery,
+  getAdminBudget,
 };

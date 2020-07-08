@@ -1,3 +1,3 @@
-const getAdminEmail = require('./getAdmin');
+const { getAdminEmail, getAdminBudget } = require('./getAdmin');
 
-module.exports = { getAdminEmail };
+module.exports = { getAdminEmail, getAdminBudget };

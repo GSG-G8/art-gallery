@@ -20,6 +20,7 @@ const {
   updateArtistAvatar,
   getArtist,
   updateArtist,
+  getAdminData,
 } = require('./user');
 const { addReview, getArtistReview } = require('./review');
 
@@ -45,4 +46,5 @@ module.exports = {
   buyPaintings,
   getPaintingInfo,
   postCharge,
+  getAdminData,
 };
