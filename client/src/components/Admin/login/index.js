@@ -1,44 +1,43 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
-import { Form, Input, Button, message, Spin, Alert, Radio } from 'antd';
+import { Form, Input, Button, message, Spin, Alert } from 'antd';
 import propTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
 import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
-import * as ROUTES from '../../constants/routes';
-import './style.css';
+import * as ROUTES from '../../../constants/routes';
+import '../../Login/style.css';
 
-const Login = ({ setLogged }) => {
+const AdminLogin = (props) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState();
-  const [role, setRole] = useState('customer');
-
-  const history = useHistory();
 
   const onFinish = async ({ email, password }) => {
     try {
       setLoaded(true);
-      await Axios.post(`/api/v1/login`, {
+      await Axios.post(`/api/v1/admin/login`, {
         email,
         password,
-        role,
+        role: 'admin',
       });
+      const { history, setLogged } = props;
       message.success('تم تسجيل الدخول بنجاح');
       setLoaded(false);
       setLogged(true);
-      history.push(ROUTES.HOME_PAGE);
+      history.push(ROUTES.ADMIN_DASHBOARD_PAGE);
     } catch (err) {
       let e;
       if (err.response) {
         switch (err.response.data.message) {
+          case 'Incorrect Password':
+            e = ' كلمة المرور خاطئة!';
+            break;
           case 'You have to sign up first':
             e = 'البريد الإلكتروني خاطئ';
-            break;
-          case 'Incorrect Password':
-            e = 'كلمة المرور خاطئة !';
             break;
           default:
             e = 'حصل خطأ غير متوقع حاول مجددًا مرةً أخرى';
         }
+      } else {
+        e = 'حصل خطأ غير متوقع حاول مجددًا مرةً أخرى';
       }
       setError(e);
       setLoaded(false);
@@ -47,21 +46,12 @@ const Login = ({ setLogged }) => {
   return (
     <div className="main-form-container">
       <div className="form-container">
-        <h2 className="form-title">أهلًا بكَ في موقع برواز</h2>
-        <h3 className="sub-title">تسجيل الدخول كـ</h3>
-        <Form name="normal_login" className="login-form" onFinish={onFinish}>
-          <Radio.Group
-            onChange={({ target: { value } }) => setRole(value)}
-            defaultValue="customer"
-            className="radio-g"
-          >
-            <Radio.Button className="radio-btn" value="customer">
-              مشترٍ
-            </Radio.Button>
-            <Radio.Button className="radio-btn" value="artist">
-              فنان
-            </Radio.Button>
-          </Radio.Group>
+        <h2 className="form-title">أهلًا بك</h2>
+        <Form
+          name="normal_login"
+          className="admin-login-form"
+          onFinish={onFinish}
+        >
           <Form.Item
             name="email"
             rules={[
@@ -105,10 +95,6 @@ const Login = ({ setLogged }) => {
             >
               {loaded ? <Spin /> : 'تسجيل الدخول'}
             </Button>
-            <br />
-            <Link className="sign-up-btn" to={ROUTES.SIGNUP_PAGE}>
-              مستخدم جديد
-            </Link>
           </Form.Item>
           {error && <Alert message={error} type="error" />}
         </Form>
@@ -116,7 +102,7 @@ const Login = ({ setLogged }) => {
     </div>
   );
 };
-Login.propTypes = {
+AdminLogin.propTypes = {
   history: propTypes.shape({
     push: propTypes.func.isRequired,
     goBack: propTypes.func.isRequired,
@@ -124,4 +110,4 @@ Login.propTypes = {
   setLogged: propTypes.func.isRequired,
 };
 
-export default Login;
+export default AdminLogin;
