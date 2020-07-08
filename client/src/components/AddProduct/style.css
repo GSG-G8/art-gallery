@@ -14,3 +14,17 @@
 .ant-modal-wrap-rtl .ant-modal-footer button + button {
     color: aliceblue;
 }
+.addProduct-form-prop{
+    width: 100%;
+}
+.btn-prop{
+    margin: 10px 0px;
+}
+.div-prop{
+    margin: 10px 0px;
+    width: 50%;
+    display: flex;
+    border:1px solid #955F83;
+    padding: 5px;
+    justify-content: space-between;
+}
