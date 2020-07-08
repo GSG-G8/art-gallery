@@ -3,7 +3,7 @@ import { Modal, Form, Input, Rate, message } from 'antd';
 import propTypes from 'prop-types';
 import Axios from 'axios';
 
-function AddReview({ reviewVisible, hideReview, artistID }) {
+function AddReview({ reviewVisible, hideReview, artistID, getReviews }) {
   const formRef = React.createRef();
 
   const SubmitReview = async (values) => {
@@ -17,6 +17,7 @@ function AddReview({ reviewVisible, hideReview, artistID }) {
       if (data.StatusCode === 201) {
         message.success('تم إضافة التقييم بنجاح');
         hideReview();
+        getReviews(artistID);
       }
     } catch (err) {
       let e;
@@ -63,5 +64,6 @@ AddReview.propTypes = {
   reviewVisible: propTypes.bool.isRequired,
   hideReview: propTypes.func.isRequired,
   artistID: propTypes.number.isRequired,
+  getReviews: propTypes.func.isRequired,
 };
 export default AddReview;

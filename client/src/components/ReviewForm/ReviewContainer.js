@@ -11,7 +11,7 @@ function ReviewContainer({ reviews }) {
           <h2>{`${review.first_name} ${review.last_name}`}</h2>
           <Rate disabled defaultValue={review.rate} />
           <p>{review.details}</p>
-          <p>{Date(review.review_date).split('G')[0]}</p>
+          <p>{new Date(review.review_date).toDateString()}</p>
         </div>
       ))}
     </Carousel>

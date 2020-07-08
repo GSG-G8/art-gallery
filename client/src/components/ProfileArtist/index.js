@@ -259,6 +259,7 @@ function Profile({ match }) {
               reviewVisible={reviewVisible}
               hideReview={hideReview}
               artistID={artistId}
+              getReviews={getArtistReviews}
             />
           )}
           {showFormEdit && (
