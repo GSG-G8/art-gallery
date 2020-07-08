@@ -1,26 +1,33 @@
-@import "~antd/dist/antd.css";
-
-.container {
-  width: 80vw;
+.landing__container {
+  width: 75%;
   margin: 5% auto;
 }
 .search__category {
   width: 80%;
   margin: 0 auto;
 }
+.catInputs .ant-radio-group {
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap;
+}
 .container__paintings {
+  width: 95%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  margin: 0 auto;
-  padding: 2% 0;
+  margin: 30px auto;
+  padding: 2% auto;
   justify-content: space-around;
-  background-color: rgb(240, 234, 234);
 }
-
+.container__paintings img {
+  padding: 10px;
+}
+.ant-pagination-rtl {
+  margin-top: 10px !important;
+}
 .flip-card {
   background-color: transparent;
-  border: 1px solid #f1f1f1;
 }
 
 .flip-card-inner {
@@ -29,6 +36,7 @@
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
+  margin-bottom: 15px;
 }
 
 .flip-card:hover .flip-card-inner {
@@ -42,7 +50,7 @@
 }
 
 .flip-card-front {
-  background-color: #bbb;
+  box-shadow: 2px 3px 7px #955f83c2;
   color: black;
 }
 
@@ -63,8 +71,27 @@
   cursor: pointer;
   margin-top: 40%;
 }
+.moreBtn:hover {
+  color: white;
+}
 
 .deleteBtn {
   margin-left: 200px;
   margin-top: 20px;
+}
+.paintings {
+  margin-top: 20px;
+}
+.ant-pagination-item-active a {
+  color: white !important;
+}
+.paintingsPag {
+  width: 300px;
+  margin: 2% auto;
+}
+@media (max-width: 600px) {
+  .container__paintings {
+    width: 100%;
+    border: none;
+  }
 }

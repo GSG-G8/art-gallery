@@ -17,14 +17,14 @@ describe('Delete Paintings from cart for login user', () => {
       .end((err, res) => {
         if (err) return done(err);
         const { message } = res.body;
-        expect(message).toBe('your order with id 1 deleted!!');
+        expect(message).toBe('your order deleted!!');
         done();
       });
   });
 
   test('Route /cart/:paintingsId status 400,message=painting not on cart', (done) => {
     return request(app)
-      .delete('/api/v1/cart/100')
+      .delete('/api/v1/cart/99999')
       .set('Cookie', [`token=${process.env.CUSTOMER_TOKEN}`])
       .expect(400)
       .expect('Content-Type', /json/)
