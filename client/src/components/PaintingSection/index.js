@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import {
-  notification,
-  Form,
-  Input,
-  Radio,
-  Select,
-  AutoComplete,
-  message,
-} from 'antd';
+import { Form, Input, Radio, Select, AutoComplete, message } from 'antd';
 import PaintingSection from './PaintingsSection';
 import './style.css';
 
@@ -36,7 +28,7 @@ function PaintingContainer() {
       } = await axios.get(`/api/v1/paintings/${cat || 'all'}`);
       setPaintings(data);
     } catch (err) {
-      notification.error('عذراً, لا يمكن تحميل اللوحات');
+      message.error('عذراً, لا يمكن تحميل اللوحات');
     }
   };
 
@@ -54,7 +46,7 @@ function PaintingContainer() {
 
       setArtists(artistsArray);
     } catch (err) {
-      notification.error('عذراً, لا يمكن عرض الفنانين ');
+      message.error('عذراً, لا يمكن عرض الفنانين ');
     }
   };
 

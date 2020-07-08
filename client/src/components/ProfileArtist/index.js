@@ -1,13 +1,16 @@
+/* eslint-disable consistent-return */
 import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import Axios from 'axios';
 import { FaFacebook, FaInstagram, FiEdit } from 'react-icons/all';
-import { message, Spin, Button, Alert, Upload, Form } from 'antd';
+import { message, Spin, Button, Alert, Upload, Form, Rate } from 'antd';
 
 import AddProduct from '../AddProduct';
 import AuthorizationContext from '../../Contexts/AuthorizationContext';
 import PaintingSection from '../PaintingSection/PaintingsSection';
 import EditArtistProfile from '../EditArtistProfile';
+import AddReview from '../ReviewForm';
+import ReviewContainer from '../ReviewForm/ReviewContainer';
 
 import './style.css';
 
@@ -19,6 +22,10 @@ function Profile({ match }) {
   const [error, setError] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [ArtistImg, setArtistImg] = useState();
+  const [reviewVisible, setReviewVisible] = useState(false);
+  const [totalReviews, setTotalReviews] = useState();
+  const [reviews, setReviews] = useState();
+
   const cloudinaryLink =
     'https://res.cloudinary.com/dacf3uopo/image/upload/v1593353472/';
   const { artistId } = match.params;
@@ -41,6 +48,33 @@ function Profile({ match }) {
     }
   };
 
+  const getArtistReviews = async (id) => {
+    try {
+      const { data } = await Axios.get(`/api/v1/review/${id}`);
+      if (data.statusCode === 200) {
+        setReviews(data.data);
+        const totalRate =
+          data.data.reduce((sum, current) => sum + current.rate, 0) /
+          data.data.length;
+        setTotalReviews(totalRate);
+      }
+    } catch (err) {
+      let e;
+      if (err.response) {
+        switch (err.response.data.message) {
+          case 'Artist ID should be number':
+            e = 'لا يمكن العثور على هذا الفنان';
+            break;
+          default:
+            e = 'فشلت العملية, يرجى المحاولة لاحقاً';
+        }
+      } else {
+        e = 'فشلت العملية, يرجى المحاولة لاحقاً';
+      }
+      message.error(e);
+    }
+  };
+
   const getAllPainting = async (id) => {
     try {
       const { data } = await Axios.get(`/api/v1/paintingsArtist/${id}`);
@@ -48,27 +82,23 @@ function Profile({ match }) {
         setPaintings(data.data);
       }
     } catch (err) {
-      let e;
-      if (
-        err &&
-        err.response.data.message ===
-          "Sorry There's no paintings for this artist"
-      ) {
-        e = 'لا يوجد لوحات لهذا الفنان';
-      } else {
-        e = 'حدث خطا في جلب اللوحات';
-      }
-      message.error(e);
+      setError('حدث خطأ ما, حاول مجدداً');
     }
   };
 
+  const hideReview = () => setReviewVisible(false);
+
   useEffect(() => {
     getArtistProfile(artistId);
-  }, []);
+  }, [artistId]);
 
   useEffect(() => {
     getAllPainting(artistId);
-  }, []);
+  }, [artistId]);
+
+  useEffect(() => {
+    getArtistReviews(artistId);
+  }, [artistId]);
 
   const hideForm = () => setShowForm(false);
   const hideFormEdit = () => setShowFormEdit(false);
@@ -180,6 +210,9 @@ function Profile({ match }) {
                 }
               </AuthorizationContext.Consumer>
               <p>{profileData.bio ? profileData.bio : ' '}</p>
+              {totalReviews && (
+                <Rate allowHalf disabled defaultValue={totalReviews} />
+              )}
               <p>
                 <span>رقم الهاتف : </span>{' '}
                 {profileData.mobile_no ? profileData.mobile_no : ''}
@@ -212,15 +245,21 @@ function Profile({ match }) {
           )}
         </div>
         <div className="left-header">
-          <AuthorizationContext.Consumer>
-            {({ user }) =>
-              isAuth(user) && (
-                <Button onClick={() => setShowFormEdit(true)}>
-                  تعديل بيانات الحساب
-                </Button>
-              )
-            }
-          </AuthorizationContext.Consumer>
+          <div>
+            {' '}
+            {reviews && (
+              <ReviewContainer className="reviewsSlider" reviews={reviews} />
+            )}
+          </div>
+
+          {reviewVisible && (
+            <AddReview
+              reviewVisible={reviewVisible}
+              hideReview={hideReview}
+              artistID={artistId}
+              getReviews={getArtistReviews}
+            />
+          )}
           {showFormEdit && (
             <EditArtistProfile
               profileData={profileData}
@@ -234,13 +273,27 @@ function Profile({ match }) {
       </header>
       <div className="painting-container">
         <AuthorizationContext.Consumer>
-          {({ user }) =>
-            isAuth(user) && (
-              <Button onClick={() => setShowForm(true)}>
-                اضافة لوحة جديدة
-              </Button>
-            )
-          }
+          {({ user }) => {
+            if (isAuth(user)) {
+              return (
+                <>
+                  <Button onClick={() => setShowForm(true)}>
+                    اضافة لوحة جديدة
+                  </Button>
+                  <Button onClick={() => setShowFormEdit(true)}>
+                    تعديل بيانات الحساب
+                  </Button>
+                </>
+              );
+            }
+            if (user.role === 'customer') {
+              return (
+                <Button onClick={() => setReviewVisible(true)}>
+                  أضف تقييم الفنان
+                </Button>
+              );
+            }
+          }}
         </AuthorizationContext.Consumer>
         {showForm && (
           <AddProduct
