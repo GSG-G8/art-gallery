@@ -97,7 +97,11 @@ function App() {
                 exact
                 path={ROUTES.SIGNUP_PAGE}
                 render={() =>
-                  !logged ? <Register /> : <Redirect to={ROUTES.HOME_PAGE} />
+                  !logged ? (
+                    <Register setLogged={setLogged} />
+                  ) : (
+                    <Redirect to={ROUTES.HOME_PAGE} />
+                  )
                 }
               />
               <Route
