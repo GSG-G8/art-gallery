@@ -14,13 +14,14 @@ import {
 } from 'antd';
 import {
   BsUpload,
-  RiPriceTag2Line,
-  MdPhotoSizeSelectLarge,
+  FiMinusCircle,
+  FiPlusCircle,
   MdDescription,
   MdSubtitles,
 } from 'react-icons/all';
 
 import './style.css';
+import FormItem from 'antd/lib/form/FormItem';
 
 const { Option } = Select;
 
@@ -28,25 +29,23 @@ const AddProduct = ({ showForm, hideForm }) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState();
   const [paintingImg, setPaintingImg] = useState();
-  const [category, setCategory] = useState();
 
-  const handleCategories = (value) => {
-    setCategory(value);
-  };
+  const onFinish = async ({ props, size, price, ...values }) => {
+    const obj = {};
+    obj[size] = price;
+    if (props) {
+      // eslint-disable-next-line no-return-assign
+      props.map((el) => (obj[el.size] = el.price));
+    }
+    const body = {
+      ...values,
+      property: obj,
+    };
 
-  const onFinish = async ({ title, description, size, price }) => {
     const formData = new FormData();
 
     formData.append('paintingImg', paintingImg);
-    formData.append(
-      'data',
-      JSON.stringify({
-        title,
-        description,
-        property: JSON.stringify({ size, price }),
-        category,
-      })
-    );
+    formData.append('data', JSON.stringify(body));
     try {
       setLoaded(true);
       await Axios.post(`/api/v1/painting`, formData, {
@@ -54,6 +53,7 @@ const AddProduct = ({ showForm, hideForm }) => {
       });
       setLoaded(false);
       message.success('تم إضافة اللوحة بنجاح');
+      hideForm();
     } catch (err) {
       setError(err.response.data.message);
       setLoaded(false);
@@ -110,44 +110,95 @@ const AddProduct = ({ showForm, hideForm }) => {
           </Form.Item>
           <div className="cat-div">
             <span>نوع اللوحة : </span>
-            <Select style={{ width: 120 }} onChange={handleCategories}>
-              <Option value="nature">طبيعة</Option>
-              <Option value="islamic">اسلامي</Option>
-              <Option value="sky">سماء</Option>
-              <Option value="hertage">ثقافة</Option>
-              <Option value="other">غير ذلك</Option>
-            </Select>
+            <FormItem name="category">
+              <Select style={{ width: 120 }}>
+                <Option value="nature">طبيعة</Option>
+                <Option value="islamic">اسلامي</Option>
+                <Option value="sky">سماء</Option>
+                <Option value="hertage">ثقافة</Option>
+                <Option value="other">غير ذلك</Option>
+              </Select>
+            </FormItem>
           </div>
-          <Form.Item
-            name="size"
-            rules={[
-              {
-                required: true,
-                message: 'رجاءً قم بادخال حجم اللوحة   !',
-              },
-            ]}
+
+          <div
+            style={{ display: 'flex', marginBottom: 8, width: '100%' }}
+            align="start"
           >
-            <Input
-              prefix={<MdPhotoSizeSelectLarge />}
-              placeholder="حجم اللوحة"
-              className="form-input"
-            />
-          </Form.Item>
-          <Form.Item
-            name="price"
-            rules={[
-              {
-                required: true,
-                message: 'رجاءً قم بادخال سعر اللوحة   !',
-              },
-            ]}
-          >
-            <Input
-              prefix={<RiPriceTag2Line />}
-              placeholder="سعر اللوحة"
-              className="form-input"
-            />
-          </Form.Item>
+            <Form.Item
+              name="size"
+              label="حجم الصورة cm"
+              rules={[{ required: true, message: 'أضف حجماً' }]}
+            >
+              <Input placeholder="حجم اللوحة" />
+            </Form.Item>
+            <Form.Item
+              name="price"
+              label="السعر دولار"
+              rules={[{ required: true, message: 'أضف السعر' }]}
+            >
+              <Input style={{ width: '100%' }} placeholder="السعر" />
+            </Form.Item>
+          </div>
+
+          <Form.List name="props">
+            {(fields, { add, remove }) => {
+              return (
+                <div>
+                  {fields.map((field) => (
+                    <div
+                      key={field.key}
+                      style={{ display: 'flex' }}
+                      align="start"
+                    >
+                      <>
+                        <Form.Item
+                          {...field}
+                          name={[field.name, 'size']}
+                          label="حجم الصورة cm"
+                          fieldKey={[field.fieldKey, 'size']}
+                          rules={[{ required: true, message: 'أضف حجماً' }]}
+                        >
+                          <Input placeholder="حجم اللوحة" />
+                        </Form.Item>
+                        <Form.Item
+                          {...field}
+                          label="السعر شيكل"
+                          name={[field.name, 'price']}
+                          fieldKey={[field.fieldKey, 'price']}
+                          rules={[{ required: true, message: 'أضف السعر' }]}
+                        >
+                          <Input
+                            style={{ width: '100%' }}
+                            placeholder="السعر"
+                          />
+                        </Form.Item>
+                      </>
+
+                      <FiMinusCircle
+                        onClick={() => {
+                          remove(field.name);
+                        }}
+                      />
+                    </div>
+                  ))}
+
+                  <Form.Item>
+                    <Button
+                      type="dashed"
+                      onClick={() => {
+                        add();
+                      }}
+                      block
+                    >
+                      <FiPlusCircle /> أضف حجماً جديد
+                    </Button>
+                  </Form.Item>
+                </div>
+              );
+            }}
+          </Form.List>
+
           <Form.Item name="paintingImg">
             <Upload
               type="file"
@@ -184,6 +235,12 @@ AddProduct.propTypes = {
     showForm: propTypes.string,
   }).isRequired,
   hideForm: propTypes.shape({
+    title: propTypes.func,
+  }).isRequired,
+  map: propTypes.shape({
+    title: propTypes.func,
+  }).isRequired,
+  length: propTypes.shape({
     title: propTypes.func,
   }).isRequired,
 };
