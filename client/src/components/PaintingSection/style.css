@@ -6,7 +6,7 @@
   width: 80%;
   margin: 0 auto;
 }
-.ant-radio-group {
+.catInputs .ant-radio-group {
   display: flex !important;
   justify-content: center !important;
   flex-wrap: wrap;
