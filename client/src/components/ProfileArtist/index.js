@@ -82,17 +82,7 @@ function Profile({ match }) {
         setPaintings(data.data);
       }
     } catch (err) {
-      let e;
-      if (
-        err &&
-        err.response.data.message ===
-          "Sorry There's no paintings for this artist"
-      ) {
-        e = 'لا يوجد لوحات لهذا الفنان';
-      } else {
-        e = 'حدث خطا في جلب اللوحات';
-      }
-      message.error(e);
+      setError('حدث خطأ ما, حاول مجدداً');
     }
   };
 
