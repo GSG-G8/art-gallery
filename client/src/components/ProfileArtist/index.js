@@ -163,7 +163,7 @@ function Profile({ match }) {
                     ArtistImg && `${cloudinaryLink}${profileData.profile_img}`
                   }
                 />
-                {loaded && <Spin />}
+                {loaded && <Spin className="spin" />}
                 <Form
                   className="form-edit-img"
                   layout="inline"
@@ -209,36 +209,32 @@ function Profile({ match }) {
                   )
                 }
               </AuthorizationContext.Consumer>
-              <p>{profileData.bio ? profileData.bio : ' '}</p>
-              {totalReviews && (
+              <p>{profileData.bio}</p>
+
+              {totalReviews ? (
                 <Rate allowHalf disabled defaultValue={totalReviews} />
+              ) : (
+                ''
               )}
-              <p>
-                <span>رقم الهاتف : </span>{' '}
-                {profileData.mobile_no ? profileData.mobile_no : ''}
-              </p>
-              {profileData.social_media_accounts && (
-                <div className="social_media">
-                  <a
-                    href={
-                      profileData.social_media_accounts
-                        ? profileData.social_media_accounts[0]
-                        : null
-                    }
-                  >
+              {profileData.mobile_no && (
+                <p>
+                  <span>رقم الهاتف : </span>
+                  {profileData.mobile_no}
+                </p>
+              )}
+
+              <div className="social_media">
+                {profileData.social_media_accounts[0] && (
+                  <a target="blank" href={profileData.social_media_accounts[0]}>
                     <FaFacebook className="facebook" />
                   </a>
-                  <a
-                    href={
-                      profileData.social_media_accounts
-                        ? profileData.social_media_accounts[1]
-                        : 'www.google.com'
-                    }
-                  >
+                )}
+                {profileData.social_media_accounts[1] && (
+                  <a target="blank" href={profileData.social_media_accounts[1]}>
                     <FaInstagram />
                   </a>
-                </div>
-              )}
+                )}
+              </div>
             </>
           ) : (
             <Spin />
