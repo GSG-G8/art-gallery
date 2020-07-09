@@ -27,9 +27,9 @@ const postCharge = async (req, res) => {
       charge,
       newUserBudget,
     });
-  } catch (error) {
+  } catch (err) {
     res.status(500).json({
-      message: error.message,
+      message: err.message,
     });
   }
 };

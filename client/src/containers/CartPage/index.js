@@ -14,6 +14,7 @@ import {
 } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import CheckoutForm from './CheckoutForm';
+import './style.css';
 
 import Navbar from '../../components/common/Navbar';
 
@@ -269,23 +270,37 @@ const CartPage = () => {
   return (
     <div>
       <Navbar pageType="cart" />
-      <Button danger onClick={() => setBudgetVisible(true)}>
-        Add Budget
-      </Button>
-      <AddBudgetForm />
-      {cartData.length === 0 ? (
-        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="empty" />
-      ) : (
-        <Table
-          columns={columns}
-          dataSource={cartData}
-          rowKey="id"
-          size="middle"
-          className="cart__table"
-        />
-      )}
-      <div>
-        <CollectionCreateForm />
+      <div className="cart__container">
+        <div className="budget__container">
+          <Button
+            type="primary"
+            style={{ color: 'aliceblue' }}
+            onClick={() => setBudgetVisible(true)}
+          >
+            إضافة رصيد
+          </Button>
+          <div>
+            <h3 className="budget__heading">
+              <span>رصيدك الحالي : </span> <span>45.45</span>
+            </h3>
+          </div>
+        </div>
+        <AddBudgetForm />
+        {cartData.length === 0 ? (
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="empty" />
+        ) : (
+          <Table
+            columns={columns}
+            dataSource={cartData}
+            rowKey="id"
+            size="middle"
+            className="cart__table"
+            bordered
+          />
+        )}
+        <div>
+          <CollectionCreateForm />
+        </div>
       </div>
     </div>
   );

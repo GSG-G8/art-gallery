@@ -39,7 +39,14 @@ const CheckoutForm = ({ stripe }) => {
         setErrorMessage(error.message);
       }
     } catch (err) {
-      message.error('حصل خطأ غير متوقع، يُرجى المحاولة مرةً أخرى');
+      if (
+        err.response.data.message ===
+        'Your card was declined. This transaction requires authentication.'
+      ) {
+        message.error('تم رفض البطاقة، يُرجى التحقق من المصادقات');
+      } else {
+        message.error('حصل خطأ غير متوقع، يُرجى المحاولة مرةً أخرى');
+      }
     }
     setLoading(false);
   };
