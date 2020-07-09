@@ -8,7 +8,7 @@ const deletePantingCart = async (req, res, next) => {
   try {
     const { rows } = await deletePaintingFromCart(customerId, paintingsId);
     if (rows.length) {
-      res.status(200).json({
+      res.json({
         statusCode: 200,
         message: `your order deleted!!`,
       });

@@ -15,7 +15,7 @@ import './style.css';
 
 const Footer = () => {
   return (
-    <div className="main-container">
+    <div className="main-container-footer">
       <div className="footer-container">
         <div className="logo-container">
           <img src={logo} alt="logo" />
@@ -99,11 +99,13 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="copy-right">
-        <p>سياسات المتجر</p>
-        <p> الأسئلة الشائعة</p>
-        <p> فريق العمل</p>
-        <p>‫‪2020‬‬ ‫‪All‬‬ ‫‪rights‬‬ ‫‪reserved.BERWAZ‬‬ &copy;</p>
+      <div className="copy-right-container">
+        <div className="copy-right">
+          <p>سياسات المتجر</p>
+          <p> الأسئلة الشائعة</p>
+          <p> فريق العمل</p>
+          <p>‫‪2020‬‬ ‫‪All‬‬ ‫‪rights‬‬ ‫‪reserved.BERWAZ‬‬ &copy;</p>
+        </div>
       </div>
     </div>
   );

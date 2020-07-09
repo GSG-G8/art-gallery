@@ -50,7 +50,9 @@ CREATE TABLE artist
         artist_id INTEGER REFERENCES artist(id) ON UPDATE CASCADE ON DELETE CASCADE,
         customer_id INTEGER REFERENCES customer(id) ON UPDATE CASCADE ON DELETE CASCADE,
         rate INTEGER NOT NULL,
-        details text NOT NULL
+        details text,
+        review_date TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+
     );
 
     CREATE TABLE cart
@@ -74,7 +76,7 @@ CREATE TABLE artist
         name varchar(50) NOT NULL,
         email varchar(255) UNIQUE NOT NULL,
         password text NOT NULL,
-        mobile integer UNIQUE,
+        mobile text UNIQUE,
         budget DECIMAL
     );
     INSERT INTO admin

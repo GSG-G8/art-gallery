@@ -39,12 +39,12 @@ describe('Get artist paints by id', () => {
   test('Route /paintingsArtist/18 status 200, json header ', (done) => {
     return request(app)
       .get('/api/v1/paintingsArtist/18')
-      .expect(404)
+      .expect(200)
       .expect('Content-Type', /json/)
       .end((err, res) => {
         if (err) return done(err);
-        const { message } = res.body;
-        expect(message).toBe("Sorry There's no paintings for this artist");
+        const { data } = res.body;
+        expect(data).toEqual([]);
         done();
       });
   });

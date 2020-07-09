@@ -54,6 +54,13 @@ const NavbarComponent = (props) => {
                     </Button>
                   </div>
                 )}
+                {role === 'admin' && (
+                  <div className="nav-left">
+                    <Button className="nav-logout-btn" onClick={logout}>
+                      تسجيل الخروج
+                    </Button>
+                  </div>
+                )}
               </div>
             )}
           </LogoutContext.Consumer>
