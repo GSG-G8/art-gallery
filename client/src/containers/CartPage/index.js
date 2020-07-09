@@ -28,7 +28,7 @@ const CartPage = () => {
   const [budgetVisible, setBudgetVisible] = useState(false);
   const [checkoutData, setCheckoutData] = useState([]);
   const [budget, setBudget] = useState('');
-  const [update, setupdate] = useState(false);
+  const [update, setUpdate] = useState(false);
 
   const cloudinaryLink =
     'https://res.cloudinary.com/dacf3uopo/image/upload/v1593353472/';
@@ -64,9 +64,7 @@ const CartPage = () => {
         try {
           await Axios.delete(`/api/v1/cart/${id}`);
           message.success('تم حذف اللوحة من عربة التسوق');
-          setCartData(
-            cartData.filter((painting) => painting.painting_id !== id)
-          );
+          setUpdate(!update);
         } catch (err) {
           message.error('حدث خطا في حذف اللوحة');
         }
@@ -83,7 +81,7 @@ const CartPage = () => {
       });
       await Axios.delete(`/api/v1/cart/${paintingId}`);
       message.success('تمت عملية الشراء بنجاح');
-      setupdate(!update);
+      setUpdate(!update);
       setVisible(false);
     } catch (err) {
       if (
@@ -256,6 +254,7 @@ const CartPage = () => {
         cancelText="إغلاق"
         onCancel={() => {
           setBudgetVisible(false);
+          setUpdate(!update);
         }}
       >
         <StripeProvider apiKey="pk_test_51H2XOsGP4bG3BNnqIuJs1B3aTgxkO5WB9lgYI9Szn7sfNcwYq24XuOh4zuYIECpbYAcRhIzwdo7HSbrb59cj2rwS00G9CnMEz5">

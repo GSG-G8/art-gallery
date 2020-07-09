@@ -9,7 +9,7 @@ import propTypes from 'prop-types';
 import axios from 'axios';
 import { Form, Button, Input, message, notification, Alert, Spin } from 'antd';
 
-const CheckoutForm = ({ setBudget, stripe }) => {
+const CheckoutForm = ({ stripe }) => {
   const [receiptUrl, setReceiptUrl] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -27,7 +27,6 @@ const CheckoutForm = ({ setBudget, stripe }) => {
           budget: amount,
         });
         if (data.message === 'charge posted successfully') {
-          setBudget(data.newUserBudget);
           notification.success({
             message: 'تمت عملية الدفع بنجاح',
             description: `رصيدك الحالي ${data.newUserBudget}$`,
@@ -61,7 +60,7 @@ const CheckoutForm = ({ setBudget, stripe }) => {
   }
   return (
     <div className="checkout-form">
-      <Form layout="vertical" onFinish={handleSubmit} confirmLoading>
+      <Form layout="vertical" onFinish={handleSubmit}>
         <Form.Item
           label="قيمة المبلغ المراد إضافته"
           name="amount"
@@ -96,7 +95,6 @@ const CheckoutForm = ({ setBudget, stripe }) => {
 };
 
 CheckoutForm.propTypes = {
-  setBudget: propTypes.func.isRequired,
   stripe: propTypes.shape({
     createToken: propTypes.func.isRequired,
   }).isRequired,
