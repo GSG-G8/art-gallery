@@ -73,8 +73,8 @@ function PaintingsSection({ paintings, deletePainting }) {
                       <AuthorizationContext.Consumer>
                         {({ user }) => (
                           <>
-                            {user.role === 'admin' ||
-                              (user.role === 'artist' &&
+                            {user.userRole === 'admin' ||
+                              (user.userRole === 'artist' &&
                                 painting.artist_id === user.id && (
                                   <div className="deleteBtn">
                                     <Popconfirm
@@ -93,11 +93,11 @@ function PaintingsSection({ paintings, deletePainting }) {
                               type="button"
                               className="moreBtn"
                               onClick={() => {
-                                if (user.role === 'customer') {
+                                if (user.userRole === 'customer') {
                                   addPaintingToCart(painting.id);
                                 } else if (
-                                  user.role === 'artist' ||
-                                  user.role === 'admin'
+                                  user.userRole === 'artist' ||
+                                  user.userRole === 'admin'
                                 ) {
                                   message.warn(
                                     'عليك تسجيل الدخول بحساب مشترٍ لتتم العملية'

@@ -20,10 +20,10 @@ const AdminLogin = (props) => {
         password,
         role: 'admin',
       });
-      const { setLogged } = props;
+      const { setRole } = props;
       message.success('تم تسجيل الدخول بنجاح');
       setLoaded(false);
-      setLogged(true);
+      setRole('admin');
       history.push(ROUTES.ADMIN_DASHBOARD_PAGE);
     } catch (err) {
       let e;
@@ -109,7 +109,7 @@ AdminLogin.propTypes = {
     push: propTypes.func.isRequired,
     goBack: propTypes.func.isRequired,
   }).isRequired,
-  setLogged: propTypes.func.isRequired,
+  setRole: propTypes.func.isRequired,
 };
 
 export default AdminLogin;

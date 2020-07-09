@@ -7,7 +7,7 @@ import { AiOutlineMail, AiOutlineUser, AiOutlineLock } from 'react-icons/ai';
 import * as ROUTES from '../../constants/routes';
 import '../Login/style.css';
 
-const Register = ({ setLogged }) => {
+const Register = ({ setRole: swithRole }) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState();
   const [role, setRole] = useState('customer');
@@ -36,7 +36,7 @@ const Register = ({ setLogged }) => {
       const name = data.message?.split(',');
       message.success(`مرحبا, ${name[1]} تم تسجيل حسابك بنجاح`);
       setLoaded(false);
-      setLogged(true);
+      swithRole(role);
       history.push(ROUTES.HOME_PAGE);
     } catch (err) {
       let e;
@@ -176,7 +176,7 @@ Register.propTypes = {
     push: propTypes.func.isRequired,
     goBack: propTypes.func.isRequired,
   }).isRequired,
-  setLogged: propTypes.func.isRequired,
+  setRole: propTypes.func.isRequired,
 };
 
 export default Register;

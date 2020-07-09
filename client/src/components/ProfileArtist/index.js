@@ -140,7 +140,7 @@ function Profile({ match }) {
     }
   };
 
-  const isAuth = (user) => user.role === 'artist' && user.id === +artistId;
+  const isAuth = (user) => user.userRole === 'artist' && user.id === +artistId;
 
   return (
     <div className="profile-container">
@@ -282,7 +282,7 @@ function Profile({ match }) {
                 </>
               );
             }
-            if (user.role === 'customer') {
+            if (user.userRole === 'customer') {
               return (
                 <Button onClick={() => setReviewVisible(true)}>
                   أضف تقييم الفنان
