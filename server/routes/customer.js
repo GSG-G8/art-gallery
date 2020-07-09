@@ -8,6 +8,6 @@ router.patch('/profile/customer', verifyUser, updateUserInfo);
 
 router.get('/profile', verifyUser, getUserProfile);
 
-router.post('/stripe/charge', postCharge);
+router.post('/stripe/charge', verifyUser, postCharge);
 
 module.exports = router;

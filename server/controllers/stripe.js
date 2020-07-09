@@ -1,20 +1,23 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { getCustomerProfile } = require('../database/queries');
 
 const postCharge = async (req, res) => {
   try {
     // eslint-disable-next-line camelcase
-    const { amount, source, receipt_email } = req.body;
-
+    const { amount, source } = req.body;
+    const { id: userId } = req.user;
+    const { rows: userData } = await getCustomerProfile(userId);
+    const { email } = userData[0];
     const charge = await stripe.charges.create({
       amount,
       currency: 'usd',
       source,
-      receipt_email,
+      receipt_email: email,
     });
 
     if (!charge) throw new Error('charge unsuccessful');
 
-    res.status(200).json({
+    res.json({
       message: 'charge posted successfully',
       charge,
     });
