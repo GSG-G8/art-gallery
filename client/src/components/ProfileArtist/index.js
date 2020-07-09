@@ -224,16 +224,24 @@ function Profile({ match }) {
               )}
 
               <div className="social_media">
-                {profileData.social_media_accounts[0] && (
-                  <a target="blank" href={profileData.social_media_accounts[0]}>
-                    <FaFacebook className="facebook" />
-                  </a>
-                )}
-                {profileData.social_media_accounts[1] && (
-                  <a target="blank" href={profileData.social_media_accounts[1]}>
-                    <FaInstagram />
-                  </a>
-                )}
+                {profileData.social_media_accounts &&
+                  profileData.social_media_accounts[0] && (
+                    <a
+                      target="blank"
+                      href={profileData.social_media_accounts[0]}
+                    >
+                      <FaFacebook className="facebook" />
+                    </a>
+                  )}
+                {profileData.social_media_accounts &&
+                  profileData.social_media_accounts[1] && (
+                    <a
+                      target="blank"
+                      href={profileData.social_media_accounts[1]}
+                    >
+                      <FaInstagram />
+                    </a>
+                  )}
               </div>
             </>
           ) : (
