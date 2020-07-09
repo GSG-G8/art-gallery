@@ -25,7 +25,6 @@ const CheckoutForm = ({ stripe }) => {
         const { data } = await axios.post('/api/v1/stripe/charge', {
           amount: Number(amount).toFixed(2).replace('.', ''),
           source: token.id,
-          receipt_email: 'mu7ammadabed@gmail.com',
           budget: amount,
         });
         if (data.message === 'charge posted successfully') {
@@ -70,7 +69,7 @@ const CheckoutForm = ({ stripe }) => {
             { required: true, message: 'بالرجاء إدخال المبلغ المراد إضافته' },
           ]}
         >
-          <Input />
+          <Input style={{ width: '50%' }} />
         </Form.Item>
         <Form.Item label="Credit Card Details">
           <CardNumberElement />
