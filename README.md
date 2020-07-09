@@ -15,7 +15,7 @@
 
 ## Summary
 
-Art gallery is an Arab web application which allows artists to view their arts. so each artist has a profile . Customers can buy arts
+Art gallery is an Arab web application which allows artists to view their arts, each artist has a profile to present his/her arts so customers can buy their paintings.
 
 ## Challenge
 
