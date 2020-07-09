@@ -28,6 +28,7 @@ const CartPage = () => {
   const [budgetVisible, setBudgetVisible] = useState(false);
   const [checkoutData, setCheckoutData] = useState([]);
   const [budget, setBudget] = useState('');
+  const [update, setupdate] = useState(false);
 
   const cloudinaryLink =
     'https://res.cloudinary.com/dacf3uopo/image/upload/v1593353472/';
@@ -49,7 +50,7 @@ const CartPage = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [update]);
 
   const deleteCart = (id, title) => {
     confirm({
@@ -82,9 +83,7 @@ const CartPage = () => {
       });
       await Axios.delete(`/api/v1/cart/${paintingId}`);
       message.success('تمت عملية الشراء بنجاح');
-      setCartData(
-        cartData.filter((painting) => painting.painting_id !== paintingId)
-      );
+      setupdate(!update);
       setVisible(false);
     } catch (err) {
       if (

@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import {
   CardNumberElement,
@@ -7,6 +5,7 @@ import {
   CardCVCElement,
   injectStripe,
 } from 'react-stripe-elements';
+import propTypes from 'prop-types';
 import axios from 'axios';
 import { Form, Button, Input, message, notification, Alert, Spin } from 'antd';
 
@@ -94,6 +93,13 @@ const CheckoutForm = ({ setBudget, stripe }) => {
       </Form>
     </div>
   );
+};
+
+CheckoutForm.propTypes = {
+  setBudget: propTypes.func.isRequired,
+  stripe: propTypes.shape({
+    createToken: propTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default injectStripe(CheckoutForm);
