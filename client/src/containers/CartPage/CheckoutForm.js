@@ -8,10 +8,11 @@ import {
   injectStripe,
 } from 'react-stripe-elements';
 import axios from 'axios';
-import { Form, Button, Input, message, notification } from 'antd';
+import { Form, Button, Input, message, notification, Alert } from 'antd';
 
 const CheckoutForm = ({ stripe }) => {
   const [receiptUrl, setReceiptUrl] = useState('');
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleSubmit = async (values) => {
     try {
@@ -33,7 +34,7 @@ const CheckoutForm = ({ stripe }) => {
         }
         setReceiptUrl(data.charge.receipt_url);
       } else {
-        message.error(error.message);
+        setErrorMessage(error.message);
       }
     } catch (err) {
       message.error('حصل خطأ غير متوقع، يُرجى المحاولة مرةً أخرى');
@@ -43,7 +44,9 @@ const CheckoutForm = ({ stripe }) => {
     return (
       <div className="success">
         <h2>تمت عملية الدفع بنجاح</h2>
-        <a href={receiptUrl}>لعرض الوصل الخاص بعملية الدفع</a>
+        <a href={receiptUrl} target="_blank" rel="noopener noreferrer">
+          لعرض الوصل الخاص بعملية الدفع
+        </a>
       </div>
     );
   }
@@ -69,10 +72,15 @@ const CheckoutForm = ({ stripe }) => {
           <CardCVCElement />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button
+            type="primary"
+            style={{ color: 'aliceblue' }}
+            htmlType="submit"
+          >
             تنفيذ
           </Button>
         </Form.Item>
+        {errorMessage && <Alert message={errorMessage} type="error" showIcon />}
       </Form>
     </div>
   );
