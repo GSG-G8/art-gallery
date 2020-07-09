@@ -17,7 +17,7 @@ function PaintingContainer() {
   const [paintings, setPaintings] = useState();
   const [artists, setArtists] = useState();
   const [advance, setAdvance] = useState('mostPopular');
-  const [price, setPrice] = useState(500);
+  const [price, setPrice] = useState();
   const [artist, setArtist] = useState(-1);
   const [category, setCategory] = useState('all');
 
@@ -53,7 +53,7 @@ function PaintingContainer() {
   useEffect(() => {
     getPaintings();
     getArtists();
-  }, []);
+  }, [price]);
 
   const deletePainting = async (paintingID) => {
     try {
@@ -85,7 +85,7 @@ function PaintingContainer() {
     minPrice: minPriceOfPainting(property),
   });
 
-  const minPriceFilter = ({ minPrice }) => minPrice <= price;
+  const minPriceFilter = ({ minPrice }) => !price || minPrice <= price;
 
   const categoryFilter = ({ category: paintCategory }) => {
     if (category === 'all') return true;
