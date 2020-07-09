@@ -57,21 +57,19 @@ then run `npm i` and open new terminal then run `cd client` then `npm i` to inst
 In terminal type psql or pgcli if installed. Within psql/pcli enter the following commands:
 
 ```CREATE DATABASE
-CREATE DATABASE [db_name];
-CREATE USER [user_name] WITH PASSWORD ['password'];
-ALTER DATABASE [db_name] OWNER TO [user_name]
+\i [file-local-path]/art-gallery/server/database/data/buildDatabase.sql
 ```
 
 Now you can set the database url in your config.env as follows (setting the values in square brackets to the values you defined in the steps above):
 
 ```
-postgres://[user_name]:[password]@localhost:5432/[db_name]
+postgres://artist:123@localhost:5432/artistdev
 ```
 
 In the terminal, connect to your database using:
 
 ```
-pgcli postgres://[username]:[password]@localhost:5432/[database]
+pgcli postgres://artist:123@localhost:5432/artistdev
 ```
 
 Next, run SQL build file in your database:
@@ -87,7 +85,7 @@ This will create the tables in your database.
 
 Environment variables are one of the ways we keep our product safe. If you want to access our app locally you will need to add your own.
 
-First create a [.env]() file and add the following variables:
+First create a [.env](https://www.npmjs.com/package/dotenv) file and add the following variables:
 
 ```
 DATABASE_URL
