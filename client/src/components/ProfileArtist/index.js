@@ -140,7 +140,7 @@ function Profile({ match }) {
     }
   };
 
-  const isAuth = (user) => user.role === 'artist' && user.id === +artistId;
+  const isAuth = (user) => user.userRole === 'artist' && user.id === +artistId;
 
   return (
     <div className="profile-container">
@@ -163,7 +163,7 @@ function Profile({ match }) {
                     ArtistImg && `${cloudinaryLink}${profileData.profile_img}`
                   }
                 />
-                {loaded && <Spin />}
+                {loaded && <Spin className="spin" />}
                 <Form
                   className="form-edit-img"
                   layout="inline"
@@ -209,36 +209,40 @@ function Profile({ match }) {
                   )
                 }
               </AuthorizationContext.Consumer>
-              <p>{profileData.bio ? profileData.bio : ' '}</p>
-              {totalReviews && (
+              <p>{profileData.bio}</p>
+
+              {totalReviews ? (
                 <Rate allowHalf disabled defaultValue={totalReviews} />
+              ) : (
+                ''
               )}
-              <p>
-                <span>رقم الهاتف : </span>{' '}
-                {profileData.mobile_no ? profileData.mobile_no : ''}
-              </p>
-              {profileData.social_media_accounts && (
-                <div className="social_media">
-                  <a
-                    href={
-                      profileData.social_media_accounts
-                        ? profileData.social_media_accounts[0]
-                        : null
-                    }
-                  >
-                    <FaFacebook className="facebook" />
-                  </a>
-                  <a
-                    href={
-                      profileData.social_media_accounts
-                        ? profileData.social_media_accounts[1]
-                        : 'www.google.com'
-                    }
-                  >
-                    <FaInstagram />
-                  </a>
-                </div>
+              {profileData.mobile_no && (
+                <p>
+                  <span>رقم الهاتف : </span>
+                  {profileData.mobile_no}
+                </p>
               )}
+
+              <div className="social_media">
+                {profileData.social_media_accounts &&
+                  profileData.social_media_accounts[0] && (
+                    <a
+                      target="blank"
+                      href={profileData.social_media_accounts[0]}
+                    >
+                      <FaFacebook className="facebook" />
+                    </a>
+                  )}
+                {profileData.social_media_accounts &&
+                  profileData.social_media_accounts[1] && (
+                    <a
+                      target="blank"
+                      href={profileData.social_media_accounts[1]}
+                    >
+                      <FaInstagram />
+                    </a>
+                  )}
+              </div>
             </>
           ) : (
             <Spin />
@@ -286,7 +290,7 @@ function Profile({ match }) {
                 </>
               );
             }
-            if (user.role === 'customer') {
+            if (user.userRole === 'customer') {
               return (
                 <Button onClick={() => setReviewVisible(true)}>
                   أضف تقييم الفنان
@@ -300,14 +304,18 @@ function Profile({ match }) {
             className="add-btn"
             showForm={showForm}
             hideForm={hideForm}
+            getPaintings={getAllPainting}
+            artistId={artistId}
           />
         )}
-        <div className="paintings">
-          <PaintingSection
-            paintings={paintings}
-            deletePainting={deletePainting}
-          />
-        </div>
+        {paintings && (
+          <div className="paintings">
+            <PaintingSection
+              paintings={paintings}
+              deletePainting={deletePainting}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

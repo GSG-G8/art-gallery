@@ -7,7 +7,7 @@ import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
 import * as ROUTES from '../../constants/routes';
 import './style.css';
 
-const Login = ({ setLogged }) => {
+const Login = ({ setRole: switchRole }) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState();
   const [role, setRole] = useState('customer');
@@ -24,7 +24,7 @@ const Login = ({ setLogged }) => {
       });
       message.success('تم تسجيل الدخول بنجاح');
       setLoaded(false);
-      setLogged(true);
+      switchRole(role);
       history.push(ROUTES.HOME_PAGE);
     } catch (err) {
       let e;
@@ -121,7 +121,7 @@ Login.propTypes = {
     push: propTypes.func.isRequired,
     goBack: propTypes.func.isRequired,
   }).isRequired,
-  setLogged: propTypes.func.isRequired,
+  setRole: propTypes.func.isRequired,
 };
 
 export default Login;

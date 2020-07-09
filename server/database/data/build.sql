@@ -13,7 +13,7 @@ CREATE TABLE artist
     mobile_no text UNIQUE,
     customized boolean DEFAULT false,
     reviews integer,
-    profile_img text,
+    profile_img text DEFAULT 'lm3xruk5amec1b9ax0j2.png',
     social_media_accounts text
     [],
     budget DECIMAL
