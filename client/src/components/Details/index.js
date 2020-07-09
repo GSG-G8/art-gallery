@@ -93,7 +93,9 @@ function PaintingsDetail({ match }) {
                   onChange={handleSizeChange}
                 >
                   {Object.keys(painting.property).map((e) => (
-                    <Select.Option value={e}>{e}</Select.Option>
+                    <Select.Option key={e} value={e}>
+                      {e}
+                    </Select.Option>
                   ))}
                 </Select>
                 <strong className="price">
@@ -106,11 +108,11 @@ function PaintingsDetail({ match }) {
                     <Button
                       className="addBtn"
                       onClick={() => {
-                        if (user.role === 'customer') {
+                        if (user.userRole === 'customer') {
                           addPaintingToCart(painting.id);
                         } else if (
-                          user.role === 'artist' ||
-                          user.role === 'admin'
+                          user.userRole === 'artist' ||
+                          user.userRole === 'admin'
                         ) {
                           message.warn(
                             'عليك تسجيل الدخول بحساب مشترٍ لتتم العملية'

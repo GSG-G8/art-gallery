@@ -7,6 +7,7 @@ import { Pagination, message, Popconfirm, Empty } from 'antd';
 import Axios from 'axios';
 
 import AuthorizationContext from '../../Contexts/AuthorizationContext';
+import * as ROUTES from '../../constants/routes';
 
 function PaintingsSection({ paintings, deletePainting }) {
   const [minValue, setMinValue] = useState(0);
@@ -45,82 +46,85 @@ function PaintingsSection({ paintings, deletePainting }) {
         <>
           <div className="container__paintings">
             {paintings.length > 0 ? (
-              paintings.slice(minValue, maxValue).map((painting) => (
-                <div className="flip-card" key={painting.id}>
-                  <div className="flip-card-inner">
-                    <div className="flip-card-front">
-                      <img
-                        alt={painting.title}
-                        src={`${cloudinaryLink}${painting.img}`}
+              paintings
+                .sort((a, b) => b.id - a.id)
+                .slice(minValue, maxValue)
+                .map((painting) => (
+                  <div className="flip-card" key={painting.id}>
+                    <div className="flip-card-inner">
+                      <div className="flip-card-front">
+                        <img
+                          alt={painting.title}
+                          src={`${cloudinaryLink}${painting.img}`}
+                          style={{
+                            width: 300,
+                            height: 300,
+                            objectFit: 'cover',
+                          }}
+                        />
+                      </div>
+                      <div
+                        className="flip-card-back"
                         style={{
                           width: 300,
-                          height: 300,
-                          objectFit: 'cover',
-                        }}
-                      />
-                    </div>
-                    <div
-                      className="flip-card-back"
-                      style={{
-                        width: 300,
-                        backgroundSize: 'cover',
-                        background: `linear-gradient(
+                          backgroundSize: 'cover',
+                          background: `linear-gradient(
                         rgba(0, 0, 0,0.7),
                         rgba(0, 0, 0,0.7)
                       ),url(${cloudinaryLink}${painting.img}) center no-repeat`,
-                      }}
-                    >
-                      <AuthorizationContext.Consumer>
-                        {({ user }) => (
-                          <>
-                            {user.role === 'admin' ||
-                              (user.role === 'artist' &&
-                                painting.artist_id === user.id && (
-                                  <div className="deleteBtn">
-                                    <Popconfirm
-                                      title="هل أنت متأكد من حذف هذه اللوحة؟"
-                                      onConfirm={() =>
-                                        deletePainting(painting.id)
-                                      }
-                                      okText="نعم"
-                                      cancelText="لا"
-                                    >
-                                      <DeleteOutlined width="2em" />
-                                    </Popconfirm>
-                                  </div>
-                                ))}
-                            <button
-                              type="button"
-                              className="moreBtn"
-                              onClick={() => {
-                                if (user.role === 'customer') {
-                                  addPaintingToCart(painting.id);
-                                } else if (
-                                  user.role === 'artist' ||
-                                  user.role === 'admin'
-                                ) {
-                                  message.warn(
-                                    'عليك تسجيل الدخول بحساب مشترٍ لتتم العملية'
-                                  );
-                                } else {
-                                  history.push('/login');
-                                }
-                              }}
-                            >
-                              أضف إلى السلة
-                            </button>
-                          </>
-                        )}
-                      </AuthorizationContext.Consumer>
-                      <br />
-                      <Link className="moreBtn" to={`/art/${painting.id}`}>
-                        {' '}
-                        ...للمزيد
-                      </Link>
+                        }}
+                      >
+                        <AuthorizationContext.Consumer>
+                          {({ user }) => (
+                            <>
+                              {user.userRole === 'admin' ||
+                                (user.userRole === 'artist' &&
+                                  painting.artist_id === user.id && (
+                                    <div className="deleteBtn">
+                                      <Popconfirm
+                                        title="هل أنت متأكد من حذف هذه اللوحة؟"
+                                        onConfirm={() =>
+                                          deletePainting(painting.id)
+                                        }
+                                        okText="نعم"
+                                        cancelText="لا"
+                                      >
+                                        <DeleteOutlined width="2em" />
+                                      </Popconfirm>
+                                    </div>
+                                  ))}
+                              <button
+                                type="button"
+                                className="moreBtn"
+                                onClick={() => {
+                                  if (user.userRole === 'customer') {
+                                    addPaintingToCart(painting.id);
+                                  } else if (
+                                    user.userRole === 'artist' ||
+                                    user.userRole === 'admin'
+                                  ) {
+                                    message.warn(
+                                      'عليك تسجيل الدخول بحساب مشترٍ لتتم العملية'
+                                    );
+                                  } else {
+                                    history.push(ROUTES.LOGIN_PAGE);
+                                  }
+                                }}
+                              >
+                                أضف إلى السلة
+                              </button>
+                            </>
+                          )}
+                        </AuthorizationContext.Consumer>
+                        <br />
+                        <Link className="moreBtn" to={`/art/${painting.id}`}>
+                          {' '}
+                          ...للمزيد
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))
+                ))
             ) : (
               <Empty />
             )}

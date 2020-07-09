@@ -17,16 +17,16 @@ const SlideShow = () => {
       <div className="carousal-container">
         <Carousel autoplay>
           <div className="image-container">
-            <img className="slider-image" src={pic5} alt="pic1" />
+            <img className="slider-image" src={pic5} alt="words" />
           </div>
           <div className="image-container">
-            <img className="slider-image" src={pic1} alt="pic1" />
+            <img className="slider-image" src={pic1} alt="Calligraphy" />
           </div>
           <div className="image-container">
-            <img src={pic3} alt="pic1" className="slider-image" />
+            <img src={pic3} alt="Jerusalem" className="slider-image" />
           </div>
           <div className="image-container">
-            <img src={pic4} alt="pic1" className="slider-image" />
+            <img src={pic4} alt="EgyptPyramids" className="slider-image" />
           </div>
         </Carousel>
       </div>

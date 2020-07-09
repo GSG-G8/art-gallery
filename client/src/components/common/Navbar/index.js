@@ -14,7 +14,7 @@ const NavbarComponent = (props) => {
   return (
     <div className="main-navbar-container">
       <AuthorizationContext.Consumer>
-        {({ user: { role, id } }) => (
+        {({ user: { id }, role }) => (
           <LogoutContext.Consumer>
             {({ logout }) => (
               <div className="navbar-container">

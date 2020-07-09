@@ -1,21 +1,21 @@
 INSERT INTO artist
     (first_name,last_name,email,password,mobile_no,customized,
-    reviews,profile_img,social_media_accounts,budget,bio)
+    reviews,social_media_accounts,budget,bio)
 VALUES
     ('Alaa', 'Swaireh', 'alaa@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK',
-        '0592888888', 'false', '10', 'https://avatars1.githubusercontent.com/u/26024288?s=96&v=4', '{https://www.facebook.com/}',
+        '0592888888', 'false', '10', '{https://www.facebook.com/}',
         '200.26', 'الفن هو الأسلوب، والأسلوب هو الإنسان'),
     ('mariam', 'Isa', 'mariam@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK',
-        '0592000000', 'true', '12', 'https://avatars1.githubusercontent.com/u/26024288?s=96&v=4', '{https://www.instagram.com/}',
+        '0592000000', 'true', '12', '{https://www.instagram.com/}',
         '300.50', 'الفن هو الأسلوب، والأسلوب هو الإنسان'),
     ('Rana', 'Obeid', 'rana@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK',
-        '0592111111', 'false', '7', 'https://avatars1.githubusercontent.com/u/26024288?s=96&v=4', '{https://www.pinterest.com/}',
+        '0592111111', 'false', '7', '{https://www.pinterest.com/}',
         '300.66', 'الفن هو الأسلوب، والأسلوب هو الإنسان'),
     ('Rehab', 'ALsawaf', 'rehab@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK',
-        '0592333333', 'false', '8', 'https://avatars1.githubusercontent.com/u/26024288?s=96&v=4', '{https://www.facebook.com/}',
+        '0592333333', 'false', '8', '{https://www.facebook.com/}',
         '400.20', 'الفن هو الأسلوب، والأسلوب هو الإنسان'),
     ('Mohammed', 'ALghzali', 'mohammed@gmail.com', '$2b$10$DcDZvSOFT8wnvO3uA89LGOTqa9rSRiOuaj2f7RxssF9DNwXYaeFXK',
-        '0592777777', 'true', '3', 'https://avatars1.githubusercontent.com/u/26024288?s=96&v=4', '{https://www.facebook.com/}',
+        '0592777777', 'true', '3', '{https://www.facebook.com/}',
         '100.23', 'الفن هو الأسلوب، والأسلوب هو الإنسان');
 
 INSERT INTO customer
