@@ -1,0 +1,97 @@
+.landing__container {
+  width: 75%;
+  margin: 5% auto;
+}
+.search__category {
+  width: 80%;
+  margin: 0 auto;
+}
+.catInputs .ant-radio-group {
+  display: flex !important;
+  justify-content: center !important;
+  flex-wrap: wrap;
+}
+.container__paintings {
+  width: 95%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 30px auto;
+  padding: 2% auto;
+  justify-content: space-around;
+}
+.container__paintings img {
+  padding: 10px;
+}
+.ant-pagination-rtl {
+  margin-top: 10px !important;
+}
+.flip-card {
+  background-color: transparent;
+}
+
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  margin-bottom: 15px;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  box-shadow: 2px 3px 7px #955f83c2;
+  color: black;
+}
+
+.flip-card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  color: white;
+  transform: rotateY(180deg);
+  font-size: larger;
+}
+
+.moreBtn {
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 40%;
+}
+.moreBtn:hover {
+  color: white;
+}
+
+.deleteBtn {
+  margin-left: 200px;
+  margin-top: 20px;
+}
+.paintings {
+  margin-top: 20px;
+}
+.ant-pagination-item-active a {
+  color: white !important;
+}
+.paintingsPag {
+  width: 300px;
+  margin: 2% auto;
+}
+@media (max-width: 600px) {
+  .container__paintings {
+    width: 100%;
+    border: none;
+  }
+}

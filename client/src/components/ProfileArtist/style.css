@@ -1,0 +1,72 @@
+.profile-container {
+  width: 80%;
+  margin: 20px auto;
+  color: #955f83;
+}
+.profile-container .header-profile {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+}
+.profile-container .right-header p {
+  padding-right: 10px;
+}
+.profile-container .right-header p span {
+  color: #2d616c;
+}
+
+.profile-container .ant-btn-rtl {
+  margin-top: 20px;
+  background-color: #955f83;
+  color: white;
+}
+.profile-container .circle-img {
+  border-radius: 50%;
+  margin-bottom: 20px;
+  padding: 20px;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+.profile-container .social_media {
+  font-size: 2rem;
+  padding: 0px 10px;
+}
+.profile-container .social_media .facebook {
+  color: rgb(26, 56, 190);
+}
+.profile-container .social_media .facebook:hover {
+  opacity: 0.8;
+}
+.profile-container {
+  align-self: flex-end;
+  padding-left: 10px;
+  padding-bottom: 20px;
+}
+.right-header .left-header {
+  display: flex;
+  flex-direction: column;
+}
+.header-profile > .ant-carousel-rtl {
+  height: 200px;
+}
+.header__btns {
+  align-self: flex-end;
+}
+.painting-container {
+  padding: 15px;
+}
+.form-edit-img {
+  margin-top: -50px;
+  margin-bottom: 10px;
+}
+.container-edit-img .edit-img-btn {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background-color: whitesmoke;
+  color: #955f83;
+}
+
+.container-edit-img:hover .edit-img-btn {
+  opacity: 1;
+}

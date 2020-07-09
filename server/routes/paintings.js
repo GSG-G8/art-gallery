@@ -2,17 +2,23 @@ const router = require('express').Router();
 
 const {
   getPaintings,
-  addPainting,
   getArtistPaints,
+  buyPaintings,
+  deletePainting,
+  addPainting,
+  getPaintingInfo,
 } = require('../controllers');
-const { verifyArtist } = require('../controllers/middlewares/verifyUser');
+const { verifyArtist, verifyUser } = require('../controllers/middleware');
 
-router.get('/paintings', getPaintings);
-router.get('/paintings/:artistId', getArtistPaints);
+router.get('/paintings/:category', getPaintings);
+router.get('/paintingsArtist/:artistId', getArtistPaints);
+router.get('/painting/:paintingId', getPaintingInfo);
 
-// Only artist endPoints
-router.use(verifyArtist);
+router.post('/paintings/buy', verifyUser, buyPaintings);
+router.delete('/paintings/:paintingId', verifyArtist, deletePainting);
 
-router.post('/painting', addPainting);
+router.get('/paintingsArtist/:artistId', getArtistPaints);
+
+router.post('/painting', verifyArtist, addPainting);
 
 module.exports = router;

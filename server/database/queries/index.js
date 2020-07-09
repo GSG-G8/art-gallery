@@ -1,21 +1,72 @@
 const {
+  addArtist,
+  getArtistByEmail,
+  getArtistQuery,
+  updateArtistQuery,
+  switchActivateArtist,
+  updateAvatarQuery,
+  getArtists,
+} = require('./artists');
+
+const {
+  addCustomer,
+  checkCustomerEmail,
+  getCustomerProfile,
+  updateCustomer,
+} = require('./customers');
+
+const {
   getPaintingsQuery,
+  getPaintingsForUser,
   getArtistPaintsQuery,
+  getPaintingPrice,
+  getCustomerBudget,
+  deletePaintingsQuery,
+  getPaintingCategory,
   addPaintingQuery,
+  updateBudgets,
+  getPaintQuery,
 } = require('./Paintings');
-const { checkCartQuery, postCartQuery } = require('./Cart');
-const { addArtist, getArtistByEmail, getArtistQuery } = require('./artists');
-const { addCustomer, checkCustomerEmail } = require('./customers');
+const {
+  deletePaintingFromCart,
+  checkCartQuery,
+  postCartQuery,
+  getCustomerCarts,
+} = require('./cart');
+
+const { getArtistReviews } = require('./review');
+const { getAdminEmail, getAdminBudget } = require('./admin');
+
+const { addReview } = require('./review');
 
 module.exports = {
   getPaintingsQuery,
+  deletePaintingFromCart,
+  getPaintingsForUser,
   checkCartQuery,
   postCartQuery,
   getArtistPaintsQuery,
   addPaintingQuery,
   addArtist,
   getArtistByEmail,
+  getArtistQuery,
   addCustomer,
   checkCustomerEmail,
-  getArtistQuery,
+  updateArtistQuery,
+  getPaintingPrice,
+  getCustomerBudget,
+  updateBudgets,
+  getArtistReviews,
+  getCustomerProfile,
+  getAdminEmail,
+  getArtists,
+  switchActivateArtist,
+  deletePaintingsQuery,
+  getCustomerCarts,
+  getPaintingCategory,
+  updateAvatarQuery,
+  updateCustomer,
+  addReview,
+  getPaintQuery,
+  getAdminBudget,
 };

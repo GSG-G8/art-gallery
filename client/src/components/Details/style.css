@@ -1,0 +1,47 @@
+.containerD {
+  display: flex;
+  flex-direction: row;
+  height: 80vh;
+  margin: 4vh 2vw;
+}
+.container__details {
+  width: 35%;
+}
+.painting {
+  width: 95%;
+  padding: 5%;
+}
+
+.price {
+  padding: 10%;
+}
+.paintingView {
+  width: 10rem;
+  font-weight: bold;
+}
+.artistName {
+  font-weight: bold;
+}
+.viewBtn {
+  margin-top: 5%;
+}
+.container__image {
+  width: 65%;
+}
+.addBtn {
+  margin: 7% 0;
+  width: 100%;
+  height: 2.5rem;
+  background-color: #955f83;
+  color: white;
+  font-size: larger;
+  font-weight: bold;
+}
+.imgPreview {
+  width: 60%;
+  margin: 5% 20%;
+}
+strong {
+  color: #955f83;
+  padding: 10px;
+}

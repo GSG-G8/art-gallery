@@ -1,11 +1,13 @@
 const { sign } = require('jsonwebtoken');
 const { compare, hash, genSalt } = require('bcrypt');
 const { loginSchema, registerSchema } = require('../utils/validation');
+const { verify } = require('../utils/verify');
 const {
   getArtistByEmail,
   addArtist,
   addCustomer,
   checkCustomerEmail,
+  getAdminEmail,
 } = require('../database/queries');
 const addUser = require('../utils/addUser');
 
@@ -23,13 +25,16 @@ exports.login = async (req, res, next) => {
       case 'customer':
         existingUser = await checkCustomerEmail(email);
         break;
+      case 'admin':
+        existingUser = await getAdminEmail(email);
+        break;
       default:
         throw new Error('Choose your role');
     }
     if (existingUser.rows[0]) {
-      const { id, password: hashedPasswored } = existingUser.rows[0];
+      const { id, password: hashedPassword } = existingUser.rows[0];
 
-      const isCorrectPassword = await compare(password, hashedPasswored);
+      const isCorrectPassword = await compare(password, hashedPassword);
 
       if (isCorrectPassword) {
         const token = sign({ id, role }, process.env.SECRET_KEY);
@@ -113,5 +118,14 @@ exports.registerController = async (req, res, next) => {
 };
 
 exports.logout = (req, res) => {
-  res.clearCookie('token').json({ status: 200, message: 'logout success' });
+  res.clearCookie('token').json({ statusCode: 200, message: 'logout success' });
+};
+
+exports.isAuth = async (req, res) => {
+  try {
+    const { id, role } = await verify(req.cookies.token);
+    res.json({ statusCode: 200, data: { id, role } });
+  } catch (err) {
+    res.status(401).json({ statusCode: 401, message: 'Un-Authorized' });
+  }
 };
