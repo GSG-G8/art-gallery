@@ -65,21 +65,21 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaTwitter size="1.2em" />
+              <FaTwitter className="icons" size="1.2em" />
             </a>
             <a
               href="https://pinterest.com"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaPinterest size="1.2em" />
+              <FaPinterest className="icons" size="1.2em" />
             </a>
             <a
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaInstagram size="1.2em" />
+              <FaInstagram className="icons" size="1.2em" />
             </a>
 
             <a
@@ -87,14 +87,14 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaFacebook size="1.2em" />
+              <FaFacebook className="icons" size="1.2em" />
             </a>
             <a
               href="https://www.behance.net"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaBehance size="1.2em" />
+              <FaBehance className="icons" size="1.2em" />
             </a>
           </div>
         </div>
