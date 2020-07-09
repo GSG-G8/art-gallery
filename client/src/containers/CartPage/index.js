@@ -27,6 +27,7 @@ const CartPage = () => {
   const [visible, setVisible] = useState(false);
   const [budgetVisible, setBudgetVisible] = useState(false);
   const [checkoutData, setCheckoutData] = useState([]);
+  const [budget, setBudget] = useState('');
 
   const cloudinaryLink =
     'https://res.cloudinary.com/dacf3uopo/image/upload/v1593353472/';
@@ -36,9 +37,11 @@ const CartPage = () => {
       const {
         data: { data },
       } = await Axios.get('/api/v1/cart');
-      if (data) {
-        setCartData(data);
-      }
+      const {
+        data: { data: userData },
+      } = await Axios.get('/api/v1/profile');
+      setCartData(data);
+      setBudget(userData[0].budget);
     } catch (err) {
       message.error('خطأ في السيرفر، يرجى المحاولة لاحقًا');
     }
@@ -258,7 +261,7 @@ const CartPage = () => {
       >
         <StripeProvider apiKey="pk_test_51H2XOsGP4bG3BNnqIuJs1B3aTgxkO5WB9lgYI9Szn7sfNcwYq24XuOh4zuYIECpbYAcRhIzwdo7HSbrb59cj2rwS00G9CnMEz5">
           <Elements>
-            <CheckoutForm />
+            <CheckoutForm setBudget={setBudget} />
           </Elements>
         </StripeProvider>
       </Modal>
@@ -279,7 +282,7 @@ const CartPage = () => {
           </Button>
           <div>
             <h3 className="budget__heading">
-              <span>رصيدك الحالي : </span> <span>45.45</span>
+              <span>رصيدك الحالي : </span> <span>{budget}$</span>
             </h3>
           </div>
         </div>

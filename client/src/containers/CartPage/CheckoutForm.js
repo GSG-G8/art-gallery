@@ -10,7 +10,7 @@ import {
 import axios from 'axios';
 import { Form, Button, Input, message, notification, Alert, Spin } from 'antd';
 
-const CheckoutForm = ({ stripe }) => {
+const CheckoutForm = ({ setBudget, stripe }) => {
   const [receiptUrl, setReceiptUrl] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -28,6 +28,7 @@ const CheckoutForm = ({ stripe }) => {
           budget: amount,
         });
         if (data.message === 'charge posted successfully') {
+          setBudget(data.newUserBudget);
           notification.success({
             message: 'تمت عملية الدفع بنجاح',
             description: `رصيدك الحالي ${data.newUserBudget}$`,
