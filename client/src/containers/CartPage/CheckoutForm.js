@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
   CardNumberElement,
   CardExpiryElement,
@@ -9,7 +8,7 @@ import {
   injectStripe,
 } from 'react-stripe-elements';
 import axios from 'axios';
-import { Form, Button, Input, message } from 'antd';
+import { Form, Button, Input, message, notification } from 'antd';
 
 const CheckoutForm = ({ stripe }) => {
   const [receiptUrl, setReceiptUrl] = useState('');
@@ -20,13 +19,19 @@ const CheckoutForm = ({ stripe }) => {
       const { token, error } = stripeToken;
       const { amount } = values;
       if (token) {
-        const order = await axios.post('/api/v1/stripe/charge', {
+        const { data } = await axios.post('/api/v1/stripe/charge', {
           amount: Number(amount).toFixed(2).replace('.', ''),
           source: token.id,
           receipt_email: 'mu7ammadabed@gmail.com',
+          budget: amount,
         });
-
-        setReceiptUrl(order.data.charge.receipt_url);
+        if (data.message === 'charge posted successfully') {
+          notification.success({
+            message: 'تمت عملية الدفع بنجاح',
+            description: `رصيدك الحالي ${data.newUserBudget}$`,
+          });
+        }
+        setReceiptUrl(data.charge.receipt_url);
       } else {
         message.error(error.message);
       }
@@ -37,15 +42,14 @@ const CheckoutForm = ({ stripe }) => {
   if (receiptUrl) {
     return (
       <div className="success">
-        <h2>Payment Successful!</h2>
-        <a href={receiptUrl}>View Receipt</a>
-        <Link to="/">Home</Link>
+        <h2>تمت عملية الدفع بنجاح</h2>
+        <a href={receiptUrl}>لعرض الوصل الخاص بعملية الدفع</a>
       </div>
     );
   }
   return (
     <div className="checkout-form">
-      <Form layout="vertical" onFinish={handleSubmit}>
+      <Form layout="vertical" onFinish={handleSubmit} confirmLoading>
         <Form.Item
           label="قيمة المبلغ المراد إضافته"
           name="amount"
@@ -66,7 +70,7 @@ const CheckoutForm = ({ stripe }) => {
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Submit
+            تنفيذ
           </Button>
         </Form.Item>
       </Form>

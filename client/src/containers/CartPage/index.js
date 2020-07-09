@@ -251,6 +251,7 @@ const CartPage = () => {
       <Modal
         visible={budgetVisible}
         title="إضافة الرصيد"
+        // okButtonProps={{ style: { display: 'none' } }}
         cancelText="إغلاق"
         onCancel={() => {
           setBudgetVisible(false);
