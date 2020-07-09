@@ -1,11 +1,11 @@
 .main-container-footer {
   width: 100%;
-  background-color: #f3e9ea;
+  background-color: #a1819514;
+
 }
 .footer-container {
   display: flex;
   width: 90%;
-  background-color: #f3e9ea;
   margin: auto;
   padding: 40px;
 }

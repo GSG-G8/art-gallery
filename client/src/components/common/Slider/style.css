@@ -1,9 +1,11 @@
 .main-carousal {
   display: flex;
-  justify-content: space-around;
-  align-self: center;
-  margin-top: 50px;
-}
+    justify-content: space-around;
+    align-self: center;
+    margin-top: 7px;
+    background-color: #a1819514;
+    padding-top: 20px;
+    padding-bottom: 20px;}
 
 .carousal-container {
   height: 60vh;

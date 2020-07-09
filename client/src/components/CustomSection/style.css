@@ -1,0 +1,26 @@
+.main-form-custom{
+    padding-top: 10px;
+    padding-bottom: 50px;
+}
+.main-form-custom p{
+    color: #2D616C;
+}
+.form-container{
+    width: 50%;
+    margin: auto;
+    padding: 40px;
+    border: 2px solid #955F83;
+}
+.form-container .form-title{
+    color:#2D616C ;
+    text-align: center;
+}
+.form-container .sub-title{
+    color:#955F83;
+}
+.form-container .custom-form-button{
+    color: white
+}
+
+
+
