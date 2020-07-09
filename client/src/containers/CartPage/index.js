@@ -245,27 +245,6 @@ const CartPage = () => {
     },
   ];
 
-  const AddBudgetForm = () => {
-    return (
-      <Modal
-        visible={budgetVisible}
-        title="إضافة الرصيد"
-        okButtonProps={{ disabled: true, style: { display: 'none' } }}
-        cancelText="إغلاق"
-        onCancel={() => {
-          setBudgetVisible(false);
-          setUpdate(!update);
-        }}
-      >
-        <StripeProvider apiKey="pk_test_51H2XOsGP4bG3BNnqIuJs1B3aTgxkO5WB9lgYI9Szn7sfNcwYq24XuOh4zuYIECpbYAcRhIzwdo7HSbrb59cj2rwS00G9CnMEz5">
-          <Elements>
-            <CheckoutForm />
-          </Elements>
-        </StripeProvider>
-      </Modal>
-    );
-  };
-
   return (
     <div>
       <Navbar pageType="cart" />
@@ -278,13 +257,27 @@ const CartPage = () => {
           >
             إضافة رصيد
           </Button>
+          <Modal
+            visible={budgetVisible}
+            title="إضافة الرصيد"
+            okButtonProps={{ disabled: true, style: { display: 'none' } }}
+            cancelText="إغلاق"
+            onCancel={() => {
+              setBudgetVisible(false);
+            }}
+          >
+            <StripeProvider apiKey="pk_test_51H2XOsGP4bG3BNnqIuJs1B3aTgxkO5WB9lgYI9Szn7sfNcwYq24XuOh4zuYIECpbYAcRhIzwdo7HSbrb59cj2rwS00G9CnMEz5">
+              <Elements>
+                <CheckoutForm setBudget={setBudget} />
+              </Elements>
+            </StripeProvider>
+          </Modal>
           <div>
             <h3 className="budget__heading">
               <span>رصيدك الحالي : </span> <span>{budget}$</span>
             </h3>
           </div>
         </div>
-        <AddBudgetForm />
         {cartData.length === 0 ? (
           <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="empty" />
         ) : (
