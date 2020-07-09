@@ -7,6 +7,7 @@ import { Pagination, message, Popconfirm, Empty } from 'antd';
 import Axios from 'axios';
 
 import AuthorizationContext from '../../Contexts/AuthorizationContext';
+import * as ROUTES from '../../constants/routes';
 
 function PaintingsSection({ paintings, deletePainting }) {
   const [minValue, setMinValue] = useState(0);
@@ -106,7 +107,7 @@ function PaintingsSection({ paintings, deletePainting }) {
                                       'عليك تسجيل الدخول بحساب مشترٍ لتتم العملية'
                                     );
                                   } else {
-                                    history.push('/login');
+                                    history.push(ROUTES.LOGIN_PAGE);
                                   }
                                 }}
                               >
