@@ -34,8 +34,6 @@ const CartPage = () => {
       } = await Axios.get('/api/v1/cart');
       if (data) {
         setCartData(data);
-      } else {
-        setCartData([]);
       }
     } catch (err) {
       message.error('خطأ في السيرفر، يرجى المحاولة لاحقًا');

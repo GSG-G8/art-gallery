@@ -137,7 +137,7 @@ const AddProduct = ({ showForm, hideForm }) => {
               label="السعر دولار"
               rules={[{ required: true, message: 'أضف السعر' }]}
             >
-              <Input style={{ width: '100%' }} placeholder="السعر" />
+              <Input style={{ width: '90%' }} placeholder="السعر" />
             </Form.Item>
           </div>
 
@@ -168,14 +168,12 @@ const AddProduct = ({ showForm, hideForm }) => {
                           fieldKey={[field.fieldKey, 'price']}
                           rules={[{ required: true, message: 'أضف السعر' }]}
                         >
-                          <Input
-                            style={{ width: '100%' }}
-                            placeholder="السعر"
-                          />
+                          <Input style={{ width: '90%' }} placeholder="السعر" />
                         </Form.Item>
                       </>
 
                       <FiMinusCircle
+                        className="btn-add-icon"
                         onClick={() => {
                           remove(field.name);
                         }}
