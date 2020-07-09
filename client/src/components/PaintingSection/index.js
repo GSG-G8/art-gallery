@@ -53,7 +53,7 @@ function PaintingContainer() {
   useEffect(() => {
     getPaintings();
     getArtists();
-  }, [price]);
+  }, []);
 
   const deletePainting = async (paintingID) => {
     try {
