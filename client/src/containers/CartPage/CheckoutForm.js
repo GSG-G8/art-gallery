@@ -8,14 +8,16 @@ import {
   injectStripe,
 } from 'react-stripe-elements';
 import axios from 'axios';
-import { Form, Button, Input, message, notification, Alert } from 'antd';
+import { Form, Button, Input, message, notification, Alert, Spin } from 'antd';
 
 const CheckoutForm = ({ stripe }) => {
   const [receiptUrl, setReceiptUrl] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (values) => {
     try {
+      setLoading(true);
       const stripeToken = await stripe.createToken();
       const { token, error } = stripeToken;
       const { amount } = values;
@@ -39,6 +41,7 @@ const CheckoutForm = ({ stripe }) => {
     } catch (err) {
       message.error('حصل خطأ غير متوقع، يُرجى المحاولة مرةً أخرى');
     }
+    setLoading(false);
   };
   if (receiptUrl) {
     return (
@@ -77,7 +80,7 @@ const CheckoutForm = ({ stripe }) => {
             style={{ color: 'aliceblue' }}
             htmlType="submit"
           >
-            تنفيذ
+            تنفيذ {loading && <Spin size="small" />}
           </Button>
         </Form.Item>
         {errorMessage && <Alert message={errorMessage} type="error" showIcon />}
