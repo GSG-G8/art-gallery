@@ -93,7 +93,9 @@ function PaintingsDetail({ match }) {
                   onChange={handleSizeChange}
                 >
                   {Object.keys(painting.property).map((e) => (
-                    <Select.Option value={e}>{e}</Select.Option>
+                    <Select.Option key={e} value={e}>
+                      {e}
+                    </Select.Option>
                   ))}
                 </Select>
                 <strong className="price">

@@ -300,12 +300,14 @@ function Profile({ match }) {
             artistId={artistId}
           />
         )}
-        <div className="paintings">
-          <PaintingSection
-            paintings={paintings}
-            deletePainting={deletePainting}
-          />
-        </div>
+        {paintings && (
+          <div className="paintings">
+            <PaintingSection
+              paintings={paintings}
+              deletePainting={deletePainting}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
