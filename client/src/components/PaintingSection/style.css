@@ -16,10 +16,14 @@
   width: 80%;
   margin: 0 auto;
 }
-.catInputs .ant-radio-group {
-  display: flex !important;
-  justify-content: center !important;
+.catInputs .ant-radio-group{
+  display: flex;
+  margin: auto;
+  justify-content: center;
   flex-wrap: wrap;
+}
+.catInputs .ant-radio-group .ant-radio-button-wrapper{
+  margin: .25em .25em .5em;
 }
 .container__paintings {
   width: 95%;
@@ -107,4 +111,5 @@
     width: 100%;
     border: none;
   }
+
 }
