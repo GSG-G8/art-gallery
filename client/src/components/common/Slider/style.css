@@ -46,9 +46,9 @@
   color: #955f83;
 }
 
-@media (max-width:900px){
+@media (max-width:1100px){
   .carousal-container {
-    height: 40vh;
+    height: 34vh;
   }
   .title-1{
     font-size: 1.3rem !important;
@@ -57,6 +57,20 @@
     font-size: 1.2rem;
   }
   .slider-image{
-    height: 35vh;
+    height: 30vh;
+  }
+}
+@media (max-width:750px){
+  .carousal-container {
+    height: 25vh;
+  }
+  .slider-image{
+    height: 20vh;
+  }
+  .title-1{
+    font-size: 1rem !important;
+  }
+  .title-2{
+    font-size: .9rem;
   }
 }
