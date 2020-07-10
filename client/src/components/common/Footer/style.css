@@ -62,7 +62,6 @@
   justify-content: space-around;
   padding-top: 10px;
   width: 80%;
-  /* margin-right: 50px; */
   background-color: white;
   margin: auto;
 }
@@ -85,8 +84,8 @@
   text-align: right;
   color: #955f83;
   font-weight: bold;
-  width: 80%;
   margin: auto;
+  width: 80%;
 }
 
 .follow-icons {
@@ -129,8 +128,8 @@
   }
   .follow-container {
     justify-content: flex-end;
-    margin-right: 40px;
     align-self: flex-start;
     margin-top: 10px;
+    width: 80%;
   }
 }
