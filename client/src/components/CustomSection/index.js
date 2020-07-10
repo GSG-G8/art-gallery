@@ -41,7 +41,7 @@ const CustomOrder = () => {
           </Form.Item>
           <Form.Item>
             <p>اختر اسم الفنان : </p>
-            <Select style={{ width: 200 }}>
+            <Select>
               <Option value="alaa">الاء ابو سويرح</Option>
               <Option value="rana">رنا عبيد</Option>
               <Option value="lina">لينا يحيى</Option>

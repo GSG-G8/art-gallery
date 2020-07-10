@@ -101,10 +101,10 @@ const Footer = () => {
       </div>
       <div className="copy-right-container">
         <div className="copy-right">
-          <p>سياسات المتجر</p>
-          <p> الأسئلة الشائعة</p>
-          <p> فريق العمل</p>
-          <p>‫‪2020‬‬ ‫‪All‬‬ ‫‪rights‬‬ ‫‪reserved.BERWAZ‬‬ &copy;</p>
+          <span>سياسات المتجر</span>
+          <span> الأسئلة الشائعة</span>
+          <span> فريق العمل</span>
+          <span>‫‪2020‬‬ ‫‪All‬‬ ‫‪rights‬‬ ‫‪reserved.BERWAZ‬‬ &copy;</span>
         </div>
       </div>
     </div>

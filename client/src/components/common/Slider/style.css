@@ -3,12 +3,11 @@
     justify-content: space-around;
     align-self: center;
     margin-top: 7px;
-    background-color: #a1819514;
     padding-top: 20px;
     padding-bottom: 20px;}
 
 .carousal-container {
-  height: 60vh;
+  height: 59vh;
   line-height: 160px;
   overflow: hidden;
   width: 40%;
@@ -23,21 +22,41 @@
 
 .slider-image {
   width: 100%;
-  height: 54vh;
+  height: 90%;
   object-fit: cover;
 }
 
 .titles-container {
   width: 40%;
   text-align: right;
-  margin-top: 100px;
+  color: #2D616C;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+
 }
 
 .title-1 {
   font-weight: bold;
+  color: #2D616C;
 }
 
 .title-2 {
   font-weight: bold;
   color: #955f83;
+}
+
+@media (max-width:900px){
+  .carousal-container {
+    height: 40vh;
+  }
+  .title-1{
+    font-size: 1.3rem !important;
+  }
+  .title-2{
+    font-size: 1.2rem;
+  }
+  .slider-image{
+    height: 35vh;
+  }
 }

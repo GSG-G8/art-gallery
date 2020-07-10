@@ -5,8 +5,8 @@
 .main-form-custom p{
     color: #2D616C;
 }
-.form-container{
-    width: 50%;
+.main-form-custom .form-container{
+    width: 40%;
     margin: auto;
     padding: 40px;
     border: 2px solid #955F83;
@@ -20,6 +20,29 @@
 }
 .form-container .custom-form-button{
     color: white
+}
+.main-form-custom .form-input{
+    width: 50%;
+}
+.main-form-custom .ant-select{
+    width: 50%;
+}
+@media (max-width:850px){
+    .main-form-custom h1{
+        font-size: 1.3rem;
+    }
+    .main-form-custom h3{
+        font-size: 1rem;
+    }
+    .main-form-custom .form-container{
+        width: 80%;
+    }
+    .main-form-custom .form-input{
+        width: 90%;
+    }
+    .main-form-custom .ant-select{
+        width: 90%;
+    }
 }
 
 
