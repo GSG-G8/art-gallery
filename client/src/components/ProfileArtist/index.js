@@ -203,7 +203,7 @@ function Profile({ match }) {
                 {({ user }) =>
                   isAuth(user) && (
                     <p>
-                      <span>رصيدك الحالي يساوي :</span>
+                      <span> رصيدك الحالي  :</span>
                       {profileData.budget ? profileData.budget : ' '} $
                     </p>
                   )

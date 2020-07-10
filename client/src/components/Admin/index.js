@@ -94,7 +94,7 @@ const AdminPage = () => {
               </thead>
               <tbody>
                 {artists
-                  .sort((a, b) => a.id - b.id)
+                  .sort((a, b) => b.id - a.id)
                   .map(
                     ({
                       first_name: firstName,
@@ -105,7 +105,7 @@ const AdminPage = () => {
                       mobile_no: mobile,
                       budget,
                     }) => (
-                      <tr key={firstName}>
+                      <tr key={id}>
                         <td>{`${firstName} ${lastName}`} </td>
                         <td>{email}</td>
                         <td>{active ? 'نشط' : 'غير نشط'}</td>

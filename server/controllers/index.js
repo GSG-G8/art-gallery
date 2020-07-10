@@ -1,5 +1,6 @@
 const error = require('./errorHandlers');
 const auth = require('./auth');
+const postCharge = require('./stripe');
 
 const {
   getPaintings,
@@ -44,5 +45,6 @@ module.exports = {
   updateArtistAvatar,
   buyPaintings,
   getPaintingInfo,
+  postCharge,
   getAdminData,
 };

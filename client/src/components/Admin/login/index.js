@@ -48,7 +48,7 @@ const AdminLogin = (props) => {
   return (
     <div className="main-form-container">
       <div className="form-container">
-        <h2 className="form-title">أهلًا بك</h2>
+        <h2 className="form-title"> أهلًا بك في صفحة المدير</h2>
         <Form
           name="normal_login"
           className="admin-login-form"
