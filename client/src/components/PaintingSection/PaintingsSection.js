@@ -13,7 +13,7 @@ function PaintingsSection({ paintings, deletePainting }) {
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(6);
   const cloudinaryLink =
-    'https://res.cloudinary.com/dacf3uopo/image/upload/v1593353472/';
+    'https://res.cloudinary.com/dacf3uopo/image/upload/c_limit,h_400,w_400/v1593353472/';
 
   const history = useHistory();
 
