@@ -3,8 +3,9 @@
     justify-content: space-around;
     align-self: center;
     margin-top: 7px;
-    padding-top: 20px;
-    padding-bottom: 20px;}
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
 
 .carousal-container {
   height: 59vh;

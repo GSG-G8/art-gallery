@@ -1,12 +1,12 @@
 .main__landing__container{
   width: 100%;
   background-color: #a1819514;
-  padding: 5px;
+  padding: 1px 0px;
   margin-bottom: 20px;
 }
 .landing__container {
   width: 75%;
-  margin: 5% auto;
+  margin: 2% auto;
 }
 .container__filter{
   width: 80%;
@@ -101,7 +101,9 @@
 }
 .paintingsPag {
   width: 300px;
-  margin: 2% auto;
+  margin: 2% auto !important;
+  display: flex;
+  justify-content: center;
 }
 .filter_container_wrap{
   display: flex;
