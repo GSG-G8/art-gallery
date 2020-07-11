@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { StripeProvider, Elements } from 'react-stripe-elements';
 import Axios from 'axios';
 import {
   Table,
@@ -12,6 +13,8 @@ import {
   message,
 } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
+import CheckoutForm from './CheckoutForm';
+import './style.css';
 
 import Navbar from '../../components/common/Navbar';
 
@@ -22,7 +25,10 @@ const { confirm } = Modal;
 const CartPage = () => {
   const [cartData, setCartData] = useState([]);
   const [visible, setVisible] = useState(false);
+  const [budgetVisible, setBudgetVisible] = useState(false);
   const [checkoutData, setCheckoutData] = useState([]);
+  const [budget, setBudget] = useState('');
+  const [update, setUpdate] = useState(false);
 
   const cloudinaryLink =
     'https://res.cloudinary.com/dacf3uopo/image/upload/v1593353472/';
@@ -32,9 +38,11 @@ const CartPage = () => {
       const {
         data: { data },
       } = await Axios.get('/api/v1/cart');
-      if (data) {
-        setCartData(data);
-      }
+      const {
+        data: { data: userData },
+      } = await Axios.get('/api/v1/profile');
+      setCartData(data);
+      setBudget(userData[0].budget);
     } catch (err) {
       message.error('خطأ في السيرفر، يرجى المحاولة لاحقًا');
     }
@@ -42,7 +50,7 @@ const CartPage = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [update]);
 
   const deleteCart = (id, title) => {
     confirm({
@@ -56,9 +64,7 @@ const CartPage = () => {
         try {
           await Axios.delete(`/api/v1/cart/${id}`);
           message.success('تم حذف اللوحة من عربة التسوق');
-          setCartData(
-            cartData.filter((painting) => painting.painting_id !== id)
-          );
+          setUpdate(!update);
         } catch (err) {
           message.error('حدث خطا في حذف اللوحة');
         }
@@ -75,9 +81,7 @@ const CartPage = () => {
       });
       await Axios.delete(`/api/v1/cart/${paintingId}`);
       message.success('تمت عملية الشراء بنجاح');
-      setCartData(
-        cartData.filter((painting) => painting.painting_id !== paintingId)
-      );
+      setUpdate(!update);
       setVisible(false);
     } catch (err) {
       if (
@@ -244,19 +248,51 @@ const CartPage = () => {
   return (
     <div>
       <Navbar pageType="cart" />
-      {cartData.length === 0 ? (
-        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="empty" />
-      ) : (
-        <Table
-          columns={columns}
-          dataSource={cartData}
-          rowKey="id"
-          size="middle"
-          className="cart__table"
-        />
-      )}
-      <div>
-        <CollectionCreateForm />
+      <div className="cart__container">
+        <div className="budget__container">
+          <Button
+            type="primary"
+            style={{ color: 'aliceblue' }}
+            onClick={() => setBudgetVisible(true)}
+          >
+            إضافة رصيد
+          </Button>
+          <Modal
+            visible={budgetVisible}
+            title="إضافة الرصيد"
+            okButtonProps={{ disabled: true, style: { display: 'none' } }}
+            cancelText="إغلاق"
+            onCancel={() => {
+              setBudgetVisible(false);
+            }}
+          >
+            <StripeProvider apiKey="pk_test_51H2XOsGP4bG3BNnqIuJs1B3aTgxkO5WB9lgYI9Szn7sfNcwYq24XuOh4zuYIECpbYAcRhIzwdo7HSbrb59cj2rwS00G9CnMEz5">
+              <Elements>
+                <CheckoutForm setBudget={setBudget} />
+              </Elements>
+            </StripeProvider>
+          </Modal>
+          <div>
+            <h3 className="budget__heading">
+              <span>رصيدك الحالي : </span> <span>{budget}$</span>
+            </h3>
+          </div>
+        </div>
+        {cartData.length === 0 ? (
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="empty" />
+        ) : (
+          <Table
+            columns={columns}
+            dataSource={cartData}
+            rowKey="id"
+            size="middle"
+            className="cart__table"
+            bordered
+          />
+        )}
+        <div>
+          <CollectionCreateForm />
+        </div>
       </div>
     </div>
   );

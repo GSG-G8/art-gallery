@@ -47,6 +47,7 @@
     "nodemailer": "^6.4.10",
     "pg": "^7.18.2",
     "prettier": "^2.0.2",
+    "stripe": "^8.69.0",
     "yup": "^0.28.3"
   },
   "devDependencies": {

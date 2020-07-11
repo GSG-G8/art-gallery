@@ -13,6 +13,7 @@ const {
   checkCustomerEmail,
   getCustomerProfile,
   updateCustomer,
+  editCustomerBudget,
 } = require('./customers');
 
 const {
@@ -69,4 +70,5 @@ module.exports = {
   addReview,
   getPaintQuery,
   getAdminBudget,
+  editCustomerBudget,
 };
