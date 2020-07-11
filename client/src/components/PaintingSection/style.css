@@ -9,7 +9,6 @@
   width: 75%;
 }
 .container__filter{
-  width: 80%;
   margin: auto;
 }
 .search__category {
@@ -17,6 +16,7 @@
   margin: 0 auto;
 }
 .catInputs .ant-radio-group{
+  width: 100%;
   display: flex;
   margin: auto;
   justify-content: center;
