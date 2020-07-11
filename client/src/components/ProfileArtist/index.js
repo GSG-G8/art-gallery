@@ -125,13 +125,18 @@ function Profile({ match }) {
         getArtistProfile(artistId);
       }
     } catch (err) {
-      if (err.response.data.message[0] === 'Should be an image png or jpeg') {
+      console.log(err.response.data.message[0]);
+      if (err.response?.data.message[0] === 'Should be an image png or jpeg') {
         message.error('يجب ادخال صورة بامتداد png , jpeg');
         setLoaded(false);
       } else {
         message.error(' فشل تحميل الصورة الرجاء المحاولة مرة اخرى');
       }
     }
+  };
+  const uploadController = (file) => {
+    setArtistImg(file);
+    return false;
   };
 
   const isAuth = (user) => user.userRole === 'artist' && user.id === +artistId;
@@ -172,14 +177,12 @@ function Profile({ match }) {
                             <Form.Item name="artistImg">
                               <Upload
                                 type="file"
-                                beforeUpload={(file) => {
-                                  setArtistImg(file);
-                                  return false;
-                                }}
+                                beforeUpload={uploadController}
                                 onRemove={() => setArtistImg(null)}
-                                value={ArtistImg}
+                                showUploadList={false}
+                                file={ArtistImg}
                               >
-                                <Button onClick className="edit-img-btn">
+                                <Button className="edit-img-btn">
                                   <FiEdit />
                                 </Button>
                               </Upload>
