@@ -8,10 +8,18 @@ cloudinary.config({
 
 const uploadImg = (path) =>
   new Promise((resolve, reject) => {
-    cloudinary.uploader.upload(path, (err, result) => {
-      if (err) reject(err);
-      else resolve(result);
-    });
+    cloudinary.uploader.upload(
+      path,
+      {
+        crop: 'limit',
+        width: 400,
+        height: 400,
+      },
+      (err, result) => {
+        if (err) reject(err);
+        else resolve(result);
+      },
+    );
   });
 
 module.exports = uploadImg;
