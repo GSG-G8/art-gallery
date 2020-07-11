@@ -17,6 +17,7 @@ import CheckoutForm from './CheckoutForm';
 import './style.css';
 
 import Navbar from '../../components/common/Navbar';
+import Footer from '../../components/common/Footer';
 
 const { Option } = Select;
 
@@ -201,7 +202,7 @@ const CartPage = () => {
         <img
           src={`${cloudinaryLink}${img}`}
           alt="Painting"
-          style={{ width: '100px' }}
+          style={{ width: '100px', justifyContent: 'center' }}
         />
       ),
     },
@@ -246,13 +247,13 @@ const CartPage = () => {
   ];
 
   return (
-    <div>
+    <div className="cart__container__main">
       <Navbar pageType="cart" />
       <div className="cart__container">
         <div className="budget__container">
           <Button
             type="primary"
-            style={{ color: 'aliceblue' }}
+            style={{ color: 'white' }}
             onClick={() => setBudgetVisible(true)}
           >
             إضافة رصيد
@@ -294,6 +295,7 @@ const CartPage = () => {
           <CollectionCreateForm />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

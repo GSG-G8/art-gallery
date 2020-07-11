@@ -1,7 +1,8 @@
 .main-container-footer {
   width: 100%;
   background-color: #a1819514;
-
+  position: relative;
+  bottom: 0px;
 }
 .footer-container {
   display: flex;
