@@ -1,19 +1,27 @@
 .main-form-custom{
-    padding-top: 10px;
-    padding-bottom: 50px;
+    display: flex;
+    width: 80%;
+    margin: auto;
 }
 .main-form-custom p{
     color: #2D616C;
 }
 .main-form-custom .form-container{
-    width: 40%;
-    margin: auto;
+    width: 50%;
     padding: 40px;
-    border: 2px solid #955F83;
+    background-color: #a1819514;
+    margin-bottom: 20px;
+}
+.img-container-custom{
+    background-image: url(../../assets/images/3860186.jpg);
+    background-size: contain;
+    width: 50%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+
 }
 .form-container .form-title{
     color:#2D616C ;
-    text-align: center;
 }
 .form-container .sub-title{
     color:#955F83;
@@ -34,14 +42,19 @@
     .main-form-custom h3{
         font-size: 1rem;
     }
-    .main-form-custom .form-container{
-        width: 80%;
-    }
+
     .main-form-custom .form-input{
         width: 90%;
     }
     .main-form-custom .ant-select{
         width: 90%;
+    }
+    .img-container-custom{
+        display: none;    
+    }
+    .main-form-custom .form-container{
+        width: 100%;
+
     }
 }
 
