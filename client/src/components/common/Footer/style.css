@@ -10,6 +10,11 @@
   padding: 30px;
 }
 
+.footer-container .logo__title{
+  color: #955f83;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
 .logo-container {
   width: 30%;
   align-self: center;
@@ -17,7 +22,6 @@
 
 .logo-container img {
   width: 100px;
-  margin-left: 300px;
 }
 .logo-container p {
   text-align: right;

@@ -1,11 +1,21 @@
-.ant-result-extra a{
+.page__notfound{
+    text-align: center;
+    width: 100%;
+    margin: auto;
+    padding: 30px;
+}
+.page__notfound h1{
+    color: #2D616C;
+    margin-bottom: 50px;
+
+}
+.page__notfound a {
     border:solid 1px #955f83;
     background-color:white;
     width: 150px;
-    margin: auto;
     padding: 15px;
 }
-.ant-result-extra  a:hover{
+.page__notfound a:hover{
     color: white; 
     background-color:#955f83;
 }

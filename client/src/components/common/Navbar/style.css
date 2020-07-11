@@ -10,19 +10,21 @@
 }
 
 .nav-right {
-  width: 70px;
-  height: 70px;
-  align-items: flex-start;
+  align-items: flex-end;
+  text-align: center;
+}
+.nav-right span{
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .nav-logo {
-  width: 100%;
+  width: 70px;
 }
 
 .nav-left {
   display: flex;
   align-items: center;
-  margin-top: 20px;
 }
 
 .nav-logout-btn {

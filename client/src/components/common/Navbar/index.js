@@ -6,7 +6,7 @@ import { Button } from 'antd';
 import * as ROUTES from '../../../constants/routes';
 import AuthorizationContext from '../../../Contexts/AuthorizationContext';
 import LogoutContext from '../../../Contexts/LogoutContext';
-import navLogo from '../../../assets/images/berwaz.png';
+import navLogo from '../../../assets/images/logo.png';
 import './style.css';
 
 const NavbarComponent = (props) => {
@@ -21,6 +21,7 @@ const NavbarComponent = (props) => {
                 <div className="nav-right">
                   <Link to={ROUTES.HOME_PAGE}>
                     <img className="nav-logo" src={navLogo} alt="logo" />
+                    <span>برواز</span>
                   </Link>
                 </div>
                 {!role && (
