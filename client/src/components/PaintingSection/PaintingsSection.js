@@ -56,11 +56,6 @@ function PaintingsSection({ paintings, deletePainting }) {
                         <img
                           alt={painting.title}
                           src={`${cloudinaryLink}${painting.img}`}
-                          style={{
-                            width: 300,
-                            height: 300,
-                            objectFit: 'cover',
-                          }}
                         />
                       </div>
                       <div
