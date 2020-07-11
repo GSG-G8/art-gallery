@@ -1,27 +1,54 @@
+.main__landing__container{
+  width: 100%;
+  background-color: #a1819514;
+  padding: 1px 0px;
+  margin-bottom: 20px;
+}
 .landing__container {
+  margin: 2% auto;
   width: 75%;
-  margin: 5% auto;
+}
+.container__filter{
+  margin:20px auto;
 }
 .search__category {
   width: 80%;
   margin: 0 auto;
 }
-.catInputs .ant-radio-group {
-  display: flex !important;
-  justify-content: center !important;
+.catInputs .ant-radio-group{
+  width: 100%;
+  display: flex;
+  margin: auto;
+  justify-content: center;
   flex-wrap: wrap;
 }
+.catInputs .ant-radio-group .ant-radio-button-wrapper{
+  margin: .25em .25em .5em;
+}
 .container__paintings {
-  width: 95%;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  margin: 30px auto;
-  padding: 2% auto;
-  justify-content: space-around;
+    display: grid;
+    width: 95%;
+    grid-template-columns: repeat(auto-fill,minmax(20em,1fr));
+    grid-column-gap: 2vw;
+    -webkit-column-gap: 2vw;
+    column-gap: 2vw;
+    grid-row-gap: 2em;
+    row-gap: 2em;
+    margin: 20px auto;
+    box-sizing: border-box;
+}
+.flip-card{
+  width: 100%;
+}
+.flip-card-back{
+  width: 100%;
+  background-position: 50%;
 }
 .container__paintings img {
   padding: 10px;
+    width: 100%;
+    height: 320px;
+    object-fit: 'cover';
 }
 .ant-pagination-rtl {
   margin-top: 10px !important;
@@ -36,7 +63,6 @@
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
-  margin-bottom: 15px;
 }
 
 .flip-card:hover .flip-card-inner {
@@ -87,11 +113,36 @@
 }
 .paintingsPag {
   width: 300px;
-  margin: 2% auto;
+  margin: 2% auto !important;
+  display: flex;
+  justify-content: center;
+}
+.filter_container_wrap{
+  display: flex;
 }
 @media (max-width: 600px) {
   .container__paintings {
     width: 100%;
     border: none;
+  }
+}
+@media (max-width: 800px) {
+  .container__paintings {
+    width: 100%;
+    border: none;
+  }
+  .flip-card{
+    width: 280px;
+  }
+}
+@media (max-width:350px){
+  .container__paintings{
+    width: 90%;
+  }
+  .flip-card{
+    width: 220px;
+  }
+  .container__paintings img {
+      height: 250px;
   }
 }

@@ -87,14 +87,14 @@ const AdminPage = () => {
                   <th>الاسم</th>
                   <th>البريد الالكتروني</th>
                   <th>حالة الحساب</th>
-                  <th>تفعيل/تعطيل</th>
                   <th>رقم الجوال</th>
                   <th>$الرصيد</th>
+                  <th>تفعيل/تعطيل</th>
                 </tr>
               </thead>
               <tbody>
                 {artists
-                  .sort((a, b) => a.id - b.id)
+                  .sort((a, b) => b.id - a.id)
                   .map(
                     ({
                       first_name: firstName,
@@ -105,7 +105,7 @@ const AdminPage = () => {
                       mobile_no: mobile,
                       budget,
                     }) => (
-                      <tr key={firstName}>
+                      <tr key={id}>
                         <td>{`${firstName} ${lastName}`} </td>
                         <td>{email}</td>
                         <td>{active ? 'نشط' : 'غير نشط'}</td>

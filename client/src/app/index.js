@@ -18,6 +18,7 @@ import LandingPage from '../containers/LandingPage';
 import AdminDashboard from '../components/Admin';
 import AdminLogin from '../components/Admin/login';
 import CartPage from '../containers/CartPage';
+import NotFound from '../components/PageNotFound';
 
 function App() {
   const [user, setUser] = useState({});
@@ -142,6 +143,7 @@ function App() {
                   );
                 }}
               />
+              <Route component={NotFound} />
             </Switch>
           </LogoutContext.Provider>
         </AuthorizationContext.Provider>

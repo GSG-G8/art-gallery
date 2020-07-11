@@ -1,32 +1,21 @@
-.not-found-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.page__notfound{
+    text-align: center;
+    width: 100%;
+    margin: auto;
+    padding: 30px;
 }
+.page__notfound h1{
+    color: #2D616C;
+    margin-bottom: 50px;
 
-.not-found-container img {
-  width: 500px;
-  height: 300px;
-  margin-top: 100px;
 }
-
-.not-found-container h1 {
-  margin-top: 20px;
-  font-weight: bold;
-  text-align: center;
+.page__notfound a {
+    border:solid 1px #955f83;
+    background-color:white;
+    width: 150px;
+    padding: 15px;
 }
-
-.not-found-container p {
-  color: darkgrey;
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.not-found-container .ant-btn {
-  color: white;
-  background-color: #955f83;
-  margin-left: 30px;
+.page__notfound a:hover{
+    color: white; 
+    background-color:#955f83;
 }
