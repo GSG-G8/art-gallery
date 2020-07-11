@@ -17,7 +17,6 @@ import CheckoutForm from './CheckoutForm';
 import './style.css';
 
 import Navbar from '../../components/common/Navbar';
-import Footer from '../../components/common/Footer';
 
 const { Option } = Select;
 
@@ -280,7 +279,7 @@ const CartPage = () => {
           </div>
         </div>
         {cartData.length === 0 ? (
-          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="empty" />
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
         ) : (
           <Table
             columns={columns}
@@ -295,7 +294,6 @@ const CartPage = () => {
           <CollectionCreateForm />
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

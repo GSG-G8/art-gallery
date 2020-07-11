@@ -22,7 +22,3 @@
   display: flex;
   justify-content: center;
 }
-.cart__container__main .main-container-footer{
-  position: absolute !important;
-  bottom: 0px;
-}
