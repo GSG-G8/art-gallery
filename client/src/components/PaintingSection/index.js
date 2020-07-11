@@ -172,6 +172,7 @@ function PaintingContainer() {
             </div>
           </div>
           <PaintingSection
+            id="painting__link"
             paintings={finalData}
             deletePainting={deletePainting}
           />
