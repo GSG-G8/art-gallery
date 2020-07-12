@@ -30,7 +30,7 @@ const buyPaintings = async (req, res, next) => {
         );
         const { budget: customerBudget } = customerBudgetRows[0];
 
-        if (Number(customerBudget) > Number(paintingPrice)) {
+        if (Number(customerBudget) >= Number(paintingPrice)) {
           const results = await updateBudgets(
             customerId,
             artistId,

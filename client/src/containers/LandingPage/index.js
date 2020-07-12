@@ -13,7 +13,7 @@ function LandingPage() {
       <Slider />
       <PaintingsSection />
       <CustomForm />
-      <Footer className="landingP__footer" />
+      <Footer />
     </div>
   );
 }

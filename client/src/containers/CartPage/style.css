@@ -15,6 +15,10 @@
 }
 
 .ant-table-thead .ant-table-cell {
-  background-color: #f3e9ea;
+  background-color: #a1819514;
   text-align: center !important;
+}
+ .ant-table-row-level-0 :first-child{
+  display: flex;
+  justify-content: center;
 }

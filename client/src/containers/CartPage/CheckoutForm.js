@@ -30,6 +30,7 @@ const CheckoutForm = ({ setBudget, stripe }) => {
           setBudget(data.newUserBudget);
           notification.success({
             message: 'تمت عملية الدفع بنجاح',
+            duration: 1,
             description: `رصيدك الحالي ${data.newUserBudget}$`,
           });
         }

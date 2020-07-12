@@ -2,14 +2,19 @@
   display: flex;
   flex-direction: row;
   height: 80vh;
-  margin: 4vh 2vw;
+  width: 90%;
+  margin: 4vh auto;
+  justify-content: center;
+}
+.main__details__container{
+  margin-top: 30px;
 }
 .container__details {
   width: 35%;
 }
 .painting {
-  width: 95%;
   padding: 5%;
+  width: 100%;
 }
 
 .price {
@@ -44,4 +49,19 @@
 strong {
   color: #955f83;
   padding: 10px;
+}
+@media (max-width:800px){
+  .containerD {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .container__details {
+    width: 80%;
+    margin:20px auto;
+  }
+  .container__image {
+    width: 80%;
+    margin: auto;
+  }
+
 }

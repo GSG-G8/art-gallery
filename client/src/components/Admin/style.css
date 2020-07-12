@@ -8,22 +8,20 @@
   }
   
 #artists-table td, #artists-table th {
-    border: 1px solid #ddd;
+    border: 1px solid #a1819514;
     padding: 8px;
 }
-  
-#artists-table tr:nth-child(even){background-color: #f2f2f2;}
   
 #artists-table th {
     padding-top: 12px;
     padding-bottom: 12px;
-    background-color: #F3E9EA
+    background-color: #a1819514
     ;
     color: #955F83;
 }
 
  .download-table-xls-button{
-     background-color: #F3E9EA;
+     background-color: #a1819514;
       border: 1px solid #955F83 !important;
       padding: 10px;
       color: #955F83;
@@ -41,6 +39,6 @@
   ;
 }
 .budget-mark{
-  background-color:#f2f2f2;
+  background-color:#a1819514;
   padding: 2px;
 }
