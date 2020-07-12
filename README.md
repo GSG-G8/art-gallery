@@ -32,6 +32,7 @@ Our site provides artists with the ability to sell their paintings at reasonable
 - I can sign up / login and have my own profile
 - I can edit my profile data
 - I can upload my paintings in my profile
+- I can edit my information
 
 ### As an user
 
@@ -45,12 +46,15 @@ Our site provides artists with the ability to sell their paintings at reasonable
 ### As an admin
 
 - I can delete a artist/user/painting
+- I can see all artist and switch activate artist
+- I can export all artist to excel file
+- I can see my budget on dashboard
 
 ## Set up the app locally
 
 First clone this repo: `git clone https://github.com/GSG-G8/art-gallery.git`
 
-then run `npm i` and open new terminal then run `cd client` then `npm i` to install the dependencies for the app.
+then run `npm run project-setup` to install the dependencies for the app.
 
 ### Database Setup
 
