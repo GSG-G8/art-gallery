@@ -30,12 +30,12 @@ const AddProduct = ({ showForm, hideForm, getPaintings, artistId }) => {
   const [error, setError] = useState();
   const [paintingImg, setPaintingImg] = useState();
 
-  const onFinish = async ({ props, size, price, ...values }) => {
+  const onFinish = async ({ properity, size, price, ...values }) => {
     const obj = {};
     obj[size] = price;
-    if (props) {
+    if (properity) {
       // eslint-disable-next-line no-return-assign
-      props.map((el) => (obj[el.size] = el.price));
+      properity.map((el) => (obj[el.size] = el.price));
     }
     const body = {
       ...values,
@@ -142,7 +142,7 @@ const AddProduct = ({ showForm, hideForm, getPaintings, artistId }) => {
             </Form.Item>
           </div>
 
-          <Form.List name="props">
+          <Form.List name="properity">
             {(fields, { add, remove }) => {
               return (
                 <div>
@@ -227,23 +227,10 @@ const AddProduct = ({ showForm, hideForm, getPaintings, artistId }) => {
   );
 };
 AddProduct.propTypes = {
-  profileData: propTypes.shape({
-    title: propTypes.string,
-  }).isRequired,
-  showForm: propTypes.shape({
-    showForm: propTypes.string,
-  }).isRequired,
-  hideForm: propTypes.shape({
-    title: propTypes.func,
-  }).isRequired,
-  map: propTypes.shape({
-    title: propTypes.func,
-  }).isRequired,
-  length: propTypes.shape({
-    title: propTypes.func,
-  }).isRequired,
+  showForm: propTypes.bool.isRequired,
+  hideForm: propTypes.func.isRequired,
   getPaintings: propTypes.func.isRequired,
-  artistId: propTypes.number.isRequired,
+  artistId: propTypes.string.isRequired,
 };
 
 export default AddProduct;
