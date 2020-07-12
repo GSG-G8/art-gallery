@@ -201,7 +201,7 @@ const CartPage = () => {
         <img
           src={`${cloudinaryLink}${img}`}
           alt="Painting"
-          style={{ width: '100px' }}
+          style={{ width: '100px', justifyContent: 'center' }}
         />
       ),
     },
@@ -246,13 +246,13 @@ const CartPage = () => {
   ];
 
   return (
-    <div>
+    <div className="cart__container__main">
       <Navbar pageType="cart" />
       <div className="cart__container">
         <div className="budget__container">
           <Button
             type="primary"
-            style={{ color: 'aliceblue' }}
+            style={{ color: 'white' }}
             onClick={() => setBudgetVisible(true)}
           >
             إضافة رصيد
@@ -279,7 +279,7 @@ const CartPage = () => {
           </div>
         </div>
         {cartData.length === 0 ? (
-          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="empty" />
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
         ) : (
           <Table
             columns={columns}

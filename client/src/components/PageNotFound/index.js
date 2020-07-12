@@ -1,23 +1,19 @@
 import React from 'react';
-import { Button } from 'antd';
 import { Link } from 'react-router-dom';
-import * as ROUTES from '../../constants/routes';
-import notFoundImg from '../../assets/images/notFoundImg.svg';
+import { HOME_PAGE } from '../../constants/routes';
+import { ReactComponent as NotfoundImg } from '../../assets/images/notFound.svg';
 import './style.css';
 
-const PageNotFound = () => {
+function NotFound() {
   return (
-    <div className="not-found-container">
-      <img src={notFoundImg} alt="notFound" className="not-found-img" />
-      <div>
-        <h1> ...عذراََ</h1>
-        <p>هذه الصفحة غير متوفرة</p>
-        <Link to={ROUTES.HOME_PAGE}>
-          <Button>الصفحة الرئيسية</Button>
-        </Link>
-      </div>
+    <div className="page__notfound">
+      <NotfoundImg styleName="img__not-found" />
+      <h1>نأسف,هذه الصفحة غير متوفرة.</h1>
+      <Link styleName="link__pageNotFound" to={HOME_PAGE}>
+        عودة للصفحة الرئيسية
+      </Link>
     </div>
   );
-};
+}
 
-export default PageNotFound;
+export default NotFound;

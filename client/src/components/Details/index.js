@@ -49,96 +49,105 @@ function PaintingsDetail({ match }) {
     <>
       <Navbar />
       {painting ? (
-        <div className="containerD">
-          <div className="container__details">
-            <div className="painting">
-              <h1>{painting.title}</h1>
-              <p>{painting.description}</p>
-              <h3>
-                {' '}
-                التصنيف <strong>{painting.category}</strong>
-              </h3>
-              <Link className="artistName" to={`/artist/${painting.artist_id}`}>
+        <div className="main__details__container">
+          <div className="containerD">
+            <div className="container__details">
+              <div className="painting">
+                <h1>{painting.title}</h1>
+                <p>{painting.description}</p>
                 <h3>
-                  الفنان
-                  <strong>
-                    {`${painting.first_name} ${painting.last_name} `}
-                  </strong>
+                  {' '}
+                  التصنيف <strong>{painting.category}</strong>
                 </h3>
-              </Link>
-              <br />
-
-              <Radio.Group
-                className="viewBtn"
-                buttonStyle="solid"
-                defaultValue="previewImg"
-                onChange={(e) => setimgPreview(e.target.value)}
-              >
-                <Radio.Button className="paintingView" value="previewImg">
-                  عرض اللوحة
-                </Radio.Button>
-                <Radio.Button className="paintingView" value="previewWall">
-                  عرض على الحائط
-                </Radio.Button>
-              </Radio.Group>
-              <br />
-              <br />
-              <label htmlFor="size">
-                {' '}
-                حجم اللوحة{' '}
-                <Select
-                  id="size"
-                  defaultValue={Object.keys(painting.property)[0]}
-                  style={{ width: 120, margin: '10px' }}
-                  onChange={handleSizeChange}
+                <Link
+                  className="artistName"
+                  to={`/artist/${painting.artist_id}`}
                 >
-                  {Object.keys(painting.property).map((e) => (
-                    <Select.Option key={e} value={e}>
-                      {e}
-                    </Select.Option>
-                  ))}
-                </Select>
-                <strong className="price">
-                  {painting.property[size || Object.keys(painting.property)[0]]}
-                  $
-                </strong>
+                  <h3>
+                    الفنان
+                    <strong>
+                      {`${painting.first_name} ${painting.last_name} `}
+                    </strong>
+                  </h3>
+                </Link>
                 <br />
-                <AuthorizationContext.Consumer>
-                  {({ user }) => (
-                    <Button
-                      className="addBtn"
-                      onClick={() => {
-                        if (user.userRole === 'customer') {
-                          addPaintingToCart(painting.id);
-                        } else if (
-                          user.userRole === 'artist' ||
-                          user.userRole === 'admin'
-                        ) {
-                          message.warn(
-                            'عليك تسجيل الدخول بحساب مشترٍ لتتم العملية'
-                          );
-                        } else {
-                          history.push('/login');
-                        }
-                      }}
-                    >
-                      إضافة إلى السلة
-                    </Button>
-                  )}
-                </AuthorizationContext.Consumer>
-              </label>
+
+                <Radio.Group
+                  className="viewBtn"
+                  buttonStyle="solid"
+                  defaultValue="previewImg"
+                  onChange={(e) => setimgPreview(e.target.value)}
+                >
+                  <Radio.Button className="paintingView" value="previewImg">
+                    عرض اللوحة
+                  </Radio.Button>
+                  <Radio.Button className="paintingView" value="previewWall">
+                    عرض على الحائط
+                  </Radio.Button>
+                </Radio.Group>
+                <br />
+                <br />
+                <label htmlFor="size">
+                  {' '}
+                  حجم اللوحة{' '}
+                  <Select
+                    id="size"
+                    defaultValue={Object.keys(painting.property)[0]}
+                    style={{ width: 120, margin: '10px' }}
+                    onChange={handleSizeChange}
+                  >
+                    {Object.keys(painting.property).map((e) => (
+                      <Select.Option key={e} value={e}>
+                        {e}
+                      </Select.Option>
+                    ))}
+                  </Select>
+                  <strong className="price">
+                    {
+                      painting.property[
+                        size || Object.keys(painting.property)[0]
+                      ]
+                    }
+                    $
+                  </strong>
+                  <br />
+                  <AuthorizationContext.Consumer>
+                    {({ user }) => (
+                      <Button
+                        className="addBtn"
+                        onClick={() => {
+                          if (user.userRole === 'customer') {
+                            addPaintingToCart(painting.id);
+                          } else if (
+                            user.userRole === 'artist' ||
+                            user.userRole === 'admin'
+                          ) {
+                            message.warn(
+                              'عليك تسجيل الدخول بحساب مشترٍ لتتم العملية'
+                            );
+                          } else {
+                            history.push('/login');
+                          }
+                        }}
+                      >
+                        إضافة إلى السلة
+                      </Button>
+                    )}
+                  </AuthorizationContext.Consumer>
+                </label>
+              </div>
             </div>
-          </div>
-          <div className="container__image">
-            {imgPreview === 'previewImg' ? (
-              <img
-                className="imgPreview"
-                alt={painting.title}
-                src={cloudinaryLink + painting.img}
-              />
-            ) : (
-              <PictureWall paintingSrc={painting.img} />
-            )}
+            <div className="container__image">
+              {imgPreview === 'previewImg' ? (
+                <img
+                  className="imgPreview"
+                  alt={painting.title}
+                  src={cloudinaryLink + painting.img}
+                />
+              ) : (
+                <PictureWall paintingSrc={painting.img} />
+              )}
+            </div>
           </div>
         </div>
       ) : (

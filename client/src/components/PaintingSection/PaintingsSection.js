@@ -56,18 +56,11 @@ function PaintingsSection({ paintings, deletePainting }) {
                         <img
                           alt={painting.title}
                           src={`${cloudinaryLink}${painting.img}`}
-                          style={{
-                            width: 300,
-                            height: 300,
-                            objectFit: 'cover',
-                          }}
                         />
                       </div>
                       <div
                         className="flip-card-back"
                         style={{
-                          width: 300,
-                          backgroundSize: 'cover',
                           background: `linear-gradient(
                         rgba(0, 0, 0,0.7),
                         rgba(0, 0, 0,0.7)
@@ -134,9 +127,6 @@ function PaintingsSection({ paintings, deletePainting }) {
             <div className="paintingsPag">
               <Pagination
                 total={paintings.length}
-                showTotal={(total, range) =>
-                  `${range[0]}-${range[1]} of ${total} items`
-                }
                 defaultCurrent={1}
                 defaultPageSize={6}
                 onChange={handlePageChange}

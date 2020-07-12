@@ -12,7 +12,9 @@ const SlideShow = () => {
       <div className="titles-container">
         <h1 className="title-1">أرقى اللوحات الفنية</h1>
         <h1 className="title-2">تجدونها هنا </h1>
-        <p>الفن العربي فن جميل يتضمن فن العمارة وفن الخط العربي وفن الزخرفة</p>
+        <p className="title-3">
+          الفن العربي فن جميل يتضمن فن العمارة وفن الخط العربي وفن الزخرفة
+        </p>
       </div>
       <div className="carousal-container">
         <Carousel autoplay>

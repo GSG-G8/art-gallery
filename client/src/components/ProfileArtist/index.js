@@ -90,13 +90,7 @@ function Profile({ match }) {
 
   useEffect(() => {
     getArtistProfile(artistId);
-  }, [artistId]);
-
-  useEffect(() => {
     getAllPainting(artistId);
-  }, [artistId]);
-
-  useEffect(() => {
     getArtistReviews(artistId);
   }, [artistId]);
 
@@ -131,13 +125,18 @@ function Profile({ match }) {
         getArtistProfile(artistId);
       }
     } catch (err) {
-      if (err.response.data.message[0] === 'Should be an image png or jpeg') {
+      console.log(err.response.data.message[0]);
+      if (err.response?.data.message[0] === 'Should be an image png or jpeg') {
         message.error('يجب ادخال صورة بامتداد png , jpeg');
         setLoaded(false);
       } else {
         message.error(' فشل تحميل الصورة الرجاء المحاولة مرة اخرى');
       }
     }
+  };
+  const uploadController = (file) => {
+    setArtistImg(file);
+    return false;
   };
 
   const isAuth = (user) => user.userRole === 'artist' && user.id === +artistId;
@@ -163,38 +162,46 @@ function Profile({ match }) {
                     ArtistImg && `${cloudinaryLink}${profileData.profile_img}`
                   }
                 />
-                {loaded && <Spin className="spin" />}
-                <Form
-                  className="form-edit-img"
-                  layout="inline"
-                  name="edit-img-form"
-                  onFinish={onFinish}
-                >
-                  <Form.Item name="artistImg">
-                    <Upload
-                      type="file"
-                      beforeUpload={(file) => {
-                        setArtistImg(file);
-                        return false;
-                      }}
-                      onRemove={() => setArtistImg(null)}
-                      value={ArtistImg}
-                    >
-                      <Button onClick className="edit-img-btn">
-                        <FiEdit />
-                      </Button>
-                    </Upload>
-                  </Form.Item>
-                  <Form.Item>
-                    <Button
-                      className="edit-img-btn submit"
-                      type="primary"
-                      htmlType="submit"
-                    >
-                      حفظ الصورة
-                    </Button>
-                  </Form.Item>
-                </Form>
+                <AuthorizationContext.Consumer>
+                  {({ user }) => {
+                    if (isAuth(user)) {
+                      return (
+                        <>
+                          {loaded && <Spin className="spin" />}
+                          <Form
+                            className="form-edit-img"
+                            layout="inline"
+                            name="edit-img-form"
+                            onFinish={onFinish}
+                          >
+                            <Form.Item name="artistImg">
+                              <Upload
+                                type="file"
+                                beforeUpload={uploadController}
+                                onRemove={() => setArtistImg(null)}
+                                showUploadList={false}
+                                file={ArtistImg}
+                              >
+                                <Button className="edit-img-btn">
+                                  <FiEdit />
+                                </Button>
+                              </Upload>
+                            </Form.Item>
+                            <Form.Item>
+                              <Button
+                                className="edit-img-btn submit"
+                                type="primary"
+                                htmlType="submit"
+                              >
+                                حفظ الصورة
+                              </Button>
+                            </Form.Item>
+                          </Form>
+                        </>
+                      );
+                    }
+                  }}
+                </AuthorizationContext.Consumer>
               </div>
               <p>
                 {profileData.first_name} {profileData.last_name}

@@ -3,6 +3,7 @@ import PaintingsSection from '../../components/PaintingSection';
 import Navbar from '../../components/common/Navbar';
 import Footer from '../../components/common/Footer';
 import Slider from '../../components/common/Slider';
+import CustomForm from '../../components/CustomSection';
 import './style.css';
 
 function LandingPage() {
@@ -11,7 +12,8 @@ function LandingPage() {
       <Navbar />
       <Slider />
       <PaintingsSection />
-      <Footer className="landingP__footer" />
+      <CustomForm />
+      <Footer />
     </div>
   );
 }

@@ -10,7 +10,7 @@ import {
   FaEnvelope,
   FaSkype,
 } from 'react-icons/fa';
-import logo from '../../../assets/images/berwaz.png';
+import navLogo from '../../../assets/images/logo.png';
 import './style.css';
 
 const Footer = () => {
@@ -18,7 +18,8 @@ const Footer = () => {
     <div className="main-container-footer">
       <div className="footer-container">
         <div className="logo-container">
-          <img src={logo} alt="logo" />
+          <img src={navLogo} alt="logo" />
+          <span className="logo__title">برواز</span>
           <p>
             برواز هي منصة عربية تساعد الرسامين على بيع لوحاتهم الفنية بأفضل سعر
             و وبأفضل وسيلة للتسويق الالكتروني نسعى لان نكون الأفضل والاعلى جودة
@@ -101,10 +102,10 @@ const Footer = () => {
       </div>
       <div className="copy-right-container">
         <div className="copy-right">
-          <p>سياسات المتجر</p>
-          <p> الأسئلة الشائعة</p>
-          <p> فريق العمل</p>
-          <p>‫‪2020‬‬ ‫‪All‬‬ ‫‪rights‬‬ ‫‪reserved.BERWAZ‬‬ &copy;</p>
+          <span>سياسات المتجر</span>
+          <span> الأسئلة الشائعة</span>
+          <span> فريق العمل</span>
+          <span>‫‪2020‬‬ ‫‪All‬‬ ‫‪rights‬‬ ‫‪reserved.BERWAZ‬‬ &copy;</span>
         </div>
       </div>
     </div>
