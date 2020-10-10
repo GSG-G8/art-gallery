@@ -10,15 +10,15 @@ import * as ROUTES from '../constants/routes';
 import LogoutContext from '../Contexts/LogoutContext';
 import AuthorizationContext from '../Contexts/AuthorizationContext';
 import 'antd/dist/antd.css';
-import Login from '../components/Login';
-import Register from '../components/Register';
-import Painting from '../components/Details';
+import Login from '../containers/LoginPage';
+import Signup from '../containers/SignupPage';
+import Painting from '../containers/PaintingDetailsPage';
 import ProfilePage from '../containers/ProfilePage';
 import LandingPage from '../containers/LandingPage';
-import AdminDashboard from '../components/Admin';
-import AdminLogin from '../components/Admin/login';
+import AdminDashboard from '../containers/Admin';
+import AdminLogin from '../containers/AdminLoginPage';
 import CartPage from '../containers/CartPage';
-import NotFound from '../components/PageNotFound';
+import NotFound from '../containers/PageNotFound';
 
 function App() {
   const [user, setUser] = useState({});
@@ -67,7 +67,7 @@ function App() {
                 path={ROUTES.SIGNUP_PAGE}
                 render={() =>
                   !role ? (
-                    <Register setRole={setRole} />
+                    <Signup setRole={setRole} />
                   ) : (
                     <Redirect to={ROUTES.HOME_PAGE} />
                   )

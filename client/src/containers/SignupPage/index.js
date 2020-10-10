@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { AiOutlineMail, AiOutlineUser, AiOutlineLock } from 'react-icons/ai';
 import * as ROUTES from '../../constants/routes';
-import '../Login/style.css';
+import '../LoginPage/style.css';
 
 const Register = ({ setRole: swithRole }) => {
   const [loaded, setLoaded] = useState(false);

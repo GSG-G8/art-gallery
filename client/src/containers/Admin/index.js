@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { Alert, Spin, Empty, Button, message } from 'antd';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
-import NavBar from '../common/Navbar';
-import Footer from '../common/Footer';
+import NavBar from '../../components/common/Navbar';
+import Footer from '../../components/common/Footer';
 import './style.css';
 
 const AdminPage = () => {

@@ -4,8 +4,8 @@ import { Link, useHistory } from 'react-router-dom';
 import Axios from 'axios';
 import propTypes from 'prop-types';
 import AuthorizationContext from '../../Contexts/AuthorizationContext';
-import PictureWall from '../Mockup';
-import Navbar from '../common/Navbar';
+import PictureWall from '../../components/Mockup';
+import Navbar from '../../components/common/Navbar';
 import './style.css';
 
 function PaintingsDetail({ match }) {

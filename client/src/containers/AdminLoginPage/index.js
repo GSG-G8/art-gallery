@@ -4,8 +4,8 @@ import Axios from 'axios';
 import { Form, Input, Button, message, Spin, Alert } from 'antd';
 import propTypes from 'prop-types';
 import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
-import * as ROUTES from '../../../constants/routes';
-import '../../Login/style.css';
+import * as ROUTES from '../../constants/routes';
+import '../LoginPage/style.css';
 
 const AdminLogin = (props) => {
   const [loaded, setLoaded] = useState(false);
